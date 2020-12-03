@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.22, for Linux (x86_64)
 --
--- Host: localhost    Database: Proyecto
+-- Host: localhost    Database: Project
 -- ------------------------------------------------------
--- Server version	8.0.22-0ubuntu0.20.04.2
+-- Server version	8.0.22-0ubuntu0.20.04.3
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,21 +30,30 @@ CREATE TABLE `autor` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `compra`
+-- Table structure for table `ciudad`
 --
 
-DROP TABLE IF EXISTS `compra`;
+DROP TABLE IF EXISTS `ciudad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `compra` (
-  `id_compra` int NOT NULL AUTO_INCREMENT,
-  `producto` int NOT NULL,
-  `comprador` int NOT NULL,
-  PRIMARY KEY (`id_compra`),
-  KEY `producto` (`producto`),
-  KEY `comprador` (`comprador`),
-  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`producto`) REFERENCES `producto` (`id_producto`),
-  CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`comprador`) REFERENCES `user` (`id_usuario`)
+CREATE TABLE `ciudad` (
+  `id_ciudad` int NOT NULL AUTO_INCREMENT,
+  `nombre_ciudad` varchar(150) NOT NULL,
+  PRIMARY KEY (`id_ciudad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `codigopostal`
+--
+
+DROP TABLE IF EXISTS `codigopostal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `codigopostal` (
+  `id_codigo` int NOT NULL AUTO_INCREMENT,
+  `codigopostal` char(5) DEFAULT NULL,
+  PRIMARY KEY (`id_codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -72,60 +81,73 @@ DROP TABLE IF EXISTS `producto`;
 CREATE TABLE `producto` (
   `id_producto` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
+  `foto_portada` varchar(255) NOT NULL,
+  `foto_contraportada` varchar(255) NOT NULL,
   `descripcion` varchar(500) DEFAULT NULL,
-  `fechaPublicacion` datetime NOT NULL,
+  `fechaPublicacion` timestamp NOT NULL,
   `precio` decimal(3,2) NOT NULL,
-  `fechaVenta` datetime DEFAULT NULL,
+  `idioma` varchar(60) NOT NULL,
   `vendedor` int NOT NULL,
   `autor` int NOT NULL,
   `genero` int NOT NULL,
+  `codigo_postal` int NOT NULL,
   PRIMARY KEY (`id_producto`),
   KEY `vendedor` (`vendedor`),
   KEY `autor` (`autor`),
   KEY `genero` (`genero`),
-  CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`vendedor`) REFERENCES `user` (`id_usuario`),
+  KEY `codigo_postal` (`codigo_postal`),
+  CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`vendedor`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`autor`) REFERENCES `autor` (`id_autor`),
-  CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`genero`) REFERENCES `genero` (`id_genero`)
+  CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`genero`) REFERENCES `genero` (`id_genero`),
+  CONSTRAINT `producto_ibfk_4` FOREIGN KEY (`codigo_postal`) REFERENCES `codigopostal` (`id_codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `transaccion`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `transaccion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
+CREATE TABLE `transaccion` (
+  `id_transaccion` int NOT NULL AUTO_INCREMENT,
+  `fecha_transaccion` timestamp NOT NULL,
+  `vendedor` int NOT NULL,
+  `comprador` int NOT NULL,
+  `producto` int NOT NULL,
+  PRIMARY KEY (`id_transaccion`),
+  KEY `vendedor` (`vendedor`),
+  KEY `comprador` (`comprador`),
+  KEY `producto` (`producto`),
+  CONSTRAINT `transaccion_ibfk_1` FOREIGN KEY (`vendedor`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `transaccion_ibfk_2` FOREIGN KEY (`comprador`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `transaccion_ibfk_3` FOREIGN KEY (`producto`) REFERENCES `producto` (`id_producto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuario` (
   `id_usuario` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(60) NOT NULL,
   `apellidos` varchar(60) NOT NULL,
-  `contraseña` varchar(30) NOT NULL,
-  `ciudad` varchar(60) NOT NULL,
-  `localidad` varchar(60) NOT NULL,
+  `contraseña` varchar(200) NOT NULL,
+  `ciudad` int NOT NULL,
+  `codigo_postal` int NOT NULL,
   `email` varchar(100) NOT NULL,
-  `foto` blob,
+  `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `venta`
---
-
-DROP TABLE IF EXISTS `venta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `venta` (
-  `id_venta` int NOT NULL AUTO_INCREMENT,
-  `producto` int NOT NULL,
-  `vendedor` int NOT NULL,
-  PRIMARY KEY (`id_venta`),
-  KEY `producto` (`producto`),
-  KEY `vendedor` (`vendedor`),
-  CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`producto`) REFERENCES `producto` (`id_producto`),
-  CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`vendedor`) REFERENCES `user` (`id_usuario`)
+  UNIQUE KEY `email` (`email`),
+  KEY `ciudad` (`ciudad`),
+  KEY `codigo_postal` (`codigo_postal`),
+  CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`id_ciudad`),
+  CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`codigo_postal`) REFERENCES `codigopostal` (`id_codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -138,4 +160,4 @@ CREATE TABLE `venta` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-28 14:31:06
+-- Dump completed on 2020-12-03 13:44:52
