@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `Project` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `Project`;
+CREATE DATABASE  IF NOT EXISTS `recy_book` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `recy_book`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: Project
+-- Host: 127.0.0.1    Database: recy_book
 -- ------------------------------------------------------
 -- Server version	8.0.22-0ubuntu0.20.04.3
 
@@ -38,6 +38,29 @@ CREATE TABLE `autor` (
 LOCK TABLES `autor` WRITE;
 /*!40000 ALTER TABLE `autor` DISABLE KEYS */;
 /*!40000 ALTER TABLE `autor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categoria` (
+  `id_categoria` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(80) NOT NULL,
+  PRIMARY KEY (`id_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -87,55 +110,36 @@ LOCK TABLES `codigopostal` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `favoritos`
+-- Table structure for table `compra`
 --
 
-DROP TABLE IF EXISTS `favoritos`;
+DROP TABLE IF EXISTS `compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `favoritos` (
-  `vendedor` int NOT NULL,
-  `comprador` int NOT NULL,
+CREATE TABLE `compra` (
+  `id_compra` int NOT NULL AUTO_INCREMENT,
   `producto` int NOT NULL,
-  KEY `vendedor` (`vendedor`),
+  `fechaCompra` timestamp NOT NULL,
+  `favorito` tinyint(1) DEFAULT '0',
+  `reserva` tinyint(1) DEFAULT '0',
+  `valoracion` tinyint DEFAULT NULL,
+  `comentario` varchar(255) DEFAULT NULL,
+  `comprador` int NOT NULL,
+  PRIMARY KEY (`id_compra`),
   KEY `comprador` (`comprador`),
   KEY `producto` (`producto`),
-  CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`vendedor`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`comprador`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `favoritos_ibfk_3` FOREIGN KEY (`producto`) REFERENCES `producto` (`id_producto`)
+  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`comprador`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`producto`) REFERENCES `producto` (`id_producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `favoritos`
+-- Dumping data for table `compra`
 --
 
-LOCK TABLES `favoritos` WRITE;
-/*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `genero`
---
-
-DROP TABLE IF EXISTS `genero`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `genero` (
-  `id_genero` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(80) NOT NULL,
-  PRIMARY KEY (`id_genero`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `genero`
---
-
-LOCK TABLES `genero` WRITE;
-/*!40000 ALTER TABLE `genero` DISABLE KEYS */;
-/*!40000 ALTER TABLE `genero` ENABLE KEYS */;
+LOCK TABLES `compra` WRITE;
+/*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+/*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -156,16 +160,16 @@ CREATE TABLE `producto` (
   `idioma` varchar(60) NOT NULL,
   `vendedor` int NOT NULL,
   `autor` int NOT NULL,
-  `genero` int NOT NULL,
+  `categoria` int NOT NULL,
   `codigo_postal` int NOT NULL,
   PRIMARY KEY (`id_producto`),
   KEY `vendedor` (`vendedor`),
   KEY `autor` (`autor`),
-  KEY `genero` (`genero`),
+  KEY `categoria` (`categoria`),
   KEY `codigo_postal` (`codigo_postal`),
   CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`vendedor`) REFERENCES `usuario` (`id_usuario`),
   CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`autor`) REFERENCES `autor` (`id_autor`),
-  CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`genero`) REFERENCES `genero` (`id_genero`),
+  CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`categoria`) REFERENCES `categoria` (`id_categoria`),
   CONSTRAINT `producto_ibfk_4` FOREIGN KEY (`codigo_postal`) REFERENCES `codigopostal` (`id_codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -177,38 +181,6 @@ CREATE TABLE `producto` (
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `transaccion`
---
-
-DROP TABLE IF EXISTS `transaccion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transaccion` (
-  `id_transaccion` int NOT NULL AUTO_INCREMENT,
-  `fecha_transaccion` timestamp NOT NULL,
-  `vendedor` int NOT NULL,
-  `comprador` int NOT NULL,
-  `producto` int NOT NULL,
-  PRIMARY KEY (`id_transaccion`),
-  KEY `vendedor` (`vendedor`),
-  KEY `comprador` (`comprador`),
-  KEY `producto` (`producto`),
-  CONSTRAINT `transaccion_ibfk_1` FOREIGN KEY (`vendedor`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `transaccion_ibfk_2` FOREIGN KEY (`comprador`) REFERENCES `usuario` (`id_usuario`),
-  CONSTRAINT `transaccion_ibfk_3` FOREIGN KEY (`producto`) REFERENCES `producto` (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `transaccion`
---
-
-LOCK TABLES `transaccion` WRITE;
-/*!40000 ALTER TABLE `transaccion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transaccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -233,7 +205,7 @@ CREATE TABLE `usuario` (
   KEY `codigo_postal` (`codigo_postal`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`ciudad`) REFERENCES `ciudad` (`id_ciudad`),
   CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`codigo_postal`) REFERENCES `codigopostal` (`id_codigo`),
-  CONSTRAINT `contraseña` CHECK ((length(`contraseña`) >= 8))
+  CONSTRAINT `usuario_chk_1` CHECK ((length(`contraseña`) >= 8))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -245,29 +217,6 @@ LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `valoracion`
---
-
-DROP TABLE IF EXISTS `valoracion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `valoracion` (
-  `id_valoracion` int NOT NULL AUTO_INCREMENT,
-  `valoracion` tinyint NOT NULL,
-  PRIMARY KEY (`id_valoracion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `valoracion`
---
-
-LOCK TABLES `valoracion` WRITE;
-/*!40000 ALTER TABLE `valoracion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `valoracion` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -278,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-14 14:12:28
+-- Dump completed on 2020-12-18 17:50:11
