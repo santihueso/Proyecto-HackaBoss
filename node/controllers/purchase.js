@@ -1,5 +1,7 @@
 require("dotenv").config();
-const compraRepository = require("../repository/compra.js");
+const compraRepository = require("../repository/purchase.js");
+const { MAILGUN_KEY, DOMAIN } = process.env;
+const mailgun = require("mailgun-js");
 
 async function getReserver(req, res) {
   try {
@@ -36,13 +38,30 @@ async function getBuyBookWithReserve(req, res) {
   try {
     const bookId = req.params.bookId;
     const buyer = +req.params.userId;
+    const dateBuy = new Date();
     const ifHaveReserved = await compraRepository.findUserIfReserverBook(
       bookId
     );
     if (ifHaveReserved[0].buyer !== buyer) {
       throw new Error("El libro está reservado por otro usuario.");
     } else {
-      const buyWithReserve = await compraRepository.updateWeReserve(1, buyer);
+      const buyWithReserve = await compraRepository.updateWeReserve(
+        1,
+        buyer,
+        dateBuy
+      );
+      const mg = mailgun({
+        apiKey: MAILGUN_KEY,
+        domain: DOMAIN,
+      });
+
+      const data = {
+        from: "sender@gmail.com",
+        to: "jeimymiranda@outlook.es",
+        subject: "Hola",
+        text: "Testing some Mailgun awesomness!",
+      };
+      await mg.messages().send(data);
       res.send(buyWithReserve);
     }
   } catch (err) {
@@ -59,6 +78,7 @@ async function buyBookWithoutReserve(req, res) {
   try {
     const book = +req.params.bookId;
     const buyer = req.params.userId;
+    const date = new Date();
     const ifExist = await compraRepository.findBook(book);
 
     if (ifExist.length > 0) {
@@ -68,11 +88,40 @@ async function buyBookWithoutReserve(req, res) {
       if (ifSelled || ifReserved) {
         throw new Error("El libro fue vendido.");
       } else {
-        const buyBookInTable = await compraRepository.buyBook(book, 1, buyer);
+        const buyBookInTable = await compraRepository.buyBook(
+          book,
+          1,
+          buyer,
+          date
+        );
+        const mg = mailgun({
+          apiKey: MAILGUN_KEY,
+          domain: DOMAIN,
+        });
+
+        const data = {
+          from: "sender@gmail.com",
+          to: "jeimymiranda@outlook.es",
+          subject: "Hola",
+          text: "Testing some Mailgun awesomness!",
+        };
+        await mg.messages().send(data);
         res.send(buyBookInTable);
       }
     } else {
-      const buyBook = await compraRepository.buyBook(book, 1, buyer);
+      const buyBook = await compraRepository.buyBook(book, 1, buyer, date);
+      const mg = mailgun({
+        apiKey: MAILGUN_KEY,
+        domain: DOMAIN,
+      });
+
+      const data = {
+        from: "sender@gmail.com",
+        to: "jeimymiranda@outlook.es",
+        subject: "Hola",
+        text: "Testing some Mailgun awesomness!",
+      };
+      await mg.messages().send(data);
       res.send(buyBook);
     }
   } catch (err) {

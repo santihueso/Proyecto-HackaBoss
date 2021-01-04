@@ -27,11 +27,12 @@ async function findUserIfReserverBook(bookId) {
   return user;
 }
 
-async function updateWeReserve(buyBook, userId) {
+async function updateWeReserve(buyBook, userId, date) {
   const pool = await database.getPool();
-  console.log(userId);
-  const insertQuery = "update purchase set purchase = ? where buyer = ?";
-  const [buy] = await pool.query(insertQuery, [buyBook, userId]);
+  console.log(date);
+  const insertQuery =
+    "update purchase set purchase = ?, purchaseDate = ? where buyer = ?";
+  const [buy] = await pool.query(insertQuery, [buyBook, date, userId]);
   return buy;
 }
 
@@ -42,11 +43,11 @@ async function findBook(bookId) {
   return book;
 }
 
-async function buyBook(book, buyBookId, buyer) {
+async function buyBook(book, buyBookId, buyer, date) {
   const pool = await database.getPool();
   const insertQuery =
-    "insert into purchase (product, purchase, buyer) values(?,?,?)";
-  const [buy] = await pool.query(insertQuery, [book, buyBookId, buyer]);
+    "insert into purchase (product, purchase, buyer, purchaseDate) values(?,?,?,?)";
+  const [buy] = await pool.query(insertQuery, [book, buyBookId, buyer, date]);
   return buy;
 }
 
