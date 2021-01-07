@@ -73,6 +73,7 @@ async function findAuthor(req, res) {
     const schema = Joi.object({
       author: Joi.string(),
     });
+    console.log(schema);
     await schema.validateAsync(req.body);
     const { author } = req.body;
     const selectAuthor = await seekerRepository.forAuthor(author);

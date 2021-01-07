@@ -44,20 +44,20 @@ app.post("/beginning/seeker/author", seekerController.findAuthor);
 /*dentro de categoria*/
 app.get("/beginning/category/:bookID", bookController.selectBook);
 /*Reserva, compra y favorito*/
-app.post(
+app.get(
   "/login/:userId/book/:bookId/reservation/buy",
   compraController.getBuyBookWithReserve
 );
-app.post(
+app.get(
   "/login/:userId/book/:bookId/reservation",
   compraController.getReserver
 );
 
-app.post(
+app.get(
   "/login/:userId/book/:bookId/buy",
   compraController.buyBookWithoutReserve
 );
-app.post(
+app.get(
   "/login/:userId/book/:bookId/favorite",
   compraController.getFavoriteBook
 );
