@@ -34,7 +34,11 @@ function validate(req, res, next) {
 app.use(bodyparser.urlencoded({ extended: true }));
 
 /*Muestra los libros reservados de un usuario */
-app.get("/login/:userId/reservation/books", reservedController.getReservedBook);
+app.get(
+  "/login/:userId/reservation/books",
+  validate,
+  reservedController.getReservedBook
+);
 /*Muestra los últimos libros */
 app.get("/beginning/lastBooks", bookController.showLastBook);
 /*Buscardor*/
@@ -47,31 +51,37 @@ app.get("/beginning/category/:bookID", bookController.selectBook);
 /*Reserva con reserva*/
 app.get(
   "/login/:userId/book/:bookId/reservation/buy",
+  validate,
   compraController.getBuyBookWithReserve
 );
 /*Eliminar reserva*/
 app.get(
   "/login/:userId/book/:bookId/reservation/delete",
+  validate,
   compraController.deleteBookReserved
 );
 /*reservar*/
 app.get(
   "/login/:userId/book/:bookId/reservation",
+  validate,
   compraController.getReserver
 );
 /*comprar directamente*/
 app.get(
   "/login/:userId/book/:bookId/buy",
+  validate,
   compraController.buyBookWithoutReserve
 );
 /*eliminar favorito*/
 app.get(
   "/login/:userId/book/:bookId/favorite/delete",
+  validate,
   compraController.deleteFavorite
 );
 /*guardar como favorito*/
 app.get(
   "/login/:userId/book/:bookId/favorite",
+  validate,
   compraController.getFavoriteBook
 );
 /*los datos necesario del usuario visto desde fuera*/
@@ -82,6 +92,6 @@ app.get(
 
 // app.get("/", userController.getUsers);
 /*cambio de contraseña*/
-app.post("/:userId/forgetPassword", userController.newPassword);
+app.post("/:userId/forgetPassword", validate, userController.newPassword);
 
 app.listen(PORT, () => console.log(PORT));
