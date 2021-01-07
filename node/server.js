@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyparser = require("body-parser");
 // const multer = require("multer");
-const path = require("path");
+
 const app = express();
 const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
@@ -33,41 +33,55 @@ function validate(req, res, next) {
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
+/*Muestra los libros reservados de un usuario */
 app.get("/login/:userId/reservation/books", reservedController.getReservedBook);
-
+/*Muestra los últimos libros */
 app.get("/beginning/lastBooks", bookController.showLastBook);
 /*Buscardor*/
 app.post("/beginning/seeker/category", seekerController.findCategory);
 app.post("/beginning/seeker/tittle", seekerController.findName);
 app.post("/beginning/seeker/cp", seekerController.findCP);
 app.post("/beginning/seeker/author", seekerController.findAuthor);
-/*dentro de categoria*/
+/*dentro de categoria, buscar los datos del libro*/
 app.get("/beginning/category/:bookID", bookController.selectBook);
-/*Reserva, compra y favorito*/
+/*Reserva con reserva*/
 app.get(
   "/login/:userId/book/:bookId/reservation/buy",
   compraController.getBuyBookWithReserve
 );
+/*Eliminar reserva*/
+app.get(
+  "/login/:userId/book/:bookId/reservation/delete",
+  compraController.deleteBookReserved
+);
+/*reservar*/
 app.get(
   "/login/:userId/book/:bookId/reservation",
   compraController.getReserver
 );
-
+/*comprar directamente*/
 app.get(
   "/login/:userId/book/:bookId/buy",
   compraController.buyBookWithoutReserve
 );
+/*eliminar favorito*/
+app.get(
+  "/login/:userId/book/:bookId/favorite/delete",
+  compraController.deleteFavorite
+);
+/*guardar como favorito*/
 app.get(
   "/login/:userId/book/:bookId/favorite",
   compraController.getFavoriteBook
 );
-
+/*los datos necesario del usuario visto desde fuera*/
 app.get(
   "/login/category/language/book/porfile/:userId",
   profileController.profileFromOutside
 );
 
 // app.get("/", userController.getUsers);
+/*cambio de contraseña*/
 app.post("/:userId/forgetPassword", userController.newPassword);
 
 app.listen(PORT, () => console.log(PORT));

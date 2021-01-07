@@ -106,12 +106,17 @@ async function getFavoriteBook(req, res) {
   try {
     const book = req.params.bookId;
     const buyer = req.params.userId;
-    const ifExist = await compraRepository.findBook(book);
 
+    const ifExist = await compraRepository.findBook(book);
+    const findUserWithFavorite = await ifExist.find(
+      (e) => e.buyer === +buyer && e.favorite === 1
+    );
     if (ifExist.length > 0) {
-      const ifNotSelled = ifExist.find((e) => e.purchase === 1);
-      if (ifNotSelled) {
+      const ifSelled = ifExist.find((e) => e.purchase === 1);
+      if (ifSelled) {
         throw new Error("El libro no está disponible.");
+      } else if (findUserWithFavorite) {
+        throw new Error("Ya está en tu lista de favoritos");
       } else {
         const favoriteBook = await compraRepository.favorites(book, 1, buyer);
         res.send(favoriteBook);
@@ -130,9 +135,47 @@ async function getFavoriteBook(req, res) {
   }
 }
 
+async function deleteBookReserved(req, res) {
+  try {
+    const bookId = req.params.bookId;
+    const userId = req.params.userId;
+    const deleteBook = await compraRepository.deleteReservation(
+      0,
+      bookId,
+      userId
+    );
+    res.send(deleteBook);
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
+}
+
+async function deleteFavorite(req, res) {
+  try {
+    const userId = req.params.userId;
+    const bookId = req.params.bookId;
+    const deleteBook = await compraRepository.deleteFavorite(0, bookId, userId);
+    res.send(deleteBook);
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
+}
+
 module.exports = {
   getReserver,
   getBuyBookWithReserve,
   getFavoriteBook,
   buyBookWithoutReserve,
+  deleteBookReserved,
+  deleteFavorite,
 };

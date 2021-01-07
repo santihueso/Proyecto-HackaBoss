@@ -59,6 +59,23 @@ async function favorites(book, favorite, buyer) {
   return favoriteBook;
 }
 
+async function deleteReservation(cancel, bookId, userId) {
+  const pool = await database.getPool();
+  const insertQuery =
+    "update purchase set reservation = ? where product = ? and buyer = ?";
+  const [deleteBook] = await pool.query(insertQuery, [cancel, bookId, userId]);
+
+  return deleteBook;
+}
+
+async function deleteFavorite(cancel, bookId, userId) {
+  const pool = await database.getPool();
+  const insertQuery =
+    "update purchase set favorite = ? where product = ? and buyer = ?";
+  const [deleteBook] = await pool.query(insertQuery, [cancel, bookId, userId]);
+  return deleteBook;
+}
+
 module.exports = {
   ifReservedOrBuyed,
   reserverBook,
@@ -67,4 +84,6 @@ module.exports = {
   buyBook,
   favorites,
   findBook,
+  deleteReservation,
+  deleteFavorite,
 };
