@@ -1,7 +1,7 @@
 const mailgun = require("mailgun-js");
 const { MAILGUN_KEY, DOMAIN } = process.env;
 
-async function send() {
+async function send(req, res, comment) {
   try {
     const mg = mailgun({
       apiKey: MAILGUN_KEY,
@@ -11,10 +11,10 @@ async function send() {
     const data = {
       from: "sender@gmail.com",
       to: "jeimymiranda@outlook.es",
-      subject: "Hola",
-      text: "Testing some Mailgun awesomness!",
+      subject: "recy-book",
+      text: comment,
     };
-    return await mg.messages().send(data);
+    await mg.messages().send(data);
   } catch (err) {
     if (err.name === "ValdationError") {
       err.code = 400;

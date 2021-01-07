@@ -1,6 +1,8 @@
 require("dotenv").config();
 const compraRepository = require("../repository/purchase.js");
 const messages = require("../messages/sendMessage.js");
+const register = "You have successfully registered!";
+const buy = "You have made the purchase correctly.";
 
 async function getReserver(req, res) {
   try {
@@ -49,7 +51,7 @@ async function getBuyBookWithReserve(req, res) {
         buyer,
         dateBuy
       );
-      messages.send();
+      await messages.send(req, res, buy);
       res.send(buyWithReserve);
     }
   } catch (err) {
@@ -82,12 +84,12 @@ async function buyBookWithoutReserve(req, res) {
           buyer,
           date
         );
-        messages.send();
+        await messages.send(req, res, buy);
         res.send(buyBookInTable);
       }
     } else {
       const buyBook = await compraRepository.buyBook(book, 1, buyer, date);
-      messages.send();
+      await messages.send(req, res, buy);
       res.send(buyBook);
     }
   } catch (err) {
