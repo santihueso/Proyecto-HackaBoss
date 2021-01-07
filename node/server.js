@@ -34,7 +34,7 @@ function validate(req, res, next) {
 app.use(bodyparser.urlencoded({ extended: true }));
 
 app.get("/login/:userId/reservation/books", reservedController.getReservedBook);
-app.post("/:userId/uploads", userController.upImgUser);
+
 app.get("/beginning/lastBooks", bookController.showLastBook);
 /*Buscardor*/
 app.post("/beginning/seeker/category", seekerController.findCategory);
@@ -69,9 +69,5 @@ app.get(
 
 // app.get("/", userController.getUsers);
 app.post("/:userId/forgetPassword", userController.newPassword);
-
-app.post("/login", userController.login);
-
-app.post("/register", userController.register);
 
 app.listen(PORT, () => console.log(PORT));
