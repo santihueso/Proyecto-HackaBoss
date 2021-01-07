@@ -1,5 +1,5 @@
 require("dotenv").config();
-const compraRepository = require("../repository/purchase.js");
+const purchaseRepository = require("../repository/purchase.js");
 const messages = require("../messages/sendMessage.js");
 const register = "You have successfully registered!";
 const buy = "You have made the purchase correctly.";
@@ -8,7 +8,7 @@ async function getReserver(req, res) {
   try {
     const book = req.params.bookId;
     const buyer = req.params.userId;
-    const existBook = await compraRepository.ifReservedOrBuyed(book);
+    const existBook = await purchaseRepository.ifReservedOrBuyed(book);
     const ifReserved = existBook.find((e) => e.reservation === 1);
     const ifBuyed = existBook.find((e) => e.purchase === 1);
 
@@ -18,11 +18,11 @@ async function getReserver(req, res) {
       } else if (ifBuyed) {
         throw new Error("El libro fue vendido.");
       } else {
-        const getBook = await compraRepository.reserverBook(book, 1, buyer);
+        const getBook = await purchaseRepository.reserverBook(book, 1, buyer);
         res.send(getBook);
       }
     } else {
-      const getBook = await compraRepository.reserverBook(book, 1, buyer);
+      const getBook = await purchaseRepository.reserverBook(book, 1, buyer);
       res.send(getBook);
     }
   } catch (err) {
@@ -40,13 +40,13 @@ async function getBuyBookWithReserve(req, res) {
     const bookId = req.params.bookId;
     const buyer = +req.params.userId;
     const dateBuy = new Date();
-    const ifHaveReserved = await compraRepository.findUserIfReserverBook(
+    const ifHaveReserved = await purchaseRepository.findUserIfReserverBook(
       bookId
     );
     if (ifHaveReserved[0].buyer !== buyer) {
       throw new Error("El libro está reservado por otro usuario.");
     } else {
-      const buyWithReserve = await compraRepository.updateWeReserve(
+      const buyWithReserve = await purchaseRepository.updateWeReserve(
         1,
         buyer,
         dateBuy
@@ -69,7 +69,7 @@ async function buyBookWithoutReserve(req, res) {
     const book = +req.params.bookId;
     const buyer = req.params.userId;
     const date = new Date();
-    const ifExist = await compraRepository.findBook(book);
+    const ifExist = await purchaseRepository.findBook(book);
 
     if (ifExist.length > 0) {
       const ifSelled = ifExist.find((e) => e.purchase === 1);
@@ -78,7 +78,7 @@ async function buyBookWithoutReserve(req, res) {
       if (ifSelled || ifReserved) {
         throw new Error("El libro fue vendido.");
       } else {
-        const buyBookInTable = await compraRepository.buyBook(
+        const buyBookInTable = await purchaseRepository.buyBook(
           book,
           1,
           buyer,
@@ -88,7 +88,7 @@ async function buyBookWithoutReserve(req, res) {
         res.send(buyBookInTable);
       }
     } else {
-      const buyBook = await compraRepository.buyBook(book, 1, buyer, date);
+      const buyBook = await purchaseRepository.buyBook(book, 1, buyer, date);
       await messages.send(req, res, buy);
       res.send(buyBook);
     }
@@ -107,7 +107,7 @@ async function getFavoriteBook(req, res) {
     const book = req.params.bookId;
     const buyer = req.params.userId;
 
-    const ifExist = await compraRepository.findBook(book);
+    const ifExist = await purchaseRepository.findBook(book);
     const findUserWithFavorite = await ifExist.find(
       (e) => e.buyer === +buyer && e.favorite === 1
     );
@@ -118,11 +118,11 @@ async function getFavoriteBook(req, res) {
       } else if (findUserWithFavorite) {
         throw new Error("Ya está en tu lista de favoritos");
       } else {
-        const favoriteBook = await compraRepository.favorites(book, 1, buyer);
+        const favoriteBook = await purchaseRepository.favorites(book, 1, buyer);
         res.send(favoriteBook);
       }
     } else {
-      const favoriteBook = await compraRepository.favorites(book, 1, buyer);
+      const favoriteBook = await purchaseRepository.favorites(book, 1, buyer);
       res.send(favoriteBook);
     }
   } catch (err) {
@@ -139,7 +139,7 @@ async function deleteBookReserved(req, res) {
   try {
     const bookId = req.params.bookId;
     const userId = req.params.userId;
-    const deleteBook = await compraRepository.deleteReservation(
+    const deleteBook = await purchaseRepository.deleteReservation(
       0,
       bookId,
       userId
@@ -159,7 +159,11 @@ async function deleteFavorite(req, res) {
   try {
     const userId = req.params.userId;
     const bookId = req.params.bookId;
-    const deleteBook = await compraRepository.deleteFavorite(0, bookId, userId);
+    const deleteBook = await purchaseRepository.deleteFavorite(
+      0,
+      bookId,
+      userId
+    );
     res.send(deleteBook);
   } catch (err) {
     if (err.name === "ValidationError") {

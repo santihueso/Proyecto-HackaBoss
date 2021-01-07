@@ -11,7 +11,7 @@ const { PORT, JWT } = process.env;
 const userController = require("./controllers/userController.js");
 const bookController = require("./controllers/bookController.js");
 const seekerController = require("./controllers/seeker.js");
-const compraController = require("./controllers/purchase.js");
+const purchaseController = require("./controllers/purchase.js");
 const profileController = require("./controllers/profile.js");
 const reservedController = require("./controllers/reservation.js");
 const accessLogStream = fs.createWriteStream("./access.log", { flags: "a" });
@@ -52,37 +52,37 @@ app.get("/beginning/category/:bookID", bookController.selectBook);
 app.get(
   "/login/:userId/book/:bookId/reservation/buy",
   validate,
-  compraController.getBuyBookWithReserve
+  purchaseController.getBuyBookWithReserve
 );
 /*Eliminar reserva*/
 app.get(
   "/login/:userId/book/:bookId/reservation/delete",
   validate,
-  compraController.deleteBookReserved
+  purchaseController.deleteBookReserved
 );
 /*reservar*/
 app.get(
   "/login/:userId/book/:bookId/reservation",
   validate,
-  compraController.getReserver
+  purchaseController.getReserver
 );
 /*comprar directamente*/
 app.get(
   "/login/:userId/book/:bookId/buy",
   validate,
-  compraController.buyBookWithoutReserve
+  purchaseController.buyBookWithoutReserve
 );
 /*eliminar favorito*/
 app.get(
   "/login/:userId/book/:bookId/favorite/delete",
   validate,
-  compraController.deleteFavorite
+  purchaseController.deleteFavorite
 );
 /*guardar como favorito*/
 app.get(
   "/login/:userId/book/:bookId/favorite",
   validate,
-  compraController.getFavoriteBook
+  purchaseController.getFavoriteBook
 );
 /*los datos necesario del usuario visto desde fuera*/
 app.get(
