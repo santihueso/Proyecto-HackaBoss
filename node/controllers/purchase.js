@@ -1,7 +1,6 @@
 require("dotenv").config();
 const compraRepository = require("../repository/purchase.js");
-const { MAILGUN_KEY, DOMAIN } = process.env;
-const mailgun = require("mailgun-js");
+const messages = require("../messages/sendMessage.js");
 
 async function getReserver(req, res) {
   try {
@@ -50,18 +49,7 @@ async function getBuyBookWithReserve(req, res) {
         buyer,
         dateBuy
       );
-      const mg = mailgun({
-        apiKey: MAILGUN_KEY,
-        domain: DOMAIN,
-      });
-
-      const data = {
-        from: "sender@gmail.com",
-        to: "jeimymiranda@outlook.es",
-        subject: "Hola",
-        text: "Testing some Mailgun awesomness!",
-      };
-      await mg.messages().send(data);
+      messages.send();
       res.send(buyWithReserve);
     }
   } catch (err) {
@@ -94,34 +82,12 @@ async function buyBookWithoutReserve(req, res) {
           buyer,
           date
         );
-        const mg = mailgun({
-          apiKey: MAILGUN_KEY,
-          domain: DOMAIN,
-        });
-
-        const data = {
-          from: "sender@gmail.com",
-          to: "jeimymiranda@outlook.es",
-          subject: "Hola",
-          text: "Testing some Mailgun awesomness!",
-        };
-        await mg.messages().send(data);
+        messages.send();
         res.send(buyBookInTable);
       }
     } else {
       const buyBook = await compraRepository.buyBook(book, 1, buyer, date);
-      const mg = mailgun({
-        apiKey: MAILGUN_KEY,
-        domain: DOMAIN,
-      });
-
-      const data = {
-        from: "sender@gmail.com",
-        to: "jeimymiranda@outlook.es",
-        subject: "Hola",
-        text: "Testing some Mailgun awesomness!",
-      };
-      await mg.messages().send(data);
+      messages.send();
       res.send(buyBook);
     }
   } catch (err) {
