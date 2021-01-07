@@ -2,8 +2,7 @@ require("dotenv").config();
 const userRepository = require("../repository/user.js");
 const bcrypt = require("bcryptjs");
 const Joi = require("joi");
-const { MAILGUN_KEY, DOMAIN } = process.env;
-const mailgun = require("mailgun-js");
+const sendMenssage = require("../messages/sendMessage.js");
 const jwt = require("jsonwebtoken");
 
 async function getUsers(req, res) {
