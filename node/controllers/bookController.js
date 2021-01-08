@@ -30,4 +30,18 @@ async function selectBook(req, res) {
   }
 }
 
-module.exports = { showLastBook, selectBook };
+async function selectAllCategories(req, res) {
+  try {
+    const books = await bookRepository.category();
+    res.send(books);
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
+}
+
+module.exports = { showLastBook, selectBook, selectAllCategories };

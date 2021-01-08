@@ -15,4 +15,11 @@ async function selectBook(bookID) {
   return book;
 }
 
-module.exports = { lastBooks, selectBook };
+async function category(books) {
+  const pool = await database.getPool();
+  const query = "select * from category";
+  const [categories] = await pool.query(query);
+  return categories;
+}
+
+module.exports = { lastBooks, selectBook, category };

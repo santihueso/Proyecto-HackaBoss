@@ -41,6 +41,8 @@ app.get(
 );
 /*Muestra los últimos libros */
 app.get("/beginning/lastBooks", bookController.showLastBook);
+//Todas las categorias
+app.get("/beginning/categories", bookController.selectAllCategories);
 /*Buscardor*/
 app.post("/beginning/seeker/category", seekerController.findCategory);
 app.post("/beginning/seeker/tittle", seekerController.findName);
