@@ -1,4 +1,3 @@
-require("dotenv").config();
 const bookRepository = require("../repository/book.js");
 
 async function showLastBook(req, res) {

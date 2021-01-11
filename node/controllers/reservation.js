@@ -1,4 +1,3 @@
-require("dotenv").config();
 const reserveRespository = require("../repository/reservation.js");
 
 async function getReservedBook(req, res) {
