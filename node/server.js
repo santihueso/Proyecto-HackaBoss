@@ -40,14 +40,14 @@ const storage = multer.diskStorage({
   },
 });
 
+app.use(bodyparser.urlencoded({ extended: true }));
+
 app.use(
   multer({
     storage,
     dest: path.join(__dirname, "/uploads"),
   }).single("photo")
 );
-
-app.use(bodyparser.urlencoded({ extended: true }));
 
 /*Muestra los libros reservados de un usuario */
 app.get(
