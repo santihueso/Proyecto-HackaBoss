@@ -1,4 +1,3 @@
-require("dotenv").config();
 const userRepository = require("../repository/user.js");
 const bcrypt = require("bcryptjs");
 const Joi = require("joi");
