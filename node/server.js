@@ -34,7 +34,7 @@ function validate(req, res, next) {
 }
 
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, "/public/uploads"),
+  destination: path.join(__dirname, "/uploads"),
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
@@ -43,7 +43,7 @@ const storage = multer.diskStorage({
 app.use(
   multer({
     storage,
-    dest: path.join(__dirname, "/public/uploads"),
+    dest: path.join(__dirname, "/uploads"),
   }).single("photo")
 );
 
