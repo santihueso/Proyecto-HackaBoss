@@ -174,6 +174,30 @@ async function deleteFavorite(req, res) {
   }
 }
 
+async function assessment(req, res) {
+  try {
+    const bookId = req.params.bookId;
+    const existBook = await purchaseRepository.ifBuyed(bookId);
+    const ifBuyed = existBook.find((e) => e.purchase === 1);
+
+    if (existBook.length > 0) {
+      if (ifBuyed) {
+        const getBook = await purchaseRepository.ratingPurchase(bookId);
+        res.send(getBook);
+      } else {
+        throw new Error("El libro no ha sido comprado.");
+      }
+    }
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
+}
+
 module.exports = {
   getReserver,
   getBuyBookWithReserve,
@@ -181,4 +205,5 @@ module.exports = {
   buyBookWithoutReserve,
   deleteBookReserved,
   deleteFavorite,
+  assessment,
 };

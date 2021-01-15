@@ -22,8 +22,33 @@ async function changePassword(password, userId) {
   return newPassword;
 }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+async function createUser(username, email, userPassword) {
+  const pool = await database.getPool();
+  const insertQuery =
+    "insert into user(username, email, userPassword) values(?,?,?)";
+  const [createUser] = await pool.query(insertQuery, [
+    username,
+    email,
+    userPassword,
+  ]);
+  return createUser.isertId;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+async function login(email) {
+  const pool = await database.getPool();
+  const query = "select * from user where email= ?";
+  const [user] = await pool.query(query, email);
+  return user;
+}
+
 module.exports = {
   getUser,
   selectUser,
   changePassword,
+  createUser,
+  login,
 };
