@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const bodyparser = require("body-parser");
-// const multer = require("multer");
-
+const multer = require("multer");
+const path = require("path");
 const app = express();
 const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
@@ -15,6 +15,14 @@ const purchaseController = require("./controllers/purchase.js");
 const profileController = require("./controllers/profile.js");
 const reservedController = require("./controllers/reservation.js");
 const accessLogStream = fs.createWriteStream("./access.log", { flags: "a" });
+
+const storage = multer.diskStorage({
+  destination: path.join(__dirname, "/public/uploads"),
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
 app.use(morgan("combined", { immediate: true, stream: accessLogStream }));
 function validate(req, res, next) {
   try {
@@ -32,7 +40,12 @@ function validate(req, res, next) {
 }
 
 app.use(bodyparser.urlencoded({ extended: true }));
-
+app.use(
+  multer({
+    storage,
+    dest: path.join(__dirname, "/public/uploads"),
+  }).single("photo")
+);
 /*Muestra los libros reservados de un usuario */
 app.get(
   "/login/:userId/reservation/books",

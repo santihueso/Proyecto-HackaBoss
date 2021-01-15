@@ -17,7 +17,8 @@ async function forName(name) {
 
 async function forCity(cp) {
   const pool = await database.getPool();
-  const query = "select * from product where postalCode = ?";
+  const query =
+    "select * from product where seller = (select id_user from user where postalCode = ?";
   const [cpBooks] = await pool.query(query, cp);
   return cpBooks;
 }
