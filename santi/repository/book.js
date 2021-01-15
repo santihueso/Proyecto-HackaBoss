@@ -26,12 +26,11 @@ async function createBook(
   bookLanguage,
   seller,
   author,
-  category,
-  postal_code
+  category
 ) {
   const pool = await database.getPool();
   const insertQuery =
-    "insert into product(productName, photoFront, photoBack, publicationDate, price, bookLanguage, seller, author,category,postal_code)values(?,?,?,?,?,?,?,?,?,?,?)";
+    "insert into product(productName, photoFront, photoBack,descriptionProduct, publicationDate, price, bookLanguage, seller, author,category)values(?,?,?,?,?,?,?,?,?,?)";
   const [createBook] = await pool.query(insertQuery, [
     productName,
     photoFront,
@@ -43,7 +42,6 @@ async function createBook(
     seller,
     author,
     category,
-    postal_code,
   ]);
   return createBook.isertId;
 }
@@ -64,7 +62,7 @@ async function editBook(
 ) {
   const pool = await database.getPool();
   const insertQuery =
-    "update product set productName=?, photoFront=?, photoBack=?, descriptionProduct=?, price=?, language=?, author=?, category=? where id_user =? and id_product=? ";
+    "UPDATE product SET productName = ?, photoFront = ?, photoBack = ?, descriptionProduct = ?, price = ?, bookLanguage = ?, author = ?, category = ? WHERE id_product = ? ";
   const [editBook] = await pool.query(insertQuery, [
     productName,
     photoFront,
@@ -89,6 +87,30 @@ async function deleteBook(id_product) {
   return deleteBook;
 }
 
+//----------valoraciones--------------------------------------------------------------------------------------------------------------------------------------------------
+
+async function ifBuyed(id_product) {
+  const pool = await database.getPool();
+  const query = "Select purchase from purchase where product = ?";
+  const [book] = await pool.query(query, id_product);
+  return book;
+}
+
+async function ratingPurchase(id_product) {
+  const pool = await database.getPool();
+  const insertQuery = "Insert into purchase (assessment) values (?)";
+  const [assesment] = await pool.query(insertQuery, [id_product]);
+  return assesment;
+}
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-module.exports = { getBook, selectUser, createBook, editBook, deleteBook };
+module.exports = {
+  getBook,
+  selectUser,
+  createBook,
+  editBook,
+  deleteBook,
+  ratingPurchase,
+  ifBuyed,
+};

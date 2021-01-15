@@ -41,6 +41,7 @@ async function book(req, res) {
 
 async function newBook(req, res) {
   try {
+    const { photoBack, photoFront } = req.file.path;
     const schema = Joi.object({
       productName: Joi.string().required(),
       photoFront: Joi.string(),
@@ -50,15 +51,12 @@ async function newBook(req, res) {
       price: Joi.number().positive().precision(2).required(),
       bookLanguage: Joi.string().required(),
       seller: Joi.number().required(),
-      author: Joi.number().required(),
+      author: Joi.string().required(),
       category: Joi.number().required(),
-      postal_code: Joi.number(),
     });
     await schema.validateAsync(req.body);
     const {
       productName,
-      photoFront,
-      photoBack,
       descriptionProduct,
       publicationDate,
       price,
@@ -66,7 +64,6 @@ async function newBook(req, res) {
       seller,
       author,
       category,
-      postal_code,
     } = req.body;
     const newBook = await bookRepository.createBook(
       productName,
@@ -78,8 +75,7 @@ async function newBook(req, res) {
       bookLanguage,
       seller,
       author,
-      category,
-      postal_code
+      category
     );
     res.send(newBook);
   } catch (err) {
@@ -97,12 +93,11 @@ async function newBook(req, res) {
 async function editBook(req, res) {
   try {
     //recojo datos
-    const idBook = req.params.id_product;
-    const idUser = req.params.id_user;
+    const idBook = req.params.idBook;
+    const idUser = req.params.idUser;
+    const { photoBack, photoFront } = req.file.path;
     const {
       productName,
-      photoFront,
-      photoBack,
       descriptionProduct,
       price,
       bookLanguage,
@@ -115,10 +110,9 @@ async function editBook(req, res) {
       photoFront: Joi.string(),
       photoBack: Joi.string(),
       descriptionProduct: Joi.string(),
-      publicationDate: Joi.date().required(),
       price: Joi.number().positive().precision(2).required(),
       bookLanguage: Joi.string().required(),
-      author: Joi.number().required(),
+      author: Joi.string().required(),
       category: Joi.number().required(),
     });
     await schema.validateAsync({
@@ -159,7 +153,7 @@ async function editBook(req, res) {
 
 async function deleteBook(req, res) {
   try {
-    const bookId = req.params.id_product;
+    const bookId = req.params.bookId;
     const deleteBook = await bookRepository.deleteBook(bookId);
     res.send(deleteBook);
   } catch (error) {
@@ -174,4 +168,30 @@ async function deleteBook(req, res) {
 
 //--------------------------valoraciones------------------------------------------------------------------------------------------------------------------------------------------
 
-module.exports = { getBook, book, newBook, editBook, deleteBook };
+async function assessment(req, res) {
+  try {
+    const bookId = req.params.bookId;
+    const existBook = await purchaseRepository.ifBuyed(bookId);
+    const ifBuyed = existBook.find((e) => e.purchase === 1);
+
+    if (existBook.length > 0) {
+      if (ifBuyed) {
+        const getBook = await purchaseRepository.ratingPurchase(bookId);
+        res.send(getBook);
+      } else {
+        throw new Error("El libro no ha sido comprado.");
+      }
+    }
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
+}
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+module.exports = { getBook, book, newBook, editBook, deleteBook, assessment };

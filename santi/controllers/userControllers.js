@@ -21,17 +21,17 @@ async function getUser(req, res) {
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-async function registro(req, res) {
+async function register(req, res) {
   try {
     const schema = Joi.object({
       username: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().min(8).required(),
-      passwordAgain: Joi.ref("password"),
+      hashPassword: Joi.ref("password"),
     });
     await schema.validateAsync(req.body);
     const { username, email, password } = req.body;
-    const hashPassword = await bcrypt.hash(contraseña, 10);
+    const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await userRepository.createUser(
       username,
       email,
@@ -100,26 +100,30 @@ async function getUserSelect(req, res) {
 
 async function updateUser(req, res) {
   try {
-    const userId = req.params.id_user;
-    const { username, photo, city, postalCode } = req.body;
+    const userId = req.params.userId;
+    const photo = req.file.path;
+    const { username, descriprionUser, city, postalCode } = req.body;
     const schema = Joi.object({
       username: Joi.string(),
-      photo: Joi.string(),
+      descriprionUser: Joi.string(),
       city: Joi.number(),
       postalCode: Joi.number(),
+      photo: Joi.string(),
     });
     await schema.validateAsync({
       username,
-      photo,
+      descriprionUser,
       city,
       postalCode,
+      photo,
     });
 
     const updateUser = await userRepository.updateUser(
       username,
-      photo,
+      descriprionUser,
       city,
       postalCode,
+      photo,
       userId
     );
     res.send(updateUser);
@@ -137,7 +141,7 @@ async function updateUser(req, res) {
 
 async function profileUser(req, res) {
   try {
-    const userId = req.params.id_user;
+    const userId = req.params.userId;
     const showProfileUser = await profileRepository.showProfileUser(userId);
     res.send(showProfileUser);
   } catch (error) {
@@ -150,11 +154,13 @@ async function profileUser(req, res) {
   }
 }
 
-//----------valoraciones------------------------------------------------------------------------------------------------------------------------------------
+//---------logout-------------------------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
   getUser,
-  registro,
+  register,
   login,
   getUserSelect,
   updateUser,
