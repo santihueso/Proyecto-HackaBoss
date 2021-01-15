@@ -1,4 +1,5 @@
 require("dotenv").config();
+const newman = require("newman");
 const express = require("express");
 const bodyparser = require("body-parser");
 const multer = require("multer");
@@ -8,6 +9,14 @@ const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const { PORT, JWT } = process.env;
+// const {
+//   bookController,
+//   profile,
+//   purchase,
+//   reservation,
+//   seeker,
+//   userController,
+// } = require("./controllers/index.js");
 const userController = require("./controllers/userController.js");
 const bookController = require("./controllers/bookController.js");
 const seekerController = require("./controllers/seeker.js");
@@ -17,6 +26,19 @@ const reservedController = require("./controllers/reservation.js");
 const accessLogStream = fs.createWriteStream("./access.log", { flags: "a" });
 
 app.use(morgan("combined", { immediate: true, stream: accessLogStream }));
+
+newman.run(
+  {
+    collection: require("./rutas/project.postman_collection.json"),
+    reporters: "cli",
+  },
+  function (err) {
+    if (err) {
+      throw err;
+    }
+    console.log("collection run complete!");
+  }
+);
 
 function validate(req, res, next) {
   try {
@@ -69,37 +91,37 @@ app.get("/beginning/category/:bookID", bookController.selectBook);
 /*Reserva con reserva*/
 app.get(
   "/login/:userId/book/:bookId/reservation/buy",
-  validate,
+  // validate,
   purchaseController.getBuyBookWithReserve
 );
 /*Eliminar reserva*/
 app.get(
   "/login/:userId/book/:bookId/reservation/delete",
-  validate,
+  // validate,
   purchaseController.deleteBookReserved
 );
 /*reservar*/
 app.get(
   "/login/:userId/book/:bookId/reservation",
-  validate,
+  // validate,
   purchaseController.getReserver
 );
 /*comprar directamente*/
 app.get(
   "/login/:userId/book/:bookId/buy",
-  validate,
+  // validate,
   purchaseController.buyBookWithoutReserve
 );
 /*eliminar favorito*/
 app.get(
   "/login/:userId/book/:bookId/favorite/delete",
-  validate,
+  // validate,
   purchaseController.deleteFavorite
 );
 /*guardar como favorito*/
 app.get(
   "/login/:userId/book/:bookId/favorite",
-  validate,
+  // validate,
   purchaseController.getFavoriteBook
 );
 /*los datos necesario del usuario visto desde fuera*/

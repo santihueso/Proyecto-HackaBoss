@@ -1,8 +1,8 @@
-const bookRepository = require("../repository/book.js");
+const { book } = require("../repository/index.js");
 
 async function showLastBook(req, res) {
   try {
-    const books = await bookRepository.lastBooks();
+    const books = await book.lastBooks();
     res.send(books);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -17,7 +17,7 @@ async function showLastBook(req, res) {
 async function selectBook(req, res) {
   try {
     const bookID = req.params.bookID;
-    const selectId = await bookRepository.selectBook(bookID);
+    const selectId = await book.selectBook(bookID);
     res.send(selectId);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -31,7 +31,7 @@ async function selectBook(req, res) {
 
 async function selectAllCategories(req, res) {
   try {
-    const books = await bookRepository.category();
+    const books = await book.category();
     res.send(books);
   } catch (err) {
     if (err.name === "ValidationError") {

@@ -1,9 +1,9 @@
-const reserveRespository = require("../repository/reservation.js");
+const { reservation } = require("../repository/index.js");
 
 async function getReservedBook(req, res) {
   try {
     const userId = req.params.userId;
-    const reservedBook = await reserveRespository.getReservedBooks(userId);
+    const reservedBook = await reservation.getReservedBooks(userId);
     res.send(reservedBook);
   } catch (err) {
     if (err.name === "ValdationError") {

@@ -1,4 +1,4 @@
-const seekerRepository = require("../repository/seeker.js");
+const { seeker } = require("../repository/index.js");
 const Joi = require("joi");
 async function findCategory(req, res) {
   try {
@@ -7,7 +7,7 @@ async function findCategory(req, res) {
     });
     await schema.validateAsync(req.body);
     const { category_name } = req.body;
-    const selectCategory = await seekerRepository.forCategory(category_name);
+    const selectCategory = await seeker.forCategory(category_name);
     if (selectCategory.length < 1) {
       throw new Error("No existe");
     }
@@ -29,7 +29,7 @@ async function findName(req, res) {
     });
     await schema.validateAsync(req.body);
     const { productName } = req.body;
-    const selectName = await seekerRepository.forName(productName);
+    const selectName = await seeker.forName(productName);
     if (selectName.length < 1) {
       throw new Error("No existe");
     }
@@ -52,7 +52,7 @@ async function findCP(req, res) {
     await schema.validateAsync(req.body);
     /*No sé si se escribe con la barra */
     const { postalCode } = req.body;
-    const selectCP = await seekerRepository.forCity(postalCode);
+    const selectCP = await seeker.forCity(postalCode);
     if (selectCP.length < 1) {
       throw new Error("No existe");
     }
@@ -75,7 +75,7 @@ async function findAuthor(req, res) {
 
     await schema.validateAsync(req.body);
     const { author } = req.body;
-    const selectAuthor = await seekerRepository.forAuthor(author);
+    const selectAuthor = await seeker.forAuthor(author);
     if (selectAuthor.length < 1) {
       throw new Error("No existe");
     }

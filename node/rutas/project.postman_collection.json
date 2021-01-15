@@ -1,0 +1,456 @@
+{
+	"info": {
+		"_postman_id": "ab999330-13be-4b09-9f1c-5bea45cbf939",
+		"name": "project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{port}}/signin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{$randomUserName}}",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "{{$randomUserName}}@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "userPassword",
+							"value": "123456789",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{port}}/signin",
+					"host": [
+						"{{port}}"
+					],
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "Sabina.Nikolaus44@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456789",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{port}}/login",
+					"host": [
+						"{{port}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/login/user/2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{port}}/login/user/2",
+					"host": [
+						"{{port}}"
+					],
+					"path": [
+						"login",
+						"user",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/user/8/book/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/user/8/book/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"user",
+						"8",
+						"book",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/login/category/language/book/porfile/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/login/category/language/book/porfile/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"login",
+						"category",
+						"language",
+						"book",
+						"porfile",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/login/6/book/6/favorite",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/login/6/book/6/favorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"login",
+						"6",
+						"book",
+						"6",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/login/6/book/6/favorite/delete",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/login/6/book/6/favorite/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"login",
+						"6",
+						"book",
+						"6",
+						"favorite",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/login/6/book/5/buy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/login/6/book/5/buy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"login",
+						"6",
+						"book",
+						"5",
+						"buy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/login/8/book/6/reservation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/login/8/book/6/reservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"login",
+						"8",
+						"book",
+						"6",
+						"reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/login/8/book/6/reservation/buy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/login/8/book/6/reservation/buy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"login",
+						"8",
+						"book",
+						"6",
+						"reservation",
+						"buy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/beginning/category/5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/beginning/category/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"beginning",
+						"category",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/beginning/seeker/author",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "author",
+							"value": "pis",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8084/beginning/seeker/author",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"beginning",
+						"seeker",
+						"author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/beginning/seeker/cp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "postalCode",
+							"value": "20024",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8084/beginning/seeker/cp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"beginning",
+						"seeker",
+						"cp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/beginning/seeker/tittle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "productName",
+							"value": "pedo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8084/beginning/seeker/tittle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"beginning",
+						"seeker",
+						"tittle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/beginning/seeker/category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "category_name",
+							"value": "idioma",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8084/beginning/seeker/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"beginning",
+						"seeker",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/beginning/categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/beginning/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"beginning",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{port}}/beginning/lastBooks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/beginning/lastBooks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"beginning",
+						"lastBooks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

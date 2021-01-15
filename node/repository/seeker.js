@@ -18,7 +18,7 @@ async function forName(name) {
 async function forCity(cp) {
   const pool = await database.getPool();
   const query =
-    " select p.productName, p.photoFront, p.photoBack, p.descriptionProduct, p.bookLanguage, p.author, p.category from product as p inner join user as u on u.postalCode = ?";
+    "select * from product where seller = (select id_user from user where postalCode = ?)";
   const [cpBooks] = await pool.query(query, cp);
   return cpBooks;
 }
