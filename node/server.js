@@ -99,7 +99,12 @@ app.get(
   validate,
   purchaseController.getFavoriteBook
 );
+// hacer calificacion compra (revizar requerir userid)
+app.put("/login/user/book/:bookId/assessment", purchaseController.assessment);
+
 /*los datos necesario del usuario visto desde fuera*/
+app.get("/login/user/:userId", validate, profileController.profileUser);
+
 app.get(
   "/login/category/language/book/porfile/:userId",
   profileController.profileFromOutside
@@ -108,5 +113,25 @@ app.get(
 // app.get("/", userController.getUsers);
 /*cambio de contraseña*/
 app.post("/:userId/forgetPassword", validate, userController.newPassword);
+
+// datos generales del usuario
+app.get("/api/user", userController.getUsers);
+app.get("/login/user/:userId", validate, userController.getUserSelect);
+
+//register y login
+app.post("/singIn", userController.register);
+app.post("/login", userController.login);
+
+//libros (revizar iduser newbook,deletebook)
+app.post("/login/user/newBook", bookController.newBook);
+app.delete("/login/user/book/:bookId/delete", bookController.deleteBook);
+app.put(
+  "/login/user/:userId/book/:idBook/editBook",
+  validate,
+  bookController.editBook
+);
+
+//usuario
+app.put("/user/:userId/editUser", validate, profileController.updateUser);
 
 app.listen(PORT, () => console.log(PORT));
