@@ -99,8 +99,11 @@ app.get(
   validate,
   purchaseController.getFavoriteBook
 );
-// hacer calificacion compra (revizar requerir userid)
-app.put("/login/user/book/:bookId/assessment", purchaseController.assessment);
+// hacer calificacion compra
+app.put(
+  "/login/user/userId/book/:bookId/assessment",
+  purchaseController.assessment
+);
 
 /*los datos necesario del usuario visto desde fuera*/
 app.get("/login/user/:userId", validate, profileController.profileUser);
@@ -122,7 +125,7 @@ app.get("/login/user/:userId", validate, userController.getUserSelect);
 app.post("/singIn", userController.register);
 app.post("/login", userController.login);
 
-//libros (revizar iduser newbook,deletebook)
+//libros (revisar iduser newbook,deletebook)
 app.post("/login/user/newBook", bookController.newBook);
 app.delete("/login/user/book/:bookId/delete", bookController.deleteBook);
 app.put(

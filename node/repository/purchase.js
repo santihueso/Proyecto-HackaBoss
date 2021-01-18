@@ -78,15 +78,21 @@ async function deleteFavorite(cancel, bookId, userId) {
 
 async function ifBuyed(id_product) {
   const pool = await database.getPool();
-  const query = "Select purchase from purchase where product = ?";
+  const query = "Select purchase, buyer from purchase where product = ?";
   const [book] = await pool.query(query, id_product);
   return book;
 }
 
-async function ratingPurchase(id_product) {
+async function ratingPurchase(comment, opinion, product, buyer) {
   const pool = await database.getPool();
-  const insertQuery = "Insert into purchase (assessment) values (?)";
-  const [assesment] = await pool.query(insertQuery, [id_product]);
+  const insertQuery =
+    "Update purchase set assessment = ?, opinion = ? where buyer = ? and product = ?";
+  const [assesment] = await pool.query(insertQuery, [
+    comment,
+    opinion,
+    product,
+    buyer,
+  ]);
   return assesment;
 }
 

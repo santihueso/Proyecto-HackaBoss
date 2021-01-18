@@ -178,13 +178,24 @@ async function deleteFavorite(req, res) {
 async function assessment(req, res) {
   try {
     const bookId = req.params.bookId;
+    const buyer = +req.params.userId;
+    const { assessment, opinion } = req.body;
     const existBook = await purchaseRepository.ifBuyed(bookId);
     const ifBuyed = existBook.find((e) => e.purchase === 1);
 
     if (existBook.length > 0) {
       if (ifBuyed) {
-        const getBook = await purchaseRepository.ratingPurchase(bookId);
-        res.send(getBook);
+        if (existBook[0].buyer === buyer) {
+          const getBook = await purchaseRepository.ratingPurchase(
+            assessment,
+            opinion,
+            bookId,
+            buyer
+          );
+          res.send(getBook);
+        } else {
+          throw new Error("El libro no es suyo.");
+        }
       } else {
         throw new Error("El libro no ha sido comprado.");
       }
