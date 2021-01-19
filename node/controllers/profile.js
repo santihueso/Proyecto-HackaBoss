@@ -1,4 +1,3 @@
-require("dotenv").config();
 const profileRepository = require("../repository/profile.js");
 const Joi = require("joi");
 

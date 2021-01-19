@@ -14,6 +14,7 @@ const seekerController = require("./controllers/seeker.js");
 const purchaseController = require("./controllers/purchase.js");
 const profileController = require("./controllers/profile.js");
 const reservedController = require("./controllers/reservation.js");
+const userPurchaseController = require("./controllers/userPurchase.js");
 const accessLogStream = fs.createWriteStream("./access.log", { flags: "a" });
 
 const storage = multer.diskStorage({
@@ -49,7 +50,7 @@ app.use(
 /*Muestra los libros reservados de un usuario */
 app.get(
   "/login/:userId/reservation/books",
-  // validate,
+  validate,
   reservedController.getReservedBook
 );
 /*Muestra los últimos libros */
@@ -66,37 +67,37 @@ app.get("/beginning/category/:bookID", bookController.selectBook);
 /*Reserva con reserva*/
 app.get(
   "/login/user/:userId/book/:bookId/reservation/buy",
-  // validate,
+  validate,
   purchaseController.getBuyBookWithReserve
 );
 /*Eliminar reserva*/
 app.get(
   "/login/user/:userId/book/:bookId/reservation/delete",
-  // validate,
+  validate,
   purchaseController.deleteBookReserved
 );
 /*reservar*/
 app.get(
   "/login/user/:userId/book/:bookId/reservation",
-  // validate,
+  validate,
   purchaseController.getReserver
 );
 /*comprar directamente*/
 app.get(
   "/login/user/:userId/book/:bookId/buy",
-  // validate,
+  validate,
   purchaseController.buyBookWithoutReserve
 );
 /*eliminar favorito*/
 app.get(
   "/login/user/:userId/book/:bookId/favorite/delete",
-  // validate,
+  validate,
   purchaseController.deleteFavorite
 );
 /*guardar como favorito*/
 app.get(
   "/login/user/:userId/book/:bookId/favorite",
-  // validate,
+  validate,
   purchaseController.getFavoriteBook
 );
 // hacer calificacion compra
@@ -106,12 +107,31 @@ app.put(
 );
 
 /*los datos necesario del usuario visto desde fuera*/
-// app.get("/login/user/:userId", validate, profileController.profileUser);
+// app.get("/login/user/profile/:userId", profileController.profileUser);
 
 app.get(
   "/login/category/language/book/porfile/:userId",
   profileController.profileFromOutside
 );
+/*los datos del usuario*/
+app.get(
+  "/login/user/:userId/profile/favorites",
+  userPurchaseController.showFavoritesBooks
+);
+app.get(
+  "/login/user/:userId/profile/purchase",
+  userPurchaseController.showPurchaseBooks
+);
+
+app.get(
+  "/login/user/:userId/profile/toSell",
+  userPurchaseController.showMyBooks
+);
+app.get(
+  "/login/user/:userId/profile/offers",
+  userPurchaseController.showMyoffers
+);
+app.get("/login/user/:userId/profile", userController.getUserSelect);
 
 // app.get("/", userController.getUsers);
 /*cambio de contraseña*/
@@ -119,7 +139,6 @@ app.put("/user/:userId/forgetPassword", userController.newPassword);
 
 // datos generales del usuario
 app.get("/api/user", userController.getUsers);
-// app.get("/login/user/:userId", validate, userController.getUserSelect);
 
 //register y login
 app.post("/singIn", userController.register);
@@ -130,11 +149,11 @@ app.post("/login/user/newBook", bookController.newBook);
 app.delete("/login/user/book/:bookId/delete", bookController.deleteBook);
 app.put(
   "/login/user/:userId/book/:idBook/editBook",
-  // validate,
+  validate,
   bookController.editBook
 );
 
 //usuario
-app.put("/user/:userId/editUser", profileController.updateUser);
+app.put("/user/:userId/editUser", validate, profileController.updateUser);
 
 app.listen(PORT, () => console.log(PORT));
