@@ -64,13 +64,13 @@ async function getBook(req, res) {
 
 async function newBook(req, res) {
   try {
+    const publicationDate = new Date();
     const { photoBack, photoFront } = req.file.path;
     const schema = Joi.object({
       productName: Joi.string().required(),
       photoFront: Joi.string(),
       photoBack: Joi.string(),
       descriptionProduct: Joi.string(),
-      publicationDate: Joi.date().required(),
       price: Joi.number().positive().precision(2).required(),
       bookLanguage: Joi.string().required(),
       seller: Joi.number().required(),
@@ -81,7 +81,6 @@ async function newBook(req, res) {
     const {
       productName,
       descriptionProduct,
-      publicationDate,
       price,
       bookLanguage,
       seller,

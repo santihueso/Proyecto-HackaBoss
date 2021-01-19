@@ -21,25 +21,25 @@ async function updateUser(req, res) {
   try {
     const userId = req.params.userId;
     const photo = req.file.path;
-    const { username, descriprionUser, city, postalCode } = req.body;
+    const { username, descriptionUser, city, postalCode } = req.body;
     const schema = Joi.object({
       username: Joi.string(),
-      descriprionUser: Joi.string(),
+      descriptionUser: Joi.string(),
       city: Joi.number(),
       postalCode: Joi.number(),
       photo: Joi.string(),
     });
     await schema.validateAsync({
       username,
-      descriprionUser,
+      descriptionUser,
       city,
       postalCode,
       photo,
     });
 
-    const updateUser = await userRepository.updateUser(
+    const updateUser = await profileRepository.updateUser(
       username,
-      descriprionUser,
+      descriptionUser,
       city,
       postalCode,
       photo,

@@ -49,7 +49,7 @@ app.use(
 /*Muestra los libros reservados de un usuario */
 app.get(
   "/login/:userId/reservation/books",
-  validate,
+  // validate,
   reservedController.getReservedBook
 );
 /*Muestra los últimos libros */
@@ -65,48 +65,48 @@ app.post("/beginning/seeker/author", seekerController.findAuthor);
 app.get("/beginning/category/:bookID", bookController.selectBook);
 /*Reserva con reserva*/
 app.get(
-  "/login/:userId/book/:bookId/reservation/buy",
-  validate,
+  "/login/user/:userId/book/:bookId/reservation/buy",
+  // validate,
   purchaseController.getBuyBookWithReserve
 );
 /*Eliminar reserva*/
 app.get(
-  "/login/:userId/book/:bookId/reservation/delete",
-  validate,
+  "/login/user/:userId/book/:bookId/reservation/delete",
+  // validate,
   purchaseController.deleteBookReserved
 );
 /*reservar*/
 app.get(
-  "/login/:userId/book/:bookId/reservation",
-  validate,
+  "/login/user/:userId/book/:bookId/reservation",
+  // validate,
   purchaseController.getReserver
 );
 /*comprar directamente*/
 app.get(
-  "/login/:userId/book/:bookId/buy",
-  validate,
+  "/login/user/:userId/book/:bookId/buy",
+  // validate,
   purchaseController.buyBookWithoutReserve
 );
 /*eliminar favorito*/
 app.get(
-  "/login/:userId/book/:bookId/favorite/delete",
-  validate,
+  "/login/user/:userId/book/:bookId/favorite/delete",
+  // validate,
   purchaseController.deleteFavorite
 );
 /*guardar como favorito*/
 app.get(
-  "/login/:userId/book/:bookId/favorite",
-  validate,
+  "/login/user/:userId/book/:bookId/favorite",
+  // validate,
   purchaseController.getFavoriteBook
 );
 // hacer calificacion compra
 app.put(
-  "/login/user/userId/book/:bookId/assessment",
+  "/login/user/:userId/book/:bookId/assessment",
   purchaseController.assessment
 );
 
 /*los datos necesario del usuario visto desde fuera*/
-app.get("/login/user/:userId", validate, profileController.profileUser);
+// app.get("/login/user/:userId", validate, profileController.profileUser);
 
 app.get(
   "/login/category/language/book/porfile/:userId",
@@ -115,11 +115,11 @@ app.get(
 
 // app.get("/", userController.getUsers);
 /*cambio de contraseña*/
-app.post("/:userId/forgetPassword", validate, userController.newPassword);
+app.put("/user/:userId/forgetPassword", userController.newPassword);
 
 // datos generales del usuario
 app.get("/api/user", userController.getUsers);
-app.get("/login/user/:userId", validate, userController.getUserSelect);
+// app.get("/login/user/:userId", validate, userController.getUserSelect);
 
 //register y login
 app.post("/singIn", userController.register);
@@ -130,11 +130,11 @@ app.post("/login/user/newBook", bookController.newBook);
 app.delete("/login/user/book/:bookId/delete", bookController.deleteBook);
 app.put(
   "/login/user/:userId/book/:idBook/editBook",
-  validate,
+  // validate,
   bookController.editBook
 );
 
 //usuario
-app.put("/user/:userId/editUser", validate, profileController.updateUser);
+app.put("/user/:userId/editUser", profileController.updateUser);
 
 app.listen(PORT, () => console.log(PORT));

@@ -3,6 +3,7 @@ const purchaseRepository = require("../repository/purchase.js");
 const messages = require("../messages/sendMessage.js");
 const register = "You have successfully registered!";
 const buy = "You have made the purchase correctly.";
+const joi = require("joi");
 
 async function getReserver(req, res) {
   try {
@@ -177,15 +178,22 @@ async function deleteFavorite(req, res) {
 
 async function assessment(req, res) {
   try {
+    const schema = joi.object({
+      assessment: joi.number(),
+      opinion: joi.string(),
+    });
+    await schema.validateAsync(req.body);
     const bookId = req.params.bookId;
     const buyer = +req.params.userId;
+
     const { assessment, opinion } = req.body;
     const existBook = await purchaseRepository.ifBuyed(bookId);
+
     const ifBuyed = existBook.find((e) => e.purchase === 1);
 
     if (existBook.length > 0) {
       if (ifBuyed) {
-        if (existBook[0].buyer === buyer) {
+        if (ifBuyed.buyer === buyer) {
           const getBook = await purchaseRepository.ratingPurchase(
             assessment,
             opinion,

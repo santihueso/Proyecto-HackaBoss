@@ -75,7 +75,7 @@ async function register(req, res) {
       email,
       hashPassword
     );
-    await messages.send(req, res, success);
+    await sendMenssage.send(req, res, success);
     res.send(newUser);
   } catch (err) {
     if (err.name === "validationError") {
@@ -97,10 +97,14 @@ async function login(req, res) {
     await schema.validateAsync(req.body);
     const { email, password } = req.body;
     const user = await userRepository.login(email);
+
     if (!user) {
       console.log("error");
     }
-    const contraseñaValidar = await bcrypt.compare(password, user[0].password);
+    const contraseñaValidar = await bcrypt.compare(
+      password,
+      user[0].userPassword
+    );
     if (!contraseñaValidar) {
       console.log("error");
     }
