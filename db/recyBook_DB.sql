@@ -28,7 +28,7 @@ CREATE TABLE `category` (
   `id_category` int NOT NULL AUTO_INCREMENT,
   `category_name` varchar(80) NOT NULL,
   PRIMARY KEY (`id_category`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'Idiomas'),(2,'Literatura española'),(3,'Literatura extranjera'),(4,'Infantil'),(5,'Académicos'),(6,'Comic/Manga'),(7,'Juvenil'),(8,'Hobbies');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +110,7 @@ DROP TABLE IF EXISTS `purchase`;
 CREATE TABLE `purchase` (
   `id_purchase` int NOT NULL AUTO_INCREMENT,
   `product` int NOT NULL,
-  `purchase` tinyint(1) NOT NULL,
+  `purchase` tinyint(1) DEFAULT NULL,
   `purchaseDate` timestamp NULL DEFAULT NULL,
   `favorite` tinyint(1) DEFAULT '0',
   `reservation` tinyint(1) DEFAULT '0',
@@ -175,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-01-14 13:25:45
+-- Dump completed on 2021-01-20 19:17:43
