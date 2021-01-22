@@ -65,6 +65,7 @@ async function getBook(req, res) {
 async function newBook(req, res) {
   try {
     const publicationDate = new Date();
+    const idUser = req.params.idUser;
     const { photoBack, photoFront } = req.file.path;
     const schema = Joi.object({
       productName: Joi.string().required(),
@@ -97,7 +98,8 @@ async function newBook(req, res) {
       bookLanguage,
       seller,
       author,
-      category
+      category,
+      idUser
     );
     res.send(newBook);
   } catch (err) {
@@ -176,7 +178,8 @@ async function editBook(req, res) {
 async function deleteBook(req, res) {
   try {
     const bookId = req.params.bookId;
-    const deleteBook = await bookRepository.deleteBook(bookId);
+    const userId = req.params.userId;
+    const deleteBook = await bookRepository.deleteBook(userId, bookId);
     res.send(deleteBook);
   } catch (error) {
     if (err.name === "validationError") {

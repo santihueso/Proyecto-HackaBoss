@@ -15,6 +15,7 @@ const purchaseController = require("./controllers/purchase.js");
 const profileController = require("./controllers/profile.js");
 const reservedController = require("./controllers/reservation.js");
 const userPurchaseController = require("./controllers/userPurchase.js");
+const categoryController = require("./controllers/category.js");
 const accessLogStream = fs.createWriteStream("./access.log", { flags: "a" });
 
 const storage = multer.diskStorage({
@@ -145,8 +146,11 @@ app.post("/singIn", userController.register);
 app.post("/login", userController.login);
 
 //libros (revisar iduser newbook,deletebook)
-app.post("/login/user/newBook", bookController.newBook);
-app.delete("/login/user/book/:bookId/delete", bookController.deleteBook);
+app.post("/login/user/:userId/newBook", bookController.newBook);
+app.delete(
+  "/login/user/:userId/book/:bookId/delete",
+  bookController.deleteBook
+);
 app.put(
   "/login/user/:userId/book/:idBook/editBook",
   validate,
@@ -155,5 +159,9 @@ app.put(
 
 //usuario
 app.put("/user/:userId/editUser", validate, profileController.updateUser);
+
+//categorias
+
+app.get("/category/:categoryId/", categoryController.goToCategory);
 
 app.listen(PORT, () => console.log(PORT));
