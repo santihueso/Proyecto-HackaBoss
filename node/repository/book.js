@@ -15,7 +15,7 @@ async function selectBook(bookID) {
   return book;
 }
 
-async function category(books) {
+async function category() {
   const pool = await database.getPool();
   const query = "select * from category";
   const [categories] = await pool.query(query);
@@ -41,12 +41,11 @@ async function createBook(
   bookLanguage,
   seller,
   author,
-  category,
-  id_user
+  category
 ) {
   const pool = await database.getPool();
   const insertQuery =
-    "insert into product(productName, photoFront, photoBack,descriptionProduct, publicationDate, price, bookLanguage, seller, author,category)values(?,?,?,?,?,?,?,?,?,?)";
+    "insert into product(productName, photoFront, photoBack, descriptionProduct, publicationDate, price, bookLanguage, seller, author,category)values(?,?,?,?,?,?,?,?, ?, ?)";
   const [createBook] = await pool.query(insertQuery, [
     productName,
     photoFront,
@@ -58,7 +57,6 @@ async function createBook(
     seller,
     author,
     category,
-    id_user,
   ]);
   return createBook.isertId;
 }
@@ -74,12 +72,12 @@ async function editBook(
   bookLanguage,
   author,
   category,
-  id_product,
-  id_user
+  id_user,
+  id_product
 ) {
   const pool = await database.getPool();
   const insertQuery =
-    "UPDATE product SET productName = ?, photoFront = ?, photoBack = ?, descriptionProduct = ?, price = ?, bookLanguage = ?, author = ?, category = ? WHERE id_user and id_product = ? ";
+    "UPDATE product SET productName = ?, photoFront = ?, photoBack = ?, descriptionProduct = ?, price = ?, bookLanguage = ?, author = ?, category = ? WHERE seller = ? and id_product = ? ";
   const [editBook] = await pool.query(insertQuery, [
     productName,
     photoFront,
@@ -89,18 +87,18 @@ async function editBook(
     bookLanguage,
     author,
     category,
-    id_product,
     id_user,
+    id_product,
   ]);
   return editBook;
 }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-async function deleteBook(id_user, id_product) {
+async function deleteBook(seller, book) {
   const pool = await database.getPool();
-  const query = "DELETE from product where id_product = ?";
-  const [deleteBook] = await pool.query(query, [id_user, id_product]);
+  const query = "delete from product where seller = ? and id_product = ?";
+  const [deleteBook] = await pool.query(query, [seller, book]);
   return deleteBook;
 }
 

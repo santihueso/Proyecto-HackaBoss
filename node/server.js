@@ -17,12 +17,16 @@ const reservedController = require("./controllers/reservation.js");
 const userPurchaseController = require("./controllers/userPurchase.js");
 const categoryController = require("./controllers/category.js");
 const accessLogStream = fs.createWriteStream("./access.log", { flags: "a" });
-
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "/public/uploads"),
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
+});
+
+const img = multer({
+  storage,
+  dest: path.join(__dirname, "/public/uploads"),
 });
 
 app.use(morgan("combined", { immediate: true, stream: accessLogStream }));
@@ -42,12 +46,7 @@ function validate(req, res, next) {
 }
 
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(
-  multer({
-    storage,
-    dest: path.join(__dirname, "/public/uploads"),
-  }).single("photo")
-);
+
 /*Muestra los libros reservados de un usuario */
 app.get(
   "/login/:userId/reservation/books",
@@ -146,19 +145,27 @@ app.post("/singIn", userController.register);
 app.post("/login", userController.login);
 
 //libros (revisar iduser newbook,deletebook)
-app.post("/login/user/:userId/newBook", bookController.newBook);
+app.post(
+  "/login/user/:userId/newBook",
+  img.array("photos", 2),
+  bookController.newBook
+);
 app.delete(
   "/login/user/:userId/book/:bookId/delete",
   bookController.deleteBook
 );
 app.put(
-  "/login/user/:userId/book/:idBook/editBook",
-  validate,
+  "/login/user/:userId/book/:bookId/editBook",
+  img.array("change", 2),
   bookController.editBook
 );
 
 //usuario
-app.put("/user/:userId/editUser", validate, profileController.updateUser);
+app.put(
+  "/user/:userId/editUser",
+  img.single("photo"),
+  profileController.updateUser
+);
 
 //categorias
 

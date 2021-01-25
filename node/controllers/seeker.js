@@ -1,4 +1,3 @@
-require("dotenv").config();
 const seekerRepository = require("../repository/seeker.js");
 const Joi = require("joi");
 

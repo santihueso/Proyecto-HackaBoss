@@ -1,4 +1,3 @@
-require("dotenv").config();
 const purchaseRepository = require("../repository/purchase.js");
 const messages = require("../messages/sendMessage.js");
 const register = "You have successfully registered!";

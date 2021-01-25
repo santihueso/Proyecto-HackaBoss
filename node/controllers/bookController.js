@@ -1,4 +1,3 @@
-require("dotenv").config();
 const bookRepository = require("../repository/book.js");
 const Joi = require("joi");
 //const { func, string, number } = require("joi");
@@ -65,16 +64,17 @@ async function getBook(req, res) {
 async function newBook(req, res) {
   try {
     const publicationDate = new Date();
-    const idUser = req.params.idUser;
-    const { photoBack, photoFront } = req.file.path;
+    const seller = req.params.userId;
+    const photos = req.files;
+    const photoFront = photos[0].path;
+    const photoBack = photos[1].path;
     const schema = Joi.object({
       productName: Joi.string().required(),
-      photoFront: Joi.string(),
-      photoBack: Joi.string(),
+      photos: Joi.string(),
+      photos: Joi.string(),
       descriptionProduct: Joi.string(),
       price: Joi.number().positive().precision(2).required(),
       bookLanguage: Joi.string().required(),
-      seller: Joi.number().required(),
       author: Joi.string().required(),
       category: Joi.number().required(),
     });
@@ -84,7 +84,6 @@ async function newBook(req, res) {
       descriptionProduct,
       price,
       bookLanguage,
-      seller,
       author,
       category,
     } = req.body;
@@ -98,8 +97,7 @@ async function newBook(req, res) {
       bookLanguage,
       seller,
       author,
-      category,
-      idUser
+      category
     );
     res.send(newBook);
   } catch (err) {
@@ -108,7 +106,7 @@ async function newBook(req, res) {
     }
     console.log(err);
     res.status(err.status || 500);
-    res.send({ error: err.message });
+    res.send({ err: err.message });
   }
 }
 
@@ -117,9 +115,12 @@ async function newBook(req, res) {
 async function editBook(req, res) {
   try {
     //recojo datos
-    const idBook = req.params.idBook;
-    const idUser = req.params.idUser;
-    const { photoBack, photoFront } = req.file.path;
+    const idBook = req.params.bookId;
+    const idUser = req.params.userId;
+    const change = req.files;
+
+    const photoFront = change[0].path;
+    const photoBack = change[1].path;
     const {
       productName,
       descriptionProduct,
@@ -131,24 +132,15 @@ async function editBook(req, res) {
     //valido datos
     const schema = Joi.object({
       productName: Joi.string().required(),
-      photoFront: Joi.string(),
-      photoBack: Joi.string(),
+      change: Joi.string(),
+      change: Joi.string(),
       descriptionProduct: Joi.string(),
       price: Joi.number().positive().precision(2).required(),
       bookLanguage: Joi.string().required(),
       author: Joi.string().required(),
       category: Joi.number().required(),
     });
-    await schema.validateAsync({
-      productName,
-      photoFront,
-      photoBack,
-      descriptionProduct,
-      price,
-      bookLanguage,
-      author,
-      category,
-    });
+    await schema.validateAsync(req.body);
 
     const updateBook = await bookRepository.editBook(
       productName,
@@ -159,8 +151,8 @@ async function editBook(req, res) {
       bookLanguage,
       author,
       category,
-      idBook,
-      idUser
+      idUser,
+      idBook
     );
     res.send(updateBook);
   } catch (err) {
@@ -169,7 +161,7 @@ async function editBook(req, res) {
     }
     console.log(err);
     res.status(err.status || 500);
-    res.send({ error: err.message });
+    res.send({ err: err.message });
   }
 }
 
@@ -180,14 +172,15 @@ async function deleteBook(req, res) {
     const bookId = req.params.bookId;
     const userId = req.params.userId;
     const deleteBook = await bookRepository.deleteBook(userId, bookId);
+
     res.send(deleteBook);
-  } catch (error) {
+  } catch (err) {
     if (err.name === "validationError") {
       err.code = 400;
     }
     console.log(err);
     res.status(err.status || 500);
-    res.send({ error: err.message });
+    res.send({ err: err.message });
   }
 }
 
