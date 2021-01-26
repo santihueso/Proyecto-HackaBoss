@@ -71,7 +71,7 @@ app.get(
   purchaseController.getBuyBookWithReserve
 );
 /*Eliminar reserva*/
-app.get(
+app.delete(
   "/login/user/:userId/book/:bookId/reservation/delete",
   validate,
   purchaseController.deleteBookReserved
@@ -79,7 +79,7 @@ app.get(
 /*reservar*/
 app.get(
   "/login/user/:userId/book/:bookId/reservation",
-  validate,
+
   purchaseController.getReserver
 );
 /*comprar directamente*/
@@ -89,7 +89,7 @@ app.get(
   purchaseController.buyBookWithoutReserve
 );
 /*eliminar favorito*/
-app.get(
+app.delete(
   "/login/user/:userId/book/:bookId/favorite/delete",
   validate,
   purchaseController.deleteFavorite
@@ -103,6 +103,7 @@ app.get(
 // hacer calificacion compra
 app.put(
   "/login/user/:userId/book/:bookId/assessment",
+  validate,
   purchaseController.assessment
 );
 
@@ -111,27 +112,32 @@ app.put(
 
 app.get(
   "/login/category/language/book/porfile/:userId",
+  validate,
   profileController.profileFromOutside
 );
 /*los datos del usuario*/
 app.get(
   "/login/user/:userId/profile/favorites",
+  validate,
   userPurchaseController.showFavoritesBooks
 );
 app.get(
   "/login/user/:userId/profile/purchase",
+  validate,
   userPurchaseController.showPurchaseBooks
 );
 
 app.get(
   "/login/user/:userId/profile/toSell",
+  validate,
   userPurchaseController.showMyBooks
 );
 app.get(
   "/login/user/:userId/profile/offers",
+  validate,
   userPurchaseController.showMyoffers
 );
-app.get("/login/user/:userId/profile", userController.getUserSelect);
+app.get("/login/user/:userId/profile", validate, userController.getUserSelect);
 
 // app.get("/", userController.getUsers);
 /*cambio de contraseña*/
@@ -144,18 +150,21 @@ app.get("/api/user", userController.getUsers);
 app.post("/singIn", userController.register);
 app.post("/login", userController.login);
 
-//libros (revisar iduser newbook,deletebook)
+//libros
 app.post(
   "/login/user/:userId/newBook",
+  validate,
   img.array("photos", 2),
   bookController.newBook
 );
 app.delete(
   "/login/user/:userId/book/:bookId/delete",
+  validate,
   bookController.deleteBook
 );
 app.put(
   "/login/user/:userId/book/:bookId/editBook",
+  validate,
   img.array("change", 2),
   bookController.editBook
 );
@@ -163,6 +172,7 @@ app.put(
 //usuario
 app.put(
   "/user/:userId/editUser",
+  validate,
   img.single("photo"),
   profileController.updateUser
 );

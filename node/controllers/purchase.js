@@ -140,7 +140,6 @@ async function deleteBookReserved(req, res) {
     const bookId = req.params.bookId;
     const userId = req.params.userId;
     const deleteBook = await purchaseRepository.deleteReservation(
-      0,
       bookId,
       userId
     );
@@ -159,11 +158,7 @@ async function deleteFavorite(req, res) {
   try {
     const userId = req.params.userId;
     const bookId = req.params.bookId;
-    const deleteBook = await purchaseRepository.deleteFavorite(
-      0,
-      bookId,
-      userId
-    );
+    const deleteBook = await purchaseRepository.deleteFavorite(bookId, userId);
     res.send(deleteBook);
   } catch (err) {
     if (err.name === "ValidationError") {
