@@ -1,4 +1,4 @@
-const userRepository = require("../repository/user.js");
+const { user } = require("../repository/index.js");
 const bcrypt = require("bcryptjs");
 const Joi = require("joi");
 const sendMenssage = require("../messages/sendMessage.js");
@@ -7,8 +7,8 @@ const success = "You have successfully registered!";
 
 async function getUsers(req, res) {
   try {
-    const user = await userRepository.getUser();
-    res.send(user);
+    const users = await user.getUser();
+    res.send(users);
   } catch (err) {
     if (err.name === "ValdationError") {
       err.code = 400;
@@ -22,7 +22,7 @@ async function getUsers(req, res) {
 async function getUserSelect(req, res) {
   try {
     const userId = req.params.userId;
-    const selectUser = await userRepository.selectUser(userId);
+    const selectUser = await user.selectUser(userId);
 
     res.send(selectUser);
   } catch (err) {
@@ -44,7 +44,7 @@ async function newPassword(req, res) {
     const { userPassword } = req.body;
     const userId = req.params.userId;
     const passwordHash = await bcrypt.hash(userPassword, 10);
-    const change = await userRepository.changePassword(passwordHash, userId);
+    const change = await user.changePassword(passwordHash, userId);
     res.send(change);
   } catch (err) {
     if (err.name === "ValdationError") {
@@ -69,11 +69,7 @@ async function register(req, res) {
     await schema.validateAsync(req.body);
     const { username, email, password } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = await userRepository.createUser(
-      username,
-      email,
-      hashPassword
-    );
+    const newUser = await user.createUser(username, email, hashPassword);
     await sendMenssage.send(req, res, success);
     res.send(newUser);
   } catch (err) {
@@ -95,20 +91,23 @@ async function login(req, res) {
     });
     await schema.validateAsync(req.body);
     const { email, password } = req.body;
-    const user = await userRepository.login(email);
+    const userSelect = await user.login(email);
 
-    if (!user) {
+    if (!userSelect) {
       console.log("error");
     }
     const contraseñaValidar = await bcrypt.compare(
       password,
-      user[0].userPassword
+      userSelect[0].userPassword
     );
     if (!contraseñaValidar) {
       console.log("error");
     }
 
-    const tokePayload = { id: user[0].id, username: user[0].username };
+    const tokePayload = {
+      id: userSelect[0].id,
+      username: userSelect[0].username,
+    };
     const token = jwt.sign(tokePayload, process.env.JWT, { expiresIn: "30d" });
     res.send(token);
   } catch (err) {

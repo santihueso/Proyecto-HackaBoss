@@ -1,10 +1,9 @@
-const bookRepository = require("../repository/book.js");
+const { book } = require("../repository/index.js");
 const Joi = require("joi");
-//const { func, string, number } = require("joi");
 
 async function showLastBook(req, res) {
   try {
-    const books = await bookRepository.lastBooks();
+    const books = await book.lastBooks();
     res.send(books);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -19,7 +18,7 @@ async function showLastBook(req, res) {
 async function selectBook(req, res) {
   try {
     const bookID = req.params.bookID;
-    const selectId = await bookRepository.selectBook(bookID);
+    const selectId = await book.selectBook(bookID);
     res.send(selectId);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -33,7 +32,7 @@ async function selectBook(req, res) {
 
 async function selectAllCategories(req, res) {
   try {
-    const books = await bookRepository.category();
+    const books = await book.category();
     res.send(books);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -47,8 +46,8 @@ async function selectAllCategories(req, res) {
 
 async function getBook(req, res) {
   try {
-    const book = await bookRepository.getBook();
-    res.send(book);
+    const books = await book.getBook();
+    res.send(books);
   } catch (err) {
     if (err.name === "validationError") {
       err.code = 400;
@@ -87,7 +86,7 @@ async function newBook(req, res) {
       author,
       category,
     } = req.body;
-    const newBook = await bookRepository.createBook(
+    const newBook = await book.createBook(
       productName,
       photoFront,
       photoBack,
@@ -142,7 +141,7 @@ async function editBook(req, res) {
     });
     await schema.validateAsync(req.body);
 
-    const updateBook = await bookRepository.editBook(
+    const updateBook = await book.editBook(
       productName,
       photoFront,
       photoBack,
@@ -171,7 +170,7 @@ async function deleteBook(req, res) {
   try {
     const bookId = req.params.bookId;
     const userId = req.params.userId;
-    const deleteBook = await bookRepository.deleteBook(userId, bookId);
+    const deleteBook = await book.deleteBook(userId, bookId);
 
     res.send(deleteBook);
   } catch (err) {

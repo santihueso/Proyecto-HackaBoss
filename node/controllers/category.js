@@ -1,14 +1,14 @@
-const seekerRepository = require("../repository/category.js");
+const { category } = require("../repository/index.js");
 
 async function goToCategory(req, res) {
   try {
     const categoryId = req.params.categoryId;
-    const category = await seekerRepository.goToCategory(categoryId);
-
-    if (category.length === 0) {
+    const categories = await category.goToCategory(categoryId);
+    console.log(categories);
+    if (categories.length === 0) {
       res.send("No hay libros en esta categoría.");
     } else {
-      res.send(category);
+      res.send(categories);
     }
   } catch (err) {
     if (err.name === "ValdationError") {

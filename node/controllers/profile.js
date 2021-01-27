@@ -1,10 +1,10 @@
-const profileRepository = require("../repository/profile.js");
+const { profile } = require("../repository/index.js");
 const Joi = require("joi");
 
 async function profileFromOutside(req, res) {
   try {
     const userId = req.params.userId;
-    const showProfile = await profileRepository.showProfileFromOutside(userId);
+    const showProfile = await profile.showProfileFromOutside(userId);
     res.send(showProfile);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -36,7 +36,7 @@ async function updateUser(req, res) {
       photo,
     });
 
-    const updateUser = await profileRepository.updateUser(
+    const updateUser = await profile.updateUser(
       username,
       descriptionUser,
       city,
@@ -60,7 +60,7 @@ async function updateUser(req, res) {
 async function profileUser(req, res) {
   try {
     const userId = req.params.userId;
-    const showProfileUser = await profileRepository.showProfileUser(userId);
+    const showProfileUser = await profile.showProfileUser(userId);
     res.send(showProfileUser);
   } catch (error) {
     if (err.name === "validationError") {
