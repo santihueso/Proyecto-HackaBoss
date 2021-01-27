@@ -5,18 +5,21 @@ const multer = require("multer");
 const path = require("path");
 const app = express();
 const morgan = require("morgan");
-const jwt = require("jsonwebtoken");
+const { validate, notFound } = require("./middleware/middlewares.js");
 const fs = require("fs");
-const { PORT, JWT } = process.env;
-const userController = require("./controllers/userController.js");
-const bookController = require("./controllers/bookController.js");
-const seekerController = require("./controllers/seeker.js");
-const purchaseController = require("./controllers/purchase.js");
-const profileController = require("./controllers/profile.js");
-const reservedController = require("./controllers/reservation.js");
-const userPurchaseController = require("./controllers/userPurchase.js");
-const categoryController = require("./controllers/category.js");
+const { PORT } = process.env;
 const accessLogStream = fs.createWriteStream("./access.log", { flags: "a" });
+const {
+  userPurchase,
+  userController,
+  seeker,
+  reservation,
+  purchase,
+  profile,
+  category,
+  book,
+} = require("./controllers/index.js");
+
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "/public/uploads"),
   filename: (req, file, cb) => {
@@ -30,20 +33,6 @@ const img = multer({
 });
 
 app.use(morgan("combined", { immediate: true, stream: accessLogStream }));
-function validate(req, res, next) {
-  try {
-    const token = req.headers.authorization;
-    const decodeToken = jwt.verify(token, JWT);
-    const { id, nombre } = decodeToken;
-    req.auth = { id, nombre };
-    req.auth = decodeToken;
-    next();
-  } catch (err) {
-    console.log(err);
-    res.status(401);
-    res.send("token erróneo");
-  }
-}
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
@@ -51,91 +40,88 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.get(
   "/login/:userId/reservation/books",
   validate,
-  reservedController.getReservedBook
+  reservation.getReservedBook
 );
 /*Muestra los últimos libros */
-app.get("/beginning/lastBooks", bookController.showLastBook);
+app.get("/beginning/lastBooks", book.showLastBook);
 //Todas las categorias
-app.get("/beginning/categories", bookController.selectAllCategories);
+app.get("/beginning/categories", book.selectAllCategories);
 /*Buscardor*/
-app.post("/beginning/seeker/category", seekerController.findCategory);
-app.post("/beginning/seeker/tittle", seekerController.findName);
-app.post("/beginning/seeker/cp", seekerController.findCP);
-app.post("/beginning/seeker/author", seekerController.findAuthor);
+app.post("/beginning/seeker/category", seeker.findCategory);
+app.post("/beginning/seeker/tittle", seeker.findName);
+app.post("/beginning/seeker/cp", seeker.findCP);
+app.post("/beginning/seeker/author", seeker.findAuthor);
 /*dentro de categoria, buscar los datos del libro*/
-app.get("/beginning/category/:bookID", bookController.selectBook);
+app.get("/beginning/category/:bookID", book.selectBook);
 /*Reserva con reserva*/
 app.get(
   "/login/user/:userId/book/:bookId/reservation/buy",
   validate,
-  purchaseController.getBuyBookWithReserve
+  purchase.getBuyBookWithReserve
 );
 /*Eliminar reserva*/
 app.delete(
   "/login/user/:userId/book/:bookId/reservation/delete",
   validate,
-  purchaseController.deleteBookReserved
+  purchase.deleteBookReserved
 );
 /*reservar*/
 app.get(
   "/login/user/:userId/book/:bookId/reservation",
 
-  purchaseController.getReserver
+  purchase.getReserver
 );
 /*comprar directamente*/
 app.get(
   "/login/user/:userId/book/:bookId/buy",
   validate,
-  purchaseController.buyBookWithoutReserve
+  purchase.buyBookWithoutReserve
 );
 /*eliminar favorito*/
 app.delete(
   "/login/user/:userId/book/:bookId/favorite/delete",
   validate,
-  purchaseController.deleteFavorite
+  purchase.deleteFavorite
 );
 /*guardar como favorito*/
 app.get(
   "/login/user/:userId/book/:bookId/favorite",
   validate,
-  purchaseController.getFavoriteBook
+  purchase.getFavoriteBook
 );
 // hacer calificacion compra
 app.put(
   "/login/user/:userId/book/:bookId/assessment",
   validate,
-  purchaseController.assessment
+  purchase.assessment
 );
-
-/*los datos necesario del usuario visto desde fuera*/
-// app.get("/login/user/profile/:userId", profileController.profileUser);
 
 app.get(
   "/login/category/language/book/porfile/:userId",
   validate,
-  profileController.profileFromOutside
+  profile.profileFromOutside
 );
 /*los datos del usuario*/
 app.get(
   "/login/user/:userId/profile/favorites",
   validate,
-  userPurchaseController.showFavoritesBooks
+  userPurchase.showFavoritesBooks
 );
 app.get(
   "/login/user/:userId/profile/purchase",
   validate,
-  userPurchaseController.showPurchaseBooks
+  userPurchase.showPurchaseBooks
 );
 
 app.get(
   "/login/user/:userId/profile/toSell",
   validate,
-  userPurchaseController.showMyBooks
+  userPurchase.showMyBooks
 );
 app.get(
   "/login/user/:userId/profile/offers",
   validate,
-  userPurchaseController.showMyoffers
+  userPurchase.showMyoffers
 );
 app.get("/login/user/:userId/profile", validate, userController.getUserSelect);
 
@@ -155,18 +141,18 @@ app.post(
   "/login/user/:userId/newBook",
   validate,
   img.array("photos", 2),
-  bookController.newBook
+  book.newBook
 );
 app.delete(
   "/login/user/:userId/book/:bookId/delete",
   validate,
-  bookController.deleteBook
+  book.deleteBook
 );
 app.put(
   "/login/user/:userId/book/:bookId/editBook",
   validate,
   img.array("change", 2),
-  bookController.editBook
+  book.editBook
 );
 
 //usuario
@@ -174,11 +160,13 @@ app.put(
   "/user/:userId/editUser",
   validate,
   img.single("photo"),
-  profileController.updateUser
+  profile.updateUser
 );
 
 //categorias
 
-app.get("/category/:categoryId/", categoryController.goToCategory);
+app.get("/category/:categoryId", category.goToCategory);
+
+app.get("*", notFound);
 
 app.listen(PORT, () => console.log(PORT));

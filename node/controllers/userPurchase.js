@@ -1,9 +1,9 @@
-const userPurchaseRepository = require("../repository/userPurchase.js");
+const { usePurchase } = require("../repository/index");
 
 async function showFavoritesBooks(req, res) {
   try {
     const userId = +req.params.userId;
-    const favorites = await userPurchaseRepository.favoriteUserBooks(userId);
+    const favorites = await usePurchase.favoriteUserBooks(userId);
     res.send(favorites);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -18,7 +18,7 @@ async function showFavoritesBooks(req, res) {
 async function showPurchaseBooks(req, res) {
   try {
     const userId = +req.params.userId;
-    const purchase = await userPurchaseRepository.purchaseUserBooks(userId);
+    const purchase = await usePurchase.purchaseUserBooks(userId);
     res.send(purchase);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -33,7 +33,7 @@ async function showPurchaseBooks(req, res) {
 async function showMyBooks(req, res) {
   try {
     const userId = +req.params.userId;
-    const sell = await userPurchaseRepository.sellUserBooks(userId);
+    const sell = await usePurchase.sellUserBooks(userId);
     res.send(sell);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -48,7 +48,7 @@ async function showMyBooks(req, res) {
 async function showMyoffers(req, res) {
   try {
     const userId = +req.params.userId;
-    const offers = await userPurchaseRepository.offersUserBooks(userId);
+    const offers = await usePurchase.offersUserBooks(userId);
     res.send(offers);
   } catch (err) {
     if (err.name === "ValidationError") {

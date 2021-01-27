@@ -29,9 +29,9 @@ async function findUserIfReserverBook(bookId) {
 
 async function updateWeReserve(buyBook, userId, date) {
   const pool = await database.getPool();
-  console.log(date);
+
   const insertQuery =
-    "update purchase set purchase = ?, purchaseDate = ? where buyer = ?";
+    "update purchase set purchase = ?, reservation = 0, purchaseDate = ? where buyer = ?";
   const [buy] = await pool.query(insertQuery, [buyBook, date, userId]);
   return buy;
 }
