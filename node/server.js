@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyparser = require("body-parser");
 const multer = require("multer");
+const cors = require("cors");
 const path = require("path");
 const app = express();
 const morgan = require("morgan");
@@ -31,6 +32,8 @@ const img = multer({
   storage,
   dest: path.join(__dirname, "/public/uploads"),
 });
+
+app.use(cors());
 
 app.use(morgan("combined", { immediate: true, stream: accessLogStream }));
 
