@@ -76,6 +76,7 @@ async function findAuthor(req, res) {
 
     await schema.validateAsync(req.body);
     const { author } = req.body;
+    console.log("BODY", req.body);
     const selectAuthor = await seeker.forAuthor(author);
     if (selectAuthor.length < 1) {
       throw new Error("No existe");

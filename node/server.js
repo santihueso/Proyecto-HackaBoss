@@ -21,6 +21,8 @@ const {
   book,
 } = require("./controllers/index.js");
 
+app.use(express.static("public"));
+
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "/public/uploads"),
   filename: (req, file, cb) => {
@@ -33,9 +35,13 @@ const img = multer({
   dest: path.join(__dirname, "/public/uploads"),
 });
 
+app.use(express.json({ type: ["aplication/json", "text/plain"] }));
+
 app.use(cors());
 
 app.use(morgan("combined", { immediate: true, stream: accessLogStream }));
+
+app.use(bodyparser.json());
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
@@ -51,7 +57,7 @@ app.get("/beginning/lastBooks", book.showLastBook);
 app.get("/beginning/categories", book.selectAllCategories);
 /*Buscardor*/
 app.post("/beginning/seeker/category", seeker.findCategory);
-app.post("/beginning/seeker/tittle", seeker.findName);
+app.post("/beginning/seeker/title", seeker.findName);
 app.post("/beginning/seeker/cp", seeker.findCP);
 app.post("/beginning/seeker/author", seeker.findAuthor);
 /*dentro de categoria, buscar los datos del libro*/

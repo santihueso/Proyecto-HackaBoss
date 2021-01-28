@@ -65,8 +65,9 @@ async function newBook(req, res) {
     const publicationDate = new Date();
     const seller = req.params.userId;
     const photos = req.files;
-    const photoFront = photos[0].path;
-    const photoBack = photos[1].path;
+
+    const photoFront = photos[0].originalname;
+    const photoBack = photos[1].originalname;
     const schema = Joi.object({
       productName: Joi.string().required(),
       photos: Joi.string(),
@@ -118,8 +119,8 @@ async function editBook(req, res) {
     const idUser = req.params.userId;
     const change = req.files;
 
-    const photoFront = change[0].path;
-    const photoBack = change[1].path;
+    const photoFront = change[0].originalname;
+    const photoBack = change[1].originalname;
     const {
       productName,
       descriptionProduct,

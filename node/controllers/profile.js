@@ -19,7 +19,8 @@ async function profileFromOutside(req, res) {
 async function updateUser(req, res) {
   try {
     const userId = req.params.userId;
-    const photo = req.file.path;
+    const photo = req.file.originalname;
+
     const { username, descriptionUser, city, postalCode } = req.body;
     const schema = Joi.object({
       username: Joi.string(),

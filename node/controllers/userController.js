@@ -68,6 +68,7 @@ async function register(req, res) {
     });
     await schema.validateAsync(req.body);
     const { username, email, password } = req.body;
+    console.log(req.body, "ss");
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await user.createUser(username, email, hashPassword);
     await sendMenssage.send(req, res, success);
