@@ -65,9 +65,9 @@ async function newBook(req, res) {
     const publicationDate = new Date();
     const seller = req.params.userId;
     const photos = req.files;
-
-    const photoFront = photos[0].originalname;
-    const photoBack = photos[1].originalname;
+    console.log(photos);
+    const photoFront = photos[0].filename;
+    const photoBack = photos[1].filename;
     const schema = Joi.object({
       productName: Joi.string().required(),
       photos: Joi.string(),

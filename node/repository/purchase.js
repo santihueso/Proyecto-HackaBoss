@@ -61,6 +61,7 @@ async function favorites(book, favorite, buyer) {
 
 async function deleteReservation(bookId, userId) {
   const pool = await database.getPool();
+  console.log(bookId, userId);
   const insertQuery = "delete from purchase where product = ? and buyer = ?";
   const [deleteBook] = await pool.query(insertQuery, [bookId, userId]);
 
@@ -88,8 +89,9 @@ async function ratingPurchase(comment, opinion, product, buyer) {
   const [assesment] = await pool.query(insertQuery, [
     comment,
     opinion,
-    product,
+
     buyer,
+    product,
   ]);
   return assesment;
 }

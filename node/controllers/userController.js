@@ -43,6 +43,13 @@ async function newPassword(req, res) {
     await schema.validateAsync(req.body);
     const { userPassword } = req.body;
     const userId = req.params.userId;
+    console.log(req.auth);
+    if (req.auth.id !== Number(userId)) {
+      const error = new Error("No puedes cambiar la contraseña.");
+      error.status = 403;
+      throw error;
+    }
+
     const passwordHash = await bcrypt.hash(userPassword, 10);
     const change = await user.changePassword(passwordHash, userId);
     res.send(change);
@@ -106,7 +113,7 @@ async function login(req, res) {
     }
 
     const tokePayload = {
-      id: userSelect[0].id,
+      id: userSelect[0].id_user,
       username: userSelect[0].username,
     };
     const token = jwt.sign(tokePayload, process.env.JWT, { expiresIn: "30d" });

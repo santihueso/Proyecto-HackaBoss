@@ -127,6 +127,7 @@ async function deleteBookReserved(req, res) {
   try {
     const bookId = req.params.bookId;
     const userId = req.params.userId;
+    //Arreglar con token
     const deleteBook = await purchase.deleteReservation(bookId, userId);
     res.send(deleteBook);
   } catch (err) {
@@ -173,6 +174,7 @@ async function assessment(req, res) {
     if (existBook.length > 0) {
       if (ifBuyed) {
         if (ifBuyed.buyer === buyer) {
+          console.log("hola");
           const getBook = await purchase.ratingPurchase(
             assessment,
             opinion,

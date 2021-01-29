@@ -2,10 +2,13 @@ const database = require("../infraestructure/db.js");
 
 async function showProfileFromOutside(userId) {
   const pool = await database.getPool();
+  const userQuery =
+    "select u.username, u.descriptionUser, u.photo from user as u where id_user = ?";
+  const [userData] = await pool.query(userQuery, userId);
   const query =
-    " select u.username, u.descriptionUser, u.photo, p.author, p.bookLanguage, p.price, p.productName as tittle from user as u inner join product as p on u.id_user = p.seller and p.seller = ?";
+    " select  p.author, p.bookLanguage, p.price, p.productName as title from product as p where p.seller = ?";
   const [forSell] = await pool.query(query, userId);
-  return forSell;
+  return { user: userData[0], books: forSell };
 }
 
 //--------Editar Usuario-------------------------------------------------------------------------------------------------------------------------------------------------------

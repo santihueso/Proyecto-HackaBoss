@@ -5,8 +5,6 @@ function validate(req, res, next) {
   try {
     const token = req.headers.authorization;
     const decodeToken = jwt.verify(token, JWT);
-    const { id, nombre } = decodeToken;
-    req.auth = { id, nombre };
     req.auth = decodeToken;
     next();
   } catch (err) {
