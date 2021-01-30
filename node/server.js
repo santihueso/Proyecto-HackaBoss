@@ -23,15 +23,7 @@ const {
 
 app.use(express.static("public"));
 
-const storage = multer.diskStorage({
-  destination: path.join(__dirname, "/public/uploads"),
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
 const img = multer({
-  storage,
   dest: path.join(__dirname, "/public/uploads"),
 });
 
@@ -134,9 +126,8 @@ app.get(
 );
 app.get("/login/user/:userId/profile", validate, userController.getUserSelect);
 
-// app.get("/", userController.getUsers);
 /*cambio de contraseña*/
-app.put("/user/:userId/forgetPassword", userController.newPassword);
+app.put("/user/:userId/forgetPassword", validate, userController.newPassword);
 
 // datos generales del usuario
 app.get("/api/user", userController.getUsers);

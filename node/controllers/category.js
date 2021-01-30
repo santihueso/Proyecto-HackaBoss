@@ -4,9 +4,11 @@ async function goToCategory(req, res) {
   try {
     const categoryId = req.params.categoryId;
     const categories = await category.goToCategory(categoryId);
-    console.log(categories);
-    if (categories.length === 0) {
-      res.send("No hay libros en esta categoría.");
+
+    if (!categories || categories.length === 0) {
+      const error = new Error("No hay libros en esta categoría.");
+      error.status = 404;
+      throw error;
     } else {
       res.send(categories);
     }

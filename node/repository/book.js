@@ -21,13 +21,6 @@ async function category() {
   return categories;
 }
 
-async function getBook() {
-  const pool = await database.getPool();
-  const query = "select * from product where id_product=?";
-  const [libro] = await pool.query(query);
-  return libro;
-}
-
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 async function createBook(
@@ -105,7 +98,6 @@ module.exports = {
   lastBooks,
   selectBook,
   category,
-  getBook,
   createBook,
   editBook,
   deleteBook,

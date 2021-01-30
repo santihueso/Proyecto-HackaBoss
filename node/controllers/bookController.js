@@ -4,7 +4,15 @@ const Joi = require("joi");
 async function showLastBook(req, res) {
   try {
     const books = await book.lastBooks();
-    res.send(books);
+
+    if (!books || books.length === 0) {
+      const error = new Error("No hay libros recientes");
+      error.status = 404;
+      throw error;
+    } else {
+      res.status(200);
+      res.send(books);
+    }
   } catch (err) {
     if (err.name === "ValidationError") {
       err.code = 400;
@@ -19,7 +27,14 @@ async function selectBook(req, res) {
   try {
     const bookID = req.params.bookID;
     const selectId = await book.selectBook(bookID);
-    res.send(selectId);
+    if (!selectId || selectId.length === 0) {
+      const error = new Error("El libro no se encuentra");
+      error.status = 404;
+      throw error;
+    } else {
+      res.status(200);
+      res.send(selectId);
+    }
   } catch (err) {
     if (err.name === "ValidationError") {
       err.code = 400;
@@ -44,20 +59,6 @@ async function selectAllCategories(req, res) {
   }
 }
 
-async function getBook(req, res) {
-  try {
-    const books = await book.getBook();
-    res.send(books);
-  } catch (err) {
-    if (err.name === "validationError") {
-      err.code = 400;
-    }
-    console.log(err);
-    res.status(err.status || 500);
-    res.send({ error: err.message });
-  }
-}
-
 //-----------------------Nuevo Libro---------------------------------------------------------------------------------------------------------------
 
 async function newBook(req, res) {
@@ -65,9 +66,8 @@ async function newBook(req, res) {
     const publicationDate = new Date();
     const seller = req.params.userId;
     const photos = req.files;
-
-    const photoFront = photos[0].originalname;
-    const photoBack = photos[1].originalname;
+    const photoFront = photos[0].filename;
+    const photoBack = photos[1].filename;
     const schema = Joi.object({
       productName: Joi.string().required(),
       photos: Joi.string(),
@@ -99,7 +99,8 @@ async function newBook(req, res) {
       author,
       category
     );
-    res.send(newBook);
+    res.status(200);
+    res.send("El libro se ha publicado.");
   } catch (err) {
     if (err.name === "validationError") {
       err.code = 400;
@@ -114,13 +115,17 @@ async function newBook(req, res) {
 
 async function editBook(req, res) {
   try {
-    //recojo datos
     const idBook = req.params.bookId;
+    const ifExist = await book.selectBook(idBook);
+    if (!ifExist || ifExist.length === 0) {
+      const error = new Error("El libro no existe");
+      error.status = 404;
+      throw error;
+    }
     const idUser = req.params.userId;
     const change = req.files;
-
-    const photoFront = change[0].originalname;
-    const photoBack = change[1].originalname;
+    const photoFront = change[0].filename;
+    const photoBack = change[1].filename;
     const {
       productName,
       descriptionProduct,
@@ -129,7 +134,7 @@ async function editBook(req, res) {
       author,
       category,
     } = req.body;
-    //valido datos
+
     const schema = Joi.object({
       productName: Joi.string().required(),
       change: Joi.string(),
@@ -154,7 +159,8 @@ async function editBook(req, res) {
       idUser,
       idBook
     );
-    res.send(updateBook);
+    res.status(200);
+    res.send("El libro se ha actualizado.");
   } catch (err) {
     if (err.name === "validationError") {
       err.code = 400;
@@ -171,9 +177,16 @@ async function deleteBook(req, res) {
   try {
     const bookId = req.params.bookId;
     const userId = req.params.userId;
+    const ifExist = await book.selectBook(bookId);
+    if (!ifExist || ifExist.length === 0) {
+      const error = new Error("El libro no existe");
+      error.status = 404;
+      throw error;
+    }
     const deleteBook = await book.deleteBook(userId, bookId);
 
-    res.send(deleteBook);
+    res.status(200);
+    res.send("El libro se ha eliminado.");
   } catch (err) {
     if (err.name === "validationError") {
       err.code = 400;
@@ -188,7 +201,6 @@ module.exports = {
   showLastBook,
   selectBook,
   selectAllCategories,
-  getBook,
   newBook,
   editBook,
   deleteBook,

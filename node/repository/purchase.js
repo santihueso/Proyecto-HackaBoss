@@ -7,15 +7,11 @@ async function ifReservedOrBuyed(bookId) {
   return book;
 }
 
-async function reserverBook(book, reservationtion, buyer) {
+async function reserverBook(book, reservation, buyer) {
   const pool = await database.getPool();
   const insertQuery =
     "insert into purchase (product, reservation, buyer) values(?,?,?)";
-  const [reserver] = await pool.query(insertQuery, [
-    book,
-    reservationtion,
-    buyer,
-  ]);
+  const [reserver] = await pool.query(insertQuery, [book, reservation, buyer]);
   return reserver;
 }
 
@@ -61,6 +57,7 @@ async function favorites(book, favorite, buyer) {
 
 async function deleteReservation(bookId, userId) {
   const pool = await database.getPool();
+  console.log(bookId, userId);
   const insertQuery = "delete from purchase where product = ? and buyer = ?";
   const [deleteBook] = await pool.query(insertQuery, [bookId, userId]);
 
@@ -88,8 +85,9 @@ async function ratingPurchase(comment, opinion, product, buyer) {
   const [assesment] = await pool.query(insertQuery, [
     comment,
     opinion,
-    product,
+
     buyer,
+    product,
   ]);
   return assesment;
 }

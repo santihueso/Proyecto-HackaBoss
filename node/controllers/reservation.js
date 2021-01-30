@@ -4,6 +4,11 @@ async function getReservedBook(req, res) {
   try {
     const userId = req.params.userId;
     const reservedBook = await reservation.getReservedBooks(userId);
+    if (!reservedBook || reservedBook.length === 0) {
+      const error = new Error("No tienes libros reservados.");
+      error.status = 404;
+      throw error;
+    }
     res.send(reservedBook);
   } catch (err) {
     if (err.name === "ValdationError") {
