@@ -10,7 +10,9 @@ async function findCategory(req, res) {
     const { category_name } = req.body;
     const selectCategory = await seeker.forCategory(category_name);
     if (selectCategory.length < 1) {
-      throw new Error("No existe");
+      const error = new Error("No hay libros disponibles.");
+      error.status = 404;
+      throw error;
     }
     res.send(selectCategory);
   } catch (err) {
@@ -32,7 +34,9 @@ async function findName(req, res) {
     const { productName } = req.body;
     const selectName = await seeker.forName(productName);
     if (selectName.length < 1) {
-      throw new Error("No existe");
+      const error = new Error("No hay libros disponibles con ese nombre.");
+      error.status = 404;
+      throw error;
     }
     res.send(selectName);
   } catch (err) {
@@ -55,7 +59,9 @@ async function findCP(req, res) {
     const { postalCode } = req.body;
     const selectCP = await seeker.forCity(postalCode);
     if (selectCP.length < 1) {
-      throw new Error("No existe");
+      const error = new Error("No hay libros disponibles en esa zona.");
+      error.status = 404;
+      throw error;
     }
     res.send(selectCP);
   } catch (err) {
@@ -76,10 +82,12 @@ async function findAuthor(req, res) {
 
     await schema.validateAsync(req.body);
     const { author } = req.body;
-    console.log("BODY", req.body);
+
     const selectAuthor = await seeker.forAuthor(author);
     if (selectAuthor.length < 1) {
-      throw new Error("No existe");
+      const error = new Error("No hay libros disponibles con ese autor.");
+      error.status = 404;
+      throw error;
     }
     res.send(selectAuthor);
   } catch (err) {

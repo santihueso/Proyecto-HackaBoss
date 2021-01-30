@@ -8,6 +8,11 @@ const success = "You have successfully registered!";
 async function getUsers(req, res) {
   try {
     const users = await user.getUser();
+    if (users.length < 1) {
+      const error = new Error("No hay usuarios.");
+      error.status = 404;
+      throw error;
+    }
     res.send(users);
   } catch (err) {
     if (err.name === "ValdationError") {
@@ -23,7 +28,11 @@ async function getUserSelect(req, res) {
   try {
     const userId = req.params.userId;
     const selectUser = await user.selectUser(userId);
-
+    if (!selectUser || selectUser.length === 0) {
+      const error = new Error("No existe el usuario.");
+      error.status = 404;
+      throw error;
+    }
     res.send(selectUser);
   } catch (err) {
     if (err.name === "ValdationError") {
@@ -43,7 +52,7 @@ async function newPassword(req, res) {
     await schema.validateAsync(req.body);
     const { userPassword } = req.body;
     const userId = req.params.userId;
-    console.log(req.auth);
+
     if (req.auth.id !== Number(userId)) {
       const error = new Error("No puedes cambiar la contraseña.");
       error.status = 403;
@@ -75,7 +84,7 @@ async function register(req, res) {
     });
     await schema.validateAsync(req.body);
     const { username, email, password } = req.body;
-    console.log(req.body, "ss");
+
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await user.createUser(username, email, hashPassword);
     await sendMenssage.send(req, res, success);
@@ -101,15 +110,19 @@ async function login(req, res) {
     const { email, password } = req.body;
     const userSelect = await user.login(email);
 
-    if (!userSelect) {
-      console.log("error");
+    if (!userSelect || userSelect.length === 0) {
+      const error = new Error("Usuario equivocado.");
+      error.status = 404;
+      throw error;
     }
     const contraseñaValidar = await bcrypt.compare(
       password,
       userSelect[0].userPassword
     );
-    if (!contraseñaValidar) {
-      console.log("error");
+    if (!contraseñaValidar || contraseñaValidar.length === 0) {
+      const error = new Error("Contraseña equivocada.");
+      error.status = 404;
+      throw error;
     }
 
     const tokePayload = {
@@ -117,7 +130,7 @@ async function login(req, res) {
       username: userSelect[0].username,
     };
     const token = jwt.sign(tokePayload, process.env.JWT, { expiresIn: "30d" });
-    res.send(token);
+    res.send({ token: token });
   } catch (err) {
     if (err.name === "validationError") {
       err.code = 400;

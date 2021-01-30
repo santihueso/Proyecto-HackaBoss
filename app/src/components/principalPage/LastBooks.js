@@ -37,9 +37,19 @@ const LastBooks = () => {
     for (let i = 0; i < 8; i++) {
       showBooks.push(data[i]);
     }
-    return <List array={showBooks}></List>;
+    return (
+      <section id="lastBooks">
+        <p>Últimos libros</p>
+        <List array={showBooks}></List>
+      </section>
+    );
   } else {
-    return <List array={data}></List>;
+    return (
+      <section id="lastBooks">
+        <p>Últimos libros</p>
+        <List array={data}></List>
+      </section>
+    );
   }
 };
 

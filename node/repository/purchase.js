@@ -7,15 +7,11 @@ async function ifReservedOrBuyed(bookId) {
   return book;
 }
 
-async function reserverBook(book, reservationtion, buyer) {
+async function reserverBook(book, reservation, buyer) {
   const pool = await database.getPool();
   const insertQuery =
     "insert into purchase (product, reservation, buyer) values(?,?,?)";
-  const [reserver] = await pool.query(insertQuery, [
-    book,
-    reservationtion,
-    buyer,
-  ]);
+  const [reserver] = await pool.query(insertQuery, [book, reservation, buyer]);
   return reserver;
 }
 

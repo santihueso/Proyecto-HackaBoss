@@ -45,11 +45,9 @@ const HeadPrincipal = () => {
     });
     const books = await res.json();
     console.log(books);
-    // if (!books) {
-    //   console.log("mal");
-    // } else {
-    //   window.location.href = "http://localhost:3000/principal/seeker/books";
-    // }
+    if (!books) {
+      console.log("no hay");
+    } else <Redirect to={`beginning/seeker/${e.target.value}`}></Redirect>;
   };
   return (
     <div>

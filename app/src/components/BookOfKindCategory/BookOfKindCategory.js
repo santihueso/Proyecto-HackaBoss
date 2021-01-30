@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { port } from "../principalPage/Principal";
 import { List } from "../principalPage/LastBooks";
+
 const BookOfKindCategory = () => {
   const { id } = useParams();
   const [data, setData] = useFetchData(
@@ -25,8 +26,11 @@ const BookOfKindCategory = () => {
   return (
     <div>
       <p>{categoryName}</p>
+      <nav>
+        <Link to="/principal">Principal</Link>
+        <p> > {categoryName}</p>
+      </nav>
       <List array={data}></List>
-      <Link to="/principal">Principal</Link>
     </div>
   );
 };

@@ -126,7 +126,6 @@ app.get(
 );
 app.get("/login/user/:userId/profile", validate, userController.getUserSelect);
 
-// app.get("/", userController.getUsers);
 /*cambio de contraseña*/
 app.put("/user/:userId/forgetPassword", validate, userController.newPassword);
 

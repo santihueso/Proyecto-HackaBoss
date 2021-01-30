@@ -5,6 +5,12 @@ async function profileFromOutside(req, res) {
   try {
     const userId = req.params.userId;
     const showProfile = await profile.showProfileFromOutside(userId);
+
+    if (!showProfile.user) {
+      const error = new Error("El usuario no existe.");
+      error.status = 404;
+      throw error;
+    }
     res.send(showProfile);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -19,7 +25,7 @@ async function profileFromOutside(req, res) {
 async function updateUser(req, res) {
   try {
     const userId = req.params.userId;
-    const photo = req.file.originalname;
+    const photo = req.file.filename;
 
     const { username, descriptionUser, city, postalCode } = req.body;
     const schema = Joi.object({
@@ -45,7 +51,8 @@ async function updateUser(req, res) {
       photo,
       userId
     );
-    res.send(updateUser);
+    res.status(200);
+    res.send("El perfil se ha publicado.");
   } catch (err) {
     if (err.name === "validationError") {
       err.code = 400;
@@ -58,19 +65,4 @@ async function updateUser(req, res) {
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 
-async function profileUser(req, res) {
-  try {
-    const userId = req.params.userId;
-    const showProfileUser = await profile.showProfileUser(userId);
-    res.send(showProfileUser);
-  } catch (error) {
-    if (err.name === "validationError") {
-      err.code = 400;
-    }
-    console.log(err);
-    res.status(err.status || 500);
-    res.send({ error: err.message });
-  }
-}
-
-module.exports = { profileFromOutside, updateUser, profileUser };
+module.exports = { profileFromOutside, updateUser };
