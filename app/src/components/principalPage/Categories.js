@@ -17,13 +17,11 @@ const Categories = () => {
   );
 
   const listCategories = data.map((e) => {
-    const linkOfCategory = `/category/${e.id_category}`;
+    const linkOfCategory = `/principal/category/${e.id_category}/${e.category_name}`;
 
     return (
-      <li>
-        <Link key={e.id_category} to={linkOfCategory}>
-          {e.category_name}
-        </Link>
+      <li key={e.id_category}>
+        <Link to={linkOfCategory}>{e.category_name}</Link>
       </li>
     );
   });

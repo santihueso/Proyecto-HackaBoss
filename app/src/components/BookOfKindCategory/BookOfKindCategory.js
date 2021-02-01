@@ -12,44 +12,50 @@ import { port } from "../principalPage/Principal";
 import { List } from "../principalPage/LastBooks";
 
 const BookOfKindCategory = () => {
-  const { id } = useParams();
+  const { name, id } = useParams();
   const [data, setData] = useFetchData(
     `http://localhost:${port}/category/${id}`
   );
-  const [category, setCategory] = useFetchData(
-    `http://localhost:${port}/beginning/categories`
-  );
 
-  const findCategory = category.find((e) => e.id_category === Number(id));
-  const categoryName = findCategory ? findCategory.category_name : "";
-
+  if (data.error) {
+    return <Redirect to="/notFound"></Redirect>;
+  }
   return (
     <div>
-      <p>{categoryName}</p>
-      <nav>
-        <Link to="/principal">Principal</Link>
-        <p> > {categoryName}</p>
-      </nav>
+      <p>{name}</p>
+      <Link to="/principal">Principal ></Link>
+      <p>{name}</p>
       <List array={data}></List>
     </div>
   );
 };
-
 const ViewBook = () => {
-  const { id } = useParams();
-  const [data, setData] = useFetchData(
-    `http://localhost:${port}/beginning/category/${id}`
-  );
-  const book = data.map((e) => {
-    const url = `http://localhost:${port}/uploads/${e.photoFront}`;
+  let { idBook, name, id } = useParams();
 
+  const [data, setData] = useFetchData(
+    `http://localhost:${port}/beginning/category/${idBook}`
+  );
+  console.log(name);
+
+  const book = data.map((e) => {
     return (
-      <div>
+      <div key={e.id_product}>
         <nav>
-          <Link to="/principal">Principal</Link>
+          <Link to="/principal">Principal > </Link>
+          {name !== "undefined" ? (
+            <Link to={`/principal/category/${id}/${name}`}>{name}</Link>
+          ) : (
+            <p>Últimos libros</p>
+          )}
+
+          <p> Libro</p>
         </nav>
 
-        <img src={url} alt="portada" style={{ maxWidth: 80 }}></img>
+        <img
+          src={`http://localhost:${port}/uploads/${e.photoFront}`}
+          alt="portada"
+          style={{ maxWidth: 80 }}
+        ></img>
         <div>
           <h1>{e.productName}</h1>
           <p>{e.author}</p>
@@ -60,7 +66,11 @@ const ViewBook = () => {
           </div>
           <p>{e.descriptionProduct}</p>
           <p>{e.price}</p>
-          <Link to=""></Link>
+          <Link
+            to={`/principal/category/${id}/${name}/book/${idBook}/user/${e.seller}`}
+          >
+            Perfil
+          </Link>
         </div>
       </div>
     );

@@ -4,11 +4,12 @@ const Joi = require("joi");
 async function findCategory(req, res) {
   try {
     const schema = Joi.object({
-      category_name: Joi.string(),
+      category: Joi.string(),
     });
     await schema.validateAsync(req.body);
-    const { category_name } = req.body;
-    const selectCategory = await seeker.forCategory(category_name);
+    const { category } = req.body;
+    console.log(req);
+    const selectCategory = await seeker.forCategory(category);
     if (selectCategory.length < 1) {
       const error = new Error("No hay libros disponibles.");
       error.status = 404;
@@ -28,11 +29,11 @@ async function findCategory(req, res) {
 async function findName(req, res) {
   try {
     const schema = Joi.object({
-      productName: Joi.string(),
+      title: Joi.string(),
     });
     await schema.validateAsync(req.body);
-    const { productName } = req.body;
-    const selectName = await seeker.forName(productName);
+    const { title } = req.body;
+    const selectName = await seeker.forName(title);
     if (selectName.length < 1) {
       const error = new Error("No hay libros disponibles con ese nombre.");
       error.status = 404;
@@ -52,12 +53,12 @@ async function findName(req, res) {
 async function findCP(req, res) {
   try {
     const schema = Joi.object({
-      postalCode: Joi.number(),
+      cp: Joi.number(),
     });
     await schema.validateAsync(req.body);
 
-    const { postalCode } = req.body;
-    const selectCP = await seeker.forCity(postalCode);
+    const { cp } = req.body;
+    const selectCP = await seeker.forCity(cp);
     if (selectCP.length < 1) {
       const error = new Error("No hay libros disponibles en esa zona.");
       error.status = 404;

@@ -3,12 +3,11 @@ const database = require("../infraestructure/db.js");
 async function showProfileFromOutside(userId) {
   const pool = await database.getPool();
   const userQuery =
-    "select u.username, u.descriptionUser, u.photo from user as u where id_user = ?";
+    "select u.username, u.descriptionUser, u.photo, u.id_user from user as u where id_user = ?";
   const [userData] = await pool.query(userQuery, userId);
-  const query =
-    " select  p.author, p.bookLanguage, p.price, p.productName as title from product as p where p.seller = ?";
+  const query = " select * from product where seller = ?";
   const [forSell] = await pool.query(query, userId);
-  return { user: userData[0], books: forSell };
+  return { user: userData, books: forSell };
 }
 
 //--------Editar Usuario-------------------------------------------------------------------------------------------------------------------------------------------------------

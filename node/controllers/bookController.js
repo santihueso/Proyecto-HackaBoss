@@ -47,6 +47,7 @@ async function selectBook(req, res) {
 }
 
 async function selectAllCategories(req, res) {
+  console.log(req.query.nombre);
   try {
     const books = await book.category();
     if (!books || books.length === 0) {
@@ -54,6 +55,7 @@ async function selectAllCategories(req, res) {
       error.status = 404;
       throw error;
     }
+
     res.send(books);
   } catch (err) {
     if (err.name === "ValidationError") {

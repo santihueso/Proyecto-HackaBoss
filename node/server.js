@@ -90,7 +90,7 @@ app.put(
 );
 
 app.get(
-  "/login/category/language/book/porfile/:userId",
+  "/login/category/book/porfile/:userId",
 
   profile.profileFromOutside
 );

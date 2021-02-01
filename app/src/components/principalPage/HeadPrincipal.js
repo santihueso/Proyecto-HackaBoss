@@ -12,47 +12,24 @@ import { Redirect } from "react-router-dom";
 
 const HeadPrincipal = () => {
   const [inputValue, setInputValue] = useState("");
-  const [seeker, setSeeker] = useState("");
-  const [key, setKey] = useState("");
+  const [key, setKey] = useState("category");
+
   const getData = (e) => {
     setInputValue(e.target.value);
   };
 
   const change = (e) => {
-    const url = `http://localhost:${port}/beginning/seeker/${e.target.value}`;
-    const keyList = {
-      category: "category_name",
-      author: "author",
-      title: "productName",
-      cp: "postalCode",
-    };
-    const bodyPost = keyList[e.target.value];
-
-    setKey(bodyPost);
-    setSeeker(url);
+    setKey(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const dataPost = {};
-    dataPost[key] = inputValue;
-    const res = await fetch(seeker, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(dataPost),
-    });
-    const books = await res.json();
-    console.log(books);
-    if (!books) {
-      return <Redirect to="/login"></Redirect>;
-    }
-    return <Redirect to="/newBook"></Redirect>;
+    window.location.href = `http://localhost:3000/books/${key}/${inputValue}`;
   };
+
   return (
     <div>
-      <select onChange={change}>
+      <select onChange={change} value={key}>
         <option id="category " value="category">
           Categoria
         </option>

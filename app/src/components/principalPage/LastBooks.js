@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useFetchData } from "../useFetchData";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import { port } from "./Principal";
 
 const Avatar = ({ e }) => {
+  const { name, id } = useParams();
   const url = `http://localhost:${port}/uploads/${e.photoFront}`;
-  const linkOfBook = `/beginning/category/${e.id_product}`;
+  const linkOfBook = `/principal/category/${id}/${name}/book/${e.id_product}`;
 
   return (
     <Link to={linkOfBook}>
@@ -17,8 +24,9 @@ const Avatar = ({ e }) => {
 const List = ({ array }) => {
   const listBooks = array.map((e) => {
     return (
-      <li id={e.id}>
+      <li key={e.id_product}>
         <p>{e.productName}</p>
+        <p>{e.author}</p>
         <Avatar e={e}></Avatar>
         <p>{e.price}</p>
       </li>
