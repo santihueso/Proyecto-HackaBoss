@@ -2,11 +2,14 @@ const { purchase, book } = require("../repository/index.js");
 const messages = require("../messages/sendMessage.js");
 const buy = "You have made the purchase correctly.";
 const joi = require("joi");
+const jwt = require("jsonwebtoken");
 
 async function getReserver(req, res) {
   try {
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
     const book = req.params.bookId;
-    const buyer = req.params.userId;
+    const buyer = decode.id;
     const ifExist = await purchase.findBook(book);
     const existBook = await purchase.ifReservedOrBuyed(book);
     const ifReserved = existBook.find((e) => e.reservation === 1);
@@ -43,8 +46,10 @@ async function getReserver(req, res) {
 
 async function getBuyBookWithReserve(req, res) {
   try {
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
     const bookId = req.params.bookId;
-    const buyer = +req.params.userId;
+    const buyer = decode.id;
     const dateBuy = new Date();
     const ifExist = await purchase.findBook(bookId);
     if (!ifExist || ifExist.length === 0) {
@@ -53,7 +58,9 @@ async function getBuyBookWithReserve(req, res) {
       throw error;
     }
     const ifHaveReserved = await purchase.findUserIfReserverBook(bookId);
-    if (ifHaveReserved[0].buyer !== buyer) {
+    if (!ifHaveReserved || ifHaveReserved.length === 0) {
+      throw new Error("No reservaste el libro.");
+    } else if (ifHaveReserved[0].buyer !== buyer) {
       throw new Error("El libro está reservado por otro usuario.");
     } else {
       const buyWithReserve = await purchase.updateWeReserve(1, buyer, dateBuy);
@@ -73,17 +80,20 @@ async function getBuyBookWithReserve(req, res) {
 
 async function buyBookWithoutReserve(req, res) {
   try {
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
     const book = +req.params.bookId;
-    const buyer = req.params.userId;
+    const buyer = decode.id;
     const date = new Date();
     const ifExist = await purchase.findBook(book);
+    const existBook = await purchase.ifReservedOrBuyed(book);
     if (!ifExist || ifExist.length === 0) {
       const error = new Error("No se encuentra el libro.");
       error.status = 404;
       throw error;
     } else if (ifExist.length > 0) {
-      const ifSelled = ifExist.find((e) => e.purchase === 1);
-      const ifReserved = ifExist.find((e) => e.reservation === 1);
+      const ifSelled = existBook.find((e) => e.purchase === 1);
+      const ifReserved = existBook.find((e) => e.reservation === 1);
 
       if (ifSelled || ifReserved) {
         throw new Error("El libro está reservado o fue vendido.");
@@ -111,33 +121,33 @@ async function buyBookWithoutReserve(req, res) {
 
 async function getFavoriteBook(req, res) {
   try {
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
     const book = req.params.bookId;
-    const buyer = req.params.userId;
+    const buyer = decode.id;
 
     const ifExist = await purchase.findBook(book);
-    const findUserWithFavorite = await ifExist.find(
-      (e) => e.buyer === +buyer && e.favorite === 1
-    );
-    console.log(ifExist);
+    const existBookFavorite = await purchase.ifYouHaveFavoriteBookYet(book);
+    const existBookSelled = await purchase.ifReservedOrBuyed(book);
+    const selled = existBookSelled.find((e) => e.purchase === 1);
+
     if (!ifExist || ifExist.length === 0) {
       const error = new Error("No se encuentra el libro.");
       error.status = 404;
       throw error;
-    } else if (ifExist.length > 0) {
-      const ifSelled = ifExist.find((e) => e.purchase === 1);
-      if (ifSelled) {
-        throw new Error("El libro no está disponible.");
-      } else if (findUserWithFavorite) {
-        throw new Error("Ya está en tu lista de favoritos");
-      } else {
-        const favoriteBook = await purchase.favorites(book, 1, buyer);
-        res.status(200);
-        res.send("El libro se ha añadido a tus favoritos.");
-      }
     } else {
-      const favoriteBook = await purchase.favorites(book, 1, buyer);
-      res.status(200);
-      res.send("El libro se ha añadido a tus favoritos.");
+      if (existBookSelled.length > 0 && selled) {
+        throw new Error("El libro se ha vendido.");
+      } else if (
+        existBookFavorite.length > 0 &&
+        existBookFavorite[0].buyer === buyer
+      ) {
+        throw new Error("El libro ya está en tu lista de favoritos");
+      } else {
+        const getFavorite = await purchase.favorites(book, 1, buyer);
+        res.status = 200;
+        res.send("El libro ha sido añadido a tu lista de favoritos.");
+      }
     }
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -151,9 +161,11 @@ async function getFavoriteBook(req, res) {
 
 async function deleteBookReserved(req, res) {
   try {
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
     const bookId = req.params.bookId;
-    const userId = req.params.userId;
-    //Arreglar con token
+    const userId = decode.id;
+
     const ifExist = await book.selectBook(bookId);
     if (!ifExist || ifExist.length === 0) {
       const error = new Error("El libro no se encuentra.");
@@ -175,7 +187,9 @@ async function deleteBookReserved(req, res) {
 
 async function deleteFavorite(req, res) {
   try {
-    const userId = req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const bookId = req.params.bookId;
     const ifExist = await book.selectBook(bookId);
     if (!ifExist || ifExist.length === 0) {
@@ -203,8 +217,10 @@ async function assessment(req, res) {
       opinion: joi.string(),
     });
     await schema.validateAsync(req.body);
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
     const bookId = req.params.bookId;
-    const buyer = +req.params.userId;
+    const buyer = decode.id;
 
     const { assessment, opinion } = req.body;
     const existBook = await purchase.ifBuyed(bookId);

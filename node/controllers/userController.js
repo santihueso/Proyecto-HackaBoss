@@ -26,7 +26,9 @@ async function getUsers(req, res) {
 
 async function getUserSelect(req, res) {
   try {
-    const userId = req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const selectUser = await user.selectUser(userId);
     if (!selectUser || selectUser.length === 0) {
       const error = new Error("No existe el usuario.");
@@ -51,17 +53,13 @@ async function newPassword(req, res) {
     });
     await schema.validateAsync(req.body);
     const { userPassword } = req.body;
-    const userId = req.params.userId;
-
-    if (req.auth.id !== Number(userId)) {
-      const error = new Error("No puedes cambiar la contraseña.");
-      error.status = 403;
-      throw error;
-    }
-
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const passwordHash = await bcrypt.hash(userPassword, 10);
     const change = await user.changePassword(passwordHash, userId);
-    res.send(change);
+    res.status(200);
+    res.send("Se ha cambiado la contraseña correctamente.");
   } catch (err) {
     if (err.name === "ValdationError") {
       err.code = 400;

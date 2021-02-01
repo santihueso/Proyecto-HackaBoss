@@ -22,12 +22,15 @@ const Principal = () => {
     <Router>
       <h1>Recy-book</h1>
       <Switch>
-        <Route path="/principal/seeker/books/:type/:value">
-          <div>
-            <Link to="/principal">Principal</Link>
-            <p>CACA</p>
-          </div>
-        </Route>
+        <Route
+          path="/beginning/seeker/author"
+          render={() => {
+            <div>
+              <Link to="/principal">Principal</Link>
+              <p>CACA</p>
+            </div>;
+          }}
+        ></Route>
         <Route path="/beginning/category/:id">
           <ViewBook></ViewBook>
         </Route>

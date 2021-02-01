@@ -1,5 +1,6 @@
 const { book } = require("../repository/index.js");
 const Joi = require("joi");
+const jwt = require("jsonwebtoken");
 
 async function showLastBook(req, res) {
   try {
@@ -48,6 +49,11 @@ async function selectBook(req, res) {
 async function selectAllCategories(req, res) {
   try {
     const books = await book.category();
+    if (!books || books.length === 0) {
+      const error = new Error("No tenemos esa categoría.");
+      error.status = 404;
+      throw error;
+    }
     res.send(books);
   } catch (err) {
     if (err.name === "ValidationError") {
@@ -64,7 +70,9 @@ async function selectAllCategories(req, res) {
 async function newBook(req, res) {
   try {
     const publicationDate = new Date();
-    const seller = req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const seller = decode.id;
     const photos = req.files;
     const photoFront = photos[0].filename;
     const photoBack = photos[1].filename;
@@ -122,7 +130,9 @@ async function editBook(req, res) {
       error.status = 404;
       throw error;
     }
-    const idUser = req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const idUser = decode.id;
     const change = req.files;
     const photoFront = change[0].filename;
     const photoBack = change[1].filename;
@@ -176,7 +186,9 @@ async function editBook(req, res) {
 async function deleteBook(req, res) {
   try {
     const bookId = req.params.bookId;
-    const userId = req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const ifExist = await book.selectBook(bookId);
     if (!ifExist || ifExist.length === 0) {
       const error = new Error("El libro no existe");

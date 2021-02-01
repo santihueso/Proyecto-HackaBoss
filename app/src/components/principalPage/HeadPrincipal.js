@@ -23,7 +23,7 @@ const HeadPrincipal = () => {
     const keyList = {
       category: "category_name",
       author: "author",
-      title: "productname",
+      title: "productName",
       cp: "postalCode",
     };
     const bodyPost = keyList[e.target.value];
@@ -46,8 +46,9 @@ const HeadPrincipal = () => {
     const books = await res.json();
     console.log(books);
     if (!books) {
-      console.log("no hay");
-    } else <Redirect to={`beginning/seeker/${e.target.value}`}></Redirect>;
+      return <Redirect to="/login"></Redirect>;
+    }
+    return <Redirect to="/newBook"></Redirect>;
   };
   return (
     <div>
