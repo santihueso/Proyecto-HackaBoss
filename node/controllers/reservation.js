@@ -1,8 +1,11 @@
 const { reservation } = require("../repository/index.js");
+const jwt = require("jsonwebtoken");
 
 async function getReservedBook(req, res) {
   try {
-    const userId = req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const reservedBook = await reservation.getReservedBooks(userId);
     if (!reservedBook || reservedBook.length === 0) {
       const error = new Error("No tienes libros reservados.");

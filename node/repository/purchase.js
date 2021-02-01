@@ -23,6 +23,13 @@ async function findUserIfReserverBook(bookId) {
   return user;
 }
 
+async function ifYouHaveFavoriteBookYet(bookId) {
+  const pool = await database.getPool();
+  const query = "select buyer from purchase where product = ? and favorite = 1";
+  const [user] = await pool.query(query, bookId);
+  return user;
+}
+
 async function updateWeReserve(buyBook, userId, date) {
   const pool = await database.getPool();
 
@@ -34,7 +41,7 @@ async function updateWeReserve(buyBook, userId, date) {
 
 async function findBook(bookId) {
   const pool = await database.getPool();
-  const query = "select * from purchase where product = ?";
+  const query = "select * from product where id_product = ?";
   const [book] = await pool.query(query, bookId);
   return book;
 }
@@ -100,6 +107,7 @@ module.exports = {
   buyBook,
   favorites,
   findBook,
+  ifYouHaveFavoriteBookYet,
   deleteReservation,
   deleteFavorite,
   ifBuyed,

@@ -38,11 +38,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 /*Muestra los libros reservados de un usuario */
-app.get(
-  "/login/:userId/reservation/books",
-  validate,
-  reservation.getReservedBook
-);
+app.get("/login/reservation/books", validate, reservation.getReservedBook);
 /*Muestra los últimos libros */
 app.get("/beginning/lastBooks", book.showLastBook);
 //Todas las categorias
@@ -56,37 +52,33 @@ app.post("/beginning/seeker/author", seeker.findAuthor);
 app.get("/beginning/category/:bookID", book.selectBook);
 /*Reserva con reserva*/
 app.get(
-  "/login/user/:userId/book/:bookId/reservation/buy",
+  "/login/user/book/:bookId/reservation/buy",
   validate,
   purchase.getBuyBookWithReserve
 );
 /*Eliminar reserva*/
 app.delete(
-  "/login/user/:userId/book/:bookId/reservation/delete",
+  "/login/user/book/:bookId/reservation/delete",
   validate,
   purchase.deleteBookReserved
 );
 /*reservar*/
-app.get(
-  "/login/user/:userId/book/:bookId/reservation",
-
-  purchase.getReserver
-);
+app.get("/login/user/book/:bookId/reservation", validate, purchase.getReserver);
 /*comprar directamente*/
 app.get(
-  "/login/user/:userId/book/:bookId/buy",
+  "/login/user/book/:bookId/buy",
   validate,
   purchase.buyBookWithoutReserve
 );
 /*eliminar favorito*/
 app.delete(
-  "/login/user/:userId/book/:bookId/favorite/delete",
+  "/login/user/book/:bookId/favorite/delete",
   validate,
   purchase.deleteFavorite
 );
 /*guardar como favorito*/
 app.get(
-  "/login/user/:userId/book/:bookId/favorite",
+  "/login/user/book/:bookId/favorite",
   validate,
   purchase.getFavoriteBook
 );
@@ -99,35 +91,27 @@ app.put(
 
 app.get(
   "/login/category/language/book/porfile/:userId",
-  validate,
+
   profile.profileFromOutside
 );
 /*los datos del usuario*/
 app.get(
-  "/login/user/:userId/profile/favorites",
+  "/login/user/profile/favorites",
   validate,
   userPurchase.showFavoritesBooks
 );
 app.get(
-  "/login/user/:userId/profile/purchase",
+  "/login/user/profile/purchase",
   validate,
   userPurchase.showPurchaseBooks
 );
 
-app.get(
-  "/login/user/:userId/profile/toSell",
-  validate,
-  userPurchase.showMyBooks
-);
-app.get(
-  "/login/user/:userId/profile/offers",
-  validate,
-  userPurchase.showMyoffers
-);
-app.get("/login/user/:userId/profile", validate, userController.getUserSelect);
+app.get("/login/user/profile/toSell", validate, userPurchase.showMyBooks);
+app.get("/login/user/profile/offers", validate, userPurchase.showMyoffers);
+app.get("/login/user/profile", validate, userController.getUserSelect);
 
 /*cambio de contraseña*/
-app.put("/user/:userId/forgetPassword", validate, userController.newPassword);
+app.put("/user/forgetPassword", validate, userController.newPassword);
 
 // datos generales del usuario
 app.get("/api/user", userController.getUsers);
@@ -137,31 +121,17 @@ app.post("/singIn", userController.register);
 app.post("/login", userController.login);
 
 //libros
-app.post(
-  "/login/user/:userId/newBook",
-  validate,
-  img.array("photos", 2),
-  book.newBook
-);
-app.delete(
-  "/login/user/:userId/book/:bookId/delete",
-  validate,
-  book.deleteBook
-);
+app.post("/login/user/newBook", validate, img.array("photos", 2), book.newBook);
+app.delete("/login/user/book/:bookId/delete", validate, book.deleteBook);
 app.put(
-  "/login/user/:userId/book/:bookId/editBook",
+  "/login/user/book/:bookId/editBook",
   validate,
   img.array("change", 2),
   book.editBook
 );
 
 //usuario
-app.put(
-  "/user/:userId/editUser",
-  validate,
-  img.single("photo"),
-  profile.updateUser
-);
+app.put("/user/editUser", validate, img.single("photo"), profile.updateUser);
 
 //categorias
 

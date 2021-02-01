@@ -1,5 +1,6 @@
 const { profile } = require("../repository/index.js");
 const Joi = require("joi");
+const jwt = require("jsonwebtoken");
 
 async function profileFromOutside(req, res) {
   try {
@@ -24,7 +25,9 @@ async function profileFromOutside(req, res) {
 
 async function updateUser(req, res) {
   try {
-    const userId = req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const photo = req.file.filename;
 
     const { username, descriptionUser, city, postalCode } = req.body;
@@ -43,7 +46,7 @@ async function updateUser(req, res) {
       photo,
     });
 
-    const updateUser = await profile.updateUser(
+    const updateUserProfile = await profile.updateUser(
       username,
       descriptionUser,
       city,

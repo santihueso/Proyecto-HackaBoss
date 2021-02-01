@@ -1,8 +1,10 @@
 const { usePurchase } = require("../repository/index");
-
+const jwt = require("jsonwebtoken");
 async function showFavoritesBooks(req, res) {
   try {
-    const userId = +req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const favorites = await usePurchase.favoriteUserBooks(userId);
     if (!favorites || favorites.length === 0) {
       const error = new Error("No tienes libros en favoritos.");
@@ -22,7 +24,9 @@ async function showFavoritesBooks(req, res) {
 
 async function showPurchaseBooks(req, res) {
   try {
-    const userId = +req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const purchase = await usePurchase.purchaseUserBooks(userId);
     if (!purchase || purchase.length === 0) {
       const error = new Error("No has comprado libros aún.");
@@ -42,7 +46,9 @@ async function showPurchaseBooks(req, res) {
 
 async function showMyBooks(req, res) {
   try {
-    const userId = +req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const sell = await usePurchase.sellUserBooks(userId);
     if (!sell || sell.length === 0) {
       const error = new Error("No tienes libros en venta.");
@@ -62,7 +68,9 @@ async function showMyBooks(req, res) {
 
 async function showMyoffers(req, res) {
   try {
-    const userId = +req.params.userId;
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const userId = decode.id;
     const offers = await usePurchase.offersUserBooks(userId);
     if (!offers || offers.length === 0) {
       const error = new Error("No tienes notificaciones de tus libros.");
