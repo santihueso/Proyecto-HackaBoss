@@ -25,9 +25,9 @@ const Profile = () => {
       return (
         <div key={e.id_user}>
           <nav>
-            <Link to="/principal">Principal ></Link>
+            <Link to="/principal">Principal </Link>
             {name !== "undefined" ? (
-              <Link to={`/principal/category/${id}/${name}`}>{name} > </Link>
+              <Link to={`/principal/category/${id}/${name}`}>{name} </Link>
             ) : null}
 
             <Link to={`/principal/category/${id}/${name}/book/${idBook}`}>

@@ -23,7 +23,7 @@ const BookOfKindCategory = () => {
   return (
     <div>
       <p>{name}</p>
-      <Link to="/principal">Principal ></Link>
+      <Link to="/principal">Principal </Link>
       <p>{name}</p>
       <List array={data}></List>
     </div>
@@ -41,7 +41,7 @@ const ViewBook = () => {
     return (
       <div key={e.id_product}>
         <nav>
-          <Link to="/principal">Principal > </Link>
+          <Link to="/principal">Principal </Link>
           {name !== "undefined" ? (
             <Link to={`/principal/category/${id}/${name}`}>{name}</Link>
           ) : (
