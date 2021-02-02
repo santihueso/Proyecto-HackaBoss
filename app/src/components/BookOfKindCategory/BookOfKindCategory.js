@@ -20,11 +20,7 @@ const BookOfKindCategory = () => {
   return (
     <div>
       <p>{name}</p>
-<<<<<<< HEAD
       <Link to="/principal">Principal > </Link>
-=======
-      <Link to="/principal">Principal </Link>
->>>>>>> 0d5be69e065179f0f3858e3bd1e79521232a3908
       <p>{name}</p>
       {data.length > 0 ? (
         <List array={data}></List>
