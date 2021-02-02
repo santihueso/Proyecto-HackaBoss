@@ -8,7 +8,7 @@ const SignIn = () => {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
-    console.log(email, password);
+
     const res = await fetch(`http://localhost:${port}/signin`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
