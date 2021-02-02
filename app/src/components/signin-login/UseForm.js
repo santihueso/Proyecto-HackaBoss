@@ -1,6 +1,13 @@
-import e from "cors";
 import React, { useState } from "react";
-import { port } from "../principalPage/Principal";
+
+const UseLabelInput = ({ kind, id, name }) => {
+  return (
+    <div>
+      <label htmlFor={id}></label>
+      <input id={id} type={kind} placeholder={name}></input>
+    </div>
+  );
+};
 
 const UserFormSignIn = ({ userData }) => {
   const [value, setValue] = useState("");
@@ -10,13 +17,15 @@ const UserFormSignIn = ({ userData }) => {
 
   return (
     <form onSubmit={userData} value={value} onChange={change}>
-      <label htmlFor="email">Email</label>
-      <input id="email" type="email"></input>
-      <label htmlFor="password">Password</label>
-      <input id="password" type="password"></input>
+      <UseLabelInput kind={"email"} id={"email"} name={"email"}></UseLabelInput>
+      <UseLabelInput
+        kind={"password"}
+        id={"password"}
+        name={"password"}
+      ></UseLabelInput>
       <input type="submit" value="submit"></input>
     </form>
   );
 };
 
-export { UserFormSignIn };
+export { UserFormSignIn, UseLabelInput };

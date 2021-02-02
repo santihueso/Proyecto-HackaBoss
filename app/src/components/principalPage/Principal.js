@@ -1,13 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useFetchData } from "../useFetch/useFetchData";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  Redirect,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { HeadPrincipal } from "./HeadPrincipal";
 import { Categories } from "./Categories";
 import {
@@ -16,9 +8,11 @@ import {
 } from "../BookOfKindCategory/BookOfKindCategory";
 import { LastBooks } from "./LastBooks";
 import { FindForSeeker } from "../bookSeeker/FindForSeeker";
-import { Profile } from "../profile/Profile";
+import { ProfileOutSide } from "../profile/ProfileOutSide";
+import { CreateProfile } from "../profile/ProfileInside";
 import { SignIn } from "../signin-login/Signin";
 import { Login } from "../signin-login/Login";
+
 const port = 8084;
 
 const Principal = () => {
@@ -29,7 +23,7 @@ const Principal = () => {
         <Route path="/principal/category/:id/:name/book/:idBook/user/:idUser">
           <p>CACATUA</p>
 
-          <Profile></Profile>
+          <ProfileOutSide></ProfileOutSide>
         </Route>
         <Route path="/books/:seek/:data">
           <FindForSeeker></FindForSeeker>
@@ -40,11 +34,18 @@ const Principal = () => {
         <Route path="/principal/category/:id/:name">
           <BookOfKindCategory></BookOfKindCategory>
         </Route>
+        <Route path="/principal/profile/edit">
+          <CreateProfile></CreateProfile>
+        </Route>
+        <Route path="/principal/profile">
+          <Link to="/principal/profile/edit">Editar</Link>
+        </Route>
         <Route path="/principal">
           <HeadPrincipal></HeadPrincipal>
           <nav>
             <Link to="/login">Iniciar sesión</Link>
             <Link to="/newBook">Subir libro</Link>
+            <Link to="/principal/profile">Perfil</Link>
           </nav>
           <Categories></Categories>
           <LastBooks></LastBooks>

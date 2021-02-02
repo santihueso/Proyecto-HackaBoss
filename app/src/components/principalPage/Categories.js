@@ -1,12 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useParams,
-} from "react-router-dom";
-import React, { useState, useEffect, Children } from "react";
+import { Link } from "react-router-dom";
+import React from "react";
 import { useFetchData } from "../useFetch/useFetchData";
 import { port } from "./Principal";
 import { BookOfKindCategory } from "../BookOfKindCategory/BookOfKindCategory";

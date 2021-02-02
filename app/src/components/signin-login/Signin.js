@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { port } from "../principalPage/Principal";
 import { UserFormSignIn } from "./UseForm";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const SignIn = () => {
+  const history = useHistory();
   const userData = async (e) => {
     e.preventDefault();
     const email = e.target[0].value;
@@ -14,6 +15,8 @@ const SignIn = () => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+    console.log(res.status);
+    history.push("/login");
   };
   return (
     <div style={{ background: "lightgrey" }}>

@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useFetchData } from "../useFetch/useFetchData";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useParams,
-} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { port } from "../principalPage/Principal";
 import { List } from "../principalPage/LastBooks";
 

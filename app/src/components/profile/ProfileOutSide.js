@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 import { port } from "../principalPage/Principal";
 import { List } from "../principalPage/LastBooks";
 import { useFetchData } from "../useFetch/useFetchData";
-const Profile = () => {
+
+const ProfileOutSide = () => {
   const { idUser, id, name, idBook } = useParams();
   const [user, setUser] = useFetchData(
     `http://localhost:${port}/login/category/book/porfile/${idUser}`
@@ -56,4 +51,4 @@ const Profile = () => {
   }
 };
 
-export { Profile };
+export { ProfileOutSide };
