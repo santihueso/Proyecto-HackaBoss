@@ -75,16 +75,15 @@ async function newPassword(req, res) {
 async function register(req, res) {
   try {
     const schema = Joi.object({
-      username: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().min(8).required(),
       hashPassword: Joi.ref("password"),
     });
     await schema.validateAsync(req.body);
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = await user.createUser(username, email, hashPassword);
+    const newUser = await user.createUser(email, hashPassword);
     await sendMenssage.send(req, res, success);
     res.send(newUser);
   } catch (err) {

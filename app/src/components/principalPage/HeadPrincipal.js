@@ -9,11 +9,12 @@ import {
 import { port } from "./Principal";
 import { List } from "./LastBooks";
 import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const HeadPrincipal = () => {
   const [inputValue, setInputValue] = useState("");
   const [key, setKey] = useState("category");
-
+  const history = useHistory();
   const getData = (e) => {
     setInputValue(e.target.value);
   };
@@ -24,7 +25,7 @@ const HeadPrincipal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.href = `http://localhost:3000/books/${key}/${inputValue}`;
+    history.push(`/books/${key}/${inputValue}`);
   };
 
   return (

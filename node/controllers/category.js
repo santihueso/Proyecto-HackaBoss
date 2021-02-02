@@ -5,13 +5,7 @@ async function goToCategory(req, res) {
     const categoryId = req.params.categoryId;
     const categories = await category.goToCategory(categoryId);
 
-    if (!categories || categories.length === 0) {
-      const error = new Error("No hay libros en esta categoría.");
-      error.status = 404;
-      throw error;
-    } else {
-      res.send(categories);
-    }
+    res.send(categories);
   } catch (err) {
     if (err.name === "ValdationError") {
       err.code = 400;

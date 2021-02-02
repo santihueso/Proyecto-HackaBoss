@@ -117,7 +117,7 @@ app.put("/user/forgetPassword", validate, userController.newPassword);
 app.get("/api/user", userController.getUsers);
 
 //register y login
-app.post("/singIn", userController.register);
+app.post("/signin", userController.register);
 app.post("/login", userController.login);
 
 //libros

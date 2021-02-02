@@ -8,13 +8,8 @@ async function findCategory(req, res) {
     });
     await schema.validateAsync(req.body);
     const { category } = req.body;
-    console.log(req);
     const selectCategory = await seeker.forCategory(category);
-    if (selectCategory.length < 1) {
-      const error = new Error("No hay libros disponibles.");
-      error.status = 404;
-      throw error;
-    }
+
     res.send(selectCategory);
   } catch (err) {
     if (err.name === "ValdationError") {
@@ -34,11 +29,7 @@ async function findName(req, res) {
     await schema.validateAsync(req.body);
     const { title } = req.body;
     const selectName = await seeker.forName(title);
-    if (selectName.length < 1) {
-      const error = new Error("No hay libros disponibles con ese nombre.");
-      error.status = 404;
-      throw error;
-    }
+
     res.send(selectName);
   } catch (err) {
     if (err.name === "ValdationError") {
@@ -59,11 +50,7 @@ async function findCP(req, res) {
 
     const { cp } = req.body;
     const selectCP = await seeker.forCity(cp);
-    if (selectCP.length < 1) {
-      const error = new Error("No hay libros disponibles en esa zona.");
-      error.status = 404;
-      throw error;
-    }
+
     res.send(selectCP);
   } catch (err) {
     if (err.name === "ValdationError") {
@@ -85,11 +72,7 @@ async function findAuthor(req, res) {
     const { author } = req.body;
 
     const selectAuthor = await seeker.forAuthor(author);
-    if (selectAuthor.length < 1) {
-      const error = new Error("No hay libros disponibles con ese autor.");
-      error.status = 404;
-      throw error;
-    }
+
     res.send(selectAuthor);
   } catch (err) {
     if (err.name === "ValdationError") {

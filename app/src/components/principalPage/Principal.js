@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useFetchData } from "../useFetchData";
+import { useFetchData } from "../useFetch/useFetchData";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,7 +17,9 @@ import {
 import { LastBooks } from "./LastBooks";
 import { FindForSeeker } from "../bookSeeker/FindForSeeker";
 import { Profile } from "../profile/Profile";
-const port = 8085;
+import { SignIn } from "../signin-login/Signin";
+import { Login } from "../signin-login/Login";
+const port = 8084;
 
 const Principal = () => {
   return (
@@ -30,7 +32,6 @@ const Principal = () => {
           <Profile></Profile>
         </Route>
         <Route path="/books/:seek/:data">
-          <p>CACA</p>
           <FindForSeeker></FindForSeeker>
         </Route>
         <Route path="/principal/category/:id/:name/book/:idBook">
@@ -48,14 +49,11 @@ const Principal = () => {
           <Categories></Categories>
           <LastBooks></LastBooks>
         </Route>
-        <Route path="/newBook">
-          <Redirect to="/otra"></Redirect>
+        <Route path="/signin">
+          <SignIn></SignIn>
         </Route>
-        {/* <Route path="/books">
-          <FindForSeeker books={this.books.location.state.data}></FindForSeeker>
-        </Route> */}
-        <Route path="/otra">
-          <p>HOla OTRA</p>
+        <Route path="/login">
+          <Login></Login>
         </Route>
         <Route path="/notFound">
           <p>No hay libros en esta categoría</p>

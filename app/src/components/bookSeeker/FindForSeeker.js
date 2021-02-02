@@ -33,30 +33,11 @@ const FindForSeeker = () => {
       setList(body);
     };
     fetcher();
-
-    // fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(dataPost),
-    // })
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       return res.json();
-    //     } else {
-    //       console.warn("problema!!!", res);
-    //       return res.json();
-    //     }
-    //   })
-    //   .then((body) => setList(body));
   }, []);
-  if (list.error) {
-    return <Redirect to="/notFound"></Redirect>;
-  }
+
   return (
     <div>
-      <List array={list}></List>
+      {list.length > 0 ? <List array={list}></List> : <p>No hay libros</p>}
     </div>
   );
 };

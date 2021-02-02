@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useFetchData } from "../useFetchData";
+import { useFetchData } from "../useFetch/useFetchData";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +10,8 @@ import {
 import { port } from "./Principal";
 
 const Avatar = ({ e }) => {
-  const { name, id } = useParams();
+  let { name = "ultimos", id = 0 } = useParams();
+
   const url = `http://localhost:${port}/uploads/${e.photoFront}`;
   const linkOfBook = `/principal/category/${id}/${name}/book/${e.id_product}`;
 

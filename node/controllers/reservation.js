@@ -7,11 +7,7 @@ async function getReservedBook(req, res) {
     const decode = jwt.decode(auth);
     const userId = decode.id;
     const reservedBook = await reservation.getReservedBooks(userId);
-    if (!reservedBook || reservedBook.length === 0) {
-      const error = new Error("No tienes libros reservados.");
-      error.status = 404;
-      throw error;
-    }
+
     res.send(reservedBook);
   } catch (err) {
     if (err.name === "ValdationError") {

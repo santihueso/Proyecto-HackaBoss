@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { port } from "../principalPage/Principal";
 import { List } from "../principalPage/LastBooks";
-import { useFetchData } from "../useFetchData";
+import { useFetchData } from "../useFetch/useFetchData";
 const Profile = () => {
   const { idUser, id, name, idBook } = useParams();
   const [user, setUser] = useFetchData(
@@ -17,16 +17,18 @@ const Profile = () => {
 
   const userData = user ? user.user : null;
   const userBooks = user ? user.books : null;
+  const userAvg = user ? user.avg : null;
+  const point = userAvg ? userAvg.point : null;
 
   if (userData && userBooks) {
     const showUserData = userData.map((e) => {
       const url = `http://localhost:${port}/uploads/${e.photo}`;
-      console.log(e);
+
       return (
         <div key={e.id_user}>
           <nav>
             <Link to="/principal">Principal ></Link>
-            {name !== "undefined" ? (
+            {name !== "ultimos" ? (
               <Link to={`/principal/category/${id}/${name}`}>{name} > </Link>
             ) : null}
 
@@ -38,6 +40,7 @@ const Profile = () => {
           <div>
             <p>{e.username}</p>
             <p>{e.descriptionUser}</p>
+            <p>{point}</p>
           </div>
           <div>
             <p>Libros</p>

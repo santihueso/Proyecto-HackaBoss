@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useFetchData } from "../useFetchData";
+import { useFetchData } from "../useFetch/useFetchData";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,15 +17,16 @@ const BookOfKindCategory = () => {
     `http://localhost:${port}/category/${id}`
   );
 
-  if (data.error) {
-    return <Redirect to="/notFound"></Redirect>;
-  }
   return (
     <div>
       <p>{name}</p>
-      <Link to="/principal">Principal ></Link>
+      <Link to="/principal">Principal > </Link>
       <p>{name}</p>
-      <List array={data}></List>
+      {data.length > 0 ? (
+        <List array={data}></List>
+      ) : (
+        <p>No hay libros en esta categoría.</p>
+      )}
     </div>
   );
 };
@@ -35,14 +36,13 @@ const ViewBook = () => {
   const [data, setData] = useFetchData(
     `http://localhost:${port}/beginning/category/${idBook}`
   );
-  console.log(name);
 
   const book = data.map((e) => {
     return (
       <div key={e.id_product}>
         <nav>
           <Link to="/principal">Principal > </Link>
-          {name !== "undefined" ? (
+          {name !== "ultimos" ? (
             <Link to={`/principal/category/${id}/${name}`}>{name}</Link>
           ) : (
             <p>Últimos libros</p>

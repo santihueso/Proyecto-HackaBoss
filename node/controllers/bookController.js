@@ -6,14 +6,8 @@ async function showLastBook(req, res) {
   try {
     const books = await book.lastBooks();
 
-    if (!books || books.length === 0) {
-      const error = new Error("No hay libros recientes");
-      error.status = 404;
-      throw error;
-    } else {
-      res.status(200);
-      res.send(books);
-    }
+    res.status(200);
+    res.send(books);
   } catch (err) {
     if (err.name === "ValidationError") {
       err.code = 400;
@@ -47,7 +41,6 @@ async function selectBook(req, res) {
 }
 
 async function selectAllCategories(req, res) {
-  console.log(req.query.nombre);
   try {
     const books = await book.category();
     if (!books || books.length === 0) {

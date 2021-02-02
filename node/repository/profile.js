@@ -7,7 +7,10 @@ async function showProfileFromOutside(userId) {
   const [userData] = await pool.query(userQuery, userId);
   const query = " select * from product where seller = ?";
   const [forSell] = await pool.query(query, userId);
-  return { user: userData, books: forSell };
+  const queryAvg =
+    "select AVG(assessment) as point from purchase where product = ANY(select id_product from product where seller = ?)";
+  const [avg] = await pool.query(queryAvg, userId);
+  return { user: userData, books: forSell, avg: avg };
 }
 
 //--------Editar Usuario-------------------------------------------------------------------------------------------------------------------------------------------------------

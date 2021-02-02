@@ -7,7 +7,7 @@ import {
   useParams,
 } from "react-router-dom";
 import React, { useState, useEffect, Children } from "react";
-import { useFetchData } from "../useFetchData";
+import { useFetchData } from "../useFetch/useFetchData";
 import { port } from "./Principal";
 import { BookOfKindCategory } from "../BookOfKindCategory/BookOfKindCategory";
 
@@ -27,14 +27,12 @@ const Categories = () => {
   });
 
   return (
-    <Router>
-      <section id="categories">
-        <h2>Categorias</h2>
-        <nav>
-          <ul>{listCategories}</ul>
-        </nav>
-      </section>
-    </Router>
+    <section id="categories">
+      <h2>Categorias</h2>
+      <nav>
+        <ul>{listCategories}</ul>
+      </nav>
+    </section>
   );
 };
 

@@ -24,15 +24,10 @@ async function changePassword(password, userId) {
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-async function createUser(username, email, userPassword) {
+async function createUser(email, userPassword) {
   const pool = await database.getPool();
-  const insertQuery =
-    "insert into user(username, email, userPassword) values(?,?,?)";
-  const [createUser] = await pool.query(insertQuery, [
-    username,
-    email,
-    userPassword,
-  ]);
+  const insertQuery = "insert into user( email, userPassword) values(?,?)";
+  const [createUser] = await pool.query(insertQuery, [email, userPassword]);
   return createUser.isertId;
 }
 
