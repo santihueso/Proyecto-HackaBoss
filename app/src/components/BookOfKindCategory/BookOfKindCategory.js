@@ -20,7 +20,11 @@ const BookOfKindCategory = () => {
   return (
     <div>
       <p>{name}</p>
+<<<<<<< HEAD
       <Link to="/principal">Principal > </Link>
+=======
+      <Link to="/principal">Principal </Link>
+>>>>>>> 0d5be69e065179f0f3858e3bd1e79521232a3908
       <p>{name}</p>
       {data.length > 0 ? (
         <List array={data}></List>
@@ -41,8 +45,13 @@ const ViewBook = () => {
     return (
       <div key={e.id_product}>
         <nav>
+<<<<<<< HEAD
           <Link to="/principal">Principal > </Link>
           {name !== "ultimos" ? (
+=======
+          <Link to="/principal">Principal </Link>
+          {name !== "undefined" ? (
+>>>>>>> 0d5be69e065179f0f3858e3bd1e79521232a3908
             <Link to={`/principal/category/${id}/${name}`}>{name}</Link>
           ) : (
             <p>Últimos libros</p>
