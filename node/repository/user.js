@@ -10,7 +10,7 @@ async function getUser() {
 async function selectUser(userId) {
   const pool = await database.getPool();
   const query =
-    "select username, descriptionUser, city, postalCode, email, photo from user where id_user = ?";
+    "select username, descriptionUser, city, postalCode, email, photo, id_user from user where id_user = ?";
   const [user] = await pool.query(query, userId);
   return user;
 }

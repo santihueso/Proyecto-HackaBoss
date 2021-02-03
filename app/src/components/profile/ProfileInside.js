@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { UseLabelInput } from "../signin-login/UseForm";
-import { useFetchPostData } from "../useFetch/useFetchPostData";
 import { port } from "../principalPage/Principal";
+import { useHistory, Link } from "react-router-dom";
+import { useFetchAuth } from "../useFetch/useFetchAuth";
 
 const CreateProfile = () => {
   const [auth, setAuth] = useState(
     JSON.parse(localStorage.getItem("auth")) || ""
   );
-
+  const [dataUser, setDataUser] = useFetchAuth(
+    `http://localhost:${port}/login/user/profile`,
+    auth
+  );
   const [value, setValue] = useState("");
+  const history = useHistory();
+
+  console.log(dataUser, "data");
 
   const change = (e) => {
     setValue(e.target);
@@ -37,6 +44,7 @@ const CreateProfile = () => {
     if (res.status > 300) {
       console.warn("error", res);
     }
+    history.push("/principal/profile");
   };
 
   return (
@@ -70,4 +78,38 @@ const CreateProfile = () => {
   );
 };
 
-export { CreateProfile };
+const ProfileUserInside = () => {
+  const [auth, setAuth] = useState(
+    JSON.parse(localStorage.getItem("auth")) || ""
+  );
+  const [dataUser, setDataUser] = useFetchAuth(
+    `http://localhost:${port}/login/user/profile`,
+    auth
+  );
+
+  console.log(dataUser);
+  const showProfile = dataUser.map((e) => {
+    const url = `http://localhost:${port}/uploads/${e.photo}`;
+    return (
+      <div key={e.id_user}>
+        <nav>
+          <Link to="/principal/profile/edit">Editar</Link>
+        </nav>
+
+        <img src={url} alt="avatar" style={{ maxWidth: 80 }}></img>
+        <p>{e.username}</p>
+        <p>{e.descriptionUser}</p>
+        <p>{e.postalCode}</p>
+        <nav>
+          <Link to="/principal/profile/list/favorites">Favoritos</Link>
+          <Link to="/principal/profile/list/offers">Notificaciones</Link>
+          <Link to="/principal/profile/list/purchase">Comprados</Link>
+          <Link to="/principal/profile/list/toSell">En venta</Link>
+        </nav>
+      </div>
+    );
+  });
+  return showProfile;
+};
+
+export { CreateProfile, ProfileUserInside };

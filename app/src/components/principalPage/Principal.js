@@ -9,9 +9,10 @@ import {
 import { LastBooks } from "./LastBooks";
 import { FindForSeeker } from "../bookSeeker/FindForSeeker";
 import { ProfileOutSide } from "../profile/ProfileOutSide";
-import { CreateProfile } from "../profile/ProfileInside";
+import { CreateProfile, ProfileUserInside } from "../profile/ProfileInside";
 import { SignIn } from "../signin-login/Signin";
 import { Login } from "../signin-login/Login";
+import { ListBooksUser } from "../profile/ListBooksUser";
 
 const port = 8084;
 
@@ -34,11 +35,15 @@ const Principal = () => {
         <Route path="/principal/category/:id/:name">
           <BookOfKindCategory></BookOfKindCategory>
         </Route>
+        <Route path="/principal/profile/list/:kind">
+          <p>Estoy dentro</p>
+          <ListBooksUser></ListBooksUser>
+        </Route>
         <Route path="/principal/profile/edit">
           <CreateProfile></CreateProfile>
         </Route>
         <Route path="/principal/profile">
-          <Link to="/principal/profile/edit">Editar</Link>
+          <ProfileUserInside></ProfileUserInside>
         </Route>
         <Route path="/principal">
           <HeadPrincipal></HeadPrincipal>
