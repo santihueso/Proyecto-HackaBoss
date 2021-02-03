@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { UseLabelInput } from "../signin-login/UseForm";
 import { port } from "../principalPage/Principal";
 import { useHistory, Link } from "react-router-dom";
 import { useFetchAuth } from "../useFetch/useFetchAuth";
 
 const CreateProfile = () => {
-  const [auth, setAuth] = useState(
-    JSON.parse(localStorage.getItem("auth")) || ""
-  );
+  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
   const [dataUser, setDataUser] = useFetchAuth(
     `http://localhost:${port}/login/user/profile`,
     auth
   );
   const [value, setValue] = useState("");
   const history = useHistory();
-
-  console.log(dataUser, "data");
 
   const change = (e) => {
     setValue(e.target);
@@ -79,20 +75,18 @@ const CreateProfile = () => {
 };
 
 const ProfileUserInside = () => {
-  const [auth, setAuth] = useState(
-    JSON.parse(localStorage.getItem("auth")) || ""
-  );
-  const [dataUser, setDataUser] = useFetchAuth(
+  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
+  const [dataUser] = useFetchAuth(
     `http://localhost:${port}/login/user/profile`,
     auth
   );
 
-  console.log(dataUser);
   const showProfile = dataUser.map((e) => {
     const url = `http://localhost:${port}/uploads/${e.photo}`;
     return (
       <div key={e.id_user}>
         <nav>
+          <Link to="/principal">Principal</Link>
           <Link to="/principal/profile/edit">Editar</Link>
         </nav>
 

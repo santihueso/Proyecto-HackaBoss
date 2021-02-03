@@ -6,9 +6,7 @@ import { List } from "../principalPage/LastBooks";
 
 const BookOfKindCategory = () => {
   const { name, id } = useParams();
-  const [data, setData] = useFetchData(
-    `http://localhost:${port}/category/${id}`
-  );
+  const [data] = useFetchData(`http://localhost:${port}/category/${id}`);
 
   return (
     <div>
@@ -24,13 +22,73 @@ const BookOfKindCategory = () => {
   );
 };
 const ViewBook = () => {
-  let { idBook, name, id } = useParams();
-
-  const [data, setData] = useFetchData(
+  let { idBook, name, id, kind } = useParams();
+  const [data] = useFetchData(
     `http://localhost:${port}/beginning/category/${idBook}`
   );
+  const [category] = useFetchData(
+    `http://localhost:${port}/beginning/categories`
+  );
+
+  let buttons;
+  let nameLink;
+  if (kind) {
+    if (kind === "favorites") {
+      nameLink = "Favoritos";
+      buttons = (
+        <div>
+          <button>Eliminar</button>
+          <button>Comprar</button>
+        </div>
+      );
+    } else if (kind === "purchase") {
+      nameLink = "Comprados";
+      buttons = (
+        <div>
+          <button>Valoración</button>
+        </div>
+      );
+    } else if (kind === "offers") {
+      nameLink = "Notificaciones";
+      buttons = (
+        <div>
+          <button>Ver</button>
+        </div>
+      );
+    } else if (kind === "reservation") {
+      nameLink = "Reservados";
+      buttons = (
+        <div>
+          <button>Eliminar</button>
+          <button>Comprar</button>
+        </div>
+      );
+    } else if (kind === "toSell") {
+      nameLink = "En venta";
+      buttons = (
+        <div>
+          <button>Editar</button>
+          <button>Eliminar</button>
+        </div>
+      );
+    }
+  } else {
+    buttons = (
+      <div>
+        <button>Favorito</button>
+        <button>Reservar</button>
+        <button>Comprar</button>
+      </div>
+    );
+  }
 
   const book = data.map((e) => {
+    const findCategory = category.find(
+      (element) => element.id_category === e.category
+    );
+
+    const nameCategory = () =>
+      findCategory ? findCategory.category_name : null;
     return (
       <div key={e.id_product}>
         <nav>
@@ -40,7 +98,9 @@ const ViewBook = () => {
           ) : (
             <p>Últimos libros</p>
           )}
-
+          {kind ? (
+            <Link to={`/principal/profile/list/${kind}`}>{nameLink}</Link>
+          ) : null}
           <p> Libro</p>
         </nav>
 
@@ -49,21 +109,33 @@ const ViewBook = () => {
           alt="portada"
           style={{ maxWidth: 80 }}
         ></img>
+        <img
+          src={`http://localhost:${port}/uploads/${e.photoBack}`}
+          alt="portada"
+          style={{ maxWidth: 80 }}
+        ></img>
         <div>
           <h1>{e.productName}</h1>
           <p>{e.author}</p>
           <p>{e.bookLanguage}</p>
-          <div>
-            <button>Reservar</button>
-            <button>Comprar</button>
-          </div>
+          {buttons}
           <p>{e.descriptionProduct}</p>
           <p>{e.price}</p>
-          <Link
-            to={`/principal/category/${id}/${name}/book/${idBook}/user/${e.seller}`}
-          >
-            Perfil
-          </Link>
+          {kind ? (
+            <Link
+              to={`/principal/category/${
+                e.category
+              }/${nameCategory()}/book/${idBook}/user/${e.seller}`}
+            >
+              Perfil
+            </Link>
+          ) : (
+            <Link
+              to={`/principal/category/${id}/${name}/book/${idBook}/user/${e.seller}`}
+            >
+              Perfil
+            </Link>
+          )}
         </div>
       </div>
     );

@@ -26,7 +26,7 @@ const FindForSeeker = () => {
       setList(body);
     };
     fetcher();
-  }, []);
+  }, [url, seek, data]);
 
   return (
     <div>

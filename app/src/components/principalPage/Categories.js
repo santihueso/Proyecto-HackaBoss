@@ -5,9 +5,7 @@ import { port } from "./Principal";
 import { BookOfKindCategory } from "../BookOfKindCategory/BookOfKindCategory";
 
 const Categories = () => {
-  const [data, setData] = useFetchData(
-    `http://localhost:${port}/beginning/categories`
-  );
+  const [data] = useFetchData(`http://localhost:${port}/beginning/categories`);
 
   const listCategories = data.map((e) => {
     const linkOfCategory = `/principal/category/${e.id_category}/${e.category_name}`;

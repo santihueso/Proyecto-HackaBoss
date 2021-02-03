@@ -4,13 +4,14 @@ import { Link, useParams } from "react-router-dom";
 import { port } from "./Principal";
 
 const Avatar = ({ e }) => {
-  let { name = "ultimos", id = 0 } = useParams();
+  let { name = "ultimos", id = 0, kind } = useParams();
 
   const url = `http://localhost:${port}/uploads/${e.photoFront}`;
   const linkOfBook = `/principal/category/${id}/${name}/book/${e.id_product}`;
+  const linkOfListBookUser = `/principal/profile/list/${kind}/book/${e.id_product}`;
 
   return (
-    <Link to={linkOfBook}>
+    <Link to={kind ? linkOfListBookUser : linkOfBook}>
       <img src={url} alt="avatar" style={{ maxWidth: 80 }}></img>
     </Link>
   );
@@ -31,9 +32,7 @@ const List = ({ array }) => {
 };
 
 const LastBooks = () => {
-  const [data, setData] = useFetchData(
-    `http://localhost:${port}/beginning/lastBooks`
-  );
+  const [data] = useFetchData(`http://localhost:${port}/beginning/lastBooks`);
   const showBooks = [];
 
   if (data.length > 8) {
@@ -56,4 +55,4 @@ const LastBooks = () => {
   }
 };
 
-export { LastBooks, List };
+export { LastBooks, List, Avatar };

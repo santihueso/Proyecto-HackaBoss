@@ -29,11 +29,15 @@ const Principal = () => {
         <Route path="/books/:seek/:data">
           <FindForSeeker></FindForSeeker>
         </Route>
+
         <Route path="/principal/category/:id/:name/book/:idBook">
           <ViewBook></ViewBook>
         </Route>
         <Route path="/principal/category/:id/:name">
           <BookOfKindCategory></BookOfKindCategory>
+        </Route>
+        <Route path="/principal/profile/list/:kind/book/:idBook">
+          <ViewBook></ViewBook>
         </Route>
         <Route path="/principal/profile/list/:kind">
           <p>Estoy dentro</p>
