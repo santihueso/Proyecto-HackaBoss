@@ -9,6 +9,7 @@ import {
   ButtonBuyWithReserved,
   ButtonDelete,
 } from "../buttons/Buttons";
+import { FormValoration } from "../buttons/FormValoration";
 
 const BookOfKindCategory = () => {
   const { name, id } = useParams();
@@ -29,7 +30,7 @@ const BookOfKindCategory = () => {
 };
 const ViewBook = () => {
   let { idBook, name, id, kind } = useParams();
-
+  const history = useHistory();
   const [data] = useFetchData(
     `http://localhost:${port}/beginning/category/${idBook}`
   );
@@ -59,11 +60,7 @@ const ViewBook = () => {
       );
     } else if (kind === "purchase") {
       nameLink = "Comprados";
-      buttons = (
-        <div>
-          <button>Valoración</button>
-        </div>
-      );
+      buttons = <FormValoration></FormValoration>;
     } else if (kind === "offers") {
       nameLink = "Notificaciones";
       buttons = (

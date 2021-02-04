@@ -45,7 +45,7 @@ const CreateProfile = () => {
       <form onSubmit={handlSubmit}>
         <div>
           <nav>
-            <Link to="/principal">Principal</Link>
+            <Link to="/principal">Principal ˃ </Link>
             <Link to="/principal/profile">Perfil</Link>
           </nav>
           <label id="userImage"></label>
@@ -105,7 +105,7 @@ const ProfileUserInside = () => {
     return (
       <div key={e.id_user}>
         <nav>
-          <Link to="/principal">Principal</Link>
+          <Link to="/principal">Principal ˃ </Link>
           <Link to="/principal/profile/edit">Editar</Link>
         </nav>
 

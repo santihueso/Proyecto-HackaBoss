@@ -6,7 +6,6 @@ async function showLastBook(req, res) {
   try {
     const books = await book.lastBooks();
 
-    res.status(200);
     res.send(books);
   } catch (err) {
     if (err.name === "ValidationError") {

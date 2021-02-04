@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
-import { useFetchAuth } from "../useFetch/useFetchAuth";
+import { Redirect, useHistory } from "react-router-dom";
 import { port } from "../principalPage/Principal";
 
 const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout }) => {

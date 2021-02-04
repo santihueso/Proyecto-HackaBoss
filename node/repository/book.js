@@ -2,7 +2,8 @@ const database = require("../infraestructure/db.js");
 
 async function lastBooks() {
   const pool = await database.getPool();
-  const query = "select * from product where publicationDate >= CURDATE() - 7";
+  const query =
+    "select * from product where publicationDate >= CURDATE() - 7 and state is null";
   const [lastBooks] = await pool.query(query);
   return lastBooks;
 }
@@ -94,6 +95,14 @@ async function deleteBook(seller, book) {
   return deleteBook;
 }
 
+async function soldBook() {
+  const pool = await database.getPool();
+  const query =
+    "select id_product from product where id_product = ANY (select product from purchase where purchase = 1)";
+  const [sold] = await pool.query(query);
+  return sold;
+}
+
 module.exports = {
   lastBooks,
   selectBook,
@@ -101,4 +110,5 @@ module.exports = {
   createBook,
   editBook,
   deleteBook,
+  soldBook,
 };

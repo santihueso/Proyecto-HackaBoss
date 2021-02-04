@@ -14,7 +14,7 @@ import { SignIn } from "../signin-login/Signin";
 import { Login } from "../signin-login/Login";
 import { ListBooksUser } from "../profile/ListBooksUser";
 
-const port = 8084;
+const port = 8085;
 
 const Principal = () => {
   return (
@@ -40,7 +40,6 @@ const Principal = () => {
           <ViewBook></ViewBook>
         </Route>
         <Route path="/principal/profile/list/:kind">
-          <p>Estoy dentro</p>
           <ListBooksUser></ListBooksUser>
         </Route>
         <Route path="/principal/profile/edit">

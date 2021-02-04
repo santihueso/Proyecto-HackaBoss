@@ -63,7 +63,7 @@ async function getBuyBookWithReserve(req, res) {
     } else if (ifHaveReserved[0].buyer !== buyer) {
       throw new Error("El libro está reservado por otro usuario.");
     } else {
-      const buyWithReserve = await purchase.updateWeReserve(1, buyer, dateBuy);
+      const buyWithReserve = await purchase.updateWeReserve(dateBuy, bookId);
       await messages.send(req, res, buy);
       res.status(200);
       res.send("El libro ha sido comprado correctamente.");
@@ -104,7 +104,7 @@ async function buyBookWithoutReserve(req, res) {
         res.send("El libro ha sido comprado correctamente.");
       }
     } else {
-      const buyBook = await purchase.buyBook(book, 1, buyer, date);
+      const buyBook = await purchase.buyBook(book, 1, buyer, date, 1, book);
       await messages.send(req, res, buy);
       res.status(200);
       res.send("El libro ha sido comprado correctamente.");

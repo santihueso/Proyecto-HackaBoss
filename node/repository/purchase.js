@@ -30,12 +30,15 @@ async function ifYouHaveFavoriteBookYet(bookId) {
   return user;
 }
 
-async function updateWeReserve(buyBook, userId, date) {
+async function updateWeReserve(date, book) {
   const pool = await database.getPool();
 
   const insertQuery =
-    "update purchase set purchase = ?, reservation = 0, purchaseDate = ? where buyer = ?";
-  const [buy] = await pool.query(insertQuery, [buyBook, date, userId]);
+    "update purchase set purchase = 1, reservation = 0, favorite = 0, purchaseDate = ? where product = ?";
+  const insertQueryProduct =
+    "update product set state = 1 where id_product = ?";
+  const [buy] = await pool.query(insertQuery, [date, book]);
+  const [remove] = await pool.query(insertQueryProduct, book);
   return buy;
 }
 
@@ -49,8 +52,11 @@ async function findBook(bookId) {
 async function buyBook(book, buyBookId, buyer, date) {
   const pool = await database.getPool();
   const insertQuery =
-    "insert into purchase (product, purchase, buyer, purchaseDate) values(?,?,?,?)";
+    "insert into purchase (product, purchase, buyer, purchaseDate, favorite) values(?,?,?,?, 0)";
+  const insertQueryProduct =
+    "update product set state = 1 where id_product = ?";
   const [buy] = await pool.query(insertQuery, [book, buyBookId, buyer, date]);
+  const [remove] = await pool.query(insertQueryProduct, [book]);
   return buy;
 }
 
