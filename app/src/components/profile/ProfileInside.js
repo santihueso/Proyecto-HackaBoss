@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { UseLabelInput } from "../signin-login/UseForm";
 import { port } from "../principalPage/Principal";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, Redirect } from "react-router-dom";
 import { useFetchAuth } from "../useFetch/useFetchAuth";
 
 const CreateProfile = () => {
@@ -10,26 +10,23 @@ const CreateProfile = () => {
     `http://localhost:${port}/login/user/profile`,
     auth
   );
-  const [value, setValue] = useState("");
+  console.log(dataUser);
+  const [img, setImg] = useState(null);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [city, setCity] = useState("");
+  const [cp, setCp] = useState("");
   const history = useHistory();
 
-  const change = (e) => {
-    setValue(e.target);
-  };
   const handlSubmit = async (e) => {
     e.preventDefault();
 
-    const photo = e.target[0].files[0];
-    const username = e.target[1].value;
-    const descriptionUser = e.target[2].value;
-    const city = e.target[3].value;
-    const postalCode = e.target[4].value;
     const formData = new FormData();
-    formData.append("photo", photo, photo.name);
-    formData.append("username", username);
-    formData.append("descriptionUser", descriptionUser);
+    formData.append("photo", img, img.name);
+    formData.append("username", name);
+    formData.append("descriptionUser", description);
     formData.append("city", city);
-    formData.append("postalCode", postalCode);
+    formData.append("postalCode", cp);
     const res = await fetch(`http://localhost:${port}/user/editUser`, {
       method: "PUT",
       headers: {
@@ -44,33 +41,55 @@ const CreateProfile = () => {
   };
 
   return (
-    <form onSubmit={handlSubmit} value={value} onChange={change}>
-      <div>
-        <label id="userImage"></label>
-        <input id="userImage" type="file" accept="image/*"></input>
-      </div>
-      <UseLabelInput
-        kind={"text"}
-        id={"username"}
-        name={"nombre"}
-      ></UseLabelInput>
-      <UseLabelInput
-        kind={"text"}
-        id={"description"}
-        name={"descripción"}
-      ></UseLabelInput>
-      <UseLabelInput
-        kind={"number"}
-        id={"city"}
-        name={"ciudad"}
-      ></UseLabelInput>
-      <UseLabelInput
-        kind={"number"}
-        id={"cp"}
-        name={"codigo postal"}
-      ></UseLabelInput>
-      <input type="submit" value="submit"></input>
-    </form>
+    <div>
+      <form onSubmit={handlSubmit}>
+        <div>
+          <nav>
+            <Link to="/principal">Principal</Link>
+            <Link to="/principal/profile">Perfil</Link>
+          </nav>
+          <label id="userImage"></label>
+          <input
+            id="userImage"
+            type="file"
+            onChange={(e) => setImg(e.target.files[0])}
+            accept="image/*"
+          ></input>
+        </div>
+        <UseLabelInput
+          kind={"text"}
+          id={"name"}
+          name={"nombre"}
+          value={name}
+          setValue={setName}
+        ></UseLabelInput>
+        <UseLabelInput
+          kind={"text"}
+          id={"description"}
+          name={"descripción"}
+          value={description}
+          setValue={setDescription}
+        ></UseLabelInput>
+        <UseLabelInput
+          kind={"number"}
+          id={"city"}
+          name={"city"}
+          value={city}
+          setValue={setCity}
+        ></UseLabelInput>
+        <UseLabelInput
+          kind={"numer"}
+          id={"cp"}
+          name={"codigo postal"}
+          value={cp}
+          setValue={setCp}
+        ></UseLabelInput>
+        <input type="submit" value="submit"></input>
+      </form>
+      <button onClick={() => history.push("/principal/profile")}>
+        Cancelar
+      </button>
+    </div>
   );
 };
 
@@ -106,4 +125,4 @@ const ProfileUserInside = () => {
   return showProfile;
 };
 
-export { CreateProfile, ProfileUserInside };
+export { ProfileUserInside, CreateProfile };

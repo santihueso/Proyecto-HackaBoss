@@ -18,7 +18,7 @@ const ListBooksUser = () => {
         <Link to="/principal">Principal</Link>
         <Link to="/principal/profile">Profile</Link>
       </nav>
-      <List array={dataList}></List>;
+      <List array={dataList}></List>
     </div>
   );
 };

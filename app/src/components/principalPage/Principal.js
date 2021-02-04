@@ -9,7 +9,7 @@ import {
 import { LastBooks } from "./LastBooks";
 import { FindForSeeker } from "../bookSeeker/FindForSeeker";
 import { ProfileOutSide } from "../profile/ProfileOutSide";
-import { CreateProfile, ProfileUserInside } from "../profile/ProfileInside";
+import { ProfileUserInside, CreateProfile } from "../profile/ProfileInside";
 import { SignIn } from "../signin-login/Signin";
 import { Login } from "../signin-login/Login";
 import { ListBooksUser } from "../profile/ListBooksUser";

@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { port } from "../principalPage/Principal";
 import { UserFormSignIn } from "./UseForm";
 import { Link, useHistory } from "react-router-dom";
 
 const SignIn = () => {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const history = useHistory();
-  const userData = async (e) => {
+  const handlSubmit = async (e) => {
     e.preventDefault();
-    const email = e.target[0].value;
-    const password = e.target[1].value;
 
     const res = await fetch(`http://localhost:${port}/signin`, {
       method: "POST",
@@ -21,7 +21,13 @@ const SignIn = () => {
   return (
     <div style={{ background: "lightgrey" }}>
       <div style={{ color: "red" }}>Register</div>
-      <UserFormSignIn userData={userData} />
+      <UserFormSignIn
+        handlSubmit={handlSubmit}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+      ></UserFormSignIn>
       <Link to="/login">Iniciar sesión</Link>
     </div>
   );
