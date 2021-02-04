@@ -38,7 +38,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 /*Muestra los libros reservados de un usuario */
-app.get("/login/reservation/books", validate, reservation.getReservedBook);
+app.get("/login/user/profile/reserved", validate, reservation.getReservedBook);
 /*Muestra los últimos libros */
 app.get("/beginning/lastBooks", book.showLastBook);
 //Todas las categorias
@@ -122,7 +122,7 @@ app.post("/login", userController.login);
 
 //libros
 app.post("/login/user/newBook", validate, img.array("photos", 2), book.newBook);
-app.delete("/login/user/book/:bookId/delete", validate, book.deleteBook);
+app.delete("/login/user/book/:bookId/to/delete", validate, book.deleteBook);
 app.put(
   "/login/user/book/:bookId/editBook",
   validate,

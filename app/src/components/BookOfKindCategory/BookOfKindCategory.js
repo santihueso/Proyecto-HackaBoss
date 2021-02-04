@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFetchData } from "../useFetch/useFetchData";
-import { Link, useParams } from "react-router-dom";
+import { useFetchAuth } from "../useFetch/useFetchAuth";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { port } from "../principalPage/Principal";
 import { List } from "../principalPage/LastBooks";
+import {
+  ButtonPurchaseFavoriteReserved,
+  ButtonBuyWithReserved,
+  ButtonDelete,
+} from "../buttons/Buttons";
 
 const BookOfKindCategory = () => {
   const { name, id } = useParams();
@@ -23,6 +29,7 @@ const BookOfKindCategory = () => {
 };
 const ViewBook = () => {
   let { idBook, name, id, kind } = useParams();
+
   const [data] = useFetchData(
     `http://localhost:${port}/beginning/category/${idBook}`
   );
@@ -37,8 +44,17 @@ const ViewBook = () => {
       nameLink = "Favoritos";
       buttons = (
         <div>
-          <button>Eliminar</button>
-          <button>Comprar</button>
+          <ButtonDelete
+            idBook={idBook}
+            to={"favorite"}
+            rout={"favorites"}
+          ></ButtonDelete>
+          <ButtonPurchaseFavoriteReserved
+            idBook={idBook}
+            to={"buy"}
+            name={"Comprar"}
+            rout={"purchase"}
+          ></ButtonPurchaseFavoriteReserved>
         </div>
       );
     } else if (kind === "purchase") {
@@ -55,12 +71,16 @@ const ViewBook = () => {
           <button>Ver</button>
         </div>
       );
-    } else if (kind === "reservation") {
+    } else if (kind === "reserved") {
       nameLink = "Reservados";
       buttons = (
         <div>
-          <button>Eliminar</button>
-          <button>Comprar</button>
+          <ButtonDelete
+            idBook={idBook}
+            to={"reservation"}
+            rout={"reserved"}
+          ></ButtonDelete>
+          <ButtonBuyWithReserved idBook={idBook}></ButtonBuyWithReserved>
         </div>
       );
     } else if (kind === "toSell") {
@@ -68,16 +88,35 @@ const ViewBook = () => {
       buttons = (
         <div>
           <button>Editar</button>
-          <button>Eliminar</button>
+          <ButtonDelete
+            idBook={idBook}
+            to={"to"}
+            rout={"toSell"}
+          ></ButtonDelete>
         </div>
       );
     }
   } else {
     buttons = (
       <div>
-        <button>Favorito</button>
-        <button>Reservar</button>
-        <button>Comprar</button>
+        <ButtonPurchaseFavoriteReserved
+          idBook={idBook}
+          to={"favorite"}
+          name={"Favorito"}
+          rout={"favorites"}
+        ></ButtonPurchaseFavoriteReserved>
+        <ButtonPurchaseFavoriteReserved
+          idBook={idBook}
+          to={"reservation"}
+          name={"Reservar"}
+          rout={"reserved"}
+        ></ButtonPurchaseFavoriteReserved>
+        <ButtonPurchaseFavoriteReserved
+          idBook={idBook}
+          to={"buy"}
+          name={"Comprar"}
+          rout={"purchase"}
+        ></ButtonPurchaseFavoriteReserved>
       </div>
     );
   }

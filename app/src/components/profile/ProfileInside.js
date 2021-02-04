@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { UseLabelInput } from "../signin-login/UseForm";
 import { port } from "../principalPage/Principal";
-import { useHistory, Link, Redirect } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useFetchAuth } from "../useFetch/useFetchAuth";
 
 const CreateProfile = () => {
@@ -118,6 +118,7 @@ const ProfileUserInside = () => {
           <Link to="/principal/profile/list/offers">Notificaciones</Link>
           <Link to="/principal/profile/list/purchase">Comprados</Link>
           <Link to="/principal/profile/list/toSell">En venta</Link>
+          <Link to="/principal/profile/list/reserved">Reservados</Link>
         </nav>
       </div>
     );
