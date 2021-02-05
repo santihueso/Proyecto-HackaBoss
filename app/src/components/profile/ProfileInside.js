@@ -10,87 +10,126 @@ const CreateProfile = () => {
     `http://localhost:${port}/login/user/profile`,
     auth
   );
-  console.log(dataUser);
-  const [img, setImg] = useState(null);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [city, setCity] = useState("");
-  const [cp, setCp] = useState("");
+  let [img, setImg] = useState(null);
+  let [name, setName] = useState("");
+  let [description, setDescription] = useState("");
+  let [city, setCity] = useState("");
+  let [cp, setCp] = useState("");
+  const [onImg, setOnImg] = useState(false);
+  const [onName, setOnName] = useState(false);
+  const [onDescription, setOnDescription] = useState(false);
+  const [onCity, setOnCity] = useState(false);
+  const [onCp, setOnCp] = useState(false);
   const history = useHistory();
+  const user = dataUser.map((user) => {
+    const handlSubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      if (onImg) {
+        formData.append("photo", img, img.name);
+      } else {
+        img = user.photo;
+        formData.append("photo", img);
+      }
+      if (!name) {
+        name = user.username;
+      }
+      if (!description) {
+        description = user.descriptionUser;
+      }
+      if (!city) {
+        city = user.city;
+      }
+      if (!cp) {
+        cp = user.postalCode;
+      }
 
-  const handlSubmit = async (e) => {
-    e.preventDefault();
+      formData.append("username", name);
+      formData.append("descriptionUser", description);
+      formData.append("city", city);
+      formData.append("postalCode", cp);
+      const res = await fetch(`http://localhost:${port}/user/editUser`, {
+        method: "PUT",
+        headers: {
+          Authorization: auth,
+        },
+        body: formData,
+      });
+      if (res.status > 300) {
+        console.warn("error", res);
+      }
+      history.push("/principal/profile");
+    };
 
-    const formData = new FormData();
-    formData.append("photo", img, img.name);
-    formData.append("username", name);
-    formData.append("descriptionUser", description);
-    formData.append("city", city);
-    formData.append("postalCode", cp);
-    const res = await fetch(`http://localhost:${port}/user/editUser`, {
-      method: "PUT",
-      headers: {
-        Authorization: auth,
-      },
-      body: formData,
-    });
-    if (res.status > 300) {
-      console.warn("error", res);
-    }
-    history.push("/principal/profile");
-  };
+    return (
+      <div key={user.id_user}>
+        <form onSubmit={handlSubmit}>
+          <div>
+            <nav>
+              <Link to="/principal">Principal ˃ </Link>
+              <Link to="/principal/profile">Perfil</Link>
+            </nav>
+            <label htmlFor="userImage"></label>
+            <input
+              id="userImage"
+              type="file"
+              onChange={(e) => [setOnImg(true), setImg(e.target.files[0])]}
+              accept="image/*"
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="name"></label>
+            <input
+              id="name"
+              value={onName ? name : user.username}
+              type="text"
+              placeholder="nombre"
+              onChange={(e) => [setOnName(true), setName(e.target.value)]}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="description"></label>
+            <input
+              id="description"
+              value={onDescription ? description : user.descriptionUser}
+              type="text"
+              placeholder="descripción"
+              onChange={(e) => [
+                setOnDescription(true),
+                setDescription(e.target.value),
+              ]}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="city"></label>
+            <input
+              id="city"
+              value={onCity ? city : user.city}
+              type="text"
+              placeholder="ciudad"
+              onChange={(e) => [setOnCity(true), setCity(e.target.value)]}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="cp"></label>
+            <input
+              id="cp"
+              value={onCp ? cp : user.postalCode}
+              type="number"
+              placeholder="codigo postal"
+              onChange={(e) => [setOnCp(true), setCp(e.target.value)]}
+            ></input>
+          </div>
 
-  return (
-    <div>
-      <form onSubmit={handlSubmit}>
-        <div>
-          <nav>
-            <Link to="/principal">Principal ˃ </Link>
-            <Link to="/principal/profile">Perfil</Link>
-          </nav>
-          <label id="userImage"></label>
-          <input
-            id="userImage"
-            type="file"
-            onChange={(e) => setImg(e.target.files[0])}
-            accept="image/*"
-          ></input>
-        </div>
-        <UseLabelInput
-          kind={"text"}
-          id={"name"}
-          name={"nombre"}
-          value={name}
-          setValue={setName}
-        ></UseLabelInput>
-        <UseLabelInput
-          kind={"text"}
-          id={"description"}
-          name={"descripción"}
-          value={description}
-          setValue={setDescription}
-        ></UseLabelInput>
-        <UseLabelInput
-          kind={"number"}
-          id={"city"}
-          name={"city"}
-          value={city}
-          setValue={setCity}
-        ></UseLabelInput>
-        <UseLabelInput
-          kind={"numer"}
-          id={"cp"}
-          name={"codigo postal"}
-          value={cp}
-          setValue={setCp}
-        ></UseLabelInput>
-        <input type="submit" value="submit"></input>
-      </form>
-      <button onClick={() => history.push("/principal/profile")}>
-        Cancelar
-      </button>
-    </div>
-  );
+          <input type="submit" value="submit"></input>
+        </form>
+        <button onClick={() => history.push("/principal/profile")}>
+          Cancelar
+        </button>
+      </div>
+    );
+  });
+  return user;
 };
 
 const ProfileUserInside = () => {

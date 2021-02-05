@@ -28,13 +28,19 @@ async function updateUser(req, res) {
     const auth = req.headers.authorization;
     const decode = jwt.decode(auth);
     const userId = decode.id;
-    const photo = req.file.filename;
+
+    let photo;
+    if (req.file) {
+      photo = req.file.filename;
+    } else {
+      photo = req.body.photo;
+    }
 
     const { username, descriptionUser, city, postalCode } = req.body;
     const schema = Joi.object({
       username: Joi.string(),
       descriptionUser: Joi.string(),
-      city: Joi.number(),
+      city: Joi.string(),
       postalCode: Joi.number(),
       photo: Joi.string(),
     });
