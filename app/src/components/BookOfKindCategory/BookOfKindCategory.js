@@ -30,6 +30,7 @@ const BookOfKindCategory = () => {
 };
 const ViewBook = () => {
   let { idBook, name, id, kind } = useParams();
+  const [valoration, setValoration] = useState(false);
   const history = useHistory();
   const [data] = useFetchData(
     `http://localhost:${port}/beginning/category/${idBook}`
@@ -60,7 +61,14 @@ const ViewBook = () => {
       );
     } else if (kind === "purchase") {
       nameLink = "Comprados";
-      buttons = <FormValoration></FormValoration>;
+      buttons = (
+        <div>
+          <button onClick={() => setValoration(true)}>Entregado</button>
+          {valoration ? (
+            <FormValoration idBook={idBook}></FormValoration>
+          ) : null}
+        </div>
+      );
     } else if (kind === "offers") {
       nameLink = "Notificaciones";
       buttons = (

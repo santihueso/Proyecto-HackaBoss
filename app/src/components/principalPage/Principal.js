@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { HeadPrincipal } from "./HeadPrincipal";
 import { Categories } from "./Categories";
@@ -17,6 +17,10 @@ import { ListBooksUser } from "../profile/ListBooksUser";
 const port = 8085;
 
 const Principal = () => {
+  const [auth, setAuth] = useState(
+    JSON.parse(localStorage.getItem("auth")) || ""
+  );
+
   return (
     <Router>
       <h1>Recy-book</h1>
@@ -51,9 +55,13 @@ const Principal = () => {
         <Route path="/principal">
           <HeadPrincipal></HeadPrincipal>
           <nav>
-            <Link to="/login">Iniciar sesión</Link>
+            {auth !== "" ? (
+              <Link to="/principal/profile">Perfil</Link>
+            ) : (
+              <Link to="/login">Iniciar sesión</Link>
+            )}
+
             <Link to="/newBook">Subir libro</Link>
-            <Link to="/principal/profile">Perfil</Link>
           </nav>
           <Categories></Categories>
           <LastBooks></LastBooks>

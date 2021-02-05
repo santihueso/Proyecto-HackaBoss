@@ -1,17 +1,32 @@
 import React, { useState } from "react";
+import { port } from "../principalPage/Principal";
 import { Redirect, useHistory } from "react-router-dom";
 
-const FormValoration = () => {
-  // const history = useHistory();
+const FormValoration = ({ idBook }) => {
+  const history = useHistory();
+
   const [text, setText] = useState("");
   const [star, setStar] = useState(0);
   const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
   if (auth === "") {
     return <Redirect to="/login"></Redirect>;
   }
-  console.log(star);
+  const handlSubmit = async () => {
+    const res = await fetch(
+      `http://localhost:${port}/login/user/:userId/book/${idBook}/assessment`,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json", Authorization: auth },
+        body: JSON.stringify({ assessment: star, opinion: text }),
+      }
+    );
+    if (res.status > 300) {
+      console.warn("error", res);
+    }
+    history.push(`/principal/profile/list/purchase`);
+  };
   return (
-    <form>
+    <form onSubmit={handlSubmit}>
       <div>
         <label htmlFor="radio1">★</label>
         <input
