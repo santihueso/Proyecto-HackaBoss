@@ -11,6 +11,8 @@ const ListBooksUser = () => {
     `http://localhost:${port}/login/user/profile/${kind}`,
     auth
   );
+  const linkOfListBookUser = (productId) =>
+    `/principal/profile/list/${kind}/book/${productId}`;
 
   return (
     <div>
@@ -18,7 +20,7 @@ const ListBooksUser = () => {
         <Link to="/principal">Principal ˃ </Link>
         <Link to="/principal/profile">Profile</Link>
       </nav>
-      <List array={dataList}></List>
+      <List array={dataList} link={linkOfListBookUser} kind={kind}></List>
     </div>
   );
 };

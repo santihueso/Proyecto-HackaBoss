@@ -4,7 +4,7 @@ import { UserFormLogIn } from "./UseForm";
 import { useHistory, Link } from "react-router-dom";
 import "../../css/style.css";
 
-const Login = () => {
+const Login = ({ setAuth }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const history = useHistory();
@@ -23,6 +23,7 @@ const Login = () => {
     }
     history.push("/principal");
     window.localStorage.setItem("auth", JSON.stringify(body.token));
+    setAuth(body.token);
   };
   return (
     <div className="login">

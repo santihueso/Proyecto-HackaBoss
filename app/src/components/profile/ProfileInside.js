@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { UseLabelInput } from "../signin-login/UseForm";
 import { port } from "../principalPage/Principal";
 import { useHistory, Link } from "react-router-dom";
 import { useFetchAuth } from "../useFetch/useFetchAuth";
@@ -24,13 +23,6 @@ const CreateProfile = () => {
   const user = dataUser.map((user) => {
     const handlSubmit = async (e) => {
       e.preventDefault();
-      const formData = new FormData();
-      if (onImg) {
-        formData.append("photo", img, img.name);
-      } else {
-        img = user.photo;
-        formData.append("photo", img);
-      }
       if (!name) {
         name = user.username;
       }
@@ -44,20 +36,15 @@ const CreateProfile = () => {
         cp = user.postalCode;
       }
 
-      formData.append("username", name);
-      formData.append("descriptionUser", description);
-      formData.append("city", city);
-      formData.append("postalCode", cp);
-      const res = await fetch(`http://localhost:${port}/user/editUser`, {
-        method: "PUT",
-        headers: {
-          Authorization: auth,
-        },
-        body: formData,
+      await saveUser({
+        img,
+        user,
+        name,
+        description,
+        city,
+        cp,
+        auth,
       });
-      if (res.status > 300) {
-        console.warn("error", res);
-      }
       history.push("/principal/profile");
     };
 
@@ -166,3 +153,35 @@ const ProfileUserInside = () => {
 };
 
 export { ProfileUserInside, CreateProfile };
+
+async function saveUser({
+  img = undefined,
+  user,
+  name,
+  description,
+  city,
+  cp,
+  auth,
+}) {
+  const formData = new FormData();
+  if (img) {
+    formData.append("photo", img, img.name);
+  } else {
+    formData.append("photo", user.photo);
+  }
+  formData.append("username", name);
+  formData.append("descriptionUser", description);
+  formData.append("city", city);
+  formData.append("postalCode", cp);
+  const res = await fetch(`http://localhost:${port}/user/editUser`, {
+    method: "PUT",
+    headers: {
+      Authorization: auth,
+    },
+    body: formData,
+  });
+  if (res.status > 300) {
+    console.warn("error", res);
+  }
+  return res.status === 200;
+}

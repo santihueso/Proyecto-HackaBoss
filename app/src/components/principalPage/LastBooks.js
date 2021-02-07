@@ -1,29 +1,25 @@
 import React from "react";
 import { useFetchData } from "../useFetch/useFetchData";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { port } from "./Principal";
 
-const Avatar = ({ e }) => {
-  let { name = "ultimos", id = 0, kind } = useParams();
-
+const Avatar = ({ e, to }) => {
   const url = `http://localhost:${port}/uploads/${e.photoFront}`;
-  const linkOfBook = `/principal/category/${id}/${name}/book/${e.id_product}`;
-  const linkOfListBookUser = `/principal/profile/list/${kind}/book/${e.id_product}`;
 
   return (
-    <Link to={kind ? linkOfListBookUser : linkOfBook}>
+    <Link to={to}>
       <img src={url} alt="avatar" style={{ maxWidth: 80 }}></img>
     </Link>
   );
 };
 
-const List = ({ array }) => {
+const List = ({ array, link }) => {
   const listBooks = array.map((e) => {
     return (
       <li key={e.id_product}>
         <p>{e.productName}</p>
         <p>{e.author}</p>
-        <Avatar e={e}></Avatar>
+        <Avatar to={link(e.id_product)} e={e}></Avatar>
         <p>{e.price}</p>
       </li>
     );
@@ -34,7 +30,7 @@ const List = ({ array }) => {
 const LastBooks = () => {
   const [data] = useFetchData(`http://localhost:${port}/beginning/lastBooks`);
   const showBooks = [];
-
+  const link = (idBook) => `/principal/category/0/ultimos/book/${idBook}`;
   if (data.length > 8) {
     for (let i = 0; i < 8; i++) {
       showBooks.push(data[i]);
@@ -42,14 +38,14 @@ const LastBooks = () => {
     return (
       <section id="lastBooks">
         <p>Últimos libros</p>
-        <List array={showBooks}></List>
+        <List array={showBooks} link={link}></List>
       </section>
     );
   } else {
     return (
       <section id="lastBooks">
         <p>Últimos libros</p>
-        <List array={data}></List>
+        <List array={data} link={link}></List>
       </section>
     );
   }

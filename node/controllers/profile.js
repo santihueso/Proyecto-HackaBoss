@@ -44,13 +44,7 @@ async function updateUser(req, res) {
       postalCode: Joi.number(),
       photo: Joi.string(),
     });
-    await schema.validateAsync({
-      username,
-      descriptionUser,
-      city,
-      postalCode,
-      photo,
-    });
+    await schema.validateAsync(req.body);
 
     const updateUserProfile = await profile.updateUser(
       username,

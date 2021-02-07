@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { List } from "../principalPage/LastBooks";
 import { port } from "../principalPage/Principal";
 
 const FindForSeeker = () => {
-  const { seek, data } = useParams();
+  const { seek, data, id } = useParams();
   const [list, setList] = useState([]);
   const url = `http://localhost:${port}/beginning/seeker/${seek}`;
+
+  const link = (idBook) => `/principal/category/0/seeker/book/${idBook}`;
 
   useEffect(() => {
     const dataPost = {};
@@ -30,7 +32,13 @@ const FindForSeeker = () => {
 
   return (
     <div>
-      {list.length > 0 ? <List array={list}></List> : <p>No hay libros</p>}
+      <Link to="/principal">Principal</Link>
+
+      {list.length > 0 ? (
+        <List array={list} link={link}></List>
+      ) : (
+        <p>No hay libros</p>
+      )}
     </div>
   );
 };

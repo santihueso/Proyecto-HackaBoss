@@ -25,13 +25,16 @@ const FormValoration = ({ idBook }) => {
     }
     history.push(`/principal/profile/list/purchase`);
   };
+  const starComparator = (value) => () =>
+    star === value ? setStar(0) : setStar(value);
+  console.log(star);
   return (
     <form onSubmit={handlSubmit}>
       <div>
         <label htmlFor="radio1">★</label>
         <input
           id="radio1"
-          type="radio"
+          type="checkbox"
           name="estrellas"
           value={star}
           onChange={() => setStar(1)}
@@ -40,25 +43,25 @@ const FormValoration = ({ idBook }) => {
         <label htmlFor="radio2">★</label>
         <input
           id="radio2"
-          type="radio"
+          type="checkbox"
           name="estrellas"
           value={star}
-          onChange={() => setStar(2)}
+          onChange={starComparator(2)}
           style={{ display: "none" }}
         ></input>
         <label htmlFor="radio3">★</label>
         <input
           id="radio3"
-          type="radio"
+          type="checkbox"
           name="estrellas"
           value={star}
-          onChange={() => setStar(3)}
+          onChange={() => (star === 3 ? setStar(0) : setStar(3))}
           style={{ display: "none" }}
         ></input>
         <label htmlFor="radio4">★</label>
         <input
           id="radio4"
-          type="radio"
+          type="checkbox"
           name="estrellas"
           value={star}
           onChange={() => setStar(4)}
@@ -67,7 +70,7 @@ const FormValoration = ({ idBook }) => {
         <label htmlFor="radio5">★</label>
         <input
           id="radio5"
-          type="radio"
+          type="checkbox"
           name="estrellas"
           value={star}
           onChange={() => setStar(5)}
