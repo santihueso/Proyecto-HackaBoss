@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { HeadPrincipal } from "./HeadPrincipal";
 import { Categories } from "./Categories";
 import { BookOfKindCategory } from "../BookOfKindCategory/BookOfKindCategory";
@@ -26,6 +20,7 @@ import {
 } from "../buttons/ViewBooksFor";
 import { FormEditBook } from "../FormBook/FormBook";
 import { FormCreateBook } from "../FormBook/FormCreatebook";
+import { SoldBooks } from "../profile/Valorations";
 
 const port = 8085;
 
@@ -38,9 +33,10 @@ const Principal = () => {
     <Router>
       <h1>Recy-book</h1>
       <Switch>
+        <Route path="/principal/category/:id/:name/book/:idBook/user/:idUser/valorations">
+          <SoldBooks></SoldBooks>
+        </Route>
         <Route path="/principal/category/:id/:name/book/:idBook/user/:idUser">
-          <p>CACATUA</p>
-
           <ProfileOutSide></ProfileOutSide>
         </Route>
 

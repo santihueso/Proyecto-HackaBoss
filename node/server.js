@@ -50,6 +50,7 @@ app.post("/beginning/seeker/cp", seeker.findCP);
 app.post("/beginning/seeker/author", seeker.findAuthor);
 /*dentro de categoria, buscar los datos del libro*/
 app.get("/beginning/category/:bookID", book.selectBook);
+
 /*Reserva con reserva*/
 app.get(
   "/login/user/book/:bookId/reservation/buy",
@@ -112,7 +113,7 @@ app.get("/login/user/profile", validate, userController.getUserSelect);
 
 /*cambio de contraseña*/
 app.put("/user/forgetPassword", validate, userController.newPassword);
-
+app.get("/login/user/:userId/valorations", book.soldBooks);
 // datos generales del usuario
 app.get("/api/user", userController.getUsers);
 

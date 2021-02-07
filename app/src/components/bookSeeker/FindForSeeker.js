@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { List } from "../principalPage/LastBooks";
 import { port } from "../principalPage/Principal";
 
@@ -32,6 +32,8 @@ const FindForSeeker = () => {
 
   return (
     <div>
+      <Link to="/principal">Principal</Link>
+
       {list.length > 0 ? (
         <List array={list} link={link}></List>
       ) : (

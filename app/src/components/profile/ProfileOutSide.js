@@ -5,7 +5,7 @@ import { List } from "../principalPage/LastBooks";
 import { useFetchData } from "../useFetch/useFetchData";
 
 const ProfileOutSide = () => {
-  const { idUser, id, name, idBook } = useParams();
+  const { idUser, id, idBook, name } = useParams();
   const [user] = useFetchData(
     `http://localhost:${port}/login/category/book/porfile/${idUser}`
   );
@@ -14,8 +14,8 @@ const ProfileOutSide = () => {
   const userData = user ? user.user : null;
   const userBooks = user ? user.books : null;
   const userAvg = user ? user.avg : null;
-  const point = userAvg ? userAvg.point : null;
 
+  const point = userAvg ? userAvg.map((e) => e.point) : null;
   if (userData && userBooks) {
     const showUserData = userData.map((e) => {
       const url = `http://localhost:${port}/uploads/${e.photo}`;
@@ -24,7 +24,7 @@ const ProfileOutSide = () => {
         <div key={e.id_user}>
           <nav>
             <Link to="/principal">Principal ˃</Link>
-            {name !== "ultimos" ? (
+            {name !== "undefined" ? (
               <Link to={`/principal/category/${id}/${name}`}>{name} ˃ </Link>
             ) : null}
 
@@ -37,6 +37,11 @@ const ProfileOutSide = () => {
             <p>{e.username}</p>
             <p>{e.descriptionUser}</p>
             <p>{point}</p>
+            <Link
+              to={`/principal/category/${id}/${name}/book/${idBook}/user/${e.id_user}/valorations`}
+            >
+              Valoraciones
+            </Link>
           </div>
           <div>
             <p>Libros</p>

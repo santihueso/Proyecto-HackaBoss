@@ -1,4 +1,4 @@
-const { book } = require("../repository/index.js");
+const { book, user } = require("../repository/index.js");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 
@@ -142,7 +142,7 @@ async function editBook(req, res) {
         photoBack = change[1].filename;
       }
     }
-
+    //fix
     console.log(photoBack, photoFront);
     const {
       productName,
@@ -216,6 +216,21 @@ async function deleteBook(req, res) {
     res.send({ err: err.message });
   }
 }
+async function soldBooks(req, res) {
+  try {
+    const userId = req.params.userId;
+
+    const books = await book.soldBook(userId);
+    res.send(books);
+  } catch (err) {
+    if (err.name === "validationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ err: err.message });
+  }
+}
 
 module.exports = {
   showLastBook,
@@ -224,4 +239,5 @@ module.exports = {
   newBook,
   editBook,
   deleteBook,
+  soldBooks,
 };
