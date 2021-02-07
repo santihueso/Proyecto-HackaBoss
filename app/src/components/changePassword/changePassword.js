@@ -1,26 +1,33 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
-import { useFetchData } from "../useFetchData";
-import { port } from "./Principal";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { port } from "../principalPage/Principal";
+import { UserFormChangePassword } from "../signin-login/UseForm";
+import "../../css/style.css";
 
 const NewPassword = () => {
-  const [NewPassword, setNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
+  const handlSubmit = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch(`http://localhost:${port}/changePassword`, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ newPassword, passwordAgain }),
+    });
+  };
   return (
-    <form onSubmit={handleChange}>
-      <h1>Cambiar contraseña</h1>
-      <input type="password" placeholder="Nueva contraseña" />
-      <br />
-      <input type="password" placeholder="Confirmar contraseña" />
-      <br />
-      <button>Cambiar contraseña</button>
-    </form>
+    <div className="changePassword">
+      <div>Cambiar Contraseña</div>
+      <UserFormChangePassword
+        handlSubmit={handlSubmit}
+        newPassword={newPassword}
+        setNewPassword={setNewPassword}
+        passwordAgain={passwordAgain}
+        setPasswordAgain={setPasswordAgain}
+      ></UserFormChangePassword>
+      <Link to="/Login">Iniciar sesion</Link>
+    </div>
   );
 };
 

@@ -13,6 +13,7 @@ import { ProfileUserInside, CreateProfile } from "../profile/ProfileInside";
 import { SignIn } from "../signin-login/Signin";
 import { Login } from "../signin-login/Login";
 import { ListBooksUser } from "../profile/ListBooksUser";
+import { NewPassword } from "../changePassword/changePassword";
 
 const port = 8085;
 
@@ -71,6 +72,9 @@ const Principal = () => {
         </Route>
         <Route path="/login">
           <Login></Login>
+        </Route>
+        <Route path="/changePassword">
+          <NewPassword></NewPassword>
         </Route>
         <Route path="/notFound">
           <p>No hay libros en esta categoría</p>

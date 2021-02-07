@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  --color-grey: lightgrey;
+  --color-black: black;
+  --color-white: white;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+h1 {
+  text-align: center;
+  margin: 2rem;
+  font-size: 500%;
+}
+
+/*login, resgister, change password*/
+
+.login,
+.register,
+.changePassword {
+  margin: 8rem auto;
+  padding: 2rem;
+  max-width: 500px;
+  text-align: center;
+  background-color: var(--color-grey);
+  border: solid 2px var(--color-black);
+  border-radius: 5px;
+}
+
+.login > div:first-of-type,
+.register > div:first-of-type,
+.changePassword > div:first-of-type {
+  padding: 1rem;
+  font-size: 250%;
+  font-weight: 900;
+}
+
+.login > form input,
+.register > form input,
+.changePassword > form input {
+  margin: 0.3rem;
+  padding: 0.4rem;
+  border-radius: 4px;
+}
+
+.login a,
+.register a,
+.changePassword a {
+  text-decoration: underline;
+  display: block;
+  margin: 0.3rem;
+}
