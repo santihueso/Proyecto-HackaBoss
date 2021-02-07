@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import { HeadPrincipal } from "./HeadPrincipal";
 import { Categories } from "./Categories";
-import {
-  BookOfKindCategory,
-  ViewBook,
-} from "../BookOfKindCategory/BookOfKindCategory";
+import { BookOfKindCategory } from "../BookOfKindCategory/BookOfKindCategory";
 import { LastBooks } from "./LastBooks";
 import { FindForSeeker } from "../bookSeeker/FindForSeeker";
 import { ProfileOutSide } from "../profile/ProfileOutSide";
@@ -13,6 +16,16 @@ import { ProfileUserInside, CreateProfile } from "../profile/ProfileInside";
 import { SignIn } from "../signin-login/Signin";
 import { Login } from "../signin-login/Login";
 import { ListBooksUser } from "../profile/ListBooksUser";
+import {
+  ViewBooksForFavourites,
+  ViewBooksForPurchase,
+  ViewBooksForReserved,
+  ViewBooksForToSell,
+  ViewBooksForOffers,
+  ViewBooksForCategories,
+} from "../buttons/ViewBooksFor";
+import { FormEditBook } from "../FormBook/FormBook";
+import { FormCreateBook } from "../FormBook/FormCreatebook";
 
 const port = 8085;
 
@@ -30,18 +43,34 @@ const Principal = () => {
 
           <ProfileOutSide></ProfileOutSide>
         </Route>
+
         <Route path="/books/:seek/:data">
           <FindForSeeker></FindForSeeker>
         </Route>
 
         <Route path="/principal/category/:id/:name/book/:idBook">
-          <ViewBook></ViewBook>
+          <ViewBooksForCategories></ViewBooksForCategories>
         </Route>
         <Route path="/principal/category/:id/:name">
           <BookOfKindCategory></BookOfKindCategory>
         </Route>
-        <Route path="/principal/profile/list/:kind/book/:idBook">
-          <ViewBook></ViewBook>
+        <Route path="/principal/profile/list/toSell/book/:idBook/edit">
+          <FormEditBook></FormEditBook>
+        </Route>
+        <Route path="/principal/profile/list/favorites/book/:idBook">
+          <ViewBooksForFavourites></ViewBooksForFavourites>
+        </Route>
+        <Route path="/principal/profile/list/purchase/book/:idBook">
+          <ViewBooksForPurchase></ViewBooksForPurchase>
+        </Route>
+        <Route path="/principal/profile/list/reserved/book/:idBook">
+          <ViewBooksForReserved></ViewBooksForReserved>
+        </Route>
+        <Route path="/principal/profile/list/toSell/book/:idBook">
+          <ViewBooksForToSell></ViewBooksForToSell>
+        </Route>
+        <Route path="/principal/profile/list/offers/book/:idBook">
+          <ViewBooksForOffers></ViewBooksForOffers>
         </Route>
         <Route path="/principal/profile/list/:kind">
           <ListBooksUser></ListBooksUser>
@@ -52,6 +81,9 @@ const Principal = () => {
         <Route path="/principal/profile">
           <ProfileUserInside></ProfileUserInside>
         </Route>
+        <Route path="/principal/newBook">
+          <FormCreateBook></FormCreateBook>
+        </Route>
         <Route path="/principal">
           <HeadPrincipal></HeadPrincipal>
           <nav>
@@ -61,7 +93,7 @@ const Principal = () => {
               <Link to="/login">Iniciar sesión</Link>
             )}
 
-            <Link to="/newBook">Subir libro</Link>
+            <Link to="/principal/newBook">Subir libro</Link>
           </nav>
           <Categories></Categories>
           <LastBooks></LastBooks>
@@ -70,7 +102,7 @@ const Principal = () => {
           <SignIn></SignIn>
         </Route>
         <Route path="/login">
-          <Login></Login>
+          <Login setAuth={setAuth}></Login>
         </Route>
         <Route path="/notFound">
           <p>No hay libros en esta categoría</p>

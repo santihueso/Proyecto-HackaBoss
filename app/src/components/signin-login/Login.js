@@ -3,7 +3,7 @@ import { port } from "../principalPage/Principal";
 import { UserFormSignIn } from "./UseForm";
 import { useHistory, Link } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setAuth }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const history = useHistory();
@@ -22,6 +22,7 @@ const Login = () => {
     }
     history.push("/principal");
     window.localStorage.setItem("auth", JSON.stringify(body.token));
+    setAuth(body.token);
   };
   return (
     <div style={{ background: "lightgrey" }}>

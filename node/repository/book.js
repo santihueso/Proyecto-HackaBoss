@@ -94,12 +94,12 @@ async function deleteBook(seller, book) {
   const [deleteBook] = await pool.query(query, [seller, book]);
   return deleteBook;
 }
-
-async function soldBook() {
+//revisar
+async function soldBook(seller) {
   const pool = await database.getPool();
   const query =
-    "select id_product from product where id_product = ANY (select product from purchase where purchase = 1)";
-  const [sold] = await pool.query(query);
+    "select * from product as p inner join purchase as pr on p.seller = ? and pr.purchase =1";
+  const [sold] = await pool.query(query, seller);
   return sold;
 }
 

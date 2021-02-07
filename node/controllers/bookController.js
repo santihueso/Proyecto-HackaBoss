@@ -21,6 +21,7 @@ async function selectBook(req, res) {
   try {
     const bookID = req.params.bookID;
     const selectId = await book.selectBook(bookID);
+
     if (!selectId || selectId.length === 0) {
       const error = new Error("El libro no se encuentra");
       error.status = 404;
@@ -127,9 +128,22 @@ async function editBook(req, res) {
     const auth = req.headers.authorization;
     const decode = jwt.decode(auth);
     const idUser = decode.id;
-    const change = req.files;
-    const photoFront = change[0].filename;
-    const photoBack = change[1].filename;
+
+    let change;
+    let photoFront;
+    let photoBack;
+
+    if (req.files) {
+      change = req.files;
+      if (change[0]) {
+        photoFront = change[0].filename;
+      }
+      if (change[1]) {
+        photoBack = change[1].filename;
+      }
+    }
+
+    console.log(photoBack, photoFront);
     const {
       productName,
       descriptionProduct,
@@ -141,9 +155,9 @@ async function editBook(req, res) {
 
     const schema = Joi.object({
       productName: Joi.string().required(),
-      change: Joi.string(),
-      change: Joi.string(),
       descriptionProduct: Joi.string(),
+      change: Joi.string(),
+      change: Joi.string(),
       price: Joi.number().positive().precision(2).required(),
       bookLanguage: Joi.string().required(),
       author: Joi.string().required(),

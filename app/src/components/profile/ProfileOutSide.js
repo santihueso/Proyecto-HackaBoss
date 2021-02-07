@@ -10,6 +10,7 @@ const ProfileOutSide = () => {
     `http://localhost:${port}/login/category/book/porfile/${idUser}`
   );
 
+  const link = (idBook) => `/principal/category/${id}/${name}/book/${idBook}`;
   const userData = user ? user.user : null;
   const userBooks = user ? user.books : null;
   const userAvg = user ? user.avg : null;
@@ -39,7 +40,7 @@ const ProfileOutSide = () => {
           </div>
           <div>
             <p>Libros</p>
-            <List array={userBooks}></List>
+            <List array={userBooks} link={link}></List>
           </div>
         </div>
       );
