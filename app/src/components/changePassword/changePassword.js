@@ -8,17 +8,10 @@ import {
 } from "react-router-dom";
 import { useFetchData } from "../useFetchData";
 import { port } from "./Principal";
-//import { useLocation } from "wouter";
 
 const NewPassword = () => {
   const [NewPassword, setNewPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
-  const [, navigate] = useLocation();
-
-  // const handleChange = (e) => {
-  //   e.preventDefault();
-  //   navigate("/login");
-  // };
   return (
     <form onSubmit={handleChange}>
       <h1>Cambiar contraseña</h1>
