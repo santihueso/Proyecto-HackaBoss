@@ -60,6 +60,7 @@ CREATE TABLE `product` (
   `seller` int NOT NULL,
   `author` varchar(100) NOT NULL,
   `category` int NOT NULL,
+  `purchaseState` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_product`),
   KEY `seller` (`seller`),
   KEY `category` (`category`),
@@ -151,4 +152,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-04  1:53:01
+-- Dump completed on 2021-02-07 16:41:06
