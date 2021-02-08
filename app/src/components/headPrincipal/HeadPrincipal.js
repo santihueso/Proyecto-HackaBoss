@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import "./headPrincipal.css";
 const HeadPrincipal = () => {
   const [inputValue, setInputValue] = useState("");
   const [key, setKey] = useState("category");
@@ -19,8 +19,8 @@ const HeadPrincipal = () => {
   };
 
   return (
-    <div>
-      <select onChange={change} value={key}>
+    <div className="seeker">
+      <select className="select" onChange={change} value={key}>
         <option id="category " value="category">
           Categoria
         </option>
@@ -34,8 +34,13 @@ const HeadPrincipal = () => {
           Título
         </option>
       </select>
-      <form onSubmit={handleSubmit}>
-        <input type="text" onChange={getData} value={inputValue}></input>
+      <form className="textSeek" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          onChange={getData}
+          value={inputValue}
+          placeholder="camus"
+        ></input>
         <input type="submit"></input>
       </form>
     </div>

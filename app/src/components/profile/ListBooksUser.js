@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { port } from "../principalPage/Principal";
 import { Link, useParams } from "react-router-dom";
 import { useFetchAuth } from "../useFetch/useFetchAuth";
-import { List } from "../principalPage/LastBooks";
+import { List } from "../principalPage/List-Avatar";
 
 const ListBooksUser = () => {
   const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");

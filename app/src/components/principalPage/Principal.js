@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { HeadPrincipal } from "./HeadPrincipal";
-import { Categories } from "./Categories";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import { HeadPrincipal } from "../headPrincipal/HeadPrincipal";
+import { Categories } from "../categories/Categories";
 import { BookOfKindCategory } from "../BookOfKindCategory/BookOfKindCategory";
-import { LastBooks } from "./LastBooks";
+import { LastBooks } from "../lastBooks/LastBooks";
 import { FindForSeeker } from "../bookSeeker/FindForSeeker";
 import { ProfileOutSide } from "../profile/ProfileOutSide";
 import { ProfileUserInside, CreateProfile } from "../profile/ProfileInside";
@@ -22,8 +28,7 @@ import {
 import { FormEditBook } from "../FormBook/FormBook";
 import { FormCreateBook } from "../FormBook/FormCreatebook";
 import { SoldBooks } from "../profile/Valorations";
-
-const port = 8085;
+const port = 8084;
 
 const Principal = () => {
   const [auth, setAuth] = useState(
@@ -107,6 +112,13 @@ const Principal = () => {
         </Route>
         <Route path="/notFound">
           <p>No hay libros en esta categoría</p>
+        </Route>
+        <Route path="/chat">
+          <p>caca</p>
+          {/* <Chat></Chat> */}
+        </Route>
+        <Route path="/">
+          <Redirect to="/principal"></Redirect>
         </Route>
       </Switch>
     </Router>

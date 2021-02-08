@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { List } from "../principalPage/LastBooks";
+import { List } from "../principalPage/List-Avatar";
 import { port } from "../principalPage/Principal";
 
 const FindForSeeker = () => {

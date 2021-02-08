@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import { useFetchData } from "../useFetch/useFetchData";
-import { port } from "./Principal";
+import { port } from "../principalPage/Principal";
 import { BookOfKindCategory } from "../BookOfKindCategory/BookOfKindCategory";
+import "./categories.css";
 
 const Categories = () => {
   const [data] = useFetchData(`http://localhost:${port}/beginning/categories`);
@@ -11,7 +12,7 @@ const Categories = () => {
     const linkOfCategory = `/principal/category/${e.id_category}/${e.category_name}`;
 
     return (
-      <li key={e.id_category}>
+      <li key={e.id_category} id={e.id_category}>
         <Link to={linkOfCategory}>{e.category_name}</Link>
       </li>
     );

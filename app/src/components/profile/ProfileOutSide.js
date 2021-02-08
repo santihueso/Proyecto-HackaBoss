@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { port } from "../principalPage/Principal";
-import { List } from "../principalPage/LastBooks";
+import { List } from "../principalPage/List-Avatar";
 import { useFetchData } from "../useFetch/useFetchData";
 
 const ProfileOutSide = () => {

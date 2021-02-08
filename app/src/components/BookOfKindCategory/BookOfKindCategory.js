@@ -3,7 +3,7 @@ import { useFetchData } from "../useFetch/useFetchData";
 import { useFetchAuth } from "../useFetch/useFetchAuth";
 import { Link, useParams } from "react-router-dom";
 import { port } from "../principalPage/Principal";
-import { List } from "../principalPage/LastBooks";
+import { List } from "../principalPage/List-Avatar";
 
 const BookOfKindCategory = () => {
   const { name, id } = useParams();

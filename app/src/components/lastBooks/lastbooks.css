@@ -1,0 +1,12 @@
+#lastBooks > ul {
+  display: grid;
+  grid-template-areas:
+    "one two third four"
+    "five six seven eight";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin: 0px 200px 100px;
+}
+#lastBooks > p {
+  margin: 50px 200px;
+}
