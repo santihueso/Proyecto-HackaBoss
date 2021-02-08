@@ -62,11 +62,19 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
           <p>{e.descriptionProduct}</p>
           <p>{e.price}</p>
         </div>
-        <Link
-          to={`/principal/category/${id}/${name}/book/${idBook}/user/${e.seller}`}
-        >
-          Vendedor
-        </Link>
+        {!name ? (
+          <Link
+            to={`/principal/category/0/ultimos/book/${idBook}/user/${e.seller}`}
+          >
+            Vendedor
+          </Link>
+        ) : (
+          <Link
+            to={`/principal/category/${id}/${name}/book/${idBook}/user/${e.seller}`}
+          >
+            Vendedor
+          </Link>
+        )}
       </div>
     );
   });

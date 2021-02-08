@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./headPrincipal.css";
 const HeadPrincipal = () => {
   const [inputValue, setInputValue] = useState("");
-  const [key, setKey] = useState("category");
+  const [key, setKey] = useState("title");
   const history = useHistory();
   const getData = (e) => {
     setInputValue(e.target.value);
@@ -21,8 +21,8 @@ const HeadPrincipal = () => {
   return (
     <div className="seeker">
       <select className="select" onChange={change} value={key}>
-        <option id="category " value="category">
-          Categoria
+        <option id="city " value="city">
+          Ciudad
         </option>
         <option id="author " value="author">
           Autor

@@ -114,8 +114,8 @@ async function login(req, res, next) {
     const userSelect = await user.login(email);
 
     if (!userSelect || userSelect.length === 0) {
-      const error = new Error("Email equivocado.");
-      error.status = 404;
+      const error = new Error("Datos equivocados.");
+      error.status = 401;
       throw error;
     }
     const contraseñaValidar = await bcrypt.compare(
@@ -123,7 +123,7 @@ async function login(req, res, next) {
       userSelect[0].userPassword
     );
     if (!contraseñaValidar || contraseñaValidar.length === 0) {
-      const error = new Error("Contraseña equivocada.");
+      const error = new Error("Datos equivocados equivocada.");
       error.status = 401;
       throw error;
     }

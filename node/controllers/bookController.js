@@ -204,6 +204,8 @@ async function deleteBook(req, res) {
     const decode = jwt.decode(auth);
     const userId = decode.id;
     const ifExist = await book.selectBook(bookId);
+    const ifExistInPurchase = await book.existInPurchase(bookId);
+
     if (!ifExist || ifExist.length === 0) {
       const error = new Error("El libro no existe");
       error.status = 404;

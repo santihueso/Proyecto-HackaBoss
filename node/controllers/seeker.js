@@ -1,16 +1,18 @@
 const { seeker } = require("../repository/index.js");
 const Joi = require("joi");
 
-async function findCategory(req, res) {
+async function findCity(req, res) {
   try {
     const schema = Joi.object({
-      category: Joi.string(),
+      city: Joi.string(),
     });
     await schema.validateAsync(req.body);
-    const { category } = req.body;
-    const selectCategory = await seeker.forCategory(category);
 
-    res.send(selectCategory);
+    const { city } = req.body;
+
+    const selectCity = await seeker.forCity(city);
+
+    res.send(selectCity);
   } catch (err) {
     if (err.name === "ValdationError") {
       err.code = 400;
@@ -49,7 +51,7 @@ async function findCP(req, res) {
     await schema.validateAsync(req.body);
 
     const { cp } = req.body;
-    const selectCP = await seeker.forCity(cp);
+    const selectCP = await seeker.forCp(cp);
 
     res.send(selectCP);
   } catch (err) {
@@ -84,4 +86,4 @@ async function findAuthor(req, res) {
   }
 }
 
-module.exports = { findCategory, findName, findCP, findAuthor };
+module.exports = { findCity, findName, findCP, findAuthor };

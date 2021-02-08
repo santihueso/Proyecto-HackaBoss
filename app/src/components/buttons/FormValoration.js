@@ -7,6 +7,8 @@ const FormValoration = ({ idBook, auth }) => {
 
   const [text, setText] = useState("");
   const [star, setStar] = useState(0);
+  const [onText, setOntext] = useState(false);
+  const [onStar, setOnstar] = useState(false);
 
   const handlSubmit = async () => {
     if (!auth) {
@@ -27,6 +29,7 @@ const FormValoration = ({ idBook, auth }) => {
   };
   const starComparator = (value) => () =>
     star === value ? setStar(0) : setStar(value);
+
   console.log(star);
   return (
     <form onSubmit={handlSubmit}>
@@ -37,7 +40,7 @@ const FormValoration = ({ idBook, auth }) => {
           type="checkbox"
           name="estrellas"
           value={star}
-          onChange={() => setStar(1)}
+          onChange={starComparator(1)}
           style={{ display: "none" }}
         ></input>
         <label htmlFor="radio2">★</label>
@@ -55,7 +58,7 @@ const FormValoration = ({ idBook, auth }) => {
           type="checkbox"
           name="estrellas"
           value={star}
-          onChange={() => (star === 3 ? setStar(0) : setStar(3))}
+          onChange={starComparator(3)}
           style={{ display: "none" }}
         ></input>
         <label htmlFor="radio4">★</label>
@@ -64,7 +67,7 @@ const FormValoration = ({ idBook, auth }) => {
           type="checkbox"
           name="estrellas"
           value={star}
-          onChange={() => setStar(4)}
+          onChange={starComparator(4)}
           style={{ display: "none" }}
         ></input>
         <label htmlFor="radio5">★</label>
@@ -73,10 +76,9 @@ const FormValoration = ({ idBook, auth }) => {
           type="checkbox"
           name="estrellas"
           value={star}
-          onChange={() => setStar(5)}
+          onChange={starComparator(5)}
           style={{ display: "none" }}
         ></input>
-        <button onClick={() => setStar(0)}>Borrar</button>
       </div>
       <textarea
         id="opinion"

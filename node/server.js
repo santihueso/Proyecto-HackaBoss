@@ -45,7 +45,7 @@ app.get("/beginning/lastBooks", book.showLastBook);
 //Todas las categorias
 app.get("/beginning/categories", book.selectAllCategories);
 /*Buscardor*/
-app.post("/beginning/seeker/category", seeker.findCategory);
+app.post("/beginning/seeker/city", seeker.findCity);
 app.post("/beginning/seeker/title", seeker.findName);
 app.post("/beginning/seeker/cp", seeker.findCP);
 app.post("/beginning/seeker/author", seeker.findAuthor);

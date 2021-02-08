@@ -1,10 +1,11 @@
 const database = require("../infraestructure/db.js");
 
-async function forCategory(nameCategory) {
+async function forCity(city) {
   const pool = await database.getPool();
+
   const query =
-    "select * from product where category = ANY (select id_category from category where category_name like ?) and purchaseState is null";
-  const [category] = await pool.query(query, `%${nameCategory}%`);
+    "select * from product where purchaseState is null and seller = any(select id_user from user where city like ?)";
+  const [category] = await pool.query(query, `%${city}%`);
   return category;
 }
 
@@ -16,7 +17,7 @@ async function forName(name) {
   return nameBook;
 }
 
-async function forCity(cp) {
+async function forCp(cp) {
   const pool = await database.getPool();
   const query =
     "select * from product where seller = ANY(select id_user from user where postalCode like ?) and purchaseState is null";
@@ -32,4 +33,4 @@ async function forAuthor(name) {
   return author;
 }
 
-module.exports = { forCategory, forName, forCity, forAuthor };
+module.exports = { forCp, forName, forCity, forAuthor };

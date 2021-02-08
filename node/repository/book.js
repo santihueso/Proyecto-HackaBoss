@@ -103,6 +103,15 @@ async function soldBook(seller) {
   return sold;
 }
 
+async function existInPurchase(book) {
+  const pool = await database.getPool();
+  const query = "select * from purchase where product = ?";
+  const deletePurchase = "delete from purchase where product = ?";
+  const [purchase] = await pool.query(query, book);
+  const [rm] = await pool.query(deletePurchase, book);
+  return purchase;
+}
+
 module.exports = {
   lastBooks,
   selectBook,
@@ -111,4 +120,5 @@ module.exports = {
   editBook,
   deleteBook,
   soldBook,
+  existInPurchase,
 };
