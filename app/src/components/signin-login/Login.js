@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { port } from "../principalPage/Principal";
-import { UserFormSignIn } from "./UseForm";
+import { UserFormLogIn } from "./UseForm";
 import { useHistory, Link } from "react-router-dom";
+import "../../css/style.css";
 
 const Login = ({ setAuth }) => {
   const [password, setPassword] = useState("");
@@ -25,16 +26,17 @@ const Login = ({ setAuth }) => {
     setAuth(body.token);
   };
   return (
-    <div style={{ background: "lightgrey" }}>
-      <div style={{ color: "red" }}>Iniciar sesión</div>
-      <UserFormSignIn
+    <div className="login">
+      <div>Iniciar sesión</div>
+      <UserFormLogIn
         handlSubmit={handlSubmit}
         email={email}
         setEmail={setEmail}
         password={password}
         setPassword={setPassword}
-      ></UserFormSignIn>
+      ></UserFormLogIn>
       <Link to="/signin">Registrarse</Link>
+      <Link to="/changePassword"> Recuperar contraseña</Link>
     </div>
   );
 };

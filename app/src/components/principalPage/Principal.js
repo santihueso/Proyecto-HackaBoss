@@ -10,6 +10,7 @@ import { ProfileUserInside, CreateProfile } from "../profile/ProfileInside";
 import { SignIn } from "../signin-login/Signin";
 import { Login } from "../signin-login/Login";
 import { ListBooksUser } from "../profile/ListBooksUser";
+import { NewPassword } from "../changePassword/changePassword";
 import {
   ViewBooksForFavourites,
   ViewBooksForPurchase,
@@ -36,6 +37,7 @@ const Principal = () => {
         <Route path="/principal/category/:id/:name/book/:idBook/user/:idUser/valorations">
           <SoldBooks></SoldBooks>
         </Route>
+
         <Route path="/principal/category/:id/:name/book/:idBook/user/:idUser">
           <ProfileOutSide></ProfileOutSide>
         </Route>
@@ -99,6 +101,9 @@ const Principal = () => {
         </Route>
         <Route path="/login">
           <Login setAuth={setAuth}></Login>
+        </Route>
+        <Route path="/changePassword">
+          <NewPassword></NewPassword>
         </Route>
         <Route path="/notFound">
           <p>No hay libros en esta categoría</p>
