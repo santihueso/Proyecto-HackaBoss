@@ -7,6 +7,7 @@ import "../../css/style.css";
 const Login = ({ setAuth }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const history = useHistory();
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -19,11 +20,14 @@ const Login = ({ setAuth }) => {
     const body = await res.json();
 
     if (res.status !== 200) {
-      history.push("/notFound");
+      console.log(body);
+      setAuth("");
+      setError(body.error);
+    } else {
+      history.push("/principal");
+      window.localStorage.setItem("auth", JSON.stringify(body.token));
+      setAuth(body.token);
     }
-    history.push("/principal");
-    window.localStorage.setItem("auth", JSON.stringify(body.token));
-    setAuth(body.token);
   };
   return (
     <div className="login">
@@ -34,7 +38,9 @@ const Login = ({ setAuth }) => {
         setEmail={setEmail}
         password={password}
         setPassword={setPassword}
+        err={error}
       ></UserFormLogIn>
+
       <Link to="/signin">Registrarse</Link>
       <Link to="/changePassword"> Recuperar contraseña</Link>
     </div>

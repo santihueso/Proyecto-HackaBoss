@@ -82,7 +82,12 @@ async function register(req, res) {
     });
     await schema.validateAsync(req.body);
     const { username, email, password } = req.body;
-
+    const userSelect = await user.login(email);
+    if (userSelect) {
+      const error = new Error("El email ya existe.");
+      error.status = 400;
+      throw error;
+    }
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await user.createUser(username, email, hashPassword);
     await sendMenssage.send(req, res, success);
@@ -98,7 +103,7 @@ async function register(req, res) {
 }
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-async function login(req, res) {
+async function login(req, res, next) {
   try {
     const schema = Joi.object({
       email: Joi.string().email().required(),
@@ -109,7 +114,7 @@ async function login(req, res) {
     const userSelect = await user.login(email);
 
     if (!userSelect || userSelect.length === 0) {
-      const error = new Error("Usuario equivocado.");
+      const error = new Error("Email equivocado.");
       error.status = 404;
       throw error;
     }
@@ -119,7 +124,7 @@ async function login(req, res) {
     );
     if (!contraseñaValidar || contraseñaValidar.length === 0) {
       const error = new Error("Contraseña equivocada.");
-      error.status = 404;
+      error.status = 401;
       throw error;
     }
 
@@ -137,6 +142,7 @@ async function login(req, res) {
     res.status(err.status || 500);
     res.send({ error: err.message });
   }
+  next();
 }
 
 module.exports = {

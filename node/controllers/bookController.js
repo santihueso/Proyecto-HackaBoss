@@ -133,17 +133,21 @@ async function editBook(req, res) {
     let photoFront;
     let photoBack;
 
-    if (req.files) {
+    if (req.files.length > 0) {
       change = req.files;
       if (change[0]) {
         photoFront = change[0].filename;
       }
       if (change[1]) {
         photoBack = change[1].filename;
+      } else {
+        photoBack = req.body.change;
       }
+    } else {
+      photoFront = req.body.change[0];
+      photoBack = req.body.change[1];
     }
-    //fix
-    console.log(photoBack, photoFront);
+
     const {
       productName,
       descriptionProduct,
@@ -156,8 +160,10 @@ async function editBook(req, res) {
     const schema = Joi.object({
       productName: Joi.string().required(),
       descriptionProduct: Joi.string(),
-      change: Joi.string(),
-      change: Joi.string(),
+      change: Joi.alternatives().try(
+        Joi.array().items(Joi.string()),
+        Joi.string()
+      ),
       price: Joi.number().positive().precision(2).required(),
       bookLanguage: Joi.string().required(),
       author: Joi.string().required(),

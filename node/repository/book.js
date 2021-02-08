@@ -3,7 +3,7 @@ const database = require("../infraestructure/db.js");
 async function lastBooks(seller) {
   const pool = await database.getPool();
   const query =
-    "select * from product where publicationDate >= CURDATE() - 7 and state is null";
+    "select * from product where publicationDate >= CURDATE() - 7 and purchaseState is null";
   const [lastBooks] = await pool.query(query, seller);
   return lastBooks;
 }

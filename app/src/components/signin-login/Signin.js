@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { port } from "../principalPage/Principal";
 import { UserFormSignIn } from "./UseForm";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Route, useHistory } from "react-router-dom";
 import "../../css/style.css";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const history = useHistory();
   const handlSubmit = async (e) => {
     e.preventDefault();
@@ -17,8 +18,13 @@ const SignIn = () => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ username, email, password }),
     });
-    console.log(res.status);
-    history.push("/login");
+    const body = await res.json();
+    if (res.status !== 200) {
+      console.warn(res.status);
+      setError(body.error);
+    } else {
+      return history.push("/login");
+    }
   };
   return (
     <div className="register">
@@ -31,6 +37,7 @@ const SignIn = () => {
         setEmail={setEmail}
         password={password}
         setPassword={setPassword}
+        err={error}
       ></UserFormSignIn>
       <Link to="/login">Iniciar sesión</Link>
     </div>

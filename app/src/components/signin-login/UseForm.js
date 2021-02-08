@@ -24,6 +24,7 @@ const UserFormSignIn = ({
   setEmail,
   password,
   setPassword,
+  err = "",
 }) => {
   return (
     <form onSubmit={handlSubmit}>
@@ -48,6 +49,7 @@ const UserFormSignIn = ({
         value={password}
         setValue={setPassword}
       ></UseLabelInput>
+      <div style={{ color: "red", minHeight: "1.5em" }}> {err}</div>
       <input type="submit" value="submit"></input>
     </form>
   );
@@ -59,6 +61,7 @@ const UserFormLogIn = ({
   setEmail,
   password,
   setPassword,
+  err = "",
 }) => {
   return (
     <form onSubmit={handlSubmit}>
@@ -76,6 +79,7 @@ const UserFormLogIn = ({
         value={password}
         setValue={setPassword}
       ></UseLabelInput>
+      <div style={{ color: "red", minHeight: "1.5em" }}> {err}</div>
       <input type="submit" value="submit"></input>
     </form>
   );

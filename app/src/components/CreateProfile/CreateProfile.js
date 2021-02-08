@@ -19,7 +19,7 @@ const CreateProfile = ({ auth }) => {
   const [onCity, setOnCity] = useState(false);
   const [onCp, setOnCp] = useState(false);
   const history = useHistory();
-  const user = dataUser.map((user) => {
+  const newUser = dataUser.map((user) => {
     const handlSubmit = async (e) => {
       e.preventDefault();
       if (!name) {
@@ -71,6 +71,7 @@ const CreateProfile = ({ auth }) => {
               type="text"
               placeholder="nombre"
               onChange={(e) => [setOnName(true), setName(e.target.value)]}
+              required
             ></input>
           </div>
           <div>
@@ -84,6 +85,7 @@ const CreateProfile = ({ auth }) => {
                 setOnDescription(true),
                 setDescription(e.target.value),
               ]}
+              required
             ></input>
           </div>
           <div>
@@ -94,6 +96,7 @@ const CreateProfile = ({ auth }) => {
               type="text"
               placeholder="ciudad"
               onChange={(e) => [setOnCity(true), setCity(e.target.value)]}
+              required
             ></input>
           </div>
           <div>
@@ -104,6 +107,7 @@ const CreateProfile = ({ auth }) => {
               type="number"
               placeholder="codigo postal"
               onChange={(e) => [setOnCp(true), setCp(e.target.value)]}
+              required
             ></input>
           </div>
 
@@ -115,7 +119,7 @@ const CreateProfile = ({ auth }) => {
       </div>
     );
   });
-  return user;
+  return newUser;
 };
 
 async function saveUser({

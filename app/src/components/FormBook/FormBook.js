@@ -105,6 +105,7 @@ const FormEditBook = ({ auth }) => {
                 setOnTitle(true),
                 setTitle(element.target.value),
               ]}
+              required
             ></input>
           </div>
           <div>
@@ -118,6 +119,7 @@ const FormEditBook = ({ auth }) => {
                 setOnAuthor(true),
                 setAuthor(element.target.value),
               ]}
+              required
             ></input>
           </div>
           <div>
@@ -131,6 +133,7 @@ const FormEditBook = ({ auth }) => {
                 setOnDescription(true),
                 setDescription(element.target.value),
               ]}
+              required
             ></input>
           </div>
 
@@ -145,6 +148,7 @@ const FormEditBook = ({ auth }) => {
                 setOnPrice(true),
                 setPrice(element.target.value),
               ]}
+              required
             ></input>
           </div>
           <div>
@@ -158,6 +162,7 @@ const FormEditBook = ({ auth }) => {
                 setOnLanguage(true),
                 setLanguage(element.target.value),
               ]}
+              required
             ></input>
           </div>
           <div>
@@ -188,7 +193,11 @@ const SelectCategories = ({ id, setId, setOn, on }) => {
     );
   });
   return (
-    <select onChange={(e) => [setOn(true), setId(e.target.value)]} value={id}>
+    <select
+      onChange={(e) => [setOn(true), setId(e.target.value)]}
+      value={id}
+      required
+    >
       {listCategories}
     </select>
   );

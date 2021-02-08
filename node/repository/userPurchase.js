@@ -3,7 +3,7 @@ const database = require("../infraestructure/db.js");
 async function favoriteUserBooks(userId) {
   const pool = await database.getPool();
   const query =
-    "select * from product where id_product = ANY(select product from purchase where favorite = 1 and buyer = ?) and state is null";
+    "select * from product where id_product = ANY(select product from purchase where favorite = 1 and buyer = ?) and purchaseState is null";
   const [favorites] = await pool.query(query, userId);
 
   return favorites;
@@ -19,7 +19,8 @@ async function purchaseUserBooks(userId) {
 
 async function sellUserBooks(userId) {
   const pool = await database.getPool();
-  const query = " select * from product where seller = ? and state is null";
+  const query =
+    " select * from product where seller = ? and purchaseState is null";
   const [sell] = await pool.query(query, userId);
   return sell;
 }

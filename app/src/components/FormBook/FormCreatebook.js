@@ -65,6 +65,7 @@ const FormCreateBook = ({ auth }) => {
             type="text"
             placeholder="titulo"
             onChange={(element) => setTitle(element.target.value)}
+            required
           ></input>
         </div>
         <div>
@@ -75,6 +76,7 @@ const FormCreateBook = ({ auth }) => {
             type="text"
             placeholder="autor"
             onChange={(element) => setAuthor(element.target.value)}
+            required
           ></input>
         </div>
         <div>
@@ -85,6 +87,7 @@ const FormCreateBook = ({ auth }) => {
             type="text"
             placeholder="descripción"
             onChange={(element) => setDescription(element.target.value)}
+            required
           ></input>
         </div>
 
@@ -96,6 +99,7 @@ const FormCreateBook = ({ auth }) => {
             type="number"
             placeholder="precio"
             onChange={(element) => setPrice(element.target.value)}
+            required
           ></input>
         </div>
         <div>
@@ -106,6 +110,7 @@ const FormCreateBook = ({ auth }) => {
             type="text"
             placeholder="idioma"
             onChange={(element) => setLanguage(element.target.value)}
+            required
           ></input>
         </div>
         <div>
@@ -132,7 +137,7 @@ const SelectCategories = ({ id, setId }) => {
     );
   });
   return (
-    <select onChange={(e) => setId(e.target.value)} value={id}>
+    <select onChange={(e) => setId(e.target.value)} value={id} required>
       {listCategories}
     </select>
   );
