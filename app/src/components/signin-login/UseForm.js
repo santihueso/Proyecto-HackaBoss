@@ -28,7 +28,7 @@ const UserFormSignIn = ({
   return (
     <form onSubmit={handlSubmit}>
       <UseLabelInput
-        kind={"username"}
+        kind={"text"}
         id={"username"}
         name={"username"}
         value={username}
