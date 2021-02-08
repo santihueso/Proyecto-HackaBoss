@@ -37,8 +37,10 @@ async function updateWeReserve(date, book) {
     "update purchase set purchase = 1, reservation = 0, favorite = 0, purchaseDate = ? where product = ?";
   const insertQueryProduct =
     "update product set state = 1 where id_product = ?";
+  const deleteQuery = "delete from purchase where product = ? and favorite = 1";
   const [buy] = await pool.query(insertQuery, [date, book]);
   const [remove] = await pool.query(insertQueryProduct, book);
+  const [rmFavorite] = await pool.query(deleteQuery, book);
   return buy;
 }
 
@@ -55,8 +57,10 @@ async function buyBook(book, buyBookId, buyer, date) {
     "insert into purchase (product, purchase, buyer, purchaseDate, favorite) values(?,?,?,?, 0)";
   const insertQueryProduct =
     "update product set state = 1 where id_product = ?";
+  const deleteQuery = "delete from purchase where product = ? and favorite = 1";
   const [buy] = await pool.query(insertQuery, [book, buyBookId, buyer, date]);
   const [remove] = await pool.query(insertQueryProduct, [book]);
+  const [rmFavorite] = await pool.query(deleteQuery, book);
   return buy;
 }
 

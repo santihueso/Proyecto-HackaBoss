@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { port } from "../principalPage/Principal";
 
-const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout }) => {
+const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout, auth }) => {
   const history = useHistory();
-  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
-  if (auth === "") {
-    return <Redirect to="/login"></Redirect>;
-  }
+
   const handlClick = async () => {
+    if (!auth) {
+      return history.push("/login");
+    }
     const res = await fetch(
       `http://localhost:${port}/login/user/book/${idBook}/${to}`,
       {
@@ -16,22 +16,26 @@ const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout }) => {
         headers: { "content-type": "application/json", Authorization: auth },
       }
     );
-    if (res.status > 300) {
+    if (res.status === 400) {
+      return history.push("/yourBook");
+    } else if (res.status !== 200) {
       console.warn("error", res);
+      return history.push("/notFound");
     }
-    history.push(`/principal/profile/list/${rout}`);
+
+    return history.push(`/principal/profile/list/${rout}`);
   };
 
   return <button onClick={handlClick}>{name}</button>;
 };
 
-const ButtonBuyWithReserved = ({ idBook }) => {
+const ButtonBuyWithReserved = ({ idBook, auth }) => {
   const history = useHistory();
-  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
-  if (auth === "") {
-    return <Redirect to="/login"></Redirect>;
-  }
+
   const handlClick = async () => {
+    if (!auth) {
+      return history.push("/login");
+    }
     const res = await fetch(
       `http://localhost:${port}/login/user/book/${idBook}/reservation/buy`,
       {
@@ -39,6 +43,7 @@ const ButtonBuyWithReserved = ({ idBook }) => {
         headers: { "content-type": "application/json", Authorization: auth },
       }
     );
+
     if (res.status > 300) {
       console.warn("error", res);
     }
@@ -48,13 +53,13 @@ const ButtonBuyWithReserved = ({ idBook }) => {
   return <button onClick={handlClick}>Comprar</button>;
 };
 
-const ButtonDelete = ({ idBook, to, rout }) => {
+const ButtonDelete = ({ idBook, to, rout, auth }) => {
   const history = useHistory();
-  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
-  if (auth === "") {
-    return <Redirect to="/login"></Redirect>;
-  }
+
   const handlClick = async () => {
+    if (!auth) {
+      return history.push("/login");
+    }
     const res = await fetch(
       `http://localhost:${port}/login/user/book/${idBook}/${to}/delete`,
       {
@@ -65,6 +70,7 @@ const ButtonDelete = ({ idBook, to, rout }) => {
     if (res.status > 300) {
       console.warn("error", res);
     }
+
     history.push(`/principal/profile/list/${rout}`);
   };
 

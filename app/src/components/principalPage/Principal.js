@@ -12,11 +12,13 @@ import { BookOfKindCategory } from "../BookOfKindCategory/BookOfKindCategory";
 import { LastBooks } from "../lastBooks/LastBooks";
 import { FindForSeeker } from "../bookSeeker/FindForSeeker";
 import { ProfileOutSide } from "../profile/ProfileOutSide";
-import { ProfileUserInside, CreateProfile } from "../profile/ProfileInside";
+import { ProfileUserInside } from "../profile/ProfileInside";
+import { CreateProfile } from "../CreateProfile/CreateProfile";
 import { SignIn } from "../signin-login/Signin";
 import { Login } from "../signin-login/Login";
 import { ListBooksUser } from "../profile/ListBooksUser";
 import { NewPassword } from "../changePassword/changePassword";
+import { NavPrincipal } from "../navPrincipal/NavPrincipal";
 import {
   ViewBooksForFavourites,
   ViewBooksForPurchase,
@@ -28,7 +30,7 @@ import {
 import { FormEditBook } from "../FormBook/FormBook";
 import { FormCreateBook } from "../FormBook/FormCreatebook";
 import { SoldBooks } from "../profile/Valorations";
-const port = 8084;
+const port = 8085;
 
 const Principal = () => {
   const [auth, setAuth] = useState(
@@ -52,52 +54,44 @@ const Principal = () => {
         </Route>
 
         <Route path="/principal/category/:id/:name/book/:idBook">
-          <ViewBooksForCategories></ViewBooksForCategories>
+          <ViewBooksForCategories auth={auth}></ViewBooksForCategories>
         </Route>
         <Route path="/principal/category/:id/:name">
           <BookOfKindCategory></BookOfKindCategory>
         </Route>
         <Route path="/principal/profile/list/toSell/book/:idBook/edit">
-          <FormEditBook></FormEditBook>
+          <FormEditBook auth={auth}></FormEditBook>
         </Route>
         <Route path="/principal/profile/list/favorites/book/:idBook">
-          <ViewBooksForFavourites></ViewBooksForFavourites>
+          <ViewBooksForFavourites auth={auth}></ViewBooksForFavourites>
         </Route>
         <Route path="/principal/profile/list/purchase/book/:idBook">
-          <ViewBooksForPurchase></ViewBooksForPurchase>
+          <ViewBooksForPurchase auth={auth}></ViewBooksForPurchase>
         </Route>
         <Route path="/principal/profile/list/reserved/book/:idBook">
-          <ViewBooksForReserved></ViewBooksForReserved>
+          <ViewBooksForReserved auth={auth}></ViewBooksForReserved>
         </Route>
         <Route path="/principal/profile/list/toSell/book/:idBook">
-          <ViewBooksForToSell></ViewBooksForToSell>
+          <ViewBooksForToSell auth={auth}></ViewBooksForToSell>
         </Route>
         <Route path="/principal/profile/list/offers/book/:idBook">
-          <ViewBooksForOffers></ViewBooksForOffers>
+          <ViewBooksForOffers auth={auth}></ViewBooksForOffers>
         </Route>
         <Route path="/principal/profile/list/:kind">
-          <ListBooksUser></ListBooksUser>
+          <ListBooksUser auth={auth}></ListBooksUser>
         </Route>
         <Route path="/principal/profile/edit">
-          <CreateProfile></CreateProfile>
+          <CreateProfile auth={auth}></CreateProfile>
         </Route>
         <Route path="/principal/profile">
-          <ProfileUserInside></ProfileUserInside>
+          <ProfileUserInside auth={auth}></ProfileUserInside>
         </Route>
         <Route path="/principal/newBook">
-          <FormCreateBook></FormCreateBook>
+          <FormCreateBook auth={auth}></FormCreateBook>
         </Route>
         <Route path="/principal">
           <HeadPrincipal></HeadPrincipal>
-          <nav>
-            {auth !== "" ? (
-              <Link to="/principal/profile">Perfil</Link>
-            ) : (
-              <Link to="/login">Iniciar sesión</Link>
-            )}
-
-            <Link to="/principal/newBook">Subir libro</Link>
-          </nav>
+          <NavPrincipal auth={auth}></NavPrincipal>
           <Categories></Categories>
           <LastBooks></LastBooks>
         </Route>
@@ -113,10 +107,10 @@ const Principal = () => {
         <Route path="/notFound">
           <p>No hay libros en esta categoría</p>
         </Route>
-        <Route path="/chat">
-          <p>caca</p>
-          {/* <Chat></Chat> */}
+        <Route path="/yourBook">
+          <p>El libro es tuyo</p>
         </Route>
+
         <Route path="/">
           <Redirect to="/principal"></Redirect>
         </Route>

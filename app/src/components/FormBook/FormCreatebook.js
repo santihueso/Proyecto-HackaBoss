@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { port } from "../principalPage/Principal";
 
 import { useFetchData } from "../useFetch/useFetchData";
-import { useFetchAuth } from "../useFetch/useFetchAuth";
 
-const FormCreateBook = () => {
-  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
-
+const FormCreateBook = ({ auth }) => {
+  const history = useHistory();
+  if (!auth) {
+    history.push("/login");
+  }
   const [imgOne, setImgOne] = useState(null);
   const [imgTwo, setImgTwo] = useState(null);
   const [title, setTitle] = useState("");
@@ -16,8 +17,6 @@ const FormCreateBook = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
   const [language, setLanguage] = useState("");
-
-  const history = useHistory();
 
   const handlSubmit = async (event) => {
     event.preventDefault();
@@ -153,9 +152,7 @@ async function saveBook({
   const formData = new FormData();
 
   formData.append("photos", imgOne, imgOne.name);
-
   formData.append("photos", imgTwo, imgTwo.name);
-
   formData.append("productName", title);
   formData.append("author", author);
   formData.append("category", category);

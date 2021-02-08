@@ -8,7 +8,7 @@ import {
 } from "./Buttons";
 import { FormValoration } from "./FormValoration";
 
-const ViewBooksForFavourites = () => {
+const ViewBooksForFavourites = ({ auth }) => {
   let { idBook } = useParams();
 
   return (
@@ -19,12 +19,14 @@ const ViewBooksForFavourites = () => {
             idBook={idBook}
             to={"favorite"}
             rout={"favorites"}
+            auth={auth}
           ></ButtonDelete>
           <ButtonPurchaseFavoriteReserved
             idBook={idBook}
             to={"buy"}
             name={"Comprar"}
             rout={"purchase"}
+            auth={auth}
           ></ButtonPurchaseFavoriteReserved>
         </div>
       }
@@ -34,7 +36,7 @@ const ViewBooksForFavourites = () => {
   );
 };
 
-const ViewBooksForPurchase = () => {
+const ViewBooksForPurchase = ({ auth }) => {
   let { idBook } = useParams();
   const [valoration, setValoration] = useState(false);
   return (
@@ -43,7 +45,7 @@ const ViewBooksForPurchase = () => {
         <div>
           <button onClick={() => setValoration(true)}>Entregado</button>
           {valoration ? (
-            <FormValoration idBook={idBook}></FormValoration>
+            <FormValoration idBook={idBook} auth={auth}></FormValoration>
           ) : null}
         </div>
       }
@@ -53,7 +55,7 @@ const ViewBooksForPurchase = () => {
   );
 };
 
-const ViewBooksForReserved = () => {
+const ViewBooksForReserved = ({ auth }) => {
   let { idBook } = useParams();
   return (
     <ViewBook
@@ -63,8 +65,12 @@ const ViewBooksForReserved = () => {
             idBook={idBook}
             to={"reservation"}
             rout={"reserved"}
+            auth={auth}
           ></ButtonDelete>
-          <ButtonBuyWithReserved idBook={idBook}></ButtonBuyWithReserved>
+          <ButtonBuyWithReserved
+            idBook={idBook}
+            auth={auth}
+          ></ButtonBuyWithReserved>
         </div>
       }
       nameKind={"Reservados"}
@@ -73,7 +79,7 @@ const ViewBooksForReserved = () => {
   );
 };
 
-const ViewBooksForToSell = () => {
+const ViewBooksForToSell = ({ auth }) => {
   let { idBook } = useParams();
   const history = useHistory();
   return (
@@ -91,6 +97,7 @@ const ViewBooksForToSell = () => {
             idBook={idBook}
             to={"to"}
             rout={"toSell"}
+            auth={auth}
           ></ButtonDelete>
         </div>
       }
@@ -100,7 +107,7 @@ const ViewBooksForToSell = () => {
   );
 };
 
-const ViewBooksForOffers = () => {
+const ViewBooksForOffers = ({ auth }) => {
   return (
     <ViewBook
       buttons={
@@ -114,7 +121,7 @@ const ViewBooksForOffers = () => {
   );
 };
 
-const ViewBooksForCategories = () => {
+const ViewBooksForCategories = ({ auth }) => {
   let { idBook } = useParams();
   return (
     <ViewBook
@@ -125,18 +132,21 @@ const ViewBooksForCategories = () => {
             to={"favorite"}
             name={"Favorito"}
             rout={"favorites"}
+            auth={auth}
           ></ButtonPurchaseFavoriteReserved>
           <ButtonPurchaseFavoriteReserved
             idBook={idBook}
             to={"reservation"}
             name={"Reservar"}
             rout={"reserved"}
+            auth={auth}
           ></ButtonPurchaseFavoriteReserved>
           <ButtonPurchaseFavoriteReserved
             idBook={idBook}
             to={"buy"}
             name={"Comprar"}
             rout={"purchase"}
+            auth={auth}
           ></ButtonPurchaseFavoriteReserved>
         </div>
       }

@@ -4,16 +4,16 @@ import { port } from "../principalPage/Principal";
 import { Link, useParams } from "react-router-dom";
 
 const SoldBooks = () => {
-  const { idUser, id, name, idBook } = useParams();
+  const { idUser, id, name } = useParams();
 
-  const [book, setBook] = useFetchData(
+  const [book] = useFetchData(
     `http://localhost:${port}/login/user/${idUser}/valorations`
   );
-  console.log(book);
+
   const list = book.map((e) => {
     const url = `http://localhost:${port}/uploads/${e.photoFront}`;
     return (
-      <div key={e.id_product}>
+      <div key={e.id_purchase}>
         <li>
           <p>{e.productName}</p>
           <p>{e.author}</p>

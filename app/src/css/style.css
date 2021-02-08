@@ -10,10 +10,11 @@ html {
   --color-white: white;
 }
 
-a {
+a,
+label {
   text-decoration: none;
   cursor: pointer;
-  color: inherit;
+  color: white;
 }
 
 h1 {

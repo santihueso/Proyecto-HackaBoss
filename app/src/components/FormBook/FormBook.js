@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { port } from "../principalPage/Principal";
-
 import { useFetchData } from "../useFetch/useFetchData";
-import { useFetchAuth } from "../useFetch/useFetchAuth";
 
-const FormEditBook = () => {
+const FormEditBook = ({ auth }) => {
   const { idBook } = useParams();
-  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
-  const [book, setBook] = useFetchData(
+  const [book] = useFetchData(
     `http://localhost:${port}/beginning/category/${idBook}`
   );
 

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { port } from "../principalPage/Principal";
 import { Link, useParams } from "react-router-dom";
 import { useFetchAuth } from "../useFetch/useFetchAuth";
 import { List } from "../principalPage/List-Avatar";
 
-const ListBooksUser = () => {
-  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
+const ListBooksUser = ({ auth }) => {
   const { kind } = useParams();
   const [dataList] = useFetchAuth(
     `http://localhost:${port}/login/user/profile/${kind}`,

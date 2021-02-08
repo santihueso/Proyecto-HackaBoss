@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { port } from "../principalPage/Principal";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-const FormValoration = ({ idBook }) => {
+const FormValoration = ({ idBook, auth }) => {
   const history = useHistory();
 
   const [text, setText] = useState("");
   const [star, setStar] = useState(0);
-  const [auth] = useState(JSON.parse(localStorage.getItem("auth")) || "");
-  if (auth === "") {
-    return <Redirect to="/login"></Redirect>;
-  }
+
   const handlSubmit = async () => {
+    if (!auth) {
+      history.push("/login");
+    }
     const res = await fetch(
       `http://localhost:${port}/login/user/:userId/book/${idBook}/assessment`,
       {
