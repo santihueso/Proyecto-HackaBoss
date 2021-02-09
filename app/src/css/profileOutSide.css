@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  --white: white;
+  --gray: rgba(128, 128, 128, 0.555);
+  --red: rgba(253, 0, 0, 0.815);
+}
+
+.profileOut {
+  margin: 10px 100px 0px;
+}
+
+.profileOut > header {
+  display: flex;
+  margin-left: 200px;
+  background: no-repeat center/100% url("../img/perfil-2.jpg");
+}
+
+.profileOut > header > div {
+  margin-left: 100px;
+}
+
+.profileOut > header > div > p {
+  text-transform: capitalize;
+  margin-top: 10px;
+}
+
+.profileOut > header > div > p:first-child {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.profileOut > header > img {
+  border-radius: 50rem;
+}

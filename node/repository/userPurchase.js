@@ -28,9 +28,20 @@ async function sellUserBooks(userId) {
 async function offersUserBooks(userId) {
   const pool = await database.getPool();
   const query =
-    "select * from product as p inner join purchase as u on p.id_product = u.product and p.seller = ?";
+    "select id_product, productName, author, price, photoFront from product where seller = ? and id_product = any(select distinct product from purchase)";
   const [offers] = await pool.query(query, userId);
   return offers;
+}
+
+async function favouritesBooksUser(book) {
+  const pool = await database.getPool();
+  const queryFavourite =
+    "select count(favorite) as count from purchase where favorite = 1 and product = ?";
+  const queryPurchase =
+    "select distinct product, purchase, reservation, opinion, assessment from purchase where product = ? and favorite !=1";
+  const [favourite] = await pool.query(queryFavourite, book);
+  const [all] = await pool.query(queryPurchase, book);
+  return [favourite, all];
 }
 
 module.exports = {
@@ -38,4 +49,6 @@ module.exports = {
   purchaseUserBooks,
   sellUserBooks,
   offersUserBooks,
+  favoriteUserBooks,
+  favouritesBooksUser,
 };

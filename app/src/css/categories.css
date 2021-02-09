@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  --white: white;
+  --gray: rgba(128, 128, 128, 0.555);
+  --red: rgba(253, 0, 0, 0.815);
+}
+
+body {
+  background-color: black;
+}
+
+h1,
+h2,
+p {
+  color: var(--red);
+}
+
+h2 {
+  margin: 50px 200px;
+}
+#categories > nav > ul {
+  margin: 50px 250px 0px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "española idiomas extranjera academicos"
+    "infantil juvenil comic hobbies";
+}
+
+li[id="1"] {
+  grid-area: española;
+}
+
+li[id="2"] {
+  grid-area: idiomas;
+}
+
+li[id="3"] {
+  grid-area: extranjera;
+}
+li[id="4"] {
+  grid-area: academicos;
+}
+li[id="5"] {
+  grid-area: infantil;
+}
+li[id="6"] {
+  grid-area: juvenil;
+}
+li[id="7"] {
+  grid-area: comic;
+}
+li[id="8"] {
+  grid-area: hobbies;
+}
+
+#categories > nav > ul > li {
+  list-style: none;
+  padding: 20px;
+  margin: 10px 10px 10px;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: var(--gray);
+  text-transform: capitalize;
+}

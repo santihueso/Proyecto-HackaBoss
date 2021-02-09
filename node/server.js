@@ -107,13 +107,17 @@ app.get(
   validate,
   userPurchase.showPurchaseBooks
 );
-
+app.get(
+  "/login/user/profile/offers/:bookId",
+  validate,
+  userPurchase.showFavourites
+);
 app.get("/login/user/profile/toSell", validate, userPurchase.showMyBooks);
 app.get("/login/user/profile/offers", validate, userPurchase.showMyoffers);
 app.get("/login/user/profile", validate, userController.getUserSelect);
 
 /*cambio de contraseña*/
-app.put("/user/forgetPassword", validate, userController.newPassword);
+app.put("/user/changePassword", validate, userController.newPassword);
 app.get("/login/user/:userId/valorations", book.soldBooks);
 // datos generales del usuario
 app.get("/api/user", userController.getUsers);

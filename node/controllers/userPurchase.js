@@ -72,9 +72,26 @@ async function showMyoffers(req, res) {
   }
 }
 
+async function showFavourites(req, res) {
+  try {
+    const idBook = req.params.bookId;
+    const count = await usePurchase.favouritesBooksUser(idBook);
+
+    res.send(count);
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
+}
+
 module.exports = {
   showFavoritesBooks,
   showPurchaseBooks,
   showMyBooks,
   showMyoffers,
+  showFavourites,
 };

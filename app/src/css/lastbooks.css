@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  --white: white;
+  --gray: rgba(128, 128, 128, 0.555);
+  --red: rgba(253, 0, 0, 0.815);
+}
+
+#lastBooks > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "one two third four"
+    "five six seven eight";
+
+  margin: 0px 300px 100px;
+}
+#lastBooks > h3 {
+  margin: 50px 200px;
+  color: var(--red);
+}
+
+#lastBooks > ul > li:nth-child(1) {
+  grid-area: one;
+}
+#lastBooks > ul > li:nth-child(2) {
+  grid-area: two;
+}
+#lastBooks > ul > li:nth-child(3) {
+  grid-area: third;
+}
+#lastBooks > ul > li:nth-child(4) {
+  grid-area: four;
+}
+#lastBooks > ul > li:nth-child(5) {
+  grid-area: five;
+}
+#lastBooks > ul > li:nth-child(6) {
+  grid-area: six;
+}
+#lastBooks > ul > li:nth-child(7) {
+  grid-area: seven;
+}
+#lastBooks > ul > li:nth-child(8) {
+  grid-area: eight;
+}
+
+#lastBooks > ul > li {
+  padding: 30px;
+  list-style: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.author {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.price {
+  margin-top: 10px;
+}

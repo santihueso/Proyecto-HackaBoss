@@ -1,0 +1,11 @@
+.linkPrincipal > a {
+  color: white;
+  margin-left: 20px;
+  border-bottom: 1px solid white;
+}
+
+.linkPrincipal {
+  position: absolute;
+  top: 30px;
+  right: 80px;
+}

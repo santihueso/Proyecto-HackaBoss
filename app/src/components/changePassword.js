@@ -1,0 +1,45 @@
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { port } from "./Principal";
+import { UserFormChangePassword } from "./UseForm";
+import "../css/style.css";
+
+const NewPassword = ({ auth }) => {
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordAgain, setPasswordAgain] = useState("");
+  const [error, setError] = useState("");
+  const history = useHistory();
+  const handlSubmit = async (e) => {
+    e.preventDefault();
+    if (!auth) {
+      return history.push("/login");
+    }
+    const res = await fetch(`http://localhost:${port}/user/changePassword`, {
+      method: "PUT",
+      headers: { "Content-type": "application/json", Authorization: auth },
+      body: JSON.stringify({ newPassword, passwordAgain }),
+    });
+
+    if (res.status !== 200) {
+      console.warn("error", res);
+      setError("Datos equivocados.");
+    } else {
+      return history.push("/principal/changePassword/valid");
+    }
+  };
+  return (
+    <div className="changePassword">
+      <div>Cambiar Contraseña</div>
+      <UserFormChangePassword
+        handlSubmit={handlSubmit}
+        newPassword={newPassword}
+        setNewPassword={setNewPassword}
+        passwordAgain={passwordAgain}
+        setPasswordAgain={setPasswordAgain}
+        err={error}
+      ></UserFormChangePassword>
+    </div>
+  );
+};
+
+export { NewPassword };

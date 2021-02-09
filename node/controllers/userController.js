@@ -49,14 +49,15 @@ async function getUserSelect(req, res) {
 async function newPassword(req, res) {
   try {
     const schema = Joi.object({
-      userPassword: Joi.string().min(8).required(),
+      newPassword: Joi.string().min(8).required(),
+      passwordAgain: Joi.string().required().valid(Joi.ref("newPassword")),
     });
     await schema.validateAsync(req.body);
-    const { userPassword } = req.body;
+    const { newPassword } = req.body;
     const auth = req.headers.authorization;
     const decode = jwt.decode(auth);
     const userId = decode.id;
-    const passwordHash = await bcrypt.hash(userPassword, 10);
+    const passwordHash = await bcrypt.hash(newPassword, 10);
     const change = await user.changePassword(passwordHash, userId);
     res.status(200);
     res.send("Se ha cambiado la contraseña correctamente.");
@@ -123,7 +124,7 @@ async function login(req, res, next) {
       userSelect[0].userPassword
     );
     if (!contraseñaValidar || contraseñaValidar.length === 0) {
-      const error = new Error("Datos equivocados equivocada.");
+      const error = new Error("Datos equivocados.");
       error.status = 401;
       throw error;
     }
