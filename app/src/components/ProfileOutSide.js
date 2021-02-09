@@ -46,10 +46,12 @@ const ProfileOutSide = () => {
               </Link>
             </div>
           </header>
-          <div>
-            <p>Libros</p>
-            <List array={userBooks} link={link}></List>
-          </div>
+          <main>
+            <h2>Libros</h2>
+            <ul>
+              <List array={userBooks} link={link}></List>
+            </ul>
+          </main>
         </div>
       );
     });

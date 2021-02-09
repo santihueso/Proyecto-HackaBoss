@@ -8,6 +8,7 @@ html {
   --white: white;
   --gray: rgba(128, 128, 128, 0.555);
   --red: rgba(253, 0, 0, 0.815);
+  --light-gray: rgb(155, 155, 155);
 }
 
 body {
@@ -63,9 +64,18 @@ li[id="8"] {
 #categories > nav > ul > li {
   list-style: none;
   padding: 20px;
-  margin: 10px 10px 10px;
+  width: 250px;
+  height: 65px;
+  margin: 0px 20px 20px;
   border-radius: 5px;
   color: var(--white);
   background-color: var(--gray);
   text-transform: capitalize;
+  box-shadow: 2px 5px 6px rgb(153, 153, 153);
+}
+
+#categories > nav > ul > li:hover {
+  background: rgb(155, 155, 155);
+  width: 280px;
+  height: 75px;
 }

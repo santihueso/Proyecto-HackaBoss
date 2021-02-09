@@ -21,16 +21,16 @@ const HeadPrincipal = () => {
   return (
     <div className="seeker">
       <select className="select" onChange={change} value={key}>
-        <option id="city " value="city">
+        <option className="option" id="city " value="city">
           Ciudad
         </option>
-        <option id="author " value="author">
+        <option className="option" id="author " value="author">
           Autor
         </option>
-        <option id="cp " value="cp">
+        <option className="option" id="cp " value="cp">
           CP
         </option>
-        <option id="name " value="title">
+        <option className="option" id="name " value="title">
           Título
         </option>
       </select>

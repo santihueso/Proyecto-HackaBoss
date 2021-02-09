@@ -2,6 +2,7 @@ html {
   --white: white;
   --gray: rgba(65, 65, 65, 0.596);
   --red: rgba(253, 0, 0, 0.815);
+  --light-gray: rgb(155, 155, 155);
 }
 .seeker {
   margin: 0 300px 0;
@@ -13,9 +14,16 @@ html {
 .select {
   background-color: var(--gray);
   border: none;
-  padding: 5px 10px;
+  padding: 7px 15px;
   color: var(--white);
   font-weight: bold;
+  border-radius: 15px 0px 0px 15px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.select:hover {
+  background: var(--light-gray);
 }
 
 .textSeek > :first-child {
@@ -27,7 +35,8 @@ html {
 
 .textSeek > :last-child {
   border: none;
-  padding: 7px 10px;
+  padding: 7px 20px;
+  border-radius: 0px 15px 15px 0px;
   background-color: var(--red);
   color: var(--white);
   font-weight: bold;

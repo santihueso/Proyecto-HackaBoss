@@ -16,12 +16,13 @@ html {
 
 .profileOut > header {
   display: flex;
-  margin-left: 200px;
+  padding: 30px 0px 30px 200px;
   background: no-repeat center/100% url("../img/perfil-2.jpg");
+  border-radius: 4rem;
 }
 
 .profileOut > header > div {
-  margin-left: 100px;
+  margin-left: 120px;
 }
 
 .profileOut > header > div > p {
@@ -35,5 +36,22 @@ html {
 }
 
 .profileOut > header > img {
+  width: 200px;
+  height: 200px;
   border-radius: 50rem;
+  border: 2px solid #666;
+}
+
+.profileOut > main > ul {
+  display: grid;
+  margin: 50px 100px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.profileOut > main > ul > li {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 30px;
 }
