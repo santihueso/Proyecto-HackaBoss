@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  --white: white;
+  --gray: rgba(128, 128, 128, 0.555);
+  --red: rgba(253, 0, 0, 0.815);
+  --black: black;
+}
+
+.profileInside {
+  margin: 0px 200px;
+}
+
+.profileInside > nav {
+  background: linear-gradient(to right, var(--red), var(--black));
+  height: 80px;
+  padding-top: 30px;
+}
+
+.profileInside > nav > a {
+  color: var(--white);
+  font-weight: bold;
+  margin: 0px 100px;
+}
+
+.profileInside > header {
+  display: flex;
+}
+
+.profileInside > header > main {
+  margin-left: 100px;
+  margin-top: 60px;
+}
+
+.profileInside > main > nav {
+  display: grid;
+
+  grid-template-areas:
+    "Notif Notif Fav"
+    "Notif Notif Res"
+    "Pur  Sell Sell";
+}
+
+#notif {
+  grid-area: Notif;
+}
+
+#fav {
+  grid-area: Fav;
+}
+
+#pur {
+  grid-area: Pur;
+}
+
+#sell {
+  grid-area: Sell;
+}
+
+#res {
+  grid-area: Res;
+}

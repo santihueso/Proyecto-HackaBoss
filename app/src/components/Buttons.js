@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { port } from "./Principal";
+import "../css/buttons.css";
 
 const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout, auth }) => {
   const history = useHistory();
@@ -28,7 +29,11 @@ const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout, auth }) => {
     return history.push(`/principal/profile/list/${rout}`);
   };
 
-  return <button onClick={handlClick}>{name}</button>;
+  return (
+    <button className="purResFav" onClick={handlClick}>
+      {name}
+    </button>
+  );
 };
 
 const ButtonBuyWithReserved = ({ idBook, auth }) => {

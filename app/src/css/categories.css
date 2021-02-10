@@ -71,9 +71,10 @@ li[id="8"] {
   color: var(--white);
   background-color: var(--gray);
   text-transform: capitalize;
-  box-shadow: 2px 2px 6px rgb(153, 153, 153);
+  box-shadow: 2px 3px 6px rgb(95, 95, 95);
 }
 
 #categories > nav > ul > li:hover {
-  background: rgb(155, 155, 155);
+  background: rgb(10, 10, 10);
+  box-shadow: 2px 3px 6px rgb(46, 46, 46);
 }

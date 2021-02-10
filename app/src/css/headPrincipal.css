@@ -18,6 +18,9 @@ html {
 
 .headerPrincipal > h1 {
   padding-top: 100px;
+  text-align: center;
+  font-size: 80px;
+  margin-bottom: 30px;
 }
 .seeker {
   margin: 0 300px 0;
@@ -27,7 +30,7 @@ html {
 }
 
 .select {
-  background-color: var(--gray);
+  background-color: var(--red);
   border: none;
   padding: 7px 15px;
   color: var(--white);

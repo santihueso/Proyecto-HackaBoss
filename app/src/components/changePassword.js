@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { port } from "./Principal";
 import { UserFormChangePassword } from "./UseForm";
-import "../css/style.css";
+import "../css/login-signin.css";
 
 const NewPassword = ({ auth }) => {
   const [newPassword, setNewPassword] = useState("");

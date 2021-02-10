@@ -51,13 +51,13 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
                 <img
                   src={`http://localhost:${port}/uploads/${e.photoFront}`}
                   alt="portada"
-                  style={{ maxWidth: 400 }}
+                  style={{ maxWidth: 350 }}
                 ></img>
               ) : (
                 <img
                   src={`http://localhost:${port}/uploads/${e.photoBack}`}
                   alt="portada"
-                  style={{ maxWidth: 400 }}
+                  style={{ maxWidth: 350 }}
                 ></img>
               )}
             </Link>

@@ -84,7 +84,8 @@ async function register(req, res) {
     await schema.validateAsync(req.body);
     const { username, email, password } = req.body;
     const userSelect = await user.login(email);
-    if (userSelect) {
+
+    if (userSelect.length > 0) {
       const error = new Error("El email ya existe.");
       error.status = 400;
       throw error;

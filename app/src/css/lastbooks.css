@@ -29,10 +29,11 @@ html {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  box-shadow: 2px 5px 6px rgb(153, 153, 153);
+  box-shadow: 2px 4px 7px rgb(255, 0, 0);
   margin-bottom: 30px;
   padding: 40px;
   background: black;
+  box-sizing: border-box;
 }
 .book:hover {
   transform: scale(2);
@@ -48,6 +49,16 @@ html {
   margin-bottom: 10px;
 }
 
+.book > main > p {
+  margin-left: 20px;
+}
+
+.book > main {
+  position: relative;
+}
+
 .price {
-  margin-top: 10px;
+  position: absolute;
+  bottom: 2px;
+  right: 0;
 }

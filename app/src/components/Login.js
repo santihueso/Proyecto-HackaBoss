@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { port } from "./Principal";
 import { UserFormLogIn } from "./UseForm";
 import { useHistory, Link } from "react-router-dom";
-import "../css/style.css";
+import "../css/login-signin.css";
 
 const Login = ({ setAuth }) => {
   const [password, setPassword] = useState("");
@@ -31,7 +31,7 @@ const Login = ({ setAuth }) => {
   };
   return (
     <div className="login">
-      <div>Iniciar sesión</div>
+      <p>Iniciar sesión</p>
       <UserFormLogIn
         handlSubmit={handlSubmit}
         email={email}

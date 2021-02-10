@@ -5,9 +5,10 @@
 }
 
 html {
-  --color-grey: lightgrey;
-  --color-black: black;
-  --color-white: white;
+  --white: white;
+  --gray: rgba(65, 65, 65, 0.596);
+  --red: rgba(253, 0, 0, 0.815);
+  --light-gray: rgb(155, 155, 155);
 }
 
 a,
@@ -17,10 +18,12 @@ label {
   color: white;
 }
 
-h1 {
+.login > p {
   text-align: center;
   margin: 2rem;
-  font-size: 500%;
+  font-size: 40px;
+  color: var(--red);
+  font-weight: bold;
 }
 
 /*login, resgister, change password*/
@@ -32,8 +35,8 @@ h1 {
   padding: 2rem;
   max-width: 500px;
   text-align: center;
-  background-color: var(--color-grey);
-  border: solid 2px var(--color-black);
+  border: 2px solid var(--white);
+  box-shadow: 2px 5px 8px rgb(95, 95, 95);
   border-radius: 5px;
 }
 

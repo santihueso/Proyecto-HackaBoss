@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { port } from "./Principal";
 import { UserFormSignIn } from "./UseForm";
 import { Link, useHistory } from "react-router-dom";
-import "../css/style.css";
+import "../css/login-signin.css";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
@@ -28,7 +28,7 @@ const SignIn = () => {
   };
   return (
     <div className="register">
-      <div>Register</div>
+      <p>Register</p>
       <UserFormSignIn
         handlSubmit={handlSubmit}
         username={username}
