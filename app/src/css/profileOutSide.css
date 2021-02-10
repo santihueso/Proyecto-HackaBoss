@@ -11,18 +11,20 @@ html {
 }
 
 .profileOut {
-  margin: 10px 100px 0px;
+  margin: 10px 250px 0px;
 }
 
 .profileOut > header {
   display: flex;
-  padding: 30px 0px 30px 200px;
-  background: no-repeat center/100% url("../img/perfil-2.jpg");
-  border-radius: 4rem;
+  height: 300px;
+  background: no-repeat right/50% url("../img/f-perfil.jpg");
+  box-shadow: 0 4px 2px -2px rgb(153, 153, 153);
 }
 
 .profileOut > header > div {
-  margin-left: 120px;
+  margin-left: 60px;
+  margin-top: 90px;
+  text-align: center;
 }
 
 .profileOut > header > div > p {
@@ -40,18 +42,18 @@ html {
   height: 200px;
   border-radius: 50rem;
   border: 2px solid #666;
+  margin-top: 30px;
+  margin-left: 100px;
 }
 
 .profileOut > main > ul {
   display: grid;
   margin: 50px 100px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 30px;
 }
 
-.profileOut > main > ul > li {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin-top: 30px;
+.profileOut > nav {
+  margin-top: 20px;
+  margin-left: 20px;
 }

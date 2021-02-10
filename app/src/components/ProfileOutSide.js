@@ -23,16 +23,6 @@ const ProfileOutSide = () => {
 
       return (
         <div key={e.id_user} className="profileOut">
-          <nav>
-            <Link to="/principal">Principal ˃</Link>
-            {name !== "ultimos" ? (
-              <Link to={`/principal/category/${id}/${name}`}>{name} ˃ </Link>
-            ) : null}
-
-            <Link to={`/principal/category/${id}/${name}/book/${idBook}`}>
-              Libro
-            </Link>
-          </nav>
           <header>
             <img src={url} alt="avatar" style={{ maxWidth: 250 }}></img>
             <div>
@@ -46,11 +36,20 @@ const ProfileOutSide = () => {
               </Link>
             </div>
           </header>
+          <nav>
+            <Link to="/principal">Principal ˃ </Link>
+            {name !== "ultimos" ? (
+              <Link to={`/principal/category/${id}/${name}`}>{name} ˃ </Link>
+            ) : null}
+
+            <Link to={`/principal/category/${id}/${name}/book/${idBook}`}>
+              Libro
+            </Link>
+          </nav>
           <main>
             <h2>Libros</h2>
-            <ul>
-              <List array={userBooks} link={link}></List>
-            </ul>
+
+            <List array={userBooks} link={link}></List>
           </main>
         </div>
       );

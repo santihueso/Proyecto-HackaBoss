@@ -40,7 +40,6 @@ const Principal = () => {
 
   return (
     <Router>
-      <h1>Recy-book</h1>
       <Switch>
         <Route path="/principal/category/book/:idBook/user/:idUser/valorations">
           <SoldBooks></SoldBooks>

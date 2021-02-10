@@ -19,31 +19,34 @@ const HeadPrincipal = () => {
   };
 
   return (
-    <div className="seeker">
-      <select className="select" onChange={change} value={key}>
-        <option className="option" id="city " value="city">
-          Ciudad
-        </option>
-        <option className="option" id="author " value="author">
-          Autor
-        </option>
-        <option className="option" id="cp " value="cp">
-          CP
-        </option>
-        <option className="option" id="name " value="title">
-          Título
-        </option>
-      </select>
-      <form className="textSeek" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          onChange={getData}
-          value={inputValue}
-          placeholder="camus"
-        ></input>
-        <input type="submit"></input>
-      </form>
-    </div>
+    <header className="headerPrincipal">
+      <h1>RecyBook</h1>
+      <div className="seeker">
+        <select className="select" onChange={change} value={key}>
+          <option className="option" id="city " value="city">
+            Ciudad
+          </option>
+          <option className="option" id="author " value="author">
+            Autor
+          </option>
+          <option className="option" id="cp " value="cp">
+            CP
+          </option>
+          <option className="option" id="name " value="title">
+            Título
+          </option>
+        </select>
+        <form className="textSeek" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            onChange={getData}
+            value={inputValue}
+            placeholder="camus"
+          ></input>
+          <input type="submit"></input>
+        </form>
+      </div>
+    </header>
   );
 };
 

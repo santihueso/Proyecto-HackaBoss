@@ -11,52 +11,31 @@ html {
 }
 
 #lastBooks > ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "one two third four"
-    "five six seven eight";
-
   margin: 0px 300px 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 30px;
 }
+
 #lastBooks > h3 {
   margin: 50px 200px;
   color: var(--red);
 }
 
-#lastBooks > ul > li:nth-child(1) {
-  grid-area: one;
-}
-#lastBooks > ul > li:nth-child(2) {
-  grid-area: two;
-}
-#lastBooks > ul > li:nth-child(3) {
-  grid-area: third;
-}
-#lastBooks > ul > li:nth-child(4) {
-  grid-area: four;
-}
-#lastBooks > ul > li:nth-child(5) {
-  grid-area: five;
-}
-#lastBooks > ul > li:nth-child(6) {
-  grid-area: six;
-}
-#lastBooks > ul > li:nth-child(7) {
-  grid-area: seven;
-}
-#lastBooks > ul > li:nth-child(8) {
-  grid-area: eight;
-}
-
-#lastBooks > ul > li {
-  padding: 30px;
+.book {
+  width: 300px;
   list-style: none;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
+  box-shadow: 2px 5px 6px rgb(153, 153, 153);
+  margin-bottom: 30px;
+  padding: 40px;
+  background: black;
+}
+.book:hover {
+  transform: scale(2);
 }
 
 .title {

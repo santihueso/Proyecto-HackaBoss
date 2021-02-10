@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  --white: white;
+  --gray: rgba(128, 128, 128, 0.555);
+  --red: rgba(253, 0, 0, 0.815);
+  --light-gray: rgb(155, 155, 155);
+}
+
+.viewBook > nav {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.viewBook {
+  margin: 100px 200px;
+}
+
+.viewBook > div {
+  display: flex;
+}
+
+.viewBook > div > main {
+  margin: 30px 100px;
+}
+
+.viewBook > div > main > div > p {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.viewBook > div > main > div > p:nth-child(1) {
+  font-size: 40px;
+}
+
+.viewBook > div > main > div > p:nth-child(2) {
+  font-style: italic;
+  font-size: 25px;
+}
+
+.viewBook > div > main > nav {
+  margin-top: 20px;
+}

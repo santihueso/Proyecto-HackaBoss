@@ -7,7 +7,12 @@ const Avatar = ({ e, to }) => {
 
   return (
     <Link to={to}>
-      <img src={url} alt="avatar" style={{ maxWidth: 100 }}></img>
+      <img
+        className="avatar"
+        src={url}
+        alt="avatar"
+        style={{ maxWidth: 100 }}
+      ></img>
     </Link>
   );
 };
@@ -15,15 +20,19 @@ const Avatar = ({ e, to }) => {
 const List = ({ array, link }) => {
   const listBooks = array.map((e) => {
     return (
-      <li key={e.id_product} id={e.id_product}>
-        <p className="title">{e.productName}</p>
-        <p className="author">{e.author}</p>
-        <Avatar to={link(e.id_product)} e={e}></Avatar>
-        <p className="price">{e.price} €</p>
+      <li key={e.id_product} className="book">
+        <header>
+          <Avatar to={link(e.id_product)} e={e}></Avatar>
+        </header>
+        <main>
+          <p className="title">{e.productName}</p>
+          <p className="author">{e.author}</p>
+          <p className="price">{e.price} €</p>
+        </main>
       </li>
     );
   });
-  return listBooks;
+  return <ul>{listBooks}</ul>;
 };
 
 export { List, Avatar };

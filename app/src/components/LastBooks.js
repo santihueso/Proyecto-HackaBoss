@@ -9,7 +9,7 @@ const LastBooks = () => {
   const showBooks = [];
   const link = (idBook) => `/principal/category/0/ultimos/book/${idBook}`;
   if (data.length > 8) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 7; i++) {
       showBooks.push(data[i]);
     }
     return (
@@ -24,9 +24,8 @@ const LastBooks = () => {
     return (
       <section id="lastBooks">
         <h3>Últimos libros</h3>
-        <ul>
-          <List array={data} link={link}></List>
-        </ul>
+
+        <List array={data} link={link}></List>
       </section>
     );
   }
