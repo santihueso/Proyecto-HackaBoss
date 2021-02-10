@@ -31,9 +31,13 @@ async function getReserver(req, res) {
           throw error;
         }
         if (ifReserved) {
-          throw new Error("El libro está reservado.");
+          const error = new Error("El libro está reservado.");
+          error.status = 404;
+          throw error;
         } else if (ifBuyed) {
-          throw new Error("El libro fue vendido.");
+          const error = new Error("El libro fue vendido.");
+          error.status = 404;
+          throw error;
         } else {
           const getBook = await purchase.reserverBook(book, 1, buyer);
           res.status(200);
@@ -72,7 +76,9 @@ async function getBuyBookWithReserve(req, res) {
     if (!ifHaveReserved || ifHaveReserved.length === 0) {
       throw new Error("No reservaste el libro.");
     } else if (ifHaveReserved[0].buyer !== buyer) {
-      throw new Error("El libro está reservado por otro usuario.");
+      const error = new Error("El libro está reservado por otro usuario.");
+      error.status = 404;
+      throw error;
     } else {
       const buyWithReserve = await purchase.updateWeReserve(dateBuy, bookId);
       await messages.send(req, res, buy);
@@ -113,7 +119,9 @@ async function buyBookWithoutReserve(req, res) {
       const ifReserved = existBook.find((e) => e.reservation === 1);
 
       if (ifSelled || ifReserved) {
-        throw new Error("El libro está reservado o fue vendido.");
+        const error = new Error("El libro está reservado o fue vendido.");
+        error.status = 404;
+        throw error;
       } else {
         const buyBookInTable = await purchase.buyBook(book, 1, buyer, date);
         await messages.send(req, res, buy);

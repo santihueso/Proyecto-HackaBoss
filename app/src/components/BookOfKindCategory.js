@@ -30,9 +30,12 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
   const [data] = useFetchData(
     `http://localhost:${port}/beginning/category/${idBook}`
   );
-  const link = `/principal/profile/list/${kind}`;
+
+  const linkProfile = kind ? `/principal/profile/list/${kind}` : null;
+
   const activeComparator = (value) => () =>
     active === value ? setActive(0) : setActive(value);
+
   const book = data.map((e) => {
     return (
       <div key={e.id_product} className="viewBook">
@@ -41,7 +44,7 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
           {name !== "ultimos" && name !== "seeker" ? (
             <Link to={`/principal/category/${id}/${name}`}>{name}</Link>
           ) : null}
-          {link ? <Link to={link}>{nameKind}</Link> : null}
+          {linkProfile ? <Link to={linkProfile}>{nameKind}</Link> : null}
           <p> Libro</p>
         </nav>
         <div>

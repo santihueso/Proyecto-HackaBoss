@@ -17,10 +17,13 @@ const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout, auth }) => {
         headers: { "content-type": "application/json", Authorization: auth },
       }
     );
+    console.log(res.status);
     if (res.status === 500) {
       return history.push(`/principal/profile/list/${rout}`);
     } else if (res.status === 400) {
       return history.push("/yourBook");
+    } else if (res.status === 404) {
+      return history.push("/reserved");
     } else if (res.status !== 200) {
       console.warn("error", res);
       return history.push("/notFound");

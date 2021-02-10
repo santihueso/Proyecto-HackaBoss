@@ -77,9 +77,6 @@ const Principal = () => {
         <Route path="/principal/profile/list/:kind">
           <ListBooksUser auth={auth}></ListBooksUser>
         </Route>
-        <Route path="/principal/profile/list/:kind">
-          <ListBooksUser auth={auth}></ListBooksUser>
-        </Route>
         <Route path="/principal/profile/edit">
           <CreateProfile auth={auth}></CreateProfile>
         </Route>
@@ -112,6 +109,9 @@ const Principal = () => {
         </Route>
         <Route path="/notFound">
           <p>No hay libros en esta categoría</p>
+        </Route>
+        <Route path="/reserved">
+          <p>El libro está reservado.</p>
         </Route>
         <Route path="/yourBook">
           <p>El libro es tuyo</p>

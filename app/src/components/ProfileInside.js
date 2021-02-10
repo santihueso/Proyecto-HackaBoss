@@ -30,21 +30,21 @@ const ProfileUserInside = ({ auth }) => {
         </header>
         <main>
           <nav>
-            <Link id="notif" to="/principal/profile/list/offers">
-              Notificaciones
-            </Link>
-            <Link id="fav" to="/principal/profile/list/favorites">
-              Favoritos
-            </Link>
-            <Link id="pur" to="/principal/profile/list/purchase">
-              Comprados
-            </Link>
-            <Link id="sell" to="/principal/profile/list/toSell">
-              En venta
-            </Link>
-            <Link id="res" to="/principal/profile/list/reserved">
-              Reservados
-            </Link>
+            <div id="notif">
+              <Link to="/principal/profile/list/offers">Notificaciones</Link>
+            </div>
+            <div id="fav">
+              <Link to="/principal/profile/list/favorites">Favoritos</Link>
+            </div>
+            <div id="pur">
+              <Link to="/principal/profile/list/purchase">Comprados</Link>
+            </div>
+            <div id="sell">
+              <Link to="/principal/profile/list/toSell">En venta</Link>
+            </div>
+            <div id="res">
+              <Link to="/principal/profile/list/reserved">Reservados</Link>
+            </div>
           </nav>
         </main>
       </div>

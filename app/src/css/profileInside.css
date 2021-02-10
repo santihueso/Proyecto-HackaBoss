@@ -36,31 +36,52 @@ html {
   margin-top: 60px;
 }
 
+.profileInside > header > img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  margin: 20px 100px;
+}
+
 .profileInside > main > nav {
   display: grid;
-
   grid-template-areas:
-    "Notif Notif Fav"
-    "Notif Notif Res"
+    "Notif  Notif Fav"
+    "Pur   Res  Res"
     "Pur  Sell Sell";
+  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 100px;
+  grid-gap: 30px;
+  text-align: center;
 }
 
 #notif {
   grid-area: Notif;
+  border: 1px solid white;
 }
 
 #fav {
   grid-area: Fav;
+  border: 1px solid white;
 }
 
 #pur {
   grid-area: Pur;
+  border: 1px solid white;
 }
 
 #sell {
   grid-area: Sell;
+  border: 1px solid white;
 }
 
 #res {
   grid-area: Res;
+  border: 1px solid white;
+}
+
+.profileInside > header > main > p:nth-child(1) {
+  font-size: 30px;
+  font-weight: bold;
 }

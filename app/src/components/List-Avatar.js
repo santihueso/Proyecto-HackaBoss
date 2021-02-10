@@ -22,7 +22,7 @@ const List = ({ array, link }) => {
     return (
       <li key={e.id_product} className="book">
         <header>
-          <Avatar to={link(e.id_product)} e={e}></Avatar>
+          <Avatar e={e} to={link(e.id_product)}></Avatar>
         </header>
         <main>
           <p className="title">{e.productName}</p>

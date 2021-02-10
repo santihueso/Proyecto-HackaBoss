@@ -21,7 +21,7 @@ const ListBooksUser = ({ auth }) => {
         <Link to="/principal/profile">Profile</Link>
       </nav>
 
-      <List array={dataList} link={linkOfListBookUser} kind={kind}></List>
+      <List array={dataList} link={linkOfListBookUser}></List>
     </div>
   );
 };

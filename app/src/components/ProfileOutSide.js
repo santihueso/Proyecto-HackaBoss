@@ -15,7 +15,6 @@ const ProfileOutSide = () => {
   const userData = user ? user.user : null;
   const userBooks = user ? user.books : null;
   const userAvg = user ? user.avg : null;
-
   const point = userAvg ? userAvg.map((e) => e.point) : null;
   if (userData && userBooks) {
     const showUserData = userData.map((e) => {
