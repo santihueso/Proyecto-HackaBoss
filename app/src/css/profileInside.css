@@ -68,6 +68,13 @@ html {
 
 .profileInside > main > nav > div > a {
   margin: auto;
+  transform-origin: botton left;
+  transition: 1000ms;
+}
+
+.profileInside > main > nav > div > a:hover {
+  transform: scale(-3);
+  transform: rotate(360deg);
 }
 
 .profileInside > main > nav > div:hover {
