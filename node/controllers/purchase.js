@@ -258,6 +258,7 @@ async function assessment(req, res) {
       error.status = 404;
       throw error;
     }
+
     const ifBuyedBook = existBook.find((e) => e.purchase === 1);
 
     if (existBook.length > 0) {

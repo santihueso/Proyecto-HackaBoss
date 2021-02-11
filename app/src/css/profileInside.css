@@ -29,10 +29,13 @@ html {
 
 .profileInside > header {
   display: flex;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/f-p-12.jpg");
+  border-radius: 10px;
+  box-shadow: 0 0 15px black;
 }
 
 .profileInside > header > main {
-  margin-left: 100px;
   margin-top: 60px;
 }
 
@@ -40,45 +43,59 @@ html {
   width: 200px;
   height: 200px;
   border-radius: 100%;
-  margin: 20px 100px;
+  margin: 20px 200px;
 }
 
 .profileInside > main > nav {
   display: grid;
   grid-template-areas:
     "Notif  Notif Fav"
-    "Pur   Res  Res"
+    "Pur   Res  Fav"
     "Pur  Sell Sell";
   grid-template-rows: 100px 100px 100px;
   grid-template-columns: 1fr 1fr 1fr;
-  margin: 100px;
+  margin: 40px 100px;
   grid-gap: 30px;
   text-align: center;
 }
 
+.profileInside > main > nav > div {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 2px 3px 6px rgb(95, 95, 95);
+}
+
+.profileInside > main > nav > div > a {
+  margin: auto;
+}
+
+.profileInside > main > nav > div:hover {
+  background: var(--red);
+}
+
 #notif {
   grid-area: Notif;
-  border: 1px solid white;
 }
 
 #fav {
   grid-area: Fav;
-  border: 1px solid white;
 }
 
 #pur {
   grid-area: Pur;
-  border: 1px solid white;
 }
 
 #sell {
   grid-area: Sell;
-  border: 1px solid white;
 }
 
 #res {
   grid-area: Res;
-  border: 1px solid white;
+}
+
+.profileInside > header > main > p {
+  text-transform: capitalize;
 }
 
 .profileInside > header > main > p:nth-child(1) {

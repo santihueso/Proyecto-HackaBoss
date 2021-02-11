@@ -23,7 +23,7 @@ const Notifications = ({ auth }) => {
     array > 0 ? (
       reservedPurchase.map((e) => {
         return (
-          <div key={e.product}>
+          <div key={e.product} style={{ marginTop: 40 }}>
             {e.purchase !== 1 ? <p>En venta</p> : <p>Comprado</p>}
             {e.reservation !== 1 && e.purchase !== 1 ? (
               <p>Disponible para reservar</p>

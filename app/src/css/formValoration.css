@@ -1,0 +1,40 @@
+html {
+  --white: white;
+  --gray: rgba(65, 65, 65, 0.596);
+  --red: rgba(253, 0, 0, 0.815);
+  --light-gray: rgb(155, 155, 155);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.classification {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  margin-right: 400px;
+  margin-bottom: 10px;
+}
+
+.classification > label {
+  color: grey;
+}
+
+.classification > input {
+  display: none;
+}
+
+.classification label:hover,
+.classification label:hover ~ label {
+  color: orange;
+}
+
+.classification input[type="checkbox"]:checked ~ label {
+  color: orange;
+}
+
+.valoration {
+  margin-top: 30px;
+}

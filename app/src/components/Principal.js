@@ -116,9 +116,6 @@ const Principal = () => {
         <Route path="/yourBook">
           <p>El libro es tuyo</p>
         </Route>
-        <Route path="/errorLogin">
-          <p>Contraseña o email equivocado</p>
-        </Route>
         <Route path="/">
           <Redirect to="/principal"></Redirect>
         </Route>

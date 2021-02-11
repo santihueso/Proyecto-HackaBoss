@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { port } from "./Principal";
 import { useHistory, Link } from "react-router-dom";
 import { useFetchAuth } from "./useFetch/useFetchAuth";
+import "../css/formProfile.css";
 
 const CreateProfile = ({ auth }) => {
   const [dataUser] = useFetchAuth(
@@ -48,19 +49,17 @@ const CreateProfile = ({ auth }) => {
     };
 
     return (
-      <div key={user.id_user}>
+      <div key={user.id_user} className="formProfile">
+        <p>Editar perfil</p>
         <form onSubmit={handlSubmit}>
           <div>
-            <nav>
-              <Link to="/principal">Principal ˃ </Link>
-              <Link to="/principal/profile">Perfil</Link>
-            </nav>
             <label htmlFor="userImage"></label>
             <input
               id="userImage"
               type="file"
               onChange={(e) => [setOnImg(true), setImg(e.target.files[0])]}
               accept="image/*"
+              style={{ color: "transparent" }}
             ></input>
           </div>
           <div>
@@ -111,11 +110,9 @@ const CreateProfile = ({ auth }) => {
             ></input>
           </div>
 
-          <input type="submit" value="submit"></input>
+          <input type="submit" value="Enviar"></input>
         </form>
-        <button onClick={() => history.push("/principal/profile")}>
-          Cancelar
-        </button>
+        <button onClick={() => history.push("/principal/profile")}>x</button>
       </div>
     );
   });

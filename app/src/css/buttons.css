@@ -11,7 +11,7 @@ html {
   padding: 0;
 }
 
-.purResFav {
+.btnViewBook {
   background: none;
   color: white;
   border-radius: 15px;
@@ -21,6 +21,6 @@ html {
   margin-top: 30px;
 }
 
-.purResFav:hover {
+.btnViewBook:hover {
   border: 2px solid white;
 }

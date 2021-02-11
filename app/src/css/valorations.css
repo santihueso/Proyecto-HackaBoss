@@ -1,0 +1,31 @@
+html {
+  --white: white;
+  --gray: rgba(65, 65, 65, 0.596);
+  --red: rgba(253, 0, 0, 0.815);
+  --light-gray: rgb(155, 155, 155);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.viewValoration {
+  margin: 100px 300px;
+}
+
+.viewValoration > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+}
+
+.viewValoration > ul > div > li {
+  display: flex;
+  flex-direction: row;
+}
+
+.viewValoration > ul > div > li > header {
+  margin-right: 60px;
+}

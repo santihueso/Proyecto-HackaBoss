@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { port } from "./Principal";
 import { useHistory } from "react-router-dom";
+import "../css/formValoration.css";
 
 const FormValoration = ({ idBook, auth }) => {
   const history = useHistory();
@@ -28,63 +29,70 @@ const FormValoration = ({ idBook, auth }) => {
   const starComparator = (value) => () =>
     star === value ? setStar(0) : setStar(value);
 
+  const color = star === 0 ? { color: "gray" } : { color: "orange" };
   console.log(star);
   return (
-    <form onSubmit={handlSubmit}>
-      <div>
-        <label htmlFor="radio1">★</label>
+    <form onSubmit={handlSubmit} className="valoration">
+      <p className="classification">
         <input
           id="radio1"
           type="checkbox"
           name="estrellas"
           value={star}
-          onChange={starComparator(1)}
-          style={{ display: "none" }}
+          onChange={starComparator(5)}
+          style={color}
         ></input>
-        <label htmlFor="radio2">★</label>
+        <label htmlFor="radio1">★</label>
+
         <input
           id="radio2"
           type="checkbox"
           name="estrellas"
           value={star}
-          onChange={starComparator(2)}
-          style={{ display: "none" }}
+          onChange={starComparator(4)}
+          style={color}
         ></input>
-        <label htmlFor="radio3">★</label>
+        <label htmlFor="radio2">★</label>
+
         <input
           id="radio3"
           type="checkbox"
           name="estrellas"
           value={star}
           onChange={starComparator(3)}
-          style={{ display: "none" }}
+          style={color}
         ></input>
-        <label htmlFor="radio4">★</label>
+        <label htmlFor="radio3">★</label>
+
         <input
           id="radio4"
           type="checkbox"
           name="estrellas"
           value={star}
-          onChange={starComparator(4)}
-          style={{ display: "none" }}
+          onChange={starComparator(2)}
+          style={color}
         ></input>
-        <label htmlFor="radio5">★</label>
+        <label htmlFor="radio4">★</label>
+
         <input
           id="radio5"
           type="checkbox"
           name="estrellas"
           value={star}
-          onChange={starComparator(5)}
-          style={{ display: "none" }}
+          onChange={starComparator(1)}
+          style={color}
         ></input>
+        <label htmlFor="radio5">★</label>
+      </p>
+      <div>
+        <textarea
+          id="opinion"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Escribe aquí"
+        ></textarea>
       </div>
-      <textarea
-        id="opinion"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Escribe aquí"
-      ></textarea>
-      <input type="submit"></input>
+      <input className="btnViewBook" type="submit"></input>
     </form>
   );
 };

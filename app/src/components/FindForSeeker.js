@@ -29,10 +29,21 @@ const FindForSeeker = () => {
     };
     fetcher();
   }, [url, seek, data]);
+  let name;
+  if (seek === "title") {
+    name = "Titulo";
+  } else if (seek === "author") {
+    name = "Autor";
+  } else if (seek === "city") {
+    name = "Ciudad";
+  } else if (seek === "cp") {
+    name = "Código postal";
+  }
 
   return (
-    <div>
-      <Link to="/principal">Principal</Link>
+    <div className="listBooksUser">
+      <p>{name}</p>
+      <Link to="/principal">Principal ˃ </Link>
 
       {list.length > 0 ? (
         <List array={list} link={link}></List>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { port } from "./Principal";
 import { useFetchData } from "./useFetch/useFetchData";
+import "../css/formBook.css";
 
 const FormEditBook = ({ auth }) => {
   const { idBook } = useParams();
@@ -67,7 +68,8 @@ const FormEditBook = ({ auth }) => {
     };
 
     return (
-      <div key={e.id_product}>
+      <div key={e.id_product} className="formBook">
+        <p>Editar libro</p>
         <form onSubmit={handlSubmit}>
           <div>
             <label htmlFor="imgOne"></label>
@@ -79,6 +81,7 @@ const FormEditBook = ({ auth }) => {
                 setImgOne(element.target.files[0]),
               ]}
               accept="image/*"
+              style={{ color: "transparent" }}
             ></input>
           </div>
           <div>
@@ -91,6 +94,7 @@ const FormEditBook = ({ auth }) => {
                 setImgTwo(element.target.files[0]),
               ]}
               accept="image/*"
+              style={{ color: "transparent" }}
             ></input>
           </div>
 
@@ -175,7 +179,7 @@ const FormEditBook = ({ auth }) => {
           </div>
           <input type="submit" value="submit"></input>
         </form>
-        <button onClick={() => history.push("/principal")}>Cancelar</button>
+        <button onClick={() => history.push("/principal")}>x</button>
       </div>
     );
   });

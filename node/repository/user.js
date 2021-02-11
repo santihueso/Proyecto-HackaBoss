@@ -11,8 +11,12 @@ async function selectUser(userId) {
   const pool = await database.getPool();
   const query =
     "select username, descriptionUser, city, postalCode, email, photo, id_user from user where id_user = ?";
+  const queryAvg =
+    "select AVG(assessment) as point from purchase where product = ANY(select id_product from product where seller = ?)";
+
   const [user] = await pool.query(query, userId);
-  return user;
+  const [avg] = await pool.query(queryAvg, userId);
+  return [user, avg];
 }
 
 async function changePassword(password, userId) {

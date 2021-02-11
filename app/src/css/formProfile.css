@@ -1,0 +1,61 @@
+html {
+  --white: white;
+  --gray: rgba(65, 65, 65, 0.596);
+  --red: rgba(253, 0, 0, 0.815);
+  --light-gray: rgb(155, 155, 155);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.formProfile {
+  margin: 100px 500px;
+  border: 1px solid white;
+  text-align: center;
+  padding: 30px;
+  position: relative;
+  box-shadow: 2px 5px 8px rgb(95, 95, 95);
+}
+
+.formProfile > form {
+  margin: auto;
+  height: 300px;
+}
+
+.formProfile > form > div {
+  margin-top: 10px;
+}
+
+.formProfile > form > div:first-child {
+  margin-left: 170px;
+}
+
+.formProfile input {
+  padding: 5px;
+}
+
+.formProfile > p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.formProfile > button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  background: black;
+  border: 1px solid white;
+  color: white;
+}
+
+.formProfile > form > input {
+  margin-top: 20px;
+  background: var(--red);
+  border: none;
+  width: 100px;
+  color: white;
+}

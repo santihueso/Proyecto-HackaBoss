@@ -18,7 +18,9 @@ label {
   color: white;
 }
 
-.login > p {
+.login > p,
+.register > p,
+.changePassword > p:first-child {
   text-align: center;
   margin: 2rem;
   font-size: 40px;
@@ -62,4 +64,13 @@ label {
   text-decoration: underline;
   display: block;
   margin: 0.3rem;
+}
+
+.login > form > input,
+.register > form > input,
+.changePassword > form > input {
+  background: red;
+  border: none;
+  color: white;
+  width: 100px;
 }

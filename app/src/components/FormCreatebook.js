@@ -36,7 +36,8 @@ const FormCreateBook = ({ auth }) => {
   };
 
   return (
-    <div>
+    <div className="formBook">
+      <p>Subir un libro</p>
       <form onSubmit={handlSubmit}>
         <div>
           <label htmlFor="imgOne"></label>
@@ -45,6 +46,7 @@ const FormCreateBook = ({ auth }) => {
             type="file"
             onChange={(element) => setImgOne(element.target.files[0])}
             accept="image/*"
+            style={{ color: "transparent" }}
           ></input>
         </div>
         <div>
@@ -54,6 +56,7 @@ const FormCreateBook = ({ auth }) => {
             type="file"
             onChange={(element) => setImgTwo(element.target.files[0])}
             accept="image/*"
+            style={{ color: "transparent" }}
           ></input>
         </div>
 
@@ -119,9 +122,9 @@ const FormCreateBook = ({ auth }) => {
             setId={setCategory}
           ></SelectCategories>
         </div>
-        <input type="submit" value="submit"></input>
+        <input type="submit" value="Enviar"></input>
       </form>
-      <button onClick={() => history.push("/principal")}>Cancelar</button>
+      <button onClick={() => history.push("/principal")}>x</button>
     </div>
   );
 };

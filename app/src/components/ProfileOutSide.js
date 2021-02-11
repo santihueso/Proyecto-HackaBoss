@@ -16,10 +16,11 @@ const ProfileOutSide = () => {
   const userBooks = user ? user.books : null;
   const userAvg = user ? user.avg : null;
   const point = userAvg ? userAvg.map((e) => e.point) : null;
+  console.log(point);
   if (userData && userBooks) {
     const showUserData = userData.map((e) => {
       const url = `http://localhost:${port}/uploads/${e.photo}`;
-
+      const star = "★".repeat(Math.floor(point));
       return (
         <div key={e.id_user} className="profileOut">
           <header>
@@ -27,7 +28,7 @@ const ProfileOutSide = () => {
             <div>
               <p>{e.username}</p>
               <p>{e.descriptionUser}</p>
-              <p>{point}</p>
+              <p style={{ color: "orange" }}>{star}</p>
               <Link
                 to={`/principal/category/book/${idBook}/user/${e.id_user}/valorations`}
               >

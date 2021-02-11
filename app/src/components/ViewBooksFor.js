@@ -44,7 +44,9 @@ const ViewBooksForPurchase = ({ auth }) => {
     <ViewBook
       buttons={
         <div>
-          <button onClick={() => setValoration(true)}>Entregado</button>
+          <button className="btnViewBook" onClick={() => setValoration(true)}>
+            Entregado
+          </button>
           {valoration ? (
             <FormValoration idBook={idBook} auth={auth}></FormValoration>
           ) : null}
@@ -88,6 +90,7 @@ const ViewBooksForToSell = ({ auth }) => {
       buttons={
         <div>
           <button
+            className="btnViewBook"
             onClick={() =>
               history.push(`/principal/profile/list/toSell/book/${idBook}/edit`)
             }
@@ -114,7 +117,9 @@ const ViewBooksForOffers = ({ auth }) => {
     <ViewBook
       buttons={
         <div>
-          <button onClick={() => setActive(true)}>Ver</button>
+          <button className="btnViewBook" onClick={() => setActive(true)}>
+            Ver
+          </button>
           {active ? <Notifications auth={auth}></Notifications> : null}
         </div>
       }

@@ -12,10 +12,12 @@ const BookOfKindCategory = () => {
     `/principal/category/${id}/${name}/book/${productId}`;
 
   return (
-    <div>
+    <div className="listBooksUser">
       <p>{name}</p>
-      <Link to="/principal">Principal ˃ </Link>
-      <p>{name}</p>
+      <nav>
+        <Link to="/principal">Principal ˃ </Link>
+        <p>{name}</p>
+      </nav>
       {data.length > 0 ? (
         <List array={data} link={linkOfBook}></List>
       ) : (

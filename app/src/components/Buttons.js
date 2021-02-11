@@ -33,7 +33,7 @@ const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout, auth }) => {
   };
 
   return (
-    <button className="purResFav" onClick={handlClick}>
+    <button className="btnViewBook" onClick={handlClick}>
       {name}
     </button>
   );
@@ -60,7 +60,11 @@ const ButtonBuyWithReserved = ({ idBook, auth }) => {
     history.push(`/principal/profile/list/purchase`);
   };
 
-  return <button onClick={handlClick}>Comprar</button>;
+  return (
+    <button className="btnViewBook" onClick={handlClick}>
+      Comprar
+    </button>
+  );
 };
 
 const ButtonDelete = ({ idBook, to, rout, auth }) => {
@@ -84,7 +88,11 @@ const ButtonDelete = ({ idBook, to, rout, auth }) => {
     history.push(`/principal/profile/list/${rout}`);
   };
 
-  return <button onClick={handlClick}>Eliminar</button>;
+  return (
+    <button className="btnViewBook" onClick={handlClick}>
+      Eliminar
+    </button>
+  );
 };
 
 export { ButtonPurchaseFavoriteReserved, ButtonBuyWithReserved, ButtonDelete };

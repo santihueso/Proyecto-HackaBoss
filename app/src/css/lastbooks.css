@@ -11,7 +11,7 @@ html {
 }
 
 #lastBooks > ul {
-  margin: 0px 300px 100px;
+  margin: 0px 300px 200px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 30px;
@@ -38,6 +38,7 @@ html {
 
 .book:hover {
   transform: scale(2);
+  z-index: 100;
 }
 
 .title {
