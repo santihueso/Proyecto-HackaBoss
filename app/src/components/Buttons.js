@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { port } from "./Principal";
 import "../css/buttons.css";
 
 const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout, auth }) => {
   const history = useHistory();
-
+  const [error, setError] = useState("");
+  const [disable, setDisable] = useState(false);
   const handlClick = async () => {
     if (!auth) {
       return history.push("/login");
@@ -17,25 +18,42 @@ const ButtonPurchaseFavoriteReserved = ({ idBook, to, name, rout, auth }) => {
         headers: { "content-type": "application/json", Authorization: auth },
       }
     );
-    console.log(res.status);
+
     if (res.status === 500) {
       return history.push(`/principal/profile/list/${rout}`);
-    } else if (res.status === 400) {
-      return history.push("/yourBook");
-    } else if (res.status === 404) {
-      return history.push("/reserved");
     } else if (res.status !== 200) {
+      const body = await res.json();
       console.warn("error", res);
-      return history.push("/notFound");
+      setDisable(true);
+      setError(body.error);
+    } else {
+      return history.push(`/principal/profile/list/${rout}`);
     }
-
-    return history.push(`/principal/profile/list/${rout}`);
   };
 
   return (
-    <button className="btnViewBook" onClick={handlClick}>
-      {name}
-    </button>
+    <div>
+      <button className="btnViewBook" onClick={handlClick} disabled={disable}>
+        {name}
+      </button>
+      {error ? <ViewBookError err={error}></ViewBookError> : null}
+    </div>
+  );
+};
+
+const ViewBookError = ({ err }) => {
+  const [hidden, setHidden] = useState(false);
+  const hiddenView = { display: hidden ? "none" : "block" };
+
+  return (
+    <div className="wrapper" style={hiddenView}>
+      <div className="err" style={hiddenView}>
+        <button id="btnErr" onClick={() => setHidden(true)}>
+          x
+        </button>
+        <p>{err}</p>
+      </div>
+    </div>
   );
 };
 

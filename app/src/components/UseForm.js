@@ -62,6 +62,7 @@ const UserFormLogIn = ({
   password,
   setPassword,
   err = "",
+  setHidden,
 }) => {
   return (
     <form onSubmit={handlSubmit}>
@@ -80,7 +81,11 @@ const UserFormLogIn = ({
         setValue={setPassword}
       ></UseLabelInput>
       <div style={{ color: "red", minHeight: "1.5em" }}> {err}</div>
-      <input type="submit" value="Enviar"></input>
+      <input
+        type="submit"
+        value="Enviar"
+        onClick={() => setHidden(true)}
+      ></input>
     </form>
   );
 };

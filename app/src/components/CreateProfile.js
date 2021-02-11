@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { port } from "./Principal";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useFetchAuth } from "./useFetch/useFetchAuth";
 import "../css/formProfile.css";
 

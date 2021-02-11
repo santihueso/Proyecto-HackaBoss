@@ -22,12 +22,12 @@ async function getReserver(req, res) {
     } else {
       if (ifExist[0].seller === buyer) {
         const error = new Error("El libro es tuyo.");
-        error.status = 400;
+        error.status = 406;
         throw error;
       } else if (existBook.length > 0) {
         if (ifExist[0].seller === buyer) {
           const error = new Error("El libro es tuyo.");
-          error.status = 400;
+          error.status = 406;
           throw error;
         }
         if (ifReserved) {
@@ -112,14 +112,14 @@ async function buyBookWithoutReserve(req, res) {
     } else if (ifExist.length > 0) {
       if (ifExist[0].seller === buyer) {
         const error = new Error("El libro es tuyo.");
-        error.status = 400;
+        error.status = 406;
         throw error;
       }
       const ifSelled = existBook.find((e) => e.purchase === 1);
       const ifReserved = existBook.find((e) => e.reservation === 1);
 
       if (ifSelled || ifReserved) {
-        const error = new Error("El libro está reservado o fue vendido.");
+        const error = new Error("El libro está reservado.");
         error.status = 404;
         throw error;
       } else {
@@ -163,7 +163,7 @@ async function getFavoriteBook(req, res) {
     } else {
       if (ifExist[0].seller === buyer) {
         const error = new Error("El libro es tuyo.");
-        error.status = 400;
+        error.status = 406;
         throw error;
       } else if (existBookSelled.length > 0 && selled) {
         throw new Error("El libro se ha vendido.");

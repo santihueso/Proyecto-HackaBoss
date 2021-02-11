@@ -17,6 +17,7 @@ html {
 
 .viewBook {
   margin: 100px 200px;
+  position: relative;
 }
 
 .viewBook > div {

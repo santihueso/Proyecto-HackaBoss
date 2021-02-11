@@ -21,7 +21,7 @@ const HeadPrincipal = () => {
   return (
     <header className="headerPrincipal">
       <h1>RecyBook</h1>
-      <div className="seeker">
+      <section className="seeker">
         <select className="select" onChange={change} value={key}>
           <option className="option" id="city " value="city">
             Ciudad
@@ -45,7 +45,7 @@ const HeadPrincipal = () => {
           ></input>
           <input type="submit"></input>
         </form>
-      </div>
+      </section>
     </header>
   );
 };

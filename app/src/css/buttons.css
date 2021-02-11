@@ -14,7 +14,7 @@ html {
 .btnViewBook {
   background: none;
   color: white;
-  border-radius: 15px;
+  border-radius: 8px;
   width: 100px;
   height: 40px;
   margin-right: 20px;
@@ -23,4 +23,28 @@ html {
 
 .btnViewBook:hover {
   border: 2px solid white;
+}
+
+.err {
+  background: black;
+  border: 1px solid white;
+  width: 400px;
+  height: 150px;
+  text-align: center;
+  margin-top: 300px;
+  margin-left: 600px;
+}
+
+#btnErr {
+  margin-left: 330px;
+  margin-top: 10px;
+  border: 1px solid white;
+  background: black;
+  color: white;
+  width: 30px;
+}
+
+.err > p {
+  margin-top: 40px;
+  font-size: 30px;
 }

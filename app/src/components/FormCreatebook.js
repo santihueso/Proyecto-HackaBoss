@@ -20,7 +20,6 @@ const FormCreateBook = ({ auth }) => {
 
   const handlSubmit = async (event) => {
     event.preventDefault();
-
     await saveBook({
       imgOne,
       imgTwo,
@@ -32,6 +31,7 @@ const FormCreateBook = ({ auth }) => {
       language,
       auth,
     });
+
     history.push(`/principal/profile/list/toSell`);
   };
 
@@ -47,6 +47,7 @@ const FormCreateBook = ({ auth }) => {
             onChange={(element) => setImgOne(element.target.files[0])}
             accept="image/*"
             style={{ color: "transparent" }}
+            required
           ></input>
         </div>
         <div>
@@ -57,6 +58,7 @@ const FormCreateBook = ({ auth }) => {
             onChange={(element) => setImgTwo(element.target.files[0])}
             accept="image/*"
             style={{ color: "transparent" }}
+            required
           ></input>
         </div>
 
@@ -175,8 +177,11 @@ async function saveBook({
     },
     body: formData,
   });
+
   if (res.status > 300) {
+    const body = res.json();
     console.warn("error", res);
+    return body;
   }
   return res.status === 200;
 }

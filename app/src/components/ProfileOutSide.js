@@ -22,7 +22,7 @@ const ProfileOutSide = () => {
       const url = `http://localhost:${port}/uploads/${e.photo}`;
       const star = "★".repeat(Math.floor(point));
       return (
-        <div key={e.id_user} className="profileOut">
+        <article key={e.id_user} className="profileOut">
           <header>
             <img src={url} alt="avatar" style={{ maxWidth: 250 }}></img>
             <div>
@@ -38,7 +38,7 @@ const ProfileOutSide = () => {
           </header>
           <nav>
             <Link to="/principal">Principal ˃ </Link>
-            {name !== "ultimos" ? (
+            {name !== "ultimos" || !name ? (
               <Link to={`/principal/category/${id}/${name}`}>{name} ˃ </Link>
             ) : null}
 
@@ -51,7 +51,7 @@ const ProfileOutSide = () => {
 
             <List array={userBooks} link={link}></List>
           </main>
-        </div>
+        </article>
       );
     });
 

@@ -14,35 +14,33 @@ const SoldBooks = () => {
     const url = `http://localhost:${port}/uploads/${e.photoFront}`;
     const star = "★".repeat(e.assessment);
     return (
-      <div key={e.id_purchase}>
-        <li>
-          <header>
-            <img src={url} alt="avatar" style={{ maxWidth: 100 }}></img>
-          </header>
-          <main>
-            <p>{e.productName}</p>
-            <p>{e.author}</p>
-            <p style={{ color: "orange" }}>{star}</p>
-            <p>{e.opinion}</p>
+      <li key={e.id_purchase}>
+        <header>
+          <img src={url} alt="avatar" style={{ maxWidth: 100 }}></img>
+        </header>
+        <main>
+          <p>{e.productName}</p>
+          <p>{e.author}</p>
+          <p style={{ color: "orange" }}>{star}</p>
+          <p>{e.opinion}</p>
 
-            <Link
-              to={`/principal/category/${id}/${name}/book/${e.id_product}/user/${e.buyer}`}
-            >
-              Comprador
-            </Link>
-          </main>
-        </li>
-      </div>
+          <Link
+            to={`/principal/category/0/ultimos/book/${e.id_product}/user/${e.buyer}`}
+          >
+            Comprador
+          </Link>
+        </main>
+      </li>
     );
   });
   return (
-    <div className="viewValoration">
+    <section className="viewValoration">
       <p>Valoraciones</p>
       <nav>
         <Link to="/principal">Principal</Link>
       </nav>
       <ul>{list}</ul>
-    </div>
+    </section>
   );
 };
 

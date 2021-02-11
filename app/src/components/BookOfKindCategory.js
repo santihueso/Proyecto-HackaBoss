@@ -40,7 +40,7 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
 
   const book = data.map((e) => {
     return (
-      <div key={e.id_product} className="viewBook">
+      <article key={e.id_product} className="viewBook">
         <nav>
           <Link to="/principal">Principal ˃ </Link>
           {name !== "ultimos" && name !== "seeker" ? (
@@ -51,7 +51,7 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
         </nav>
         <div>
           <header>
-            <Link onClick={activeComparator(1)}>
+            <span onClick={activeComparator(1)}>
               {active === 0 ? (
                 <img
                   src={`http://localhost:${port}/uploads/${e.photoFront}`}
@@ -65,7 +65,7 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
                   style={{ maxWidth: 350 }}
                 ></img>
               )}
-            </Link>
+            </span>
           </header>
           <main>
             <div>
@@ -93,7 +93,7 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
             </nav>
           </main>
         </div>
-      </div>
+      </article>
     );
   });
   return <div>{book}</div>;

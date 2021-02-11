@@ -18,8 +18,9 @@ const SignIn = () => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ username, email, password }),
     });
-    const body = await res.json();
+
     if (res.status !== 200) {
+      const body = await res.json();
       console.warn(res.status);
       setError(body.error);
     } else {
@@ -27,7 +28,7 @@ const SignIn = () => {
     }
   };
   return (
-    <div className="register">
+    <section className="register">
       <p>Register</p>
       <UserFormSignIn
         handlSubmit={handlSubmit}
@@ -40,7 +41,7 @@ const SignIn = () => {
         err={error}
       ></UserFormSignIn>
       <Link to="/login">Iniciar sesión</Link>
-    </div>
+    </section>
   );
 };
 

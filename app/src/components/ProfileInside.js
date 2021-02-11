@@ -2,7 +2,6 @@ import React from "react";
 import { port } from "./Principal";
 import { Link } from "react-router-dom";
 import { useFetchAuth } from "./useFetch/useFetchAuth";
-import { useFetchData } from "./useFetch/useFetchData";
 import "../css/profileInside.css";
 
 const ProfileUserInside = ({ auth }) => {
@@ -19,7 +18,7 @@ const ProfileUserInside = ({ auth }) => {
         const url = `http://localhost:${port}/uploads/${e.photo}`;
         const star = "★".repeat(Math.floor(point));
         return (
-          <div key={e.id_user} className="profileInside">
+          <section key={e.id_user} className="profileInside">
             <nav>
               <Link to="/principal">Principal</Link>
               <Link to="/principal/profile/edit">Editar</Link>
@@ -38,26 +37,32 @@ const ProfileUserInside = ({ auth }) => {
             </header>
             <main>
               <nav>
-                <div id="notif">
-                  <Link to="/principal/profile/list/offers">
-                    Notificaciones
-                  </Link>
-                </div>
-                <div id="fav">
-                  <Link to="/principal/profile/list/favorites">Favoritos</Link>
-                </div>
-                <div id="pur">
-                  <Link to="/principal/profile/list/purchase">Comprados</Link>
-                </div>
-                <div id="sell">
-                  <Link to="/principal/profile/list/toSell">En venta</Link>
-                </div>
-                <div id="res">
-                  <Link to="/principal/profile/list/reserved">Reservados</Link>
-                </div>
+                <ul>
+                  <li id="notif">
+                    <Link to="/principal/profile/list/offers">
+                      Notificaciones
+                    </Link>
+                  </li>
+                  <li id="fav">
+                    <Link to="/principal/profile/list/favorites">
+                      Favoritos
+                    </Link>
+                  </li>
+                  <li id="pur">
+                    <Link to="/principal/profile/list/purchase">Comprados</Link>
+                  </li>
+                  <li id="sell">
+                    <Link to="/principal/profile/list/toSell">En venta</Link>
+                  </li>
+                  <li id="res">
+                    <Link to="/principal/profile/list/reserved">
+                      Reservados
+                    </Link>
+                  </li>
+                </ul>
               </nav>
             </main>
-          </div>
+          </section>
         );
       })
     : null;

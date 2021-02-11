@@ -23,24 +23,22 @@ const Notifications = ({ auth }) => {
     array > 0 ? (
       reservedPurchase.map((e) => {
         return (
-          <div key={e.product} style={{ marginTop: 40 }}>
+          <section key={e.product} style={{ marginTop: 40 }}>
             {e.purchase !== 1 ? <p>En venta</p> : <p>Comprado</p>}
-            {e.reservation !== 1 && e.purchase !== 1 ? (
-              <p>Disponible para reservar</p>
-            ) : null}
-            {e.reservation === 1 ? <p>Reservado</p> : null}
+
+            {e.reservation === 1 ? <p>Reservado</p> : <p>Disponible</p>}
             {e.opinion !== "" ? null : e.opinion}
             {e.assessment !== "number" ? null : e.assessment}
             <p>Favoritos: {list}</p>
-          </div>
+          </section>
         );
       })
     ) : (
-      <div>
+      <section>
         <p>En venta</p>
         <p>Disponible para reservar</p>
         <p>Favoritos: {list}</p>
-      </div>
+      </section>
     );
 
   return listAll;

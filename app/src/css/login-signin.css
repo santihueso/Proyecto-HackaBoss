@@ -29,6 +29,18 @@ label {
 }
 
 /*login, resgister, change password*/
+.wrapper {
+  position: fixed;
+  top: 0;
+  backdrop-filter: blur(6px);
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-content: center;
+  z-index: 100;
+}
 
 .login,
 .register,
@@ -40,6 +52,7 @@ label {
   border: 2px solid var(--white);
   box-shadow: 2px 5px 8px rgb(95, 95, 95);
   border-radius: 5px;
+  background: black;
 }
 
 .login > div:first-of-type,

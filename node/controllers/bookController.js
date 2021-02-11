@@ -102,6 +102,7 @@ async function newBook(req, res) {
       author,
       category
     );
+
     res.status(200);
     res.send("El libro se ha publicado.");
   } catch (err) {

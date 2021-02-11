@@ -15,9 +15,8 @@ const LastBooks = () => {
     return (
       <section id="lastBooks">
         <h3>Últimos libros</h3>
-        <ul>
-          <List array={showBooks} link={link}></List>
-        </ul>
+
+        <List array={showBooks} link={link}></List>
       </section>
     );
   } else {

@@ -46,7 +46,7 @@ html {
   margin: 20px 200px;
 }
 
-.profileInside > main > nav {
+.profileInside > main > nav > ul {
   display: grid;
   grid-template-areas:
     "Notif  Notif Fav"
@@ -59,25 +59,25 @@ html {
   text-align: center;
 }
 
-.profileInside > main > nav > div {
+.profileInside > main > nav > ul > li {
   font-size: 30px;
   display: flex;
   justify-content: center;
   box-shadow: 2px 3px 6px rgb(95, 95, 95);
 }
 
-.profileInside > main > nav > div > a {
+.profileInside > main > nav > ul > li > a {
   margin: auto;
   transform-origin: botton left;
   transition: 1000ms;
 }
 
-.profileInside > main > nav > div > a:hover {
+.profileInside > main > nav > ul > li > a:hover {
   transform: scale(-3);
   transform: rotate(360deg);
 }
 
-.profileInside > main > nav > div:hover {
+.profileInside > main > nav > ul > li:hover {
   background: var(--red);
 }
 

@@ -6,19 +6,17 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
-import { HeadPrincipal } from "./HeadPrincipal";
-import { Categories } from "./Categories";
+
 import { BookOfKindCategory } from "./BookOfKindCategory";
-import { LastBooks } from "./LastBooks";
+
 import { FindForSeeker } from "./FindForSeeker";
 import { ProfileOutSide } from "./ProfileOutSide";
 import { ProfileUserInside } from "./ProfileInside";
 import { CreateProfile } from "./CreateProfile";
 import { SignIn } from "./Signin";
-import { Login } from "./Login";
 import { ListBooksUser } from "./ListBooksUser";
 import { NewPassword } from "./changePassword";
-import { NavPrincipal } from "./NavPrincipal";
+import { PrincipalPage } from "./PrincipalPage";
 import {
   ViewBooksForFavourites,
   ViewBooksForPurchase,
@@ -96,26 +94,12 @@ const Principal = () => {
           <NewPassword auth={auth}></NewPassword>
         </Route>
         <Route path="/principal">
-          <HeadPrincipal></HeadPrincipal>
-          <NavPrincipal auth={auth}></NavPrincipal>
-          <Categories></Categories>
-          <LastBooks></LastBooks>
+          <PrincipalPage auth={auth} setAuth={setAuth}></PrincipalPage>
         </Route>
         <Route path="/signin">
           <SignIn></SignIn>
         </Route>
-        <Route path="/login">
-          <Login setAuth={setAuth}></Login>
-        </Route>
-        <Route path="/notFound">
-          <p>No hay libros en esta categoría</p>
-        </Route>
-        <Route path="/reserved">
-          <p>El libro está reservado.</p>
-        </Route>
-        <Route path="/yourBook">
-          <p>El libro es tuyo</p>
-        </Route>
+
         <Route path="/">
           <Redirect to="/principal"></Redirect>
         </Route>

@@ -27,7 +27,7 @@ const ListBooksUser = ({ auth }) => {
     name = "En venta";
   }
   return (
-    <div className="listBooksUser">
+    <section className="listBooksUser">
       <p>{name}</p>
       <nav>
         <Link to="/principal">Principal ˃ </Link>
@@ -36,7 +36,7 @@ const ListBooksUser = ({ auth }) => {
       </nav>
 
       <List array={dataList} link={linkOfListBookUser}></List>
-    </div>
+    </section>
   );
 };
 

@@ -5,7 +5,6 @@ import "../css/formValoration.css";
 
 const FormValoration = ({ idBook, auth }) => {
   const history = useHistory();
-
   const [text, setText] = useState("");
   const [star, setStar] = useState(0);
 
@@ -28,9 +27,8 @@ const FormValoration = ({ idBook, auth }) => {
   };
   const starComparator = (value) => () =>
     star === value ? setStar(0) : setStar(value);
-
   const color = star === 0 ? { color: "gray" } : { color: "orange" };
-  console.log(star);
+
   return (
     <form onSubmit={handlSubmit} className="valoration">
       <p className="classification">

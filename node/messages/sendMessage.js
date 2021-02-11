@@ -10,7 +10,7 @@ async function send(req, res, comment) {
 
     const data = {
       from: "sender@gmail.com",
-      to: "jeimymiranda@outlook.es",
+      to: "recybook@protonmail.com",
       subject: "recy-book",
       text: comment,
     };

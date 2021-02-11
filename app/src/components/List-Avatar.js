@@ -4,7 +4,6 @@ import { port } from "./Principal";
 
 const Avatar = ({ e, to }) => {
   const url = `http://localhost:${port}/uploads/${e.photoFront}`;
-
   return (
     <Link to={to}>
       <img
