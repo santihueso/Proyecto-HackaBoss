@@ -20,102 +20,108 @@ const CreateProfile = ({ auth }) => {
   const [onCity, setOnCity] = useState(false);
   const [onCp, setOnCp] = useState(false);
   const history = useHistory();
-  const newUser = dataUser.map((user) => {
-    const handlSubmit = async (e) => {
-      e.preventDefault();
-      if (!name) {
-        name = user.username;
-      }
-      if (!description) {
-        description = user.descriptionUser;
-      }
-      if (!city) {
-        city = user.city;
-      }
-      if (!cp) {
-        cp = user.postalCode;
-      }
 
-      await saveUser({
-        img,
-        user,
-        name,
-        description,
-        city,
-        cp,
-        auth,
-      });
-      history.push("/principal/profile");
-    };
+  const dataForm = dataUser ? dataUser[0] : null;
+  const newUser = dataForm
+    ? dataForm.map((user) => {
+        const handlSubmit = async (e) => {
+          e.preventDefault();
+          if (!name) {
+            name = user.username;
+          }
+          if (!description) {
+            description = user.descriptionUser;
+          }
+          if (!city) {
+            city = user.city;
+          }
+          if (!cp) {
+            cp = user.postalCode;
+          }
 
-    return (
-      <div key={user.id_user} className="formProfile">
-        <p>Editar perfil</p>
-        <form onSubmit={handlSubmit}>
-          <div>
-            <label htmlFor="userImage"></label>
-            <input
-              id="userImage"
-              type="file"
-              onChange={(e) => [setOnImg(true), setImg(e.target.files[0])]}
-              accept="image/*"
-              style={{ color: "transparent" }}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="name"></label>
-            <input
-              id="name"
-              value={onName ? name : user.username}
-              type="text"
-              placeholder="nombre"
-              onChange={(e) => [setOnName(true), setName(e.target.value)]}
-              required
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="description"></label>
-            <input
-              id="description"
-              value={onDescription ? description : user.descriptionUser}
-              type="text"
-              placeholder="descripción"
-              onChange={(e) => [
-                setOnDescription(true),
-                setDescription(e.target.value),
-              ]}
-              required
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="city"></label>
-            <input
-              id="city"
-              value={onCity ? city : user.city}
-              type="text"
-              placeholder="ciudad"
-              onChange={(e) => [setOnCity(true), setCity(e.target.value)]}
-              required
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="cp"></label>
-            <input
-              id="cp"
-              value={onCp ? cp : user.postalCode}
-              type="number"
-              placeholder="codigo postal"
-              onChange={(e) => [setOnCp(true), setCp(e.target.value)]}
-              required
-            ></input>
-          </div>
+          await saveUser({
+            img,
+            user,
+            name,
+            description,
+            city,
+            cp,
+            auth,
+          });
+          history.push("/principal/profile");
+        };
 
-          <input type="submit" value="Enviar"></input>
-        </form>
-        <button onClick={() => history.push("/principal/profile")}>x</button>
-      </div>
-    );
-  });
+        return (
+          <div key={user.id_user} className="formProfile">
+            <p>Editar perfil</p>
+            <form onSubmit={handlSubmit}>
+              <div>
+                <label htmlFor="userImage"></label>
+                <input
+                  id="userImage"
+                  type="file"
+                  onChange={(e) => [setOnImg(true), setImg(e.target.files[0])]}
+                  accept="image/*"
+                  style={{ color: "transparent" }}
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="name"></label>
+                <input
+                  id="name"
+                  value={onName ? name : user.username}
+                  type="text"
+                  placeholder="nombre"
+                  onChange={(e) => [setOnName(true), setName(e.target.value)]}
+                  required
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="description"></label>
+                <input
+                  id="description"
+                  value={onDescription ? description : user.descriptionUser}
+                  type="text"
+                  placeholder="descripción"
+                  onChange={(e) => [
+                    setOnDescription(true),
+                    setDescription(e.target.value),
+                  ]}
+                  required
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="city"></label>
+                <input
+                  id="city"
+                  value={onCity ? city : user.city}
+                  type="text"
+                  placeholder="ciudad"
+                  onChange={(e) => [setOnCity(true), setCity(e.target.value)]}
+                  required
+                ></input>
+              </div>
+              <div>
+                <label htmlFor="cp"></label>
+                <input
+                  id="cp"
+                  value={onCp ? cp : user.postalCode}
+                  type="number"
+                  placeholder="codigo postal"
+                  onChange={(e) => [setOnCp(true), setCp(e.target.value)]}
+                  required
+                ></input>
+              </div>
+
+              <input type="submit" value="Enviar"></input>
+            </form>
+            <button onClick={() => history.push("/principal/profile")}>
+              x
+            </button>
+          </div>
+        );
+      })
+    : null;
   return newUser;
 };
 

@@ -16,7 +16,7 @@ const ProfileOutSide = () => {
   const userBooks = user ? user.books : null;
   const userAvg = user ? user.avg : null;
   const point = userAvg ? userAvg.map((e) => e.point) : null;
-  console.log(point);
+
   if (userData && userBooks) {
     const showUserData = userData.map((e) => {
       const url = `http://localhost:${port}/uploads/${e.photo}`;

@@ -92,7 +92,7 @@ const FormValoration = ({ idBook, auth }) => {
           placeholder="Escribe aquí"
         ></textarea>
       </div>
-      <input className="btnViewBook" type="submit"></input>
+      <input className="btnViewBook" type="Enviar"></input>
     </form>
   );
 };

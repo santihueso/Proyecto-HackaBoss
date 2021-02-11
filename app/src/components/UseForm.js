@@ -50,7 +50,7 @@ const UserFormSignIn = ({
         setValue={setPassword}
       ></UseLabelInput>
       <div style={{ color: "red", minHeight: "1.5em" }}> {err}</div>
-      <input type="submit" value="submit"></input>
+      <input type="submit" value="Enviar"></input>
     </form>
   );
 };
@@ -80,7 +80,7 @@ const UserFormLogIn = ({
         setValue={setPassword}
       ></UseLabelInput>
       <div style={{ color: "red", minHeight: "1.5em" }}> {err}</div>
-      <input type="submit" value="submit"></input>
+      <input type="submit" value="Enviar"></input>
     </form>
   );
 };
