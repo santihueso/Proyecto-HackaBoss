@@ -1,0 +1,26 @@
+html {
+  --white: white;
+  --gray: rgba(65, 65, 65, 0.596);
+  --red: rgba(253, 0, 0, 0.815);
+  --light-gray: rgb(155, 155, 155);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.fondo {
+  height: 100%;
+  width: 100%;
+  background: repeat-x center/50% url("../img/fondo-cerrar-sesion.jpg");
+  padding: 335px;
+}
+
+.welcome {
+  font-size: 30px;
+  font-weight: bold;
+  background: black;
+  padding: 60px;
+}

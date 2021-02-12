@@ -25,8 +25,10 @@ const Notifications = ({ auth }) => {
         return (
           <section key={e.product} style={{ marginTop: 40 }}>
             {e.purchase !== 1 ? <p>En venta</p> : <p>Comprado</p>}
-
-            {e.reservation === 1 ? <p>Reservado</p> : <p>Disponible</p>}
+            {e.reservation !== 1 && e.purchase !== 1 ? (
+              <p>Disponible para reservar</p>
+            ) : null}
+            {e.reservation === 1 ? <p>Reservado</p> : null}
             {e.opinion !== "" ? null : e.opinion}
             {e.assessment !== "number" ? null : e.assessment}
             <p>Favoritos: {list}</p>

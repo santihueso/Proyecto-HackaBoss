@@ -30,3 +30,20 @@ html {
 .viewValoration > ul > li > header {
   margin-right: 60px;
 }
+
+.viewValoration a:hover {
+  color: var(--red);
+}
+
+.viewValoration > ul > li > main > p {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.viewValoration > p {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: var(--red);
+}

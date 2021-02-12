@@ -47,3 +47,7 @@ html {
 .viewBook > div > main > nav {
   margin-top: 60px;
 }
+
+.viewBook a:hover {
+  color: var(--red);
+}

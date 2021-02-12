@@ -22,7 +22,6 @@ html {
 }
 
 .profileInside > nav > a {
-  color: var(--white);
   font-weight: bold;
   margin: 0px 100px;
 }

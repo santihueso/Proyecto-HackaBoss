@@ -24,14 +24,17 @@ const Login = ({ setAuth }) => {
       console.log(body);
       setAuth("");
       setError(body.error);
+      setHidden(false);
     } else {
       window.localStorage.setItem("auth", JSON.stringify(body.token));
       setAuth(body.token);
+      setHidden(true);
     }
   };
   return (
     <section className="wrapper" style={hiddenView}>
       <section className="login" style={hiddenView}>
+        <button onClick={() => setHidden(true)}>x</button>
         <p>Iniciar sesión</p>
         <UserFormLogIn
           handlSubmit={handlSubmit}
@@ -40,10 +43,7 @@ const Login = ({ setAuth }) => {
           password={password}
           setPassword={setPassword}
           err={error}
-          setHidden={setHidden}
         ></UserFormLogIn>
-
-        <Link to="/signin">Registrarse</Link>
         <Link to="/changePassword"> Recuperar contraseña</Link>
       </section>
     </section>

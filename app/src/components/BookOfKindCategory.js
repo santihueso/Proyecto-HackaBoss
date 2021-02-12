@@ -77,19 +77,20 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
               {buttons}
             </div>
             <nav>
-              {kind ? (
+              {kind && kind !== "offers" ? (
                 <Link
                   to={`/principal/category/0/ultimos/book/${idBook}/user/${e.seller}`}
                 >
                   Vendedor
                 </Link>
-              ) : (
+              ) : null}
+              {!kind ? (
                 <Link
                   to={`/principal/category/${id}/${name}/book/${idBook}/user/${e.seller}`}
                 >
                   Vendedor
                 </Link>
-              )}
+              ) : null}
             </nav>
           </main>
         </div>

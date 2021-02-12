@@ -6,14 +6,11 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
-
 import { BookOfKindCategory } from "./BookOfKindCategory";
-
 import { FindForSeeker } from "./FindForSeeker";
 import { ProfileOutSide } from "./ProfileOutSide";
 import { ProfileUserInside } from "./ProfileInside";
 import { CreateProfile } from "./CreateProfile";
-import { SignIn } from "./Signin";
 import { ListBooksUser } from "./ListBooksUser";
 import { NewPassword } from "./changePassword";
 import { PrincipalPage } from "./PrincipalPage";
@@ -28,6 +25,11 @@ import {
 import { FormEditBook } from "./FormBook";
 import { FormCreateBook } from "./FormCreatebook";
 import { SoldBooks } from "./Valorations";
+import {
+  ViewClose,
+  ViewCorrectChangePass,
+  Welcome,
+} from "./Close-Welcome-ChangePass";
 
 const port = 8084;
 
@@ -85,9 +87,7 @@ const Principal = () => {
           <FormCreateBook auth={auth}></FormCreateBook>
         </Route>
         <Route path="/principal/changePassword/valid">
-          <Link to="/principal">Principal</Link>
-          <Link to="/principal/profile">Perfil</Link>
-          <p>Se ha cambiado correctamente</p>
+          <ViewCorrectChangePass></ViewCorrectChangePass>
         </Route>
 
         <Route path="/principal/changePassword">
@@ -96,10 +96,13 @@ const Principal = () => {
         <Route path="/principal">
           <PrincipalPage auth={auth} setAuth={setAuth}></PrincipalPage>
         </Route>
-        <Route path="/signin">
-          <SignIn></SignIn>
-        </Route>
 
+        <Route path="/close">
+          <ViewClose></ViewClose>
+        </Route>
+        <Route path="/welcome">
+          <Welcome></Welcome>
+        </Route>
         <Route path="/">
           <Redirect to="/principal"></Redirect>
         </Route>

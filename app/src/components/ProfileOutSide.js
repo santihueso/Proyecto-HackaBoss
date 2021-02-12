@@ -6,11 +6,13 @@ import { useFetchData } from "./useFetch/useFetchData";
 import "../css/profileOutSide.css";
 
 const ProfileOutSide = () => {
-  const { idUser, id, idBook, name } = useParams();
+  let { idUser, id, idBook, name } = useParams();
   const [user] = useFetchData(
     `http://localhost:${port}/login/category/book/porfile/${idUser}`
   );
-
+  if (name === "seeker") {
+    name = "Buscador";
+  }
   const link = (idBook) => `/principal/category/${id}/${name}/book/${idBook}`;
   const userData = user ? user.user : null;
   const userBooks = user ? user.books : null;

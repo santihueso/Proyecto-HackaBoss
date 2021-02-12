@@ -42,9 +42,11 @@ const FindForSeeker = () => {
 
   return (
     <div className="listBooksUser">
-      <p>{name}</p>
+      <p>Buscador</p>
       <Link to="/principal">Principal ˃ </Link>
-
+      <p>
+        Has buscado por "{name}" con "{data}"
+      </p>
       {list.length > 0 ? (
         <List array={list} link={link}></List>
       ) : (

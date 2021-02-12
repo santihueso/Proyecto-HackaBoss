@@ -71,9 +71,7 @@ label {
   border-radius: 4px;
 }
 
-.login a,
-.register a,
-.changePassword a {
+.login a {
   text-decoration: underline;
   display: block;
   margin: 0.3rem;

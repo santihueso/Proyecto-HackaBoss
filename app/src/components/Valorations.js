@@ -4,7 +4,7 @@ import { port } from "./Principal";
 import { Link, useParams } from "react-router-dom";
 import "../css/valorations.css";
 const SoldBooks = () => {
-  const { idUser, id, name } = useParams();
+  const { idUser } = useParams();
 
   const [book] = useFetchData(
     `http://localhost:${port}/login/user/${idUser}/valorations`
@@ -37,7 +37,7 @@ const SoldBooks = () => {
     <section className="viewValoration">
       <p>Valoraciones</p>
       <nav>
-        <Link to="/principal">Principal</Link>
+        <Link to="/principal">Principal ˃ </Link>
       </nav>
       <ul>{list}</ul>
     </section>

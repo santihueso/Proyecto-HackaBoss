@@ -57,3 +57,7 @@ html {
   margin-top: 20px;
   margin-left: 20px;
 }
+
+.profileOut a:hover {
+  color: var(--red);
+}

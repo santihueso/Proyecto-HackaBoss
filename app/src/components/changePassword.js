@@ -29,6 +29,7 @@ const NewPassword = ({ auth }) => {
   };
   return (
     <div className="changePassword">
+      <button>x</button>
       <p>Cambiar Contraseña</p>
       <UserFormChangePassword
         handlSubmit={handlSubmit}

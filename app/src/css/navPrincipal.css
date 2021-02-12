@@ -1,8 +1,13 @@
-.linkPrincipal > a {
+.linkPrincipal > nav > a {
   color: white;
-  margin-left: 20px;
-  border-bottom: 1px solid white;
+  margin-left: 30px;
+  font-size: 20px;
   font-weight: bold;
+}
+
+.linkPrincipal > nav > a:hover,
+.linkPrincipal > nav > button:hover {
+  color: red;
 }
 
 .linkPrincipal {
@@ -13,4 +18,13 @@
 
 .principal {
   position: relative;
+}
+
+.linkPrincipal > nav > button {
+  border: none;
+  color: white;
+  background: black;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 30px;
 }
