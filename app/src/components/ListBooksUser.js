@@ -31,7 +31,7 @@ const ListBooksUser = ({ auth }) => {
       <p>{name}</p>
       <nav>
         <Link to="/principal">Principal ˃ </Link>
-        <Link to="/principal/profile">Profile ˃ </Link>
+        <Link to="/principal/profile">Perfil ˃ </Link>
         <p>{name}</p>
       </nav>
 

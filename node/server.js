@@ -112,6 +112,13 @@ app.get(
   validate,
   userPurchase.showFavourites
 );
+
+app.delete(
+  "/login/user/book/:bookId/seller/delete",
+  validate,
+  purchase.deleteSellerRes
+);
+
 app.get("/login/user/profile/toSell", validate, userPurchase.showMyBooks);
 app.get("/login/user/profile/offers", validate, userPurchase.showMyoffers);
 app.get("/login/user/profile", validate, userController.getUserSelect);

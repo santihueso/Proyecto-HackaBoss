@@ -101,11 +101,17 @@ async function ratingPurchase(comment, opinion, product, buyer) {
   const [assesment] = await pool.query(insertQuery, [
     comment,
     opinion,
-
     buyer,
     product,
   ]);
   return assesment;
+}
+
+async function deleteSellerReserved(book) {
+  const pool = await database.getPool();
+  const query = "delete from purchase where reservation = 1 and product = ?";
+  const [deleteReserved] = await pool.query(query, book);
+  return deleteReserved;
 }
 
 module.exports = {
@@ -121,4 +127,5 @@ module.exports = {
   deleteFavorite,
   ifBuyed,
   ratingPurchase,
+  deleteSellerReserved,
 };

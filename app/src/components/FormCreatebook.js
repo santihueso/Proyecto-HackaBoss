@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { port } from "./Principal";
-
 import { useFetchData } from "./useFetch/useFetchData";
 
 const FormCreateBook = ({ auth }) => {
@@ -36,98 +35,100 @@ const FormCreateBook = ({ auth }) => {
   };
 
   return (
-    <div className="formBook">
-      <p>Subir un libro</p>
-      <form onSubmit={handlSubmit}>
-        <div>
-          <label htmlFor="imgOne"></label>
-          <input
-            id="imgOne"
-            type="file"
-            onChange={(element) => setImgOne(element.target.files[0])}
-            accept="image/*"
-            style={{ color: "transparent" }}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="imgTwo"></label>
-          <input
-            id="imgTwo"
-            type="file"
-            onChange={(element) => setImgTwo(element.target.files[0])}
-            accept="image/*"
-            style={{ color: "transparent" }}
-            required
-          ></input>
-        </div>
+    <section className="forms">
+      <div className="formBook">
+        <p>Subir un libro</p>
+        <form onSubmit={handlSubmit}>
+          <div>
+            <label htmlFor="imgOne"></label>
+            <input
+              id="imgOne"
+              type="file"
+              onChange={(element) => setImgOne(element.target.files[0])}
+              accept="image/*"
+              style={{ color: "transparent" }}
+              required
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="imgTwo"></label>
+            <input
+              id="imgTwo"
+              type="file"
+              onChange={(element) => setImgTwo(element.target.files[0])}
+              accept="image/*"
+              style={{ color: "transparent" }}
+              required
+            ></input>
+          </div>
 
-        <div>
-          <label htmlFor="title"></label>
-          <input
-            id="title"
-            value={title}
-            type="text"
-            placeholder="titulo"
-            onChange={(element) => setTitle(element.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="author"></label>
-          <input
-            id="author"
-            value={author}
-            type="text"
-            placeholder="autor"
-            onChange={(element) => setAuthor(element.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="description"></label>
-          <input
-            id="description"
-            value={description}
-            type="text"
-            placeholder="descripción"
-            onChange={(element) => setDescription(element.target.value)}
-            required
-          ></input>
-        </div>
+          <div>
+            <label htmlFor="title"></label>
+            <input
+              id="title"
+              value={title}
+              type="text"
+              placeholder="titulo"
+              onChange={(element) => setTitle(element.target.value)}
+              required
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="author"></label>
+            <input
+              id="author"
+              value={author}
+              type="text"
+              placeholder="autor"
+              onChange={(element) => setAuthor(element.target.value)}
+              required
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="description"></label>
+            <input
+              id="description"
+              value={description}
+              type="text"
+              placeholder="descripción"
+              onChange={(element) => setDescription(element.target.value)}
+              required
+            ></input>
+          </div>
 
-        <div>
-          <label htmlFor="price"></label>
-          <input
-            id="price"
-            value={price}
-            type="number"
-            placeholder="precio"
-            onChange={(element) => setPrice(element.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="language"></label>
-          <input
-            id="language"
-            value={language}
-            type="text"
-            placeholder="idioma"
-            onChange={(element) => setLanguage(element.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
-          <SelectCategories
-            id={category}
-            setId={setCategory}
-          ></SelectCategories>
-        </div>
-        <input type="submit" value="Enviar"></input>
-      </form>
-      <button onClick={() => history.push("/principal")}>x</button>
-    </div>
+          <div>
+            <label htmlFor="price"></label>
+            <input
+              id="price"
+              value={price}
+              type="number"
+              placeholder="precio"
+              onChange={(element) => setPrice(element.target.value)}
+              required
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="language"></label>
+            <input
+              id="language"
+              value={language}
+              type="text"
+              placeholder="idioma"
+              onChange={(element) => setLanguage(element.target.value)}
+              required
+            ></input>
+          </div>
+          <div>
+            <SelectCategories
+              id={category}
+              setId={setCategory}
+            ></SelectCategories>
+          </div>
+          <input type="submit" value="Enviar"></input>
+        </form>
+        <button onClick={() => history.push("/principal")}>x</button>
+      </div>
+    </section>
   );
 };
 

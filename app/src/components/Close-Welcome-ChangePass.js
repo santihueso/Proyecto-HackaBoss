@@ -12,7 +12,7 @@ const Close = () => {
 
 const ViewClose = () => {
   return (
-    <section className="fondo">
+    <section style={{ padding: 335 }} className="fondo">
       <section className="welcome">
         <p>Hasta pronto</p>
       </section>
@@ -22,12 +22,17 @@ const ViewClose = () => {
 
 const Welcome = () => {
   return (
-    <section className="fondo">
+    <section style={{ padding: 305 }} className="fondo">
       <section className="welcome">
         <p>¡Bienvenido a recybook!</p>
-        <p>Intercambia conocimiento y fantasías con el resto de usuarios.</p>
-        <p>Por favor, incia sesión para empezar:</p>
-        <Link to="/principal">Principal</Link>
+        <aside>
+          <p style={{ fontSize: 20 }}>
+            Intercambia conocimiento y fantasías iniciando sesión:
+          </p>
+          <Link style={{ fontSize: 20 }} to="/principal">
+            Principal
+          </Link>
+        </aside>
       </section>
     </section>
   );
@@ -35,7 +40,7 @@ const Welcome = () => {
 
 const ViewCorrectChangePass = () => {
   return (
-    <section className="fondo">
+    <section style={{ padding: 318 }} className="fondo">
       <section className="welcome">
         <p>Se ha cambiado correctamente, vuelve a tu:</p>
         <Link to="/principal/profile">Perfil</Link>

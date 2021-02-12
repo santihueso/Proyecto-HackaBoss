@@ -19,8 +19,7 @@ label {
 }
 
 .login > p,
-.register > p,
-.changePassword > p:first-child {
+.register > p {
   text-align: center;
   margin: 2rem;
   font-size: 40px;
@@ -43,8 +42,7 @@ label {
 }
 
 .login,
-.register,
-.changePassword {
+.register {
   margin: 8rem auto;
   padding: 2rem;
   max-width: 500px;
@@ -56,16 +54,14 @@ label {
 }
 
 .login > div:first-of-type,
-.register > div:first-of-type,
-.changePassword > div:first-of-type {
+.register > div:first-of-type {
   padding: 1rem;
   font-size: 250%;
   font-weight: 900;
 }
 
 .login > form input,
-.register > form input,
-.changePassword > form input {
+.register > form input {
   margin: 0.3rem;
   padding: 0.4rem;
   border-radius: 4px;
@@ -73,15 +69,24 @@ label {
 
 .login a {
   text-decoration: underline;
-  display: block;
-  margin: 0.3rem;
+  margin: 10px 0px 40px;
 }
 
 .login > form > input,
-.register > form > input,
-.changePassword > form > input {
+.register > form > input {
   background: red;
   border: none;
   color: white;
   width: 100px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.login > button,
+.register > button {
+  margin-left: 400px;
+  border: 1px solid white;
+  background: black;
+  color: white;
+  width: 20px;
 }

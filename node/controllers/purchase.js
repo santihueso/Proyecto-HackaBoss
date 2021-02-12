@@ -289,6 +289,28 @@ async function assessment(req, res) {
   }
 }
 
+async function deleteSellerRes(req, res) {
+  try {
+    const book = req.params.bookId;
+    const remove = await purchase.deleteSellerReserved(book);
+
+    if (!remove || remove.length === 0) {
+      const error = new Error("No se encuentra el libro");
+      error.status = 404;
+      throw error;
+    }
+    res.send("Se ha eliminado la reserva");
+    res.status(200);
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
+}
+
 module.exports = {
   getReserver,
   getBuyBookWithReserve,
@@ -297,4 +319,5 @@ module.exports = {
   deleteBookReserved,
   deleteFavorite,
   assessment,
+  deleteSellerRes,
 };

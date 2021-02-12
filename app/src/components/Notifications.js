@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { port } from "./Principal";
 import { useFetchAuth } from "./useFetch/useFetchAuth";
+import { ButtonDelete } from "./Buttons";
 
 const Notifications = ({ auth }) => {
   const { idBook } = useParams();
@@ -23,12 +24,22 @@ const Notifications = ({ auth }) => {
     array > 0 ? (
       reservedPurchase.map((e) => {
         return (
-          <section key={e.product} style={{ marginTop: 40 }}>
+          <section key={e.product}>
             {e.purchase !== 1 ? <p>En venta</p> : <p>Comprado</p>}
             {e.reservation !== 1 && e.purchase !== 1 ? (
               <p>Disponible para reservar</p>
             ) : null}
-            {e.reservation === 1 ? <p>Reservado</p> : null}
+            {e.reservation === 1 ? (
+              <div>
+                <p>Reservado</p>
+                <ButtonDelete
+                  idBook={idBook}
+                  to={"seller"}
+                  rout={"offers"}
+                  auth={auth}
+                ></ButtonDelete>
+              </div>
+            ) : null}
             {e.opinion !== "" ? null : e.opinion}
             {e.assessment !== "number" ? null : e.assessment}
             <p>Favoritos: {list}</p>

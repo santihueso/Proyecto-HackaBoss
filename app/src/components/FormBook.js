@@ -68,119 +68,121 @@ const FormEditBook = ({ auth }) => {
     };
 
     return (
-      <div key={e.id_product} className="formBook">
-        <p>Editar libro</p>
-        <form onSubmit={handlSubmit}>
-          <div>
-            <label htmlFor="imgOne"></label>
-            <input
-              id="imgOne"
-              type="file"
-              onChange={(element) => [
-                setOnImgOne(true),
-                setImgOne(element.target.files[0]),
-              ]}
-              accept="image/*"
-              style={{ color: "transparent" }}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="imgTwo"></label>
-            <input
-              id="imgTwo"
-              type="file"
-              onChange={(element) => [
-                setOnImgTwo(true),
-                setImgTwo(element.target.files[0]),
-              ]}
-              accept="image/*"
-              style={{ color: "transparent" }}
-            ></input>
-          </div>
+      <section key={e.id_product} className="forms">
+        <div className="formBook">
+          <p>Editar libro</p>
+          <form onSubmit={handlSubmit}>
+            <div>
+              <label htmlFor="imgOne"></label>
+              <input
+                id="imgOne"
+                type="file"
+                onChange={(element) => [
+                  setOnImgOne(true),
+                  setImgOne(element.target.files[0]),
+                ]}
+                accept="image/*"
+                style={{ color: "transparent" }}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="imgTwo"></label>
+              <input
+                id="imgTwo"
+                type="file"
+                onChange={(element) => [
+                  setOnImgTwo(true),
+                  setImgTwo(element.target.files[0]),
+                ]}
+                accept="image/*"
+                style={{ color: "transparent" }}
+              ></input>
+            </div>
 
-          <div>
-            <label htmlFor="title"></label>
-            <input
-              id="title"
-              value={onTitle ? title : e.productName}
-              type="text"
-              placeholder="titulo"
-              onChange={(element) => [
-                setOnTitle(true),
-                setTitle(element.target.value),
-              ]}
-              required
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="author"></label>
-            <input
-              id="author"
-              value={onAuthor ? author : e.author}
-              type="text"
-              placeholder="titulo"
-              onChange={(element) => [
-                setOnAuthor(true),
-                setAuthor(element.target.value),
-              ]}
-              required
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="description"></label>
-            <input
-              id="description"
-              value={onDescription ? description : e.descriptionProduct}
-              type="text"
-              placeholder="descripción"
-              onChange={(element) => [
-                setOnDescription(true),
-                setDescription(element.target.value),
-              ]}
-              required
-            ></input>
-          </div>
+            <div>
+              <label htmlFor="title"></label>
+              <input
+                id="title"
+                value={onTitle ? title : e.productName}
+                type="text"
+                placeholder="titulo"
+                onChange={(element) => [
+                  setOnTitle(true),
+                  setTitle(element.target.value),
+                ]}
+                required
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="author"></label>
+              <input
+                id="author"
+                value={onAuthor ? author : e.author}
+                type="text"
+                placeholder="titulo"
+                onChange={(element) => [
+                  setOnAuthor(true),
+                  setAuthor(element.target.value),
+                ]}
+                required
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="description"></label>
+              <input
+                id="description"
+                value={onDescription ? description : e.descriptionProduct}
+                type="text"
+                placeholder="descripción"
+                onChange={(element) => [
+                  setOnDescription(true),
+                  setDescription(element.target.value),
+                ]}
+                required
+              ></input>
+            </div>
 
-          <div>
-            <label htmlFor="price"></label>
-            <input
-              id="price"
-              value={onPrice ? price : e.price}
-              type="number"
-              placeholder="precio"
-              onChange={(element) => [
-                setOnPrice(true),
-                setPrice(element.target.value),
-              ]}
-              required
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="language"></label>
-            <input
-              id="language"
-              value={onLanguage ? language : e.bookLanguage}
-              type="text"
-              placeholder="idioma"
-              onChange={(element) => [
-                setOnLanguage(true),
-                setLanguage(element.target.value),
-              ]}
-              required
-            ></input>
-          </div>
-          <div>
-            <SelectCategories
-              id={onCategory ? category : e.category}
-              setId={setCategory}
-              on={onCategory}
-              setOn={setOnCategory}
-            ></SelectCategories>
-          </div>
-          <input type="submit" value="Enviar"></input>
-        </form>
-        <button onClick={() => history.push("/principal")}>x</button>
-      </div>
+            <div>
+              <label htmlFor="price"></label>
+              <input
+                id="price"
+                value={onPrice ? price : e.price}
+                type="number"
+                placeholder="precio"
+                onChange={(element) => [
+                  setOnPrice(true),
+                  setPrice(element.target.value),
+                ]}
+                required
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="language"></label>
+              <input
+                id="language"
+                value={onLanguage ? language : e.bookLanguage}
+                type="text"
+                placeholder="idioma"
+                onChange={(element) => [
+                  setOnLanguage(true),
+                  setLanguage(element.target.value),
+                ]}
+                required
+              ></input>
+            </div>
+            <div>
+              <SelectCategories
+                id={onCategory ? category : e.category}
+                setId={setCategory}
+                on={onCategory}
+                setOn={setOnCategory}
+              ></SelectCategories>
+            </div>
+            <input type="submit" value="Enviar"></input>
+          </form>
+          <button onClick={() => history.push("/principal")}>x</button>
+        </div>
+      </section>
     );
   });
   return edit;

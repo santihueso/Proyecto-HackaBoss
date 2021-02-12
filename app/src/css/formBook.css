@@ -12,12 +12,14 @@ html {
 }
 
 .formBook {
-  margin: 100px 500px;
   border: 1px solid white;
   text-align: center;
   padding: 30px;
   position: relative;
+  background: rgba(0, 0, 0, 0.664);
+  margin: 0px 300px;
   box-shadow: 2px 5px 8px rgb(95, 95, 95);
+  border-radius: 8px;
 }
 
 .formBook > form {
@@ -36,6 +38,8 @@ html {
 
 .formBook input {
   padding: 5px;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
 .formBook > p {
@@ -51,6 +55,7 @@ html {
   background: black;
   border: 1px solid white;
   color: white;
+  border-radius: 5px;
 }
 
 .formBook > form > input {
@@ -59,4 +64,9 @@ html {
   border: none;
   width: 100px;
   color: white;
+}
+
+.forms {
+  padding: 190px;
+  background: no-repeat center/100% url("../img/fondo-forms.jpg");
 }

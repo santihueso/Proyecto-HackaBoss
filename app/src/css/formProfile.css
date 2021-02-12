@@ -12,17 +12,14 @@ html {
 }
 
 .formProfile {
-  margin: 100px 500px;
+  margin: 25px 300px;
   border: 1px solid white;
   text-align: center;
-  padding: 30px;
+  border-radius: 5px;
+  padding: 50px;
+  background: rgba(0, 0, 0, 0.664);
   position: relative;
   box-shadow: 2px 5px 8px rgb(95, 95, 95);
-}
-
-.formProfile > form {
-  margin: auto;
-  height: 300px;
 }
 
 .formProfile > form > div {
@@ -35,6 +32,8 @@ html {
 
 .formProfile input {
   padding: 5px;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
 .formProfile > p {
@@ -50,6 +49,7 @@ html {
   background: black;
   border: 1px solid white;
   color: white;
+  border-radius: 2px;
 }
 
 .formProfile > form > input {

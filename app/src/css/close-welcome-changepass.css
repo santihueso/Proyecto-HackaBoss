@@ -15,12 +15,51 @@ html {
   height: 100%;
   width: 100%;
   background: repeat-x center/50% url("../img/fondo-cerrar-sesion.jpg");
-  padding: 335px;
 }
 
 .welcome {
   font-size: 30px;
   font-weight: bold;
-  background: black;
+  background: rgba(0, 0, 0, 0.781);
+  box-shadow: 2px 5px 8px rgb(49, 49, 49);
+  border-radius: 5px;
   padding: 60px;
+}
+
+.changePassword {
+  margin: 60px 400px;
+  background: rgba(0, 0, 0, 0.664);
+  padding: 60px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid white;
+  box-shadow: 2px 5px 8px rgb(95, 95, 95);
+  position: relative;
+}
+
+.changePassword > form input {
+  margin-top: 10px;
+  padding: 0.4rem;
+}
+
+.changePassword > form > input {
+  background: red;
+  border: none;
+  color: white;
+  width: 100px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.changePassword > p {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.changePassword > a {
+  border: 1px solid white;
+  padding: 1px 5px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }

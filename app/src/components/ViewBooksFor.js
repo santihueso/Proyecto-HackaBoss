@@ -15,7 +15,7 @@ const ViewBooksForFavourites = ({ auth }) => {
   return (
     <ViewBook
       buttons={
-        <div>
+        <div className="btnPurchase">
           <ButtonDelete
             idBook={idBook}
             to={"favorite"}
@@ -63,7 +63,7 @@ const ViewBooksForReserved = ({ auth }) => {
   return (
     <ViewBook
       buttons={
-        <div>
+        <div className="btnPurchase">
           <ButtonDelete
             idBook={idBook}
             to={"reservation"}
@@ -88,7 +88,7 @@ const ViewBooksForToSell = ({ auth }) => {
   return (
     <ViewBook
       buttons={
-        <div>
+        <div className="btnPurchase">
           <button
             className="btnViewBook"
             onClick={() =>
@@ -134,7 +134,7 @@ const ViewBooksForCategories = ({ auth }) => {
   return (
     <ViewBook
       buttons={
-        <div>
+        <div className="btnPurchase">
           <ButtonPurchaseFavoriteReserved
             idBook={idBook}
             to={"favorite"}

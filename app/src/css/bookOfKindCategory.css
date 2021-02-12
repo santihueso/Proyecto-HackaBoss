@@ -51,3 +51,7 @@ html {
 .viewBook a:hover {
   color: var(--red);
 }
+
+.btnPurchase {
+  display: flex;
+}

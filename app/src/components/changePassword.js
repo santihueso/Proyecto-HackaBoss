@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { port } from "./Principal";
 import { UserFormChangePassword } from "./UseForm";
 import "../css/login-signin.css";
@@ -28,18 +28,20 @@ const NewPassword = ({ auth }) => {
     }
   };
   return (
-    <div className="changePassword">
-      <button>x</button>
-      <p>Cambiar Contraseña</p>
-      <UserFormChangePassword
-        handlSubmit={handlSubmit}
-        newPassword={newPassword}
-        setNewPassword={setNewPassword}
-        passwordAgain={passwordAgain}
-        setPasswordAgain={setPasswordAgain}
-        err={error}
-      ></UserFormChangePassword>
-    </div>
+    <section className="forms">
+      <div className="changePassword">
+        <Link to="/principal/profile">x</Link>
+        <p>Cambiar Contraseña</p>
+        <UserFormChangePassword
+          handlSubmit={handlSubmit}
+          newPassword={newPassword}
+          setNewPassword={setNewPassword}
+          passwordAgain={passwordAgain}
+          setPasswordAgain={setPasswordAgain}
+          err={error}
+        ></UserFormChangePassword>
+      </div>
+    </section>
   );
 };
 
