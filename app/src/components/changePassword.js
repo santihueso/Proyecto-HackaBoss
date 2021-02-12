@@ -12,7 +12,7 @@ const NewPassword = ({ auth }) => {
   const handlSubmit = async (e) => {
     e.preventDefault();
     if (!auth) {
-      return history.push("/login");
+      return history.push("/principal");
     }
     const res = await fetch(`http://localhost:${port}/user/changePassword`, {
       method: "PUT",

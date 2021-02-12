@@ -12,7 +12,7 @@ const Notifications = ({ auth }) => {
     auth
   );
   if (!auth) {
-    return history.push("/login");
+    return history.push("/principal");
   }
 
   const fav = data ? data[0] : null;

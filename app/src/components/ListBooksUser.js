@@ -34,7 +34,6 @@ const ListBooksUser = ({ auth }) => {
         <Link to="/principal/profile">Perfil ˃ </Link>
         <p>{name}</p>
       </nav>
-
       <List array={dataList} link={linkOfListBookUser}></List>
     </section>
   );

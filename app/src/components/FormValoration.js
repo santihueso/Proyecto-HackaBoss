@@ -10,7 +10,7 @@ const FormValoration = ({ idBook, auth }) => {
 
   const handlSubmit = async () => {
     if (!auth) {
-      history.push("/login");
+      history.push("/principal");
     }
     const res = await fetch(
       `http://localhost:${port}/login/user/:userId/book/${idBook}/assessment`,

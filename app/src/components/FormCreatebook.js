@@ -6,7 +6,7 @@ import { useFetchData } from "./useFetch/useFetchData";
 const FormCreateBook = ({ auth }) => {
   const history = useHistory();
   if (!auth) {
-    history.push("/login");
+    history.push("/principal");
   }
   const [imgOne, setImgOne] = useState(null);
   const [imgTwo, setImgTwo] = useState(null);

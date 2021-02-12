@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../css/headPrincipal.css";
+
 const HeadPrincipal = () => {
   const [inputValue, setInputValue] = useState("");
   const [key, setKey] = useState("title");
   const history = useHistory();
-  const getData = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const change = (e) => {
-    setKey(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +16,11 @@ const HeadPrincipal = () => {
     <header className="headerPrincipal">
       <h1>RecyBook</h1>
       <section className="seeker">
-        <select className="select" onChange={change} value={key}>
+        <select
+          className="select"
+          onChange={(e) => setKey(e.target.value)}
+          value={key}
+        >
           <option className="option" id="city " value="city">
             Ciudad
           </option>
@@ -39,7 +37,7 @@ const HeadPrincipal = () => {
         <form className="textSeek" onSubmit={handleSubmit}>
           <input
             type="text"
-            onChange={getData}
+            onChange={(e) => setInputValue(e.target.value)}
             value={inputValue}
             placeholder="camus"
           ></input>
