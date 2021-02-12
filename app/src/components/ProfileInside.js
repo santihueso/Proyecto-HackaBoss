@@ -33,6 +33,7 @@ const ProfileUserInside = ({ auth }) => {
                 <p>{e.city}</p>
                 <p style={{ color: "orange" }}>{star}</p>
                 <p>{e.postalCode}</p>
+                <Link to="/principal/profile/valorations">Valoraciones</Link>
               </main>
             </header>
             <main>

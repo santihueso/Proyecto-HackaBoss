@@ -125,7 +125,9 @@ app.get("/login/user/profile", validate, userController.getUserSelect);
 
 /*cambio de contraseña*/
 app.put("/user/changePassword", validate, userController.newPassword);
+/*valoraciones */
 app.get("/login/user/:userId/valorations", book.soldBooks);
+app.get("/login/user/valorations", validate, book.soldBooksWithToken);
 // datos generales del usuario
 app.get("/api/user", userController.getUsers);
 

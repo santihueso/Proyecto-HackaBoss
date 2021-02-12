@@ -21,7 +21,6 @@ const Login = ({ setAuth }) => {
     const body = await res.json();
 
     if (res.status !== 200) {
-      console.log(body);
       setAuth("");
       setError(body.error);
       setHidden(false);

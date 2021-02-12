@@ -23,7 +23,7 @@ import {
 } from "./ViewBooksFor";
 import { FormEditBook } from "./FormBook";
 import { FormCreateBook } from "./FormCreatebook";
-import { SoldBooks } from "./Valorations";
+import { ValorationsInside, ValorationsOutside } from "./Valorations";
 import {
   ViewClose,
   ViewCorrectChangePass,
@@ -41,7 +41,7 @@ const Principal = () => {
     <Router>
       <Switch>
         <Route path="/principal/category/book/:idBook/user/:idUser/valorations">
-          <SoldBooks></SoldBooks>
+          <ValorationsOutside></ValorationsOutside>
         </Route>
         <Route path="/principal/category/:id/:name/book/:idBook/user/:idUser">
           <ProfileOutSide></ProfileOutSide>
@@ -78,6 +78,9 @@ const Principal = () => {
         </Route>
         <Route path="/principal/profile/edit">
           <CreateProfile auth={auth}></CreateProfile>
+        </Route>
+        <Route path="/principal/profile/valorations">
+          <ValorationsInside auth={auth}></ValorationsInside>
         </Route>
         <Route path="/principal/profile">
           <ProfileUserInside auth={auth}></ProfileUserInside>

@@ -230,7 +230,27 @@ async function soldBooks(req, res) {
     const userId = req.params.userId;
 
     const books = await book.soldBook(userId);
+
     res.send(books);
+  } catch (err) {
+    if (err.name === "validationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ err: err.message });
+  }
+}
+
+async function soldBooksWithToken(req, res) {
+  try {
+    const auth = req.headers.authorization;
+    const decode = jwt.decode(auth);
+    const idUser = decode.id;
+    const books = await book.soldBook(idUser);
+
+    res.send(books);
+    res.status(200);
   } catch (err) {
     if (err.name === "validationError") {
       err.code = 400;
@@ -249,4 +269,5 @@ module.exports = {
   editBook,
   deleteBook,
   soldBooks,
+  soldBooksWithToken,
 };

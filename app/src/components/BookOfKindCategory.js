@@ -26,6 +26,7 @@ const BookOfKindCategory = () => {
     </div>
   );
 };
+
 const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
   let { idBook, id, name } = useParams();
   const [active, setActive] = useState(0);
