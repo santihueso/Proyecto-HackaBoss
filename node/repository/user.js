@@ -50,6 +50,11 @@ async function login(email) {
   return user;
 }
 
+// async function  forgetPass(email) {
+//   const pool = await database.getPool();
+//   const query ="update user set userPassword "
+// }
+
 module.exports = {
   getUser,
   selectUser,

@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { port } from "./Principal";
 import { Link } from "react-router-dom";
 import { useFetchAuth } from "./useFetch/useFetchAuth";
 import "../css/profileInside.css";
 
 const ProfileUserInside = ({ auth }) => {
+  const [data, setData] = useState([]);
+  //revisar
   const [dataUser] = useFetchAuth(
     `http://localhost:${port}/login/user/profile`,
     auth
   );
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch(
+        `http://localhost:${port}/login/user/profile/offers`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json", Authorization: auth },
+        }
+      );
+      const body = await res.json();
+      if (res.status !== 200) {
+        console.warn("error", res);
+      }
+      setData(body);
+    };
+    const interval = setInterval(getData, 5000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   const userData = dataUser ? dataUser[0] : null;
   const avg = dataUser ? dataUser[1] : null;
