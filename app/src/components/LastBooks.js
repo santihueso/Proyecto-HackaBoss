@@ -8,8 +8,8 @@ const LastBooks = () => {
   const [data] = useFetchData(`http://localhost:${port}/beginning/lastBooks`);
   const showBooks = [];
   const link = (idBook) => `/principal/category/0/ultimos/book/${idBook}`;
-  if (data.length > 7) {
-    for (let i = 0; i < 7; i++) {
+  if (data.length > 6) {
+    for (let i = 0; i < 6; i++) {
       showBooks.push(data[i]);
     }
     return (

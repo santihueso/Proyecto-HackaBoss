@@ -27,6 +27,13 @@ async function changePassword(password, userId) {
   return newPassword;
 }
 
+async function forgetPass(password, email) {
+  const pool = await database.getPool();
+  const query = "update user set userPassword = ? where email = ?";
+  const [newPassword] = await pool.query(query, [password, email]);
+  return newPassword;
+}
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 async function createUser(username, email, userPassword) {
@@ -50,15 +57,11 @@ async function login(email) {
   return user;
 }
 
-// async function  forgetPass(email) {
-//   const pool = await database.getPool();
-//   const query ="update user set userPassword "
-// }
-
 module.exports = {
   getUser,
   selectUser,
   changePassword,
   createUser,
   login,
+  forgetPass,
 };

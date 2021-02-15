@@ -11,7 +11,7 @@ import { ProfileOutSide } from "./ProfileOutSide";
 import { ProfileUserInside } from "./ProfileInside";
 import { CreateProfile } from "./CreateProfile";
 import { ListBooksUser } from "./ListBooksUser";
-import { NewPassword } from "./changePassword";
+import { ForgetPass, NewPassword } from "./changePassword";
 import { PrincipalPage } from "./PrincipalPage";
 import {
   ViewBooksForFavourites,
@@ -27,6 +27,7 @@ import { ValorationsInside, ValorationsOutside } from "./Valorations";
 import {
   ViewClose,
   ViewCorrectChangePass,
+  ViewSendNewPass,
   Welcome,
 } from "./Close-Welcome-ChangePass";
 
@@ -88,6 +89,9 @@ const Principal = () => {
         <Route path="/principal/newBook">
           <FormCreateBook auth={auth}></FormCreateBook>
         </Route>
+        <Route path="/principal/forgetPass/valid">
+          <ViewSendNewPass></ViewSendNewPass>
+        </Route>
         <Route path="/principal/changePassword/valid">
           <ViewCorrectChangePass></ViewCorrectChangePass>
         </Route>
@@ -104,6 +108,9 @@ const Principal = () => {
         </Route>
         <Route path="/welcome">
           <Welcome></Welcome>
+        </Route>
+        <Route path="/forgetPass">
+          <ForgetPass></ForgetPass>
         </Route>
         <Route path="/">
           <Redirect to="/principal"></Redirect>

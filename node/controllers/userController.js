@@ -147,10 +147,51 @@ async function login(req, res, next) {
   next();
 }
 
+function generatePass() {
+  const characters =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let pass = "";
+  for (let i = 0; i < 9; i++) {
+    pass += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return pass;
+}
+
+async function forgetPassUser(req, res) {
+  try {
+    const { email } = req.body;
+    const schema = Joi.object({
+      email: Joi.string().email(),
+    });
+    await schema.validateAsync(req.body);
+
+    const newPass = generatePass();
+    const hashPassword = await bcrypt.hash(newPass, 10);
+    const change = await user.forgetPass(hashPassword, email);
+    if (!change || change.length === 0) {
+      const error = new Error("No tienes acceso");
+      error.status = 400;
+      throw error;
+    }
+    await sendMenssage.send(req, res, `La nueva contraseña es : ${newPass}`);
+    res.send("Le hemos enviado un mensaje a su correo");
+    res.status(200);
+    console.log(newPass);
+  } catch (err) {
+    if (err.name === "validationError") {
+      err.code = 400;
+    }
+    console.log(err);
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
+}
+
 module.exports = {
   getUsers,
   getUserSelect,
   newPassword,
   login,
+  forgetPassUser,
   register,
 };

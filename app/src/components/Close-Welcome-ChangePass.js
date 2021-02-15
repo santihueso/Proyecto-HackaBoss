@@ -49,4 +49,14 @@ const ViewCorrectChangePass = () => {
   );
 };
 
-export { Close, ViewClose, Welcome, ViewCorrectChangePass };
+const ViewSendNewPass = () => {
+  return (
+    <section style={{ padding: 318 }} className="fondo">
+      <section className="welcome">
+        <p>Se ha enviado un mensaje a tu correo.</p>
+      </section>
+    </section>
+  );
+};
+
+export { Close, ViewClose, Welcome, ViewCorrectChangePass, ViewSendNewPass };

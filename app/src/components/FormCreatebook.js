@@ -13,7 +13,7 @@ const FormCreateBook = ({ auth }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(2);
   const [price, setPrice] = useState(0);
   const [language, setLanguage] = useState("");
 

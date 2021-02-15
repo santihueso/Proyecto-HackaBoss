@@ -88,6 +88,7 @@ const FormValoration = ({ idBook, auth }) => {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Escribe aquí"
+          required
         ></textarea>
       </div>
       <input className="btnViewBook" type="submit" value="Enviar"></input>

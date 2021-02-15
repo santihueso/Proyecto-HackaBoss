@@ -50,12 +50,10 @@ const ProfileUserInside = ({ auth }) => {
                   <Link to="/principal/profile/edit">Editar</Link>
                 </li>
                 <li>
-                  <Link to="/principal/newBook">Subir libro</Link>
+                  <Link to="/principal/newBook">Subir📖</Link>
                 </li>
                 <li>
-                  <Link to="/principal/changePassword">
-                    Cambio de contraseña
-                  </Link>
+                  <Link to="/principal/changePassword">⚙ Contraseña</Link>
                 </li>
               </ul>
             </nav>

@@ -78,7 +78,7 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
               {buttons}
             </div>
             <nav>
-              {kind && kind !== "offers" ? (
+              {kind && kind !== "offers" && kind !== "toSell" ? (
                 <Link
                   to={`/principal/category/0/ultimos/book/${idBook}/user/${e.seller}`}
                 >

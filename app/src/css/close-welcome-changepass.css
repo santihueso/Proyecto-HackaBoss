@@ -28,6 +28,8 @@ html {
 
 .changePassword {
   margin: 60px 400px;
+  max-width: 400px;
+  min-width: 300px;
   background: rgba(0, 0, 0, 0.664);
   padding: 60px;
   text-align: center;
@@ -62,4 +64,16 @@ html {
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+@media (max-width: 1200px) {
+  .changePassword {
+    margin: 50px 100px;
+  }
+}
+
+@media (max-width: 600px) {
+  .changePassword {
+    margin: 10px 30px;
+  }
 }

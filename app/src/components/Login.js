@@ -43,7 +43,7 @@ const Login = ({ setAuth }) => {
           setPassword={setPassword}
           err={error}
         ></UserFormLogIn>
-        <Link to="/changePassword"> Recuperar contraseña</Link>
+        <Link to="/forgetPass"> Recuperar contraseña</Link>
       </section>
     </section>
   );
