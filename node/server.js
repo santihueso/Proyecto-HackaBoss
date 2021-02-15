@@ -38,8 +38,6 @@ app.use(bodyparser.json());
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
-/*Muestra los libros reservados de un usuario */
-app.get("/login/user/profile/reserved", validate, reservation.getReservedBook);
 /*Muestra los últimos libros */
 app.get("/beginning/lastBooks", book.showLastBook);
 //Todas las categorias
@@ -98,12 +96,17 @@ app.get(
 );
 /*los datos del usuario*/
 app.get(
-  "/login/user/profile/favorites",
+  "/login/user/profile/reserved/:num1/:num2",
+  validate,
+  reservation.getReservedBook
+);
+app.get(
+  "/login/user/profile/favorites/:num1/:num2",
   validate,
   userPurchase.showFavoritesBooks
 );
 app.get(
-  "/login/user/profile/purchase",
+  "/login/user/profile/purchase/:num1/:num2",
   validate,
   userPurchase.showPurchaseBooks
 );
@@ -119,8 +122,16 @@ app.delete(
   purchase.deleteSellerRes
 );
 
-app.get("/login/user/profile/toSell", validate, userPurchase.showMyBooks);
-app.get("/login/user/profile/offers", validate, userPurchase.showMyoffers);
+app.get(
+  "/login/user/profile/toSell/:num1/:num2",
+  validate,
+  userPurchase.showMyBooks
+);
+app.get(
+  "/login/user/profile/offers/:num1/:num2",
+  validate,
+  userPurchase.showMyoffers
+);
 app.get("/login/user/profile", validate, userController.getUserSelect);
 
 /*cambio de contraseña*/

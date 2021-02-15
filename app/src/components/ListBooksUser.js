@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { port } from "./Principal";
 import { Link, useParams } from "react-router-dom";
 import { useFetchAuth } from "./useFetch/useFetchAuth";
@@ -7,10 +7,10 @@ import "../css/listBooksUser.css";
 
 const ListBooksUser = ({ auth }) => {
   const { kind } = useParams();
-  //  let [num1] = useState(0);
-  //  let [num2, setNum2] = useState(3);
-  const [dataList] = useFetchAuth(
-    `http://localhost:${port}/login/user/profile/${kind}`,
+  let [num1] = useState(0);
+  let [num2, setNum2] = useState(3);
+  const [dataList, setDataList] = useFetchAuth(
+    `http://localhost:${port}/login/user/profile/${kind}/${num1}/${num2}`,
     auth
   );
 
@@ -28,6 +28,28 @@ const ListBooksUser = ({ auth }) => {
   } else if (kind === "toSell") {
     name = "En venta";
   }
+
+  const handlClick = async () => {
+    const num2Sume = num2 + 3;
+
+    const res = await fetch(
+      `http://localhost:${port}/login/user/profile/${kind}/${num1}/${num2}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: auth,
+        },
+      }
+    );
+    const body = await res.json();
+    if (res.status !== 200) {
+      console.warn("error", res);
+    }
+
+    setDataList(body);
+    setNum2(num2Sume);
+  };
   return (
     <section className="listBooksUser">
       <p>{name}</p>
@@ -38,7 +60,9 @@ const ListBooksUser = ({ auth }) => {
       </nav>
       <section>
         <List array={dataList} link={linkOfListBookUser}></List>
-        <button>Ver más</button>
+        {dataList.length < 3 ? null : (
+          <button onClick={handlClick}>Ver más</button>
+        )}
       </section>
     </section>
   );

@@ -48,7 +48,9 @@ const FindForSeeker = () => {
         Has buscado por "{name}" con "{data}"
       </p>
       {list.length > 0 ? (
-        <List array={list} link={link}></List>
+        <section>
+          <List array={list} link={link}></List>
+        </section>
       ) : (
         <p>No hay libros</p>
       )}

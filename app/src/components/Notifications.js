@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { port } from "./Principal";
 import { useFetchAuth } from "./useFetch/useFetchAuth";
@@ -7,26 +7,36 @@ import { ButtonDelete } from "./Buttons";
 const Notifications = ({ auth }) => {
   const { idBook } = useParams();
   const history = useHistory();
+  const [dateTime, setDateTime] = useState(new Date());
   const [data] = useFetchAuth(
     `http://localhost:${port}/login/user/profile/offers/${idBook}`,
     auth
   );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDateTime(new Date());
+    }, 3600000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
   if (!auth) {
     return history.push("/principal");
   }
-
+  console.log(dateTime);
   const fav = data ? data[0] : null;
   const list = fav ? fav[0].count : null;
   const reservedPurchase = data ? data[1] : null;
   const array = reservedPurchase ? reservedPurchase.length : null;
-  const date = new Date();
 
   const listAll =
     array > 0 ? (
       reservedPurchase.map((e) => {
         const reserveDate = new Date(e.reserveDate);
-        const rest = date.getTime() - reserveDate.getTime();
-        const hours = Math.round(rest / (1000 * 60 * 60 * 24));
+        console.log(reserveDate, "antes");
+        let rest = dateTime.getTime() - reserveDate.getTime();
+        const hours = rest / 3600000;
+
         console.log(hours);
         return (
           <section key={e.product}>
@@ -37,7 +47,7 @@ const Notifications = ({ auth }) => {
             {e.reservation === 1 ? (
               <div>
                 <p>Reservado</p>
-                {hours >= 24 ? (
+                {hours >= 3 ? (
                   <ButtonDelete
                     idBook={idBook}
                     to={"seller"}

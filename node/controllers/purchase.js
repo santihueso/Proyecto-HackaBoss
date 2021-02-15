@@ -177,7 +177,9 @@ async function getFavoriteBook(req, res) {
         existBookFavorite.length > 0 &&
         existBookFavorite[0].buyer === buyer
       ) {
-        throw new Error("El libro ya está en tu lista de favoritos");
+        const error = new Error("El libro ya está en tu lista de favoritos");
+        error.status = 406;
+        throw error;
       } else {
         const getFavorite = await purchase.favorites(book, 1, buyer);
         res.status = 200;

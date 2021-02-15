@@ -5,7 +5,9 @@ async function showFavoritesBooks(req, res) {
     const auth = req.headers.authorization;
     const decode = jwt.decode(auth);
     const userId = decode.id;
-    const favorites = await usePurchase.favoriteUserBooks(userId);
+    const num1 = +req.params.num1;
+    const num2 = +req.params.num2;
+    const favorites = await usePurchase.favoriteUserBooks(userId, num1, num2);
 
     res.send(favorites);
   } catch (err) {
@@ -23,7 +25,9 @@ async function showPurchaseBooks(req, res) {
     const auth = req.headers.authorization;
     const decode = jwt.decode(auth);
     const userId = decode.id;
-    const purchase = await usePurchase.purchaseUserBooks(userId);
+    const num1 = +req.params.num1;
+    const num2 = +req.params.num2;
+    const purchase = await usePurchase.purchaseUserBooks(userId, num1, num2);
 
     res.send(purchase);
   } catch (err) {
@@ -41,7 +45,9 @@ async function showMyBooks(req, res) {
     const auth = req.headers.authorization;
     const decode = jwt.decode(auth);
     const userId = decode.id;
-    const sell = await usePurchase.sellUserBooks(userId);
+    const num1 = +req.params.num1;
+    const num2 = +req.params.num2;
+    const sell = await usePurchase.sellUserBooks(userId, num1, num2);
 
     res.send(sell);
   } catch (err) {
@@ -59,7 +65,9 @@ async function showMyoffers(req, res) {
     const auth = req.headers.authorization;
     const decode = jwt.decode(auth);
     const userId = decode.id;
-    const offers = await usePurchase.offersUserBooks(userId);
+    const num1 = +req.params.num1;
+    const num2 = +req.params.num2;
+    const offers = await usePurchase.offersUserBooks(userId, num1, num2);
 
     res.send(offers);
   } catch (err) {

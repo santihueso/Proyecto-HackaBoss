@@ -6,7 +6,9 @@ async function getReservedBook(req, res) {
     const auth = req.headers.authorization;
     const decode = jwt.decode(auth);
     const userId = decode.id;
-    const reservedBook = await reservation.getReservedBooks(userId);
+    const num1 = +req.params.num1;
+    const num2 = +req.params.num2;
+    const reservedBook = await reservation.getReservedBooks(userId, num1, num2);
 
     res.send(reservedBook);
   } catch (err) {
