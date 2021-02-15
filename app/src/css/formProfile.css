@@ -12,7 +12,8 @@ html {
 }
 
 .formProfile {
-  margin: 25px 300px;
+  max-width: 300px;
+  min-width: 300px;
   border: 1px solid white;
   text-align: center;
   border-radius: 5px;
@@ -20,14 +21,12 @@ html {
   background: rgba(0, 0, 0, 0.664);
   position: relative;
   box-shadow: 2px 5px 8px rgb(95, 95, 95);
+  margin: 40px 0px;
+  margin-left: 400px;
 }
 
 .formProfile > form > div {
   margin-top: 10px;
-}
-
-.formProfile > form > div:first-child {
-  margin-left: 170px;
 }
 
 .formProfile input {
@@ -58,4 +57,22 @@ html {
   border: none;
   width: 100px;
   color: white;
+}
+
+@media (max-width: 1400px) {
+  .formProfile {
+    margin-left: 200px;
+  }
+}
+
+@media (max-width: 900px) {
+  .formProfile {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .formProfile {
+    margin: 10px;
+  }
 }

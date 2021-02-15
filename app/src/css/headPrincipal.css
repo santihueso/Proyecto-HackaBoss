@@ -53,3 +53,28 @@ html {
   color: var(--white);
   font-weight: bold;
 }
+
+@media (max-width: 1200px) {
+  .textSeek > :first-child {
+    width: 200px;
+  }
+  .seeker {
+    margin: 0 100px 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .seeker {
+    margin: 0 0px 0;
+  }
+  .textSeek > :last-child {
+    font-size: 2vh;
+  }
+
+  .textSeek > :first-child {
+    width: 80px;
+  }
+  .headerPrincipal > h1 {
+    font-size: 8vh;
+  }
+}

@@ -55,3 +55,27 @@ html {
 .btnPurchase {
   display: flex;
 }
+
+@media (max-width: 1100px) {
+  .viewBook > div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .viewBook > div > main {
+    margin: 5px 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .btnPurchase {
+    display: flex;
+    flex-direction: column;
+  }
+  .viewBook img {
+    width: 20vh;
+  }
+  .viewBook {
+    margin: 30px;
+  }
+}

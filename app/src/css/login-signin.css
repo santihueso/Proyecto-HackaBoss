@@ -90,3 +90,14 @@ label {
   color: white;
   width: 20px;
 }
+
+@media (max-width: 600px) {
+  .login,
+  .register {
+    width: 300px;
+  }
+  .login > button,
+  .register > button {
+    margin-left: 200px;
+  }
+}

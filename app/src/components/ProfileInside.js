@@ -42,10 +42,22 @@ const ProfileUserInside = ({ auth }) => {
         return (
           <section key={e.id_user} className="profileInside">
             <nav>
-              <Link to="/principal">Principal</Link>
-              <Link to="/principal/profile/edit">Editar</Link>
-              <Link to="/principal/newBook">Subir libro</Link>
-              <Link to="/principal/changePassword">Cambio de contraseña</Link>
+              <ul>
+                <li>
+                  <Link to="/principal">Principal</Link>
+                </li>
+                <li>
+                  <Link to="/principal/profile/edit">Editar</Link>
+                </li>
+                <li>
+                  <Link to="/principal/newBook">Subir libro</Link>
+                </li>
+                <li>
+                  <Link to="/principal/changePassword">
+                    Cambio de contraseña
+                  </Link>
+                </li>
+              </ul>
             </nav>
             <header>
               <img src={url} alt="avatar" style={{ maxWidth: 250 }}></img>

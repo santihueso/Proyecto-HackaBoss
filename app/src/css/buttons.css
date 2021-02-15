@@ -49,3 +49,38 @@ html {
   margin-top: 40px;
   font-size: 30px;
 }
+
+@media (max-width: 1200px) {
+  .err {
+    margin-top: 300px;
+    margin-left: 300px;
+  }
+}
+
+@media (max-width: 800px) {
+  .err {
+    margin-top: 300px;
+    margin-left: 100px;
+    width: 60vw;
+  }
+  #btnErr {
+    margin-left: 200px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .err {
+    margin-top: 300px;
+    margin-left: 100px;
+    width: 60vw;
+  }
+  #btnErr {
+    margin-left: 100px;
+    margin-top: 10px;
+  }
+  .err > p {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+}

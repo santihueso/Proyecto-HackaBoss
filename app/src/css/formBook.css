@@ -20,6 +20,8 @@ html {
   margin: 0px 300px;
   box-shadow: 2px 5px 8px rgb(95, 95, 95);
   border-radius: 8px;
+  max-width: 600px;
+  min-width: 300px;
 }
 
 .formBook > form {
@@ -69,4 +71,36 @@ html {
 .forms {
   padding: 190px;
   background: no-repeat center/100% url("../img/fondo-forms.jpg");
+}
+
+@media (max-width: 1400px) {
+  .formBook {
+    margin: 0 100px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .formBook {
+    margin: 0 50px;
+  }
+  .formBook > form > div:first-child,
+  .formBook > form > div:nth-child(2) {
+    margin-left: 100px;
+  }
+  .forms {
+    padding: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .formBook {
+    margin: 0 20px;
+  }
+  .formBook > form > div:first-child,
+  .formBook > form > div:nth-child(2) {
+    margin-left: 20px;
+  }
+  .forms {
+    padding: 20px;
+  }
 }

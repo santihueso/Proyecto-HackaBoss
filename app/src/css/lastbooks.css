@@ -14,7 +14,7 @@ html {
   margin: 0px 300px 200px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 30px;
+  grid-gap: 30px;
 }
 
 #lastBooks > h3 {
@@ -65,4 +65,48 @@ html {
   position: absolute;
   bottom: 2px;
   right: 0;
+}
+
+@media (max-width: 1400px) {
+  #lastBooks > ul {
+    margin: 0px 300px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+  }
+  .book {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1000px) {
+  #lastBooks > ul {
+    margin: 0px 200px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+  }
+  .book {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 700px) {
+  #lastBooks > ul {
+    margin: 0px 30px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+  }
+  .book {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+  #lastBooks > h3 {
+    margin: 20px;
+  }
 }

@@ -20,16 +20,22 @@ html {
   height: 80px;
   padding-top: 30px;
 }
+.profileInside > nav > ul {
+  display: flex;
+}
 
-.profileInside > nav > a {
+.profileInside li {
+  list-style: none;
+}
+.profileInside > nav > ul > li > a {
   font-weight: bold;
   margin: 0px 100px;
+  list-style: none;
 }
 
 .profileInside > header {
   display: flex;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../img/f-p-12.jpg");
+  background: no-repeat right/50% url("../img/f-perfil.jpg");
   border-radius: 10px;
   box-shadow: 0 0 15px black;
 }
@@ -42,7 +48,7 @@ html {
   width: 200px;
   height: 200px;
   border-radius: 100%;
-  margin: 20px 200px;
+  margin: 20px 100px;
 }
 
 .profileInside > main > nav > ul {
@@ -107,4 +113,57 @@ html {
 .profileInside > header > main > p:nth-child(1) {
   font-size: 30px;
   font-weight: bold;
+}
+
+@media (max-width: 1400px) {
+  .profileInside {
+    margin: 0px;
+  }
+
+  .profileInside > nav > a {
+    margin: 0px 80px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .profileInside {
+    margin: 0px;
+  }
+  .profileInside > header {
+    background: no-repeat right/30% url("../img/f-perfil.jpg");
+  }
+  .profileInside > nav > ul > li > a {
+    margin: 0px 40px;
+  }
+  .profileInside > main > nav > ul {
+    margin: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .profileInside {
+    margin: 0px;
+  }
+  .profileInside > header {
+    background: black;
+  }
+  .profileInside > nav {
+    padding: 25px;
+  }
+  .profileInside > nav > ul > li > a {
+    margin: 0px 10px;
+  }
+  .profileInside > main > nav > ul {
+    margin: 20px;
+  }
+  .profileInside > header > img {
+    width: 90px;
+    height: 90px;
+    margin-top: 60px;
+    margin-right: 20px;
+  }
+
+  .profileInside > main > nav > ul > li > a {
+    font-size: 15px;
+  }
 }

@@ -32,6 +32,7 @@ h2 {
   grid-template-areas:
     "española idiomas extranjera academicos"
     "infantil juvenil comic hobbies";
+  grid-gap: 20px;
 }
 
 li[id="1"] {
@@ -66,7 +67,6 @@ li[id="8"] {
   padding: 20px;
   width: 250px;
   height: 65px;
-  margin: 0px 20px 20px;
   border-radius: 5px;
   color: var(--white);
   background-color: var(--gray);
@@ -77,4 +77,60 @@ li[id="8"] {
 #categories > nav > ul > li:hover {
   background: rgb(10, 10, 10);
   box-shadow: 2px 3px 6px rgb(46, 46, 46);
+}
+
+@media (max-width: 1400px) {
+  #categories > nav > ul {
+    margin: 20px 300px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "española idiomas"
+      "extranjera academicos"
+      "infantil juvenil"
+      "comic hobbies";
+  }
+  #categories > nav > ul > li {
+    width: 300px;
+  }
+}
+
+@media (max-width: 1000px) {
+  #categories > nav > ul {
+    margin: 20px 200px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "española idiomas"
+      "extranjera academicos"
+      "infantil juvenil"
+      "comic hobbies";
+  }
+  #categories > nav > ul > li {
+    width: 200px;
+  }
+  h2 {
+    margin: 0px 80px;
+  }
+}
+@media (max-width: 700px) {
+  #categories > nav > ul {
+    margin: 10px 30px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "española idiomas"
+      "extranjera academicos"
+      "infantil juvenil"
+      "comic hobbies";
+  }
+  #categories > nav > ul > li {
+    width: 130px;
+  }
+  h2 {
+    margin: 0px 10px;
+  }
 }

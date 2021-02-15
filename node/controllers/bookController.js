@@ -79,7 +79,7 @@ async function newBook(req, res) {
       price: Joi.number().positive().precision(2).required(),
       bookLanguage: Joi.string().required(),
       author: Joi.string().required(),
-      category: Joi.number().required(),
+      category: Joi.string().required(),
     });
     await schema.validateAsync(req.body);
     const {
