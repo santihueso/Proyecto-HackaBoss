@@ -49,12 +49,10 @@ html {
 .author {
   font-style: italic;
   margin-bottom: 10px;
-  position: relative;
 }
 
 .book > main > p {
   margin-left: 20px;
-  position: relative;
 }
 
 .book > main {

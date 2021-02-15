@@ -15,7 +15,7 @@ html {
   margin: 100px 200px;
 }
 
-.listBooksUser > ul {
+.listBooksUser > section > ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
@@ -29,11 +29,32 @@ html {
   margin-bottom: 20px;
 }
 
+.listBooksUser > section {
+  text-align: center;
+}
+
+.listBooksUser > section > button {
+  background: none;
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  width: 100px;
+  height: 40px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.listBooksUser > section > button:hover {
+  border: 2px solid var(--red);
+}
+
 @media (max-width: 1200px) {
   .listBooksUser {
     margin: 20px 200px;
   }
-  .listBooksUser > ul {
+  .listBooksUser > section > ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 10px;

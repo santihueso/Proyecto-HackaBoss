@@ -38,7 +38,7 @@ async function favouritesBooksUser(book) {
   const queryFavourite =
     "select count(favorite) as count from purchase where favorite = 1 and product = ?";
   const queryPurchase =
-    "select distinct product, purchase, reservation, opinion, assessment from purchase where product = ? and favorite !=1";
+    "select distinct product, purchase, reservation, opinion, assessment, reserveDate from purchase where product = ? and favorite !=1";
   const [favourite] = await pool.query(queryFavourite, book);
   const [all] = await pool.query(queryPurchase, book);
   return [favourite, all];

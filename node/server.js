@@ -151,7 +151,7 @@ app.put("/user/editUser", validate, img.single("photo"), profile.updateUser);
 
 //categorias
 
-app.get("/category/:categoryId", category.goToCategory);
+app.get("/category/:categoryId/:num1/:num2", category.goToCategory);
 
 app.get("*", notFound);
 

@@ -14,6 +14,7 @@ async function getReserver(req, res) {
     const existBook = await purchase.ifReservedOrBuyed(book);
     const ifReserved = existBook.find((e) => e.reservation === 1);
     const ifBuyed = existBook.find((e) => e.purchase === 1);
+    const createDate = new Date();
 
     if (!ifExist || ifExist.length === 0) {
       const error = new Error("No se encuentra el libro.");
@@ -39,12 +40,17 @@ async function getReserver(req, res) {
           error.status = 404;
           throw error;
         } else {
-          const getBook = await purchase.reserverBook(book, 1, buyer);
+          const getBook = await purchase.reserverBook(
+            book,
+            1,
+            buyer,
+            createDate
+          );
           res.status(200);
           res.send("El libro ha sido reservado.");
         }
       } else {
-        const getBook = await purchase.reserverBook(book, 1, buyer);
+        const getBook = await purchase.reserverBook(book, 1, buyer, createDate);
         res.status(200);
         res.send("El libro ha sido reservado.");
       }

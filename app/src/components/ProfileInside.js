@@ -6,11 +6,11 @@ import "../css/profileInside.css";
 
 const ProfileUserInside = ({ auth }) => {
   const [data, setData] = useState([]);
-  //revisar
   const [dataUser] = useFetchAuth(
     `http://localhost:${port}/login/user/profile`,
     auth
   );
+
   useEffect(() => {
     const getData = async () => {
       const res = await fetch(

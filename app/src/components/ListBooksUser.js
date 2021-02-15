@@ -7,6 +7,8 @@ import "../css/listBooksUser.css";
 
 const ListBooksUser = ({ auth }) => {
   const { kind } = useParams();
+  //  let [num1] = useState(0);
+  //  let [num2, setNum2] = useState(3);
   const [dataList] = useFetchAuth(
     `http://localhost:${port}/login/user/profile/${kind}`,
     auth
@@ -34,7 +36,10 @@ const ListBooksUser = ({ auth }) => {
         <Link to="/principal/profile">Perfil ˃ </Link>
         <p>{name}</p>
       </nav>
-      <List array={dataList} link={linkOfListBookUser}></List>
+      <section>
+        <List array={dataList} link={linkOfListBookUser}></List>
+        <button>Ver más</button>
+      </section>
     </section>
   );
 };

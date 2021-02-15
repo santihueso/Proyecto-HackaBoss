@@ -19,10 +19,15 @@ const Notifications = ({ auth }) => {
   const list = fav ? fav[0].count : null;
   const reservedPurchase = data ? data[1] : null;
   const array = reservedPurchase ? reservedPurchase.length : null;
+  const date = new Date();
 
   const listAll =
     array > 0 ? (
       reservedPurchase.map((e) => {
+        const reserveDate = new Date(e.reserveDate);
+        const rest = date.getTime() - reserveDate.getTime();
+        const hours = Math.round(rest / (1000 * 60 * 60 * 24));
+        console.log(hours);
         return (
           <section key={e.product}>
             {e.purchase !== 1 ? <p>En venta</p> : <p>Comprado</p>}
@@ -32,12 +37,14 @@ const Notifications = ({ auth }) => {
             {e.reservation === 1 ? (
               <div>
                 <p>Reservado</p>
-                <ButtonDelete
-                  idBook={idBook}
-                  to={"seller"}
-                  rout={"offers"}
-                  auth={auth}
-                ></ButtonDelete>
+                {hours >= 24 ? (
+                  <ButtonDelete
+                    idBook={idBook}
+                    to={"seller"}
+                    rout={"offers"}
+                    auth={auth}
+                  ></ButtonDelete>
+                ) : null}
               </div>
             ) : null}
             {e.opinion !== "" ? null : e.opinion}
