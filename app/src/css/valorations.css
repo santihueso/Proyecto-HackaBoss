@@ -33,6 +33,7 @@ html {
 
 .viewValoration a:hover {
   color: var(--red);
+  cursor: pointer;
 }
 
 .viewValoration > ul > li > main > p {

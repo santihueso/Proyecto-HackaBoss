@@ -8,6 +8,7 @@
 .linkPrincipal > nav > a:hover,
 .linkPrincipal > nav > button:hover {
   color: red;
+  cursor: pointer;
 }
 
 .linkPrincipal {

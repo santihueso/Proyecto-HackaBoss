@@ -48,6 +48,7 @@ html {
 
 .listBooksUser > section > button:hover {
   border: 2px solid var(--red);
+  cursor: pointer;
 }
 
 @media (max-width: 1200px) {

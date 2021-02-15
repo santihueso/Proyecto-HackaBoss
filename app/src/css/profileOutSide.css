@@ -60,6 +60,7 @@ html {
 
 .profileOut a:hover {
   color: var(--red);
+  cursor: pointer;
 }
 
 @media (max-width: 1400px) {

@@ -178,7 +178,7 @@ const FormEditBook = ({ auth }) => {
                 setOn={setOnCategory}
               ></SelectCategories>
             </div>
-            <input type="submit" value="Enviar"></input>
+            <input type="submit" value="Guardar"></input>
           </form>
           <button onClick={() => history.push("/principal")}>x</button>
         </div>

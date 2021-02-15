@@ -80,10 +80,12 @@ html {
 .profileInside > main > nav > ul > li > a:hover {
   transform: scale(-3);
   transform: rotate(360deg);
+  cursor: pointer;
 }
 
 .profileInside > main > nav > ul > li:hover {
   background: var(--red);
+  cursor: pointer;
 }
 
 #notif {

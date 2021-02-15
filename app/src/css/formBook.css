@@ -58,6 +58,7 @@ html {
   border: 1px solid white;
   color: white;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .formBook > form > input {
@@ -66,6 +67,7 @@ html {
   border: none;
   width: 100px;
   color: white;
+  cursor: pointer;
 }
 
 .forms {

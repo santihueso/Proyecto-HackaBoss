@@ -45,7 +45,7 @@ const ViewBooksForPurchase = ({ auth }) => {
       buttons={
         <div>
           <button className="btnViewBook" onClick={() => setValoration(true)}>
-            Entregado
+            Valorar
           </button>
           {valoration ? (
             <FormValoration idBook={idBook} auth={auth}></FormValoration>

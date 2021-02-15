@@ -36,6 +36,7 @@ html {
   color: var(--white);
   font-weight: bold;
   border-radius: 15px 0px 0px 15px;
+  cursor: pointer;
 }
 
 .textSeek > :first-child {
@@ -52,6 +53,7 @@ html {
   background-color: var(--red);
   color: var(--white);
   font-weight: bold;
+  cursor: pointer;
 }
 
 @media (max-width: 1200px) {

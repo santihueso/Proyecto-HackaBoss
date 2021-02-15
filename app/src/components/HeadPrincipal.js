@@ -39,7 +39,7 @@ const HeadPrincipal = () => {
             type="text"
             onChange={(e) => setInputValue(e.target.value)}
             value={inputValue}
-            placeholder="camus"
+            placeholder="Escribe aquí"
           ></input>
           <input type="submit"></input>
         </form>

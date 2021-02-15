@@ -35,6 +35,10 @@ html {
   color: var(--white);
 }
 
+.viewBook img {
+  cursor: pointer;
+}
+
 .viewBook > div > main > div > p:nth-child(1) {
   font-size: 40px;
 }
@@ -50,6 +54,7 @@ html {
 
 .viewBook a:hover {
   color: var(--red);
+  cursor: pointer;
 }
 
 .btnPurchase {

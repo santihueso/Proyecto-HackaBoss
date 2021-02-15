@@ -15,7 +15,7 @@ const Notifications = ({ auth }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setDateTime(new Date());
-    }, 3600000);
+    }, 5000);
     return () => {
       clearInterval(interval);
     };
@@ -33,8 +33,7 @@ const Notifications = ({ auth }) => {
     array > 0 ? (
       reservedPurchase.map((e) => {
         const reserveDate = new Date(e.reserveDate);
-        console.log(reserveDate, "antes");
-        let rest = dateTime.getTime() - reserveDate.getTime();
+        const rest = dateTime.getTime() - reserveDate.getTime();
         const hours = rest / 3600000;
 
         console.log(hours);

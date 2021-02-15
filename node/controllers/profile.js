@@ -54,6 +54,7 @@ async function updateUser(req, res) {
       photo,
       userId
     );
+
     res.status(200);
     res.send("El perfil se ha publicado.");
   } catch (err) {

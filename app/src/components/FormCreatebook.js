@@ -5,6 +5,7 @@ import { useFetchData } from "./useFetch/useFetchData";
 
 const FormCreateBook = ({ auth }) => {
   const history = useHistory();
+
   if (!auth) {
     history.push("/principal");
   }
@@ -19,7 +20,7 @@ const FormCreateBook = ({ auth }) => {
 
   const handlSubmit = async (event) => {
     event.preventDefault();
-    await saveBook({
+    const res = await saveBook({
       imgOne,
       imgTwo,
       title,
@@ -30,7 +31,7 @@ const FormCreateBook = ({ auth }) => {
       language,
       auth,
     });
-
+    console.log(res);
     history.push(`/principal/profile/list/toSell`);
   };
 
@@ -124,6 +125,7 @@ const FormCreateBook = ({ auth }) => {
               setId={setCategory}
             ></SelectCategories>
           </div>
+          <div style={{ color: "red", minHeight: "1.5em" }}> </div>
           <input type="submit" value="Enviar"></input>
         </form>
         <button onClick={() => history.push("/principal")}>x</button>
@@ -179,7 +181,7 @@ async function saveBook({
     body: formData,
   });
 
-  if (res.status > 300) {
+  if (res.status !== 200) {
     const body = res.json();
     console.warn("error", res);
     return body;

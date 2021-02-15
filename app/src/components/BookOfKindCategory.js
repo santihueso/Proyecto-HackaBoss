@@ -33,7 +33,7 @@ const BookOfKindCategory = () => {
     setData(body);
     setNum2(num2Sume);
   };
-  console.log(num1, num2);
+
   const linkOfBook = (productId) =>
     `/principal/category/${id}/${name}/book/${productId}`;
 
