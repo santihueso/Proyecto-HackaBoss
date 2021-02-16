@@ -75,7 +75,7 @@ li[id="8"] {
 }
 
 #categories > nav > ul > li:hover {
-  background: rgb(10, 10, 10);
+  background: var(--red);
   box-shadow: 2px 3px 6px rgb(46, 46, 46);
   cursor: pointer;
 }

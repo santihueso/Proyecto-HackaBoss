@@ -29,7 +29,7 @@ html {
 }
 .profileInside > nav > ul > li > a {
   font-weight: bold;
-  margin: 0px 100px;
+  margin: 0px 80px;
   list-style: none;
 }
 
@@ -68,13 +68,14 @@ html {
   font-size: 30px;
   display: flex;
   justify-content: center;
-  box-shadow: 2px 3px 6px rgb(95, 95, 95);
+  box-shadow: 2px 2px 10px rgb(95, 95, 95);
 }
 
 .profileInside > main > nav > ul > li > a {
   margin: auto;
   transform-origin: botton left;
   transition: 1000ms;
+  font-size: 30px;
 }
 
 .profileInside > main > nav > ul > li > a:hover {

@@ -51,6 +51,10 @@ html {
   cursor: pointer;
 }
 
+.listBooksUser > nav > p {
+  font-size: 20px;
+}
+
 @media (max-width: 1200px) {
   .listBooksUser {
     margin: 20px 200px;

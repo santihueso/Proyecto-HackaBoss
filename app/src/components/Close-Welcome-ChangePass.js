@@ -35,10 +35,10 @@ const Welcome = () => {
       <section className="welcome">
         <p>¡Bienvenido a recybook!</p>
         <aside>
-          <p style={{ fontSize: 20 }}>
+          <p style={{ fontSize: 25 }}>
             Intercambia conocimiento y fantasías iniciando sesión:
           </p>
-          <Link style={{ fontSize: 20 }} to="/principal">
+          <Link style={{ fontSize: 25 }} to="/principal">
             Principal
           </Link>
         </aside>
@@ -52,7 +52,9 @@ const ViewCorrectChangePass = () => {
     <section style={{ padding: 318 }} className="fondo">
       <section className="welcome">
         <p>Se ha cambiado correctamente, vuelve a tu:</p>
-        <Link to="/principal/profile">Perfil</Link>
+        <Link style={{ fontSize: 25 }} to="/principal/profile">
+          Perfil
+        </Link>
       </section>
     </section>
   );

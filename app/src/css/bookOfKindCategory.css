@@ -28,6 +28,10 @@ html {
   margin: 30px 100px;
 }
 
+.viewBook > nav > p {
+  font-size: 20px;
+}
+
 .viewBook > div > main > div > p {
   font-size: 20px;
   text-transform: capitalize;
