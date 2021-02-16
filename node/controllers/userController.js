@@ -179,7 +179,7 @@ async function forgetPassUser(req, res) {
       error.status = 400;
       throw error;
     }
-    // await sendMenssage.send(req, res, `La nueva contraseña es : ${newPass}`);
+    await sendMenssage.send(req, res, `La nueva contraseña es : ${newPass}`);
     res.send("Le hemos enviado un mensaje a su correo");
     res.status(200);
     console.log(newPass);
