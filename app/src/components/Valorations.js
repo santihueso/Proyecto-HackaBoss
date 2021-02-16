@@ -51,6 +51,8 @@ const SoldBooks = ({ book }) => {
       <p>Valoraciones</p>
       <nav>
         <Link to="/principal">Principal ˃ </Link>
+        <Link to="/principal/profile">Perfil </Link>
+        <p>Valoraciones</p>
       </nav>
       <ul>{list}</ul>
     </section>

@@ -113,11 +113,12 @@ const ViewBooksForToSell = ({ auth }) => {
 
 const ViewBooksForOffers = ({ auth }) => {
   const [active, setActive] = useState(false);
+  const comparate = () => (active ? setActive(false) : setActive(true));
   return (
     <ViewBook
       buttons={
         <div>
-          <button className="btnViewBook" onClick={() => setActive(true)}>
+          <button className="btnViewBook" onClick={comparate}>
             Ver
           </button>
           {active ? <Notifications auth={auth}></Notifications> : null}

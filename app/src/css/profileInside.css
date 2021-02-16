@@ -19,7 +19,41 @@ html {
   background: linear-gradient(to right, var(--red), var(--black));
   height: 80px;
   padding-top: 30px;
+  display: flex;
 }
+
+.profileInside > nav > section > button {
+  font-size: 30px;
+  background: white;
+}
+
+.profileInside > nav > section > ul {
+  background: rgb(0, 0, 0);
+  border-left: 1px solid white;
+  padding: 10px;
+}
+
+.profileInside > nav > section > ul > li {
+  margin: 6px 0px 10px 10px;
+}
+
+.profileInside > nav > section > ul > li:hover,
+.profileInside > nav > section > ul > li > button:hover {
+  background: var(--red);
+}
+
+.profileInside > nav > section > ul > li > button {
+  background: black;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.profileInside > nav > section {
+  margin-left: 500px;
+  z-index: 100;
+}
+
 .profileInside > nav > ul {
   display: flex;
 }
@@ -29,8 +63,8 @@ html {
 }
 .profileInside > nav > ul > li > a {
   font-weight: bold;
-  margin: 0px 80px;
   list-style: none;
+  margin: 0px 100px;
 }
 
 .profileInside > header {
@@ -141,6 +175,15 @@ html {
   .profileInside > main > nav > ul {
     margin: 20px;
   }
+  .profileInside > nav > section {
+    margin-left: 400px;
+  }
+}
+
+@media (max-width: 900px) {
+  .profileInside > nav > section {
+    margin-left: 250px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -168,5 +211,8 @@ html {
 
   .profileInside > main > nav > ul > li > a {
     font-size: 15px;
+  }
+  .profileInside > nav > section {
+    margin-left: 50px;
   }
 }

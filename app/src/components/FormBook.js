@@ -130,7 +130,7 @@ const FormEditBook = ({ auth }) => {
                   setOnAuthor(true),
                   setAuthor(element.target.value),
                 ]}
-                maxlength="20"
+                maxLength="20"
                 required
               ></input>
             </div>
@@ -145,7 +145,7 @@ const FormEditBook = ({ auth }) => {
                   setOnDescription(true),
                   setDescription(element.target.value),
                 ]}
-                maxlength="60"
+                maxLength="60"
                 required
               ></input>
             </div>

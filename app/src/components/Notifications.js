@@ -58,7 +58,7 @@ const Notifications = ({ auth }) => {
             ) : null}
             {e.opinion !== "" ? null : e.opinion}
             {e.assessment !== "number" ? null : e.assessment}
-            <p>Favoritos: {list}</p>
+            {e.purchase !== 1 ? <p>Favoritos: {list}</p> : null}
           </section>
         );
       })

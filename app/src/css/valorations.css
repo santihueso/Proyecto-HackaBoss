@@ -41,6 +41,10 @@ html {
   margin-bottom: 10px;
 }
 
+.viewValoration > nav > p {
+  font-size: 20px;
+}
+
 .viewValoration > p {
   text-align: center;
   font-size: 30px;

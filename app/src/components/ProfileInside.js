@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { port } from "./Principal";
 import { Link } from "react-router-dom";
+import { Close } from "./Close-Welcome-ChangePass";
 import { useFetchAuth } from "./useFetch/useFetchAuth";
 import "../css/profileInside.css";
 
 const ProfileUserInside = ({ auth }) => {
+  const [active, setActive] = useState(false);
+  const comparate = () => (active ? setActive(false) : setActive(true));
   const [dataUser] = useFetchAuth(
     `http://localhost:${port}/login/user/profile`,
     auth
@@ -24,16 +27,29 @@ const ProfileUserInside = ({ auth }) => {
                 <li>
                   <Link to="/principal">Principal</Link>
                 </li>
-                <li>
-                  <Link to="/principal/profile/edit">Editar</Link>
-                </li>
+
                 <li>
                   <Link to="/principal/newBook">Subir📖</Link>
                 </li>
-                <li>
-                  <Link to="/principal/changePassword">⚙ Contraseña</Link>
-                </li>
               </ul>
+              <section>
+                <button onClick={comparate}>⚙</button>
+                {active ? (
+                  <ul>
+                    <li>
+                      <Link to="/principal/profile/edit">Editar perfil</Link>
+                    </li>
+                    <li>
+                      <Link to="/principal/changePassword">
+                        Cambiar contraseña
+                      </Link>
+                    </li>
+                    <li>
+                      <Close></Close>
+                    </li>
+                  </ul>
+                ) : null}
+              </section>
             </nav>
             <header>
               <img src={url} alt="avatar" style={{ maxWidth: 250 }}></img>
