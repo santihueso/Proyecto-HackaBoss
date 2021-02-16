@@ -10,7 +10,8 @@ async function lastBooks(seller) {
 
 async function selectBook(bookID) {
   const pool = await database.getPool();
-  const query = "select * from product where id_product = ?";
+  const query =
+    "select p.id_product, p.productName, p.photoFront, p.photoBack, p.descriptionProduct, p.price, p.bookLanguage, p.author, u.email from product as p inner join user as u on p.seller = u.id_user and id_product = ?";
   const [book] = await pool.query(query, bookID);
   return book;
 }
