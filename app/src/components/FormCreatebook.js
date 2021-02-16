@@ -97,7 +97,7 @@ const FormCreateBook = ({ auth }) => {
               placeholder="descripción"
               onChange={(element) => setDescription(element.target.value)}
               required
-              maxlength="60"
+              maxLength="60"
             ></input>
           </div>
 

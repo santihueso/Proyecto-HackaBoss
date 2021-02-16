@@ -54,10 +54,11 @@ html {
   top: 20px;
   right: 20px;
   width: 30px;
+  height: 30px;
   background: black;
   border: 1px solid white;
   color: white;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
 }
 
