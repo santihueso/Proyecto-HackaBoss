@@ -18,13 +18,22 @@ html {
 .profileInside > nav {
   background: linear-gradient(to right, var(--red), var(--black));
   height: 80px;
-  padding-top: 30px;
   display: flex;
 }
 
 .profileInside > nav > section > button {
-  font-size: 30px;
-  background: white;
+  font-size: 50px;
+  background: transparent;
+  color: white;
+  border: none;
+}
+
+.profileInside > nav > ul {
+  padding-top: 28px;
+}
+
+.profileInside > nav > section {
+  padding-top: 20px;
 }
 
 .profileInside > nav > section > ul {

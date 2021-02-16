@@ -91,7 +91,10 @@ label {
   background: black;
   color: white;
   cursor: pointer;
-  width: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 15px;
 }
 
 @media (max-width: 600px) {
