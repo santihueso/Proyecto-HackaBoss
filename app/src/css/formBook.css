@@ -62,7 +62,6 @@ html {
 }
 
 .formBook > form > input {
-  margin-top: 20px;
   background: var(--red);
   border: none;
   width: 100px;

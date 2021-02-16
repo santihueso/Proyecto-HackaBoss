@@ -16,6 +16,7 @@ label {
   text-decoration: none;
   cursor: pointer;
   color: white;
+  font-size: 20px;
 }
 
 .login > p,

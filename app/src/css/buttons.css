@@ -31,15 +31,16 @@ html {
 .err {
   background: black;
   border: 1px solid white;
-  width: 400px;
+  width: 500px;
   height: 150px;
   text-align: center;
   margin-top: 300px;
   margin-left: 600px;
+  border-radius: 8px;
 }
 
 #btnErr {
-  margin-left: 330px;
+  margin-left: 400px;
   margin-top: 10px;
   border: 1px solid white;
   background: black;

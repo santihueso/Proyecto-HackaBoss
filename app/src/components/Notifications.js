@@ -23,7 +23,7 @@ const Notifications = ({ auth }) => {
   if (!auth) {
     return history.push("/principal");
   }
-  console.log(dateTime);
+
   const fav = data ? data[0] : null;
   const list = fav ? fav[0].count : null;
   const reservedPurchase = data ? data[1] : null;
@@ -46,7 +46,7 @@ const Notifications = ({ auth }) => {
             {e.reservation === 1 ? (
               <div>
                 <p>Reservado</p>
-                {hours >= 3 ? (
+                {hours >= 24 ? (
                   <ButtonDelete
                     idBook={idBook}
                     to={"seller"}

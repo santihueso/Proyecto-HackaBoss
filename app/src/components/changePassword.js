@@ -60,15 +60,16 @@ const ForgetPass = () => {
 
     if (res.status !== 200) {
       console.warn("error", res);
-      setError("Datos equivocados.");
+      const body = await res.json();
+      setError(body.error);
     } else {
-      return history.push("/principal/forgetPass/valid");
+      history.push("/principal/forgetPass/valid");
     }
   };
   return (
     <section className="forms">
       <div className="changePassword">
-        <Link to="/principal/profile">x</Link>
+        <Link to="/principal">x</Link>
         <p>Cambiar Contraseña</p>
         <form onSubmit={handlSubmit}>
           <UseLabelInput

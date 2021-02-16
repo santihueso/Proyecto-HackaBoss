@@ -17,7 +17,7 @@ const FormCreateBook = ({ auth }) => {
   const [category, setCategory] = useState(2);
   const [price, setPrice] = useState(0);
   const [language, setLanguage] = useState("");
-
+  const [error, setError] = useState("");
   const handlSubmit = async (event) => {
     event.preventDefault();
     const res = await saveBook({
@@ -31,8 +31,11 @@ const FormCreateBook = ({ auth }) => {
       language,
       auth,
     });
-    console.log(res);
-    history.push(`/principal/profile/list/toSell`);
+    if (res.err) {
+      setError("El precio debe ser superior a cero");
+    } else {
+      history.push(`/principal/profile/list/toSell`);
+    }
   };
 
   return (
@@ -94,6 +97,7 @@ const FormCreateBook = ({ auth }) => {
               placeholder="descripción"
               onChange={(element) => setDescription(element.target.value)}
               required
+              maxlength="60"
             ></input>
           </div>
 
@@ -125,7 +129,7 @@ const FormCreateBook = ({ auth }) => {
               setId={setCategory}
             ></SelectCategories>
           </div>
-          <div style={{ color: "red", minHeight: "1.5em" }}> </div>
+          <div style={{ color: "red", minHeight: "1.5em" }}>{error} </div>
           <input type="submit" value="Enviar"></input>
         </form>
         <button onClick={() => history.push("/principal")}>x</button>

@@ -134,4 +134,7 @@ li[id="8"] {
   h2 {
     margin: 0px 10px;
   }
+  #categories a {
+    font-size: 15px;
+  }
 }

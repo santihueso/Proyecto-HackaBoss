@@ -27,6 +27,7 @@ const FormEditBook = ({ auth }) => {
   const [onCategory, setOnCategory] = useState(false);
   const [onPrice, setOnPrice] = useState(false);
   const [onLanguage, setOnLanguage] = useState(false);
+  const [error, setError] = useState("");
 
   const history = useHistory();
   const edit = book.map((e) => {
@@ -51,7 +52,7 @@ const FormEditBook = ({ auth }) => {
       if (!language) {
         language = e.bookLanguage;
       }
-      await saveBook({
+      const res = await saveBook({
         imgOne,
         imgTwo,
         title,
@@ -64,7 +65,12 @@ const FormEditBook = ({ auth }) => {
         idBook,
         e,
       });
-      history.push(`/principal/profile/list/toSell/book/${idBook}`);
+      console.log(res);
+      if (!res) {
+        setError("EL precio debe ser superior a cero");
+      } else {
+        history.push(`/principal/profile/list/toSell/book/${idBook}`);
+      }
     };
 
     return (
@@ -124,6 +130,7 @@ const FormEditBook = ({ auth }) => {
                   setOnAuthor(true),
                   setAuthor(element.target.value),
                 ]}
+                maxlength="20"
                 required
               ></input>
             </div>
@@ -138,6 +145,7 @@ const FormEditBook = ({ auth }) => {
                   setOnDescription(true),
                   setDescription(element.target.value),
                 ]}
+                maxlength="60"
                 required
               ></input>
             </div>
@@ -178,6 +186,7 @@ const FormEditBook = ({ auth }) => {
                 setOn={setOnCategory}
               ></SelectCategories>
             </div>
+            <div style={{ color: "red", minHeight: "1.5em" }}>{error} </div>
             <input type="submit" value="Guardar"></input>
           </form>
           <button onClick={() => history.push("/principal")}>x</button>

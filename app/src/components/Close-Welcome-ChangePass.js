@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "../css/close-welcome-changepass.css";
 const Close = () => {
@@ -11,6 +11,15 @@ const Close = () => {
 };
 
 const ViewClose = () => {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.href = window.location.href =
+        "http://localhost:3000/principal";
+    }, 3000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
   return (
     <section style={{ padding: 335 }} className="fondo">
       <section className="welcome">

@@ -164,6 +164,12 @@ async function forgetPassUser(req, res) {
       email: Joi.string().email(),
     });
     await schema.validateAsync(req.body);
+    const userSelect = await user.login(email);
+    if (!userSelect || userSelect.length === 0) {
+      const error = new Error("No existe el email");
+      error.status = 404;
+      throw error;
+    }
 
     const newPass = generatePass();
     const hashPassword = await bcrypt.hash(newPass, 10);
@@ -173,7 +179,7 @@ async function forgetPassUser(req, res) {
       error.status = 400;
       throw error;
     }
-    await sendMenssage.send(req, res, `La nueva contraseña es : ${newPass}`);
+    // await sendMenssage.send(req, res, `La nueva contraseña es : ${newPass}`);
     res.send("Le hemos enviado un mensaje a su correo");
     res.status(200);
     console.log(newPass);
