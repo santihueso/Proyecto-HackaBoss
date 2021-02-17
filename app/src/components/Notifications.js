@@ -53,7 +53,9 @@ const Notifications = ({ auth }) => {
                     rout={"offers"}
                     auth={auth}
                   ></ButtonDelete>
-                ) : null}
+                ) : (
+                  <p>Podrá borrar la reserva en 24h</p>
+                )}
               </div>
             ) : null}
             {e.opinion !== "" ? null : e.opinion}

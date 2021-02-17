@@ -104,7 +104,9 @@ const ViewBook = ({ buttons, kind = null, nameKind = null }) => {
               <p>{e.bookLanguage}</p>
               <p>{e.descriptionProduct}</p>
               <p>{e.price} €</p>
-              {kind ? <a href={`mailto:${e.email}`}>Contacto</a> : null}
+              {kind && kind !== "offers" && kind !== "toSell" ? (
+                <a href={`mailto:${e.email}`}>Contacto 📨</a>
+              ) : null}
               {buttons}
             </div>
             <nav>

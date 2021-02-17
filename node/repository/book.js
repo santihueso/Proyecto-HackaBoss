@@ -11,7 +11,7 @@ async function lastBooks(seller) {
 async function selectBook(bookID) {
   const pool = await database.getPool();
   const query =
-    "select p.id_product, p.productName, p.photoFront, p.photoBack, p.descriptionProduct, p.price, p.bookLanguage, p.author, u.email from product as p inner join user as u on p.seller = u.id_user and id_product = ?";
+    "select p.id_product, p.productName, p.photoFront, p.photoBack, p.category, p.descriptionProduct, p.price, p.bookLanguage, p.author, p.seller, u.email from product as p inner join user as u on p.seller = u.id_user and id_product = ?";
   const [book] = await pool.query(query, bookID);
   return book;
 }
